@@ -172,7 +172,7 @@ return [
         /*
          * Application Service Providers...
          */
-        App\Providers\AppServiceProvider::class,
+        //App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
         YM\Umi\UmiServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
