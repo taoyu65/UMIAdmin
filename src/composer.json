@@ -1,0 +1,11 @@
+{
+    "name": "taoyu/umi",
+    "description": "UMI is powerful laravel admin BREAD and RBAC system, just few minutes to click button and you will see the magic world",
+    "authors": [
+        {
+            "name": "Tao Yu",
+            "email": "taoyu65@gmail.com"
+        }
+    ],
+    "require": {}
+}
