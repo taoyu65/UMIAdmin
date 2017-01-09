@@ -28,7 +28,7 @@
         ],
         "psr-4": {
             "App\\": "app/",
-            "taoyu\\umi\\": "src/"
+            "YM\\": "src/"
         }
     },
     "autoload-dev": {
@@ -54,5 +54,6 @@
     },
     "config": {
         "preferred-install": "dist"
-    }
+    },
+    "minimum-stability": "stable"
 }

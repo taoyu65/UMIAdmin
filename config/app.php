@@ -21,7 +21,7 @@ return [
     |
     | This value determines the "environment" your application is currently
     | running in. This may determine how you prefer to configure various
-    | services your application utilizes. Set this in your ".env" file.
+    | services your applicatio n utilizes. Set this in your ".env" file.
     |
     */
 
@@ -174,7 +174,8 @@ return [
          */
         //App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
-        YM\Umi\UmiServiceProvider::class,
+        YM\UmiServiceProvider::class,
+        YM\UmiEventServiceProvider::class,
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
@@ -226,7 +227,7 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'Umi' => YM\Umi\Facades\Umi::class,
+        'Umi' => YM\Facades\Umi::class,
     ],
 
 ];

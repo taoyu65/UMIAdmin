@@ -1,6 +1,6 @@
 <?php
 
-namespace YM\Umi;
+namespace YM;
 
 use Illuminate\Support\ServiceProvider;
 

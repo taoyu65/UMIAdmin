@@ -1,6 +1,6 @@
 <?php
 
-namespace YM\Umi\Facades;
+namespace YM\Facades;
 
 use Illuminate\Support\Facades\Facade;
 

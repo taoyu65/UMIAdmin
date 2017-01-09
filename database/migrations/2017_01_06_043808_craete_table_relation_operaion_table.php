@@ -16,6 +16,7 @@ class CraeteTableRelationOperaionTable extends Migration
         Schema::create('table_relation_operation', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('active_table_id')->unsigned();
+            $table->string('active_table_field');
             $table->string('special_relation');
             $table->string('response_action');
             $table->integer('response_table_id');
