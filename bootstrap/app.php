@@ -41,7 +41,6 @@ $app->singleton(
     App\Exceptions\Handler::class
 );
 
-$app->singleton('YM\Models\Table');
 /*
 |--------------------------------------------------------------------------
 | Return The Application

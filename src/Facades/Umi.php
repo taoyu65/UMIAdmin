@@ -8,6 +8,6 @@ class Umi extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return 'Umi';
+        return 'umi';
     }
 }

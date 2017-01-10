@@ -3,11 +3,12 @@
 namespace YM\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
+use YM\Facades\Umi;
 
 class Table extends Model
 {
     protected $table = 'tables';
-    public $b = '';
 
     public function TableRelationOperationActive()
     {
@@ -17,11 +18,6 @@ class Table extends Model
     public function TableRelationOperationResponse()
     {
         return $this->belongsTo('TableRelationOperation', 'response_table_id');
-    }
-
-    public static function tableName($id)
-    {
-        return self::find($id)->table_name;
     }
 
     public function getTableName($id)

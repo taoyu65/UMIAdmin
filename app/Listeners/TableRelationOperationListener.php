@@ -6,6 +6,7 @@ use App\Events\TableRelationOperationEvent;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Support\Facades\DB;
+use YM\Facades\Umi;
 use YM\Models\TableRelationOperation;
 use YM\Umi\TableRelation;
 use YM\Umi\TableRelationDeleteInterlock;
@@ -34,7 +35,7 @@ class TableRelationOperationListener
         //check if operation exist ....
         //see if delete or add or ...
         //invoke interface main entrance
-        $tt = new TableRelationOperation();
+
         $obj = DB::table('table_relation_operation')
             ->where('active_table_id', '1')
             ->Where('special_relation', 'interlock')

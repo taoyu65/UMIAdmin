@@ -5,12 +5,13 @@ return [
     |--------------------------------------------------------------------------
     | 资源路径 Assets Path
     |--------------------------------------------------------------------------
-    | 包括js css, images 等
+    | 包括js css, images 等, 必须以 / 结尾
     | All the js, css, images files
+    | include trailing slash like 'yourFolder/'
     |
     */
 
-    'assets_path' => '/umi/UMIAdmin/src/resources/assets',
+    'assets_path' => 'assets/',
 
     /*
     |--------------------------------------------------------------------------
