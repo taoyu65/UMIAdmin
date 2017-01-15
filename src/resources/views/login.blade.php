@@ -163,7 +163,7 @@
         <P style="margin: 0px 35px 20px 45px;"><SPAN style="float: left;"><A style="color: rgb(204, 204, 204);" href="#">forget password?</A></SPAN>
            <SPAN style="float: right;">
                 <A style="color: rgb(204, 204, 204); margin-right: 10px;" href="#">sign up</A>
-                <A style="background: rgb(0, 142, 173); padding: 7px 10px; border-radius: 4px; border: 1px solid rgb(26, 117, 152); border-image: none; color: rgb(255, 255, 255); font-weight: bold;" href="#">sign in</A>
+                <A style="background: rgb(0, 142, 173); padding: 7px 10px; border-radius: 4px; border: 1px solid rgb(26, 117, 152); border-image: none; color: rgb(255, 255, 255); font-weight: bold;" href="#" onclick="">sign in</A>
            </SPAN>
         </P>
     </DIV>

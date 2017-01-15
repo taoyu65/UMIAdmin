@@ -1,5 +1,6 @@
 <?php
 
-Route::get('login1', function () {
+Route::get('admin', function () {
    return view('umi::login');
 });
+
