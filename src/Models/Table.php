@@ -3,8 +3,6 @@
 namespace YM\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Cache;
-use YM\Facades\Umi;
 
 class Table extends Model
 {

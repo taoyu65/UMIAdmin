@@ -98,6 +98,9 @@
 </head>
 
 <body class="login-layout">
+@if(isset($error))
+    {!! $error !!}
+@endif
 <div class="main-container">
     <div class="main-content">
         <div class="row">
@@ -133,14 +136,14 @@
                                         <fieldset>
                                             <label class="block clearfix">
 														<span class="block input-icon input-icon-right">
-															<input type="text" class="form-control" placeholder="Username" />
+															<input type="text" class="form-control" placeholder="Username" name="username" value="admin"/>
 															<i class="ace-icon fa fa-user"></i>
 														</span>
                                             </label>
 
                                             <label class="block clearfix">
 											    <span class="block input-icon input-icon-right">
-												    <input type="password" class="form-control" placeholder="Password" id="password"/>
+												    <input type="password" class="form-control" placeholder="Password" id="password" name="password" value="123123"/>
 												    <i class="ace-icon fa fa-lock"></i>
 											    </span>
                                             </label>

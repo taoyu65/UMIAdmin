@@ -26,4 +26,38 @@ return [
     */
 
     'umi_path' => 'src/',
+
+    /*
+    |--------------------------------------------------------------------------
+    | 是否启用路径权限
+    | if available for url authority
+    |--------------------------------------------------------------------------
+    | 后台界面的url权限 如果关闭将加载所有功能菜单列表, 否则只加载已经被授权的菜单
+    | if set false, all the menus will be loaded instead of loading menus which
+    | are authorized
+    | (warning: the value must be boolean true or false)
+    */
+
+    'url_auth' => true,
+
+    /*
+    |--------------------------------------------------------------------------
+    | 超级管理员名称
+    | super admin's name
+    |--------------------------------------------------------------------------
+    | 应用程序只允许一个超级管理员(可以重写接口实现多个超级管理员以及应用逻辑)
+    | 超级管理员拥有全部的操作权限包括Url(界面入口) 以及 BREAD (数据表的增删改)
+    | 超级管理员不依赖数据库记录, 为了防止操作失误删除管理员或者其权限, 使权限管理逻辑更加清晰
+    |
+    | application allows only one super admin exist(can be implemented multiple
+    | super admins by overriding interface)
+    | super admin has all authority including Url(entrance of web page) and BREAD
+    | super admin doesn't depend on record of database, prevent mistake of operation
+    | of deleting the record, to make the business logical of authority is clear
+    */
+
+    'super_admin' => 'admin',
+
+    //不包含的表
+    'bread_except' => []
 ];
