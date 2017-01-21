@@ -35,6 +35,14 @@ class MenuRole
 
     }
 
+    public function menuTree($parentId = 0)
+    {
+        $menuLists = $this->menus->where('menu_id', $parentId);
+        foreach ($menuLists as $menuList) {
+
+        }
+    }
+
     //recursive iterator
     function flattenJsonTree($aJSON, $iParentId = 0, $iLevel = 0)
     {

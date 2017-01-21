@@ -1,6 +1,6 @@
 <?php
 
-namespace YM\Umi;
+namespace YM\Umi\Auth;
 
 use Illuminate\Support\Facades\Config;
 use YM\Umi\Contracts\UrlAuthInterface;
