@@ -1,6 +1,6 @@
 <?php
 
-namespace YM\Umi\Contracts;
+namespace YM\Umi\Contracts\Auth;
 
 
 interface UmiAuthInterface

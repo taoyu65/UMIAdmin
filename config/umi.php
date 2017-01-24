@@ -59,5 +59,16 @@ return [
     'super_admin' => 'admin',
 
     //不包含的表
-    'bread_except' => []
+    'bread_except' => [],
+
+    //数据类型
+    'data_type' => [
+        'text',
+        'dollar',
+        'link',
+        'date',
+        'picture',
+        'select',
+        'bool'
+    ],
 ];

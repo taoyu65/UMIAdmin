@@ -10,6 +10,7 @@ use YM\Umi\Umi;
 class UmiServiceProvider extends ServiceProvider
 {
     private $tableNameSpace = 'YM\Models\Table';
+    private $administrator = 'YM\Umi\administrator';
 
     public function register()
     {
@@ -24,6 +25,9 @@ class UmiServiceProvider extends ServiceProvider
         #数据表(tables)的单例模式
         #singleton for data table 'tables'
         $this->app->singleton($this->tableNameSpace);
+
+        #管理员 administrator
+        $this->app->singleton($this->administrator);
     }
 
     public function boot(Router $router)

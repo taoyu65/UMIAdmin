@@ -9,16 +9,10 @@ class UmiUrlAuthMiddleware
 
     public function handle($request, Closure $next)
     {
-        /*var_dump('authority');
-        $request->aaa = 'asdfsadfsdaf';
-        */
 
-        if (config('umi.url_auth')) {
-            //todo: 加载所有菜单
-        } else {
-            //todo: 执行权限
-        }
+        //todo: get all menus and transfer them to the master page. using cache
 
+        //todo: entrance class administrator divide 2 parts: menu and bread.(may change administrator name)
         return $next($request);
     }
 }

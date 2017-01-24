@@ -2,7 +2,7 @@
 
 namespace YM\Umi\Auth;
 
-use YM\Umi\Contracts\Auth\MasterPageInterface;
+use YM\Umi\Contracts\PrintHtml\MasterPageInterface;
 
 abstract class UmiMasterPage implements MasterPageInterface
 {

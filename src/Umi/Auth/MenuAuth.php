@@ -3,11 +3,11 @@
 namespace YM\Umi\Auth;
 
 use Illuminate\Support\Facades\Config;
-use YM\Umi\Contracts\UrlAuthInterface;
+use YM\Umi\Contracts\Auth\MenuAuthInterface;
 use YM\Models\Menu;
 use YM\Umi\MenuRole;
 
-class UrlAuth implements UrlAuthInterface
+class MenuAuth implements MenuAuthInterface
 {
     private $userName;
     private $userId;
@@ -25,7 +25,7 @@ class UrlAuth implements UrlAuthInterface
 
     public function menuAttributions()
     {
-        if (!$this->isSuperAdmin()) {
+        if ($this->isSuperAdmin()) {
             return Menu::all();
         } else {
             return $this->loadMenu();
