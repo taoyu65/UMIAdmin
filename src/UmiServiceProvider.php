@@ -22,6 +22,10 @@ class UmiServiceProvider extends ServiceProvider
         #regist Umi route provider
         $this->app->register(UmiRouteProvider::class);
 
+        #注册视图合成器
+        #regist view composer that including master page composer
+        $this->app->register(ComposerServiceProvider::class);
+
         #数据表(tables)的单例模式
         #singleton for data table 'tables'
         $this->app->singleton($this->tableNameSpace);

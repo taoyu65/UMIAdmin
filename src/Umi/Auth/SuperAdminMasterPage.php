@@ -12,7 +12,7 @@ class SuperAdminMasterPage extends UmiMasterPage
 
     public function sideMenu()
     {
-
+        return parent::AllMenus();
     }
 
     public function body()
