@@ -41,6 +41,7 @@
         <div class="container">
             <div class="content">
                 <div class="title">Sorry, you don't have authority to view the page.</div>
+                <div class="title">{{$exception->getMessage()}}</div>
             </div>
         </div>
     </body>

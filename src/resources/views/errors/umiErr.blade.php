@@ -40,7 +40,11 @@
     <body>
         <div class="container">
             <div class="content">
-                <div class="title">Be right back.404</div>
+                <div class="title">Be right back.umiErr.</div>
+                <div class="title">{{$exception->getMessage()}}</div>
+                <div class="title">{{$exception->getLine()}}</div>
+                <div class="title">{{$exception->getFile()}}</div>
+
             </div>
         </div>
     </body>

@@ -58,6 +58,7 @@ EOD;
     {
         $path = config('umi.assets_path') . '/ace';
         $userName = Auth::user()->name;
+        #region head of master page
         $html = <<<EOD
         <div class="navbar-header pull-left">
             <a href="#" class="navbar-brand">
@@ -364,6 +365,7 @@ EOD;
             </ul>
         </div>
 EOD;
+        #endregion
         return $html;
     }
 }

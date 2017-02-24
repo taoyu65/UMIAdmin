@@ -56,7 +56,16 @@ return [
     | of deleting the record, to make the business logical of authority is clear
     */
 
-    'super_admin' => 'admin',
+    'super_admin' => 'admin_tem',
+
+    /*
+    |--------------------------------------------------------------------------
+    | 数据缓存时间,单位为分钟
+    | how many minutes for data cache
+    |--------------------------------------------------------------------------
+    */
+
+    'cache_minutes' => 10,
 
     //不包含的表
     'bread_except' => [],

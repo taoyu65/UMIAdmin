@@ -14,9 +14,11 @@ class FactoryMasterPage
         $this->administrator = new administrator();
     }
 
+    #生成左边栏菜单的对象
+    #new a object for side menus
     public function getMasterPage()
     {
-        if ($this->administrator->__get('isSuperAdmin')) {
+        if ($this->administrator->isSuperAdmin()) {
             return new SuperAdminMasterPage();
         } else {
             return new AdminMasterPage();

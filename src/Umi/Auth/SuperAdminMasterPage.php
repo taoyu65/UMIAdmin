@@ -2,8 +2,16 @@
 
 namespace YM\Umi\Auth;
 
+use YM\Umi\Menus;
+
 class SuperAdminMasterPage extends UmiMasterPage
 {
+    private $menus;
+
+    public function __construct()
+    {
+        $this->menus = new Menus();
+    }
 
     public function header()
     {
@@ -12,7 +20,7 @@ class SuperAdminMasterPage extends UmiMasterPage
 
     public function sideMenu()
     {
-        return parent::AllMenus();
+        return $this->menus->AllMenus();
     }
 
     public function body()

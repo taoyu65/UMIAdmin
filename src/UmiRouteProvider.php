@@ -51,7 +51,7 @@ class UmiRouteProvider extends ServiceProvider
             __DIR__ . '/path/to/assets' => public_path('vendor/courier'),
         ], 'public');
 
-        //$router->middleware('admin.user', VoyagerAdminMiddleware::class);
+        //$router->middleware('admin.user', AdminMiddleware::class);
     }
 
     /**

@@ -3,6 +3,7 @@
 namespace YM\Umi;
 
 use YM\Models\Menu;
+use Exception;
 
 class Menus
 {
@@ -13,7 +14,30 @@ class Menus
         $this->menus = new Menu();
     }
 
+    #超级用户获取全部菜单权限
+    #super admin can get all menus
     public function AllMenus()
+    {
+        $html = $this->dashboard();
+        $html .= $this->recursionAllMenus(0);
+        return $html;
+    }
+
+    #根据权限获取部分菜单
+    #get part of menus according to the authorization
+    public function Menus($json)
+    {
+        $html = $this->dashboard();
+        try {
+            $jsonMenus = json_decode($json);
+            $html .= $this->recursionPartMenus($jsonMenus);
+            return $html;
+        } catch (Exception $e) {
+            throw $e;
+        }
+    }
+
+    private function dashboard()
     {
         $html = <<<EOD
         <li class="active">
@@ -24,16 +48,48 @@ class Menus
             <b class="arrow"></b>
 		</li>
 EOD;
-        $html .= $this->recursion(0);
         return $html;
     }
 
-    public function Menus($json)
+    private function recursionPartMenus($jsonMenus, $levelInit = 0)
     {
+        $html = '';
+        $level = 0;
+        $level .= $levelInit;
+        foreach ($jsonMenus as $jsonMenu) {
+            $objMenu = $this->menus->getOneMenu($jsonMenu->id);
+            $rootMenu = $level == 0 ? '<span class="menu-text">' . $objMenu->title . '</span>' : $objMenu->title;
+            if (array_key_exists('children', $jsonMenu)){
+                $html .= <<<EOD
+                <li class="">
+                    <a href="$objMenu->url" target="$objMenu->target" class="dropdown-toggle">
+			            <i class="menu-icon fa $objMenu->icon_class"></i>
+			            $rootMenu
+			            <b class="arrow fa fa-angle-down"></b>
+		            </a>
+                    <b class="arrow"></b>
+EOD;
+                $html .= '<ul class="submenu">';
+                $html .= $this->recursionPartMenus($jsonMenu->children, 1);
+                $html .= '</ul>';
+                $html .= '</li>';
+            } else {
+                $html .= <<<EOD
+                <li class="">
+                    <a href="$objMenu->url" target="$objMenu->target">
+			            <i class="menu-icon fa $objMenu->icon_class"></i>
+			        $rootMenu
+		            </a>
+                    <b class="arrow"></b>
+                </li>
+EOD;
+            }
 
+        }
+        return $html;
     }
 
-    private function recursion($menu_id = 0)
+    private function recursionAllMenus($menu_id = 0)
     {
         $menus = $this->menus->getMenus($menu_id);
         $html = '';
