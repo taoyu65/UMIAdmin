@@ -39,9 +39,10 @@ class Menus
 
     private function dashboard()
     {
+        $dashboard = route('dashboard');
         $html = <<<EOD
         <li class="active">
-		    <a href="#">
+		    <a href="$dashboard">
 			    <i class="menu-icon fa fa-tachometer"></i>
 				<span class="menu-text"> Dashboard </span>
 			</a>
@@ -106,7 +107,7 @@ EOD;
                     <b class="arrow"></b>
 EOD;
                 $html .= '<ul class="submenu">';
-                $html .= $this->recursion($menu->id);
+                $html .= $this->recursionAllMenus($menu->id);
                 $html .= '</ul>';
                 $html .= '</li>';
             } else {

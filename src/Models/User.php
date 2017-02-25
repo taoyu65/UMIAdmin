@@ -6,6 +6,8 @@ use Illuminate\Database\Eloquent\Model;
 
 class User extends Model
 {
+    protected $table = 'umi_users';
+
     private $modelNameSpace = 'YM\Models';
 
     public function MenuJson()

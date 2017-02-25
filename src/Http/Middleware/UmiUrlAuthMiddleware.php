@@ -9,7 +9,7 @@ class UmiUrlAuthMiddleware
 
     public function handle($request, Closure $next)
     {
-        //var_dump('aaa');
+
         //todo: get all menus and transfer them to the master page. using cache
 
         //todo: entrance class administrator divide 2 parts: menu and bread.(may change administrator name)

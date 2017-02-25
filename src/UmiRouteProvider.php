@@ -78,7 +78,7 @@ class UmiRouteProvider extends ServiceProvider
     {
         Route::group([
             //todo: the following comment is for testing avoid the csrf
-            //'middleware' => 'web',
+            'middleware' => 'web',
             'namespace' => $this->namespace,
         ], function ($router) {
             require base_path($this->umi_path . 'routes/umi.php');

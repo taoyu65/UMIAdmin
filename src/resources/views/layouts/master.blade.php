@@ -75,8 +75,8 @@
 
         <div class="sidebar-shortcuts" id="sidebar-shortcuts">
             <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
-                <button class="btn btn-success">
-                    <i class="ace-icon fa fa-signal"></i>
+                <button class="btn btn-success" onclick="window.location.href='umiTable'">
+                    <i class="ace-icon fa fa-bars"></i>
                 </button>
 
                 <button class="btn btn-info">

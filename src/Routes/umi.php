@@ -1,14 +1,23 @@
 <?php
 
-Route::get('admin', function () {
-   return view('umi::login');
+#log in and out----------------------------------------------------
+Route::get('admin', ['as' => 'admin', function () {
+    return view('umi::login');
+}]);
+Route::post('submit', 'dashboardController@dashboard');
+Route::get('logout', 'dashboardController@logout');
+#------------------------------------------------------------------
+
+#main--------------------------------------------------------------
+Route::group(['middleware' => 'auth'], function () {
+
+    Route::get('dashboard', ['as' => 'dashboard', function () {
+        return view('umi::dashboard');
+    }]);
+
+    Route::get('umiTable', [
+        'uses'      => 'tableController@index',
+        'as'        => 'table'
+    ]);
 });
-
-Route::group(['middleware' => 'umi.url.auth'], function () {
-
-   Route::post('dashboard', [
-       'uses'  => 'dashboardController@dashboard',
-       'as'    => 'dashboard'
-   ]);
-
-});
+#------------------------------------------------------------------

@@ -2,11 +2,10 @@
 
 namespace YM\Http\Controllers;
 
-use Illuminate\Foundation\Auth\User;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
-//use YM\Umi\UrlAuth;
+use Illuminate\Support\Facades\Cache;
 
 class DashBoardController extends Controller
 {
@@ -19,5 +18,12 @@ class DashBoardController extends Controller
         } else {
             return view('umi::login', ['error' => '<script>alert("please check username or password")</script>']);
         }
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        Cache::flush();
+        return redirect()->route('admin');
     }
 }

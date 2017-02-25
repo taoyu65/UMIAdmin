@@ -131,7 +131,7 @@
                                         <DIV class="initial_right_hand" id="right_hand"></DIV>
                                     </DIV>
 
-                                    <form method="post" action="{{url('dashboard')}}">
+                                    <form method="post" action="{{url('submit')}}">
                                         {!! csrf_field() !!}
                                         <fieldset>
                                             <label class="block clearfix">

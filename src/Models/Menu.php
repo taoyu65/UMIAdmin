@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\DB;
 
 class Menu extends Model
 {
+    protected $table = 'umi_menus';
+
     private $MenuTable;
 
     public function __construct()
@@ -19,7 +21,7 @@ class Menu extends Model
 
         $minute = Config::get('umi.cache_minutes');
         $this->MenuTable = Cache::remember('menuTable', $minute, function () {
-            return DB::table('menus')->get();
+            return DB::table($this->table)->get();
         });
     }
 

@@ -6,6 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class TableRelationOperation extends Model
 {
-    protected $table = 'table_relation_operation';
+    protected $table = 'umi_table_relation_operation';
 
 }

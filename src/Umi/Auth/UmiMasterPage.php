@@ -58,6 +58,7 @@ EOD;
     {
         $path = config('umi.assets_path') . '/ace';
         $userName = Auth::user()->name;
+        $logout = '';
         #region head of master page
         $html = <<<EOD
         <div class="navbar-header pull-left">
@@ -355,7 +356,7 @@ EOD;
                         <li class="divider"></li>
 
                         <li>
-                            <a href="#">
+                            <a href="logout">
                                 <i class="ace-icon fa fa-power-off"></i>
                                 Logout
                             </a>
