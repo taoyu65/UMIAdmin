@@ -36,8 +36,8 @@ class UmiServiceProvider extends ServiceProvider
 
     public function boot(Router $router)
     {
-        #后台路径权限控制 : 菜单加载的时候获取哪个菜单显示
-        #URL authority control : when menus are loading to determine which one will be shown
+        #后台路径权限检测
+        #URL authority control to check if has permission to load
         $router->middleware('umi.url.auth', UmiUrlAuthMiddleware::class);
     }
 

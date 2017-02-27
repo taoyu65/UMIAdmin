@@ -115,16 +115,17 @@
     <div class="main-content">
         <div class="main-content-inner">
             <div class="breadcrumbs ace-save-state" id="breadcrumbs">
-                <ul class="breadcrumb">
-                    <li>
-                        <i class="ace-icon fa fa-home home-icon"></i>
-                        <a href="#">Home</a>
-                    </li>
-                    <li class="active">Dashboard</li>
-                </ul><!-- /.breadcrumb -->
-            </div>
 
-            <div class="page-content">{!! $body !!}
+                <ul class="breadcrumb">
+                    <i class="ace-icon fa fa-home home-icon"></i>
+                    <li>
+                        <a href="">Dashboard</a>
+                    </li>
+                    <li class="active">{{Request::segment(1)}}</li>
+                </ul>
+            </div>
+            <div class="page-content">
+                {!! $body !!}
                 @yield('content')
             </div><!-- /.page-content -->
         </div>

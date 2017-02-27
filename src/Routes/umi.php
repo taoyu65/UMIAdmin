@@ -9,7 +9,7 @@ Route::get('logout', 'dashboardController@logout');
 #------------------------------------------------------------------
 
 #main--------------------------------------------------------------
-Route::group(['middleware' => 'auth'], function () {
+Route::group(['middleware' => 'umi.url.auth'], function () {
 
     Route::get('dashboard', ['as' => 'dashboard', function () {
         return view('umi::dashboard');
