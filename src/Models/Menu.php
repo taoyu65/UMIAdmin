@@ -45,4 +45,9 @@ class Menu extends Model
     {
         return $this->MenuTable->where('id', $id)->first();
     }
+
+    public function getAllRecord()
+    {
+        return $this->MenuTable;
+    }
 }

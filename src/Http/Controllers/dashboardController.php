@@ -26,4 +26,10 @@ class DashBoardController extends Controller
         Cache::flush();
         return redirect()->route('admin');
     }
+
+    public function refresh()
+    {
+        Cache::flush();
+        return redirect()->route('dashboard');
+    }
 }

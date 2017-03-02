@@ -320,7 +320,7 @@ EOD;
                         </li>
 
                         <li class="dropdown-footer">
-                            <a href="inbox.html">
+                            <a href="#">
                                 See all messages
                                 <i class="ace-icon fa fa-arrow-right"></i>
                             </a>
@@ -348,14 +348,20 @@ EOD;
                         </li>
 
                         <li>
-                            <a href="profile.html">
+                            <a href="#">
                                 <i class="ace-icon fa fa-user"></i>
                                 Profile
                             </a>
                         </li>
 
                         <li class="divider"></li>
-
+                        <li>
+                            <a href="refresh">
+                                <i class="ace-icon fa fa-refresh"></i>
+                                refresh (Clean Cache)
+                            </a>
+                        </li>
+                        <li class="divider"></li>
                         <li>
                             <a href="logout">
                                 <i class="ace-icon fa fa-power-off"></i>

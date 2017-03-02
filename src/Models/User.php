@@ -12,6 +12,6 @@ class User extends Model
 
     public function MenuJson()
     {
-        return $this->hasOne($this->modelNameSpace . '\UserMenu', 'user_id');
+        return $this->hasOne($this->modelNameSpace . '\RoleMenu', 'role_id');
     }
 }

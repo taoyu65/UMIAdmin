@@ -11,13 +11,19 @@ Route::get('logout', 'dashboardController@logout');
 #main--------------------------------------------------------------
 Route::group(['middleware' => 'umi.url.auth'], function () {
 
-    Route::get('dashboard', ['as' => 'dashboard', function () {
+    Route::get('refresh', [
+        'uses'      => 'dashboardController@refresh',
+        'as'        => 'refresh'
+    ]);
+
+    Route::get('dashboard', [
+        'as'        => 'dashboard', function () {
         return view('umi::dashboard');
     }]);
 
-    Route::get('umiTable', [
-        'uses'      => 'tableController@index',
-        'as'        => 'table'
+    Route::get('umiTable/{table?}', [
+        'uses'      => 'umiTableController@index',
+        'as'        => 'umiTable'
     ]);
 });
 #------------------------------------------------------------------

@@ -19,6 +19,12 @@ class CreateRolesTable extends Migration
             $table->string('display_name');
             $table->timestamps();
         });
+
+        Schema::create('role_menu', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('role_id')->unsigned();
+            $table->text('json');
+        });
     }
 
     /**
@@ -29,5 +35,6 @@ class CreateRolesTable extends Migration
     public function down()
     {
         Schema::drop('roles');
+        Schema::drop('role_menu');
     }
 }
