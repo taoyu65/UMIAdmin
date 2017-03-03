@@ -5,6 +5,8 @@ namespace YM;
 use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
 use YM\Http\Middleware\UmiUrlAuthMiddleware;
+use YM\Http\Middleware\BreadAccessMiddleWare;
+use YM\Http\Middleware\BreadSubmitMiddleWare;
 use YM\Umi\Umi;
 
 class UmiServiceProvider extends ServiceProvider
@@ -39,6 +41,10 @@ class UmiServiceProvider extends ServiceProvider
         #后台路径权限检测
         #URL authority control to check if has permission to load
         $router->middleware('umi.url.auth', UmiUrlAuthMiddleware::class);
+
+        $router->middleware('umi.bread.access', BreadAccessMiddleWare::class);
+
+        $router->middleware('umi.bread.submit', BreadSubmitMiddleWare::class);
     }
 
 }

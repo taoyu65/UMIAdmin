@@ -22,6 +22,7 @@ Route::group(['middleware' => 'umi.url.auth'], function () {
     }]);
 
     Route::get('umiTable/{table?}', [
+        'middleware'=> 'umi.bread.access',
         'uses'      => 'umiTableController@index',
         'as'        => 'umiTable'
     ]);

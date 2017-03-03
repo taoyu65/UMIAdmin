@@ -2,7 +2,6 @@
 
 namespace YM\Umi\Auth;
 
-use YM\Facades\Umi;
 use YM\Umi\Contracts\PrintHtml\MasterPageInterface;
 use Illuminate\Support\Facades\Auth;
 

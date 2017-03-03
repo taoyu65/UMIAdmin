@@ -42,7 +42,7 @@ class Menus
         foreach ($menus as $menu) {
             $rootMenu = $menu_id == 0 ? '<span class="menu-text">' . $menu->title . '</span>' : $menu->title;
             //menus class(active or open) -------------------------------------------
-            $url = $menu->url === '#' ? '#' : $menu->url . '?id=' . $menu->id;
+            $url = $menu->url === '#' ? '#' : url($menu->url) . '?id=' . $menu->id;
             $class = '';
             if(array_key_exists($menu->id, $menuLevelStyle))
                 $class = $menuLevelStyle[$menu->id];
@@ -166,7 +166,7 @@ EOD;
             $objMenu = $this->menus->getOneMenu($jsonMenu->id);
             $rootMenu = $level == 0 ? '<span class="menu-text">' . $objMenu->title . '</span>' : $objMenu->title;
             //menus class(active or open) -------------------------------------------
-            $url = $objMenu->url === '#' ? '#' : $objMenu->url . '?id=' . $objMenu->id;
+            $url = $objMenu->url === '#' ? '#' : url($objMenu->url) . '?id=' . $objMenu->id;
             $class = '';
             if(array_key_exists($objMenu->id, $menuLevelStyle))
                 $class = $menuLevelStyle[$objMenu->id];
