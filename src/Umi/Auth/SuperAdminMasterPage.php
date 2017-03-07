@@ -2,7 +2,7 @@
 
 namespace YM\Umi\Auth;
 
-use YM\Umi\Menus;
+use YM\Umi\MenusBuilder;
 
 class SuperAdminMasterPage extends UmiMasterPage
 {
@@ -10,7 +10,7 @@ class SuperAdminMasterPage extends UmiMasterPage
 
     public function __construct()
     {
-        $this->menus = new Menus();
+        $this->menus = new MenusBuilder();
     }
 
     public function header()

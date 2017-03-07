@@ -6,7 +6,7 @@ use YM\Exceptions\UmiException;
 use YM\Models\Menu;
 use Exception;
 
-class Menus
+class MenusBuilder
 {
     private $menus;
 

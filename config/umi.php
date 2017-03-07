@@ -76,6 +76,15 @@ return [
 
     'dataTableSearch' => true,
 
+    /*
+    |--------------------------------------------------------------------------
+    | 未被授权的功能按钮所呈现的样式, 支持'invisible', 'disable' (不可见 或者 不可用)
+    | unauthorized access's style of button
+    | available setting is 'invisible', 'disable'
+    |--------------------------------------------------------------------------
+    */
+
+    'unAuthorizedAccessStyle' => 'invisible',
 
     //不包含的表
     'bread_except' => [],

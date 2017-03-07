@@ -3,7 +3,7 @@
 namespace YM\Umi\Auth;
 
 use YM\Umi\administrator;
-use YM\Umi\Menus;
+use YM\Umi\MenusBuilder;
 
 class AdminMasterPage extends UmiMasterPage
 {
@@ -12,7 +12,7 @@ class AdminMasterPage extends UmiMasterPage
 
     public function __construct()
     {
-        $this->menus = new Menus();
+        $this->menus = new MenusBuilder();
         $this->administrator = new administrator();
     }
 
