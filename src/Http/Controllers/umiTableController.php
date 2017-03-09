@@ -13,10 +13,9 @@ class umiTableController extends Controller
         //test
         $ab = new User();
         $b = $ab->permission(1);
-        //$roles = User::find(1)->roles()->orderBy('id')->get();
 
         foreach ($b as $bb) {
-           // var_dump($bbb[1]->name);
+            //var_dump($bb->key);
         }
         //
         if ($tableName == '')

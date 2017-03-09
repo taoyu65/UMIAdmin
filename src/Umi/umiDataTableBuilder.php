@@ -19,17 +19,27 @@ EOD;
 
     public function tableHead()
     {
+        $buttonDelete = $this->ButtonDelete();
+        $buttonNew = $this->ButtonNew();
+
         $html = <<<EOD
         <p>
-            <button class="btn btn-sm btn-danger">
-	        	<i class="ace-icon fa fa-trash-o"></i>
-	        	Delete
-	        </button>
+            $buttonDelete
+            $buttonNew
+		</p>
+EOD;
+        return $html;
+    }
 
-            <button class="btn btn-sm btn-success">
-	        	<i class="ace-icon fa fa-plus"></i>
-                New
-	        </button>
+    public function tableHeadSuperAdmin()
+    {
+        $buttonDelete = $this->ButtonDelete();
+        $buttonNew = $this->ButtonNew();
+
+        $html = <<<EOD
+        <p>
+            $buttonDelete
+            $buttonNew
 		</p>
 EOD;
         return $html;
@@ -163,4 +173,27 @@ EOD;
         return $html;
     }
 
+    #region component
+    private function ButtonNew()
+    {
+        $html = <<<EOD
+        <button class="btn btn-sm btn-success">
+	    	<i class="ace-icon fa fa-plus"></i>
+            New
+	    </button>
+EOD;
+        return $html;
+    }
+
+    private function ButtonDelete()
+    {
+        $html = <<<EOD
+        <button class="btn btn-sm btn-danger">
+	    	<i class="ace-icon fa fa-trash-o"></i>
+	    	Delete
+	    </button>
+EOD;
+        return $html;
+    }
+    #endregion
 }
