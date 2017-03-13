@@ -2,12 +2,13 @@
 
 namespace YM\Umi;
 
+use YM\umiAuth\Facades\umiAuth;
 
 class umiDataTableBuilder
 {
+
     public function __construct()
     {
-
     }
 
     public function tableSearch()
@@ -19,6 +20,9 @@ EOD;
 
     public function tableHead()
     {
+        if (umiAuth::can()) {
+            echo 'ff';
+        }
         $buttonDelete = $this->ButtonDelete();
         $buttonNew = $this->ButtonNew();
 
