@@ -37,9 +37,4 @@ class Umi
             }
         }
     }
-
-    public function can()
-    {
-        return true;
-    }
 }

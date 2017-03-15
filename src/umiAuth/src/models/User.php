@@ -1,30 +1,31 @@
 <?php
 
-namespace YM\umiAuth\src\models;
+namespace YM\umiAuth\src\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class User extends Model
 {
+    protected $table = 'umi_users';
+
     private $userPermsTable;
+    private $modelNameSpace = 'YM\umiAuth\src\Models';
 
-    public function __construct($user)
+    public function __construct()
     {
-        $this->userPermsTable = $this->permission($user->id);
+        $this->userPermsTable = $this->permissionTable(Auth::user()->id);
     }
 
-    private function permission($user_id)
-    {
-        return $this->permissionTable($user_id)->groupBy('umi_permissions.key', 'umi_permissions.table_id');
-    }
-
+    #获得并缓存来自内联查询的数据
+    #get and cache table that are joined by user, role, permission, table
     private function permissionTable($user_id)
     {
         $minutes = Config::get('umiAuth.cache_minutes');
-        return Cache::remember('userPerms', $minutes, function () use ($user_id){
+        $callback = function () use ($user_id) {
             return DB::table('umi_users')
                 ->join('umi_user_role', 'umi_users.id', 'umi_user_role.user_id')
                 ->join('umi_roles', 'umi_user_role.role_id', 'umi_roles.id')
@@ -43,11 +44,29 @@ class User extends Model
                 )
                 ->where('umi_users.id', $user_id)
                 ->get();
-        });
+        };
+        return Cache::remember('userPerms', $minutes, $callback);
     }
 
-    public function getUserPermsTable()
+    #region 公用函数,可以被调用的方法 public function which can be invoke
+    public function permissions()
     {
-        return $this->userPermsTable;
+        return $this->userPermsTable->groupBy('key', 'table_id');
     }
+
+    public function roles()
+    {
+        return $this->userPermsTable->groupBy('role_id');
+    }
+
+    public function tables()
+    {
+        return $this->userPermsTable->groupBy('table_id');
+    }
+
+    public function getRoles()
+    {
+        return $this->belongsToMany($this->modelNameSpace . '\Role', 'umi_user_role', 'user_id','role_id');
+    }
+    #endregion
 }

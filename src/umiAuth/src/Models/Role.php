@@ -1,6 +1,6 @@
 <?php
 
-namespace YM\Models;
+namespace YM\umiAuth\src\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
@@ -8,7 +8,7 @@ class Role extends Model
 {
     protected $table = 'umi_roles';
 
-    private $modelNameSpace = 'YM\Models';
+    private $modelNameSpace = 'YM\umiAuth\src\Models';
 
     public function permission()
     {
@@ -18,6 +18,7 @@ class Role extends Model
 
     public function users()
     {
-        return $this->belongsToMany($this->modelNameSpace . '\User', 'umi_user_role', 'role_id','user_id');
+        $related = $this->modelNameSpace . '\User';
+        return $this->belongsToMany($related, 'umi_user_role', 'role_id','user_id');
     }
 }

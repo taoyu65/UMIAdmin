@@ -20,9 +20,6 @@ EOD;
 
     public function tableHead()
     {
-        if (umiAuth::can()) {
-            echo 'ff';
-        }
         $buttonDelete = $this->ButtonDelete();
         $buttonNew = $this->ButtonNew();
 
