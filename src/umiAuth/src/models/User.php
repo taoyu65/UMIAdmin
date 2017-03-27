@@ -51,17 +51,17 @@ class User extends Model
     #region 公用函数,可以被调用的方法 public function which can be invoke
     public function permissions()
     {
-        return $this->userPermsTable->groupBy('key', 'table_id');
+        return $this->userPermsTable;
     }
 
     public function roles()
     {
-        return $this->userPermsTable->groupBy('role_id');
+        return $this->userPermsTable;
     }
 
     public function tables()
     {
-        return $this->userPermsTable->groupBy('table_id');
+        return $this->userPermsTable;
     }
 
     public function getRoles()

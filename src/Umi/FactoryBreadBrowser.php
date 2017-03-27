@@ -12,9 +12,10 @@ class FactoryBreadBrowser
 {
     private $administrator;
 
-    public function __construct()
+    public function __construct($tableName = '')
     {
         $this->administrator = new administrator();
+        $this->administrator->setCurrentTable($tableName);
     }
 
     public function getBreadBrowser()

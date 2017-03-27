@@ -6,9 +6,31 @@ use YM\umiAuth\Facades\umiAuth;
 
 class umiDataTableBuilder
 {
+    private $browser;
+    private $read;
+    private $edit;
+    private $add;
+    private $delete;
 
     public function __construct()
     {
+        $administrator = new administrator();
+        $tableName = $administrator->currentTableName();
+
+        $permission = 'browser-' . $tableName;
+        $this->browser = umiAuth::can($permission) ? true : false;
+
+        $permission = 'read-' . $tableName;
+        $this->read = umiAuth::can($permission) ? true : false;
+
+        $permission = 'edit-' . $tableName;
+        $this->edit = umiAuth::can($permission) ? true : false;
+
+        $permission = 'add-' . $tableName;
+        $this->add = umiAuth::can($permission) ? true : false;
+
+        $permission = 'delete-' . $tableName;
+        $this->delete = umiAuth::can($permission) ? true : false;
     }
 
     public function tableSearch()
@@ -18,10 +40,13 @@ EOD;
         return $html;
     }
 
-    public function tableHead()
+    public function tableHead($superAdmin = false)
     {
-        $buttonDelete = $this->ButtonDelete();
-        $buttonNew = $this->ButtonNew();
+        #删除按钮 button of delete
+        $buttonDelete = $superAdmin || $this->delete ? $this->ButtonDelete() : '';
+
+        #新建按钮 button of new
+        $buttonNew = $superAdmin || $this->add ? $this->ButtonNew() : '';
 
         $html = <<<EOD
         <p>
@@ -46,8 +71,16 @@ EOD;
         return $html;
     }
 
-    public function tableBody()
+    public function tableBody($superAdmin = false)
     {
+        #表格右侧小按钮 small button on the right side of table
+        $buttonSmallEdit = $superAdmin || $this->edit ? $this->ButtonSmallEdit() : '';
+        $buttonSmallBrowser = $superAdmin || $this->browser ? $this->ButtonSmallBrowser() : '';
+        $buttonSmallDelete = $superAdmin || $this->delete ? $this->ButtonSmallDelete() : '';
+        $linkHideEdit = $superAdmin || $this->edit ? $this->LinkHideEdit() : '';
+        $linkHideDelete = $superAdmin || $this->delete ? $this->LinkHideDelete() : '';
+        $linkHideBrowser = $superAdmin || $this->browser ? $this->LinkHideBrowser() : '';
+
         $html = <<<EOD
         <div class="row">
 		    <div class="col-xs-12">
@@ -106,21 +139,11 @@ EOD;
 
 				            <td>
 				            	<div class="hidden-sm hidden-xs btn-group">
-				            		<button class="btn btn-xs btn-success">
-				            			<i class="ace-icon fa fa-check bigger-120"></i>
-				            		</button>
+				            		$buttonSmallEdit
 
-				            		<button class="btn btn-xs btn-info">
-				            			<i class="ace-icon fa fa-pencil bigger-120"></i>
-				            		</button>
+				            		$buttonSmallBrowser
 
-				            		<button class="btn btn-xs btn-danger">
-				            			<i class="ace-icon fa fa-trash-o bigger-120"></i>
-				            		</button>
-
-				            		<button class="btn btn-xs btn-warning">
-				            			<i class="ace-icon fa fa-eye bigger-120"></i>
-				            		</button>
+				            		$buttonSmallDelete
 				            	</div>
 
 				                <div class="hidden-md hidden-lg">
@@ -130,29 +153,11 @@ EOD;
 				            			</button>
 
 				            			<ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
-				            				<li>
-				            					<a href="#" class="tooltip-info" data-rel="tooltip" title="View">
-				            						<span class="blue">
-				            							<i class="ace-icon fa fa-search-plus bigger-120"></i>
-				            						</span>
-				            					</a>
-				            				</li>
+				            				$linkHideBrowser
 
-				            				<li>
-				            					<a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
-				            						<span class="green">
-				            							<i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
-				            						</span>
-				            					</a>
-				            				</li>
+                                            $linkHideEdit
 
-				            				<li>
-				            					<a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
-				            						<span class="red">
-				            							<i class="ace-icon fa fa-trash-o bigger-120"></i>
-				            						</span>
-				            					</a>
-				            				</li>
+                                            $linkHideDelete
 				            			</ul>
 				            		</div>
 				            	</div>
@@ -166,7 +171,7 @@ EOD;
         return $html;
     }
 
-    public function tableFoot()
+    public function tableFoot($superAdmin = false)
     {
         $html = <<<EOD
 
@@ -193,6 +198,78 @@ EOD;
 	    	<i class="ace-icon fa fa-trash-o"></i>
 	    	Delete
 	    </button>
+EOD;
+        return $html;
+    }
+
+    private function ButtonSmallEdit()
+    {
+        $html = <<<EOD
+        <button class="btn btn-xs btn-info">
+            <i class="ace-icon fa fa-pencil bigger-120"></i>
+        </button>
+EOD;
+        return $html;
+    }
+
+    private function ButtonSmallBrowser()
+    {
+        $html = <<<EOD
+        <button class="btn btn-xs btn-warning">
+            <i class="ace-icon fa fa-eye bigger-120"></i>
+        </button>
+EOD;
+        return $html;
+    }
+
+    private function ButtonSmallDelete()
+    {
+        $html = <<<EOD
+        <button class="btn btn-xs btn-danger">
+            <i class="ace-icon fa fa-trash-o bigger-120"></i>
+        </button>
+EOD;
+        return $html;
+    }
+
+    private function LinkHideBrowser()
+    {
+        $html = <<<EOD
+        <li>
+            <a href="#" class="tooltip-info" data-rel="tooltip" title="View">
+                <span class="green">
+                	<i class="ace-icon fa fa-eye bigger-120"></i>
+                </span>
+            </a>
+        </li>
+EOD;
+        return $html;
+    }
+
+    private function LinkHideEdit()
+    {
+        $html = <<<EOD
+        <li>
+            <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
+                <span class="blue">
+                    <i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
+                </span>
+            </a>
+        </li>
+EOD;
+        return $html;
+    }
+
+    private function LinkHideDelete()
+    {
+        $html = <<<EOD
+        <li>
+            <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
+                <span class="red">
+                    <i class="ace-icon fa fa-trash-o bigger-120"></i>
+                </span>
+            </a>
+        </li>
 EOD;
         return $html;
     }

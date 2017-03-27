@@ -17,6 +17,8 @@ class administrator
     private $minute;
     private $userName;
 
+    private static $currentControlledTable;
+
     public function __construct()
     {
         $this->minute = Config::get('umi.cache_minutes');
@@ -40,5 +42,14 @@ class administrator
             return $user->MenuJson()->firstOrFail()->json;
         });
         return $json;
+    }
+
+    public static function setCurrentTable($tableName)
+    {
+        static::$currentControlledTable = $tableName;
+    }
+    public static function currentTableName()
+    {
+        return static::$currentControlledTable;
     }
 }

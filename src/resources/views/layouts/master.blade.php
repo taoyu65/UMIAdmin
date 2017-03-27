@@ -75,7 +75,7 @@
 
         <div class="sidebar-shortcuts" id="sidebar-shortcuts">
             <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
-                <button class="btn btn-success" onclick="window.location.href='umiTable'">
+                <button class="btn btn-success" onclick="window.location.href='{{url('umiTable')}}'">
                     <i class="ace-icon fa fa-bars"></i>
                 </button>
 
@@ -155,7 +155,7 @@
 <script src="{{$path}}/js/jquery-1.11.3.min.js"></script>
 <![endif]-->
 <script type="text/javascript">
-    if('ontouchstart' in document.documentElement) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+    if('ontou chstart' in document.documentElement) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
 </script>
 <script src="{{$path}}/js/bootstrap.min.js"></script>
 

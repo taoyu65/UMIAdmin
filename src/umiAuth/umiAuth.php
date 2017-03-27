@@ -13,8 +13,6 @@ class umiAuth implements umiAuthInterface
     use umiAuthPermissionTrait;
 
     private $User;
-    private $DELIMITER_AT = '-';        //between table and action
-    private $DELIMITER_PERM = '|';      //between permissions
 
     public function __construct()
     {
