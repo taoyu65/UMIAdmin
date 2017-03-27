@@ -5,14 +5,14 @@ Route::get('admin', ['as' => 'admin', function () {
     return view('umi::login');
 }]);
 Route::post('submit', 'dashboardController@dashboard');
-Route::get('logout', 'dashboardController@logout');
+Route::get('logout', 'dashboardController@getLogout');
 #------------------------------------------------------------------
 
 #main--------------------------------------------------------------
 Route::group(['middleware' => 'umi.url.auth'], function () {
 
     Route::get('refresh', [
-        'uses'      => 'dashboardController@refresh',
+        'uses'      => 'dashboardController@getRefresh',
         'as'        => 'refresh'
     ]);
 

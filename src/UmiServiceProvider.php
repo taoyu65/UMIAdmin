@@ -2,6 +2,7 @@
 
 namespace YM;
 
+use Illuminate\Foundation\Support\Providers\EventServiceProvider;
 use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
 use YM\Http\Middleware\UmiUrlAuthMiddleware;
@@ -19,6 +20,7 @@ class UmiServiceProvider extends ServiceProvider
         $this->app->singleton('umi', function () {
             return new Umi();
         });
+        $this->app->alias('umi', 'YM\Facades\Umi');
 
         #注册Umi路由提供者
         #regist Umi route provider
@@ -27,6 +29,10 @@ class UmiServiceProvider extends ServiceProvider
         #注册视图合成器
         #regist view composer that including master page composer
         $this->app->register(ComposerServiceProvider::class);
+
+        #事件提供者
+        #regist event service
+        $this->app->register(EventServiceProvider::class);
 
         #数据表(tables)的单例模式
         #singleton for data table 'tables'

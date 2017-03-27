@@ -58,7 +58,9 @@ EOD;
     {
         $path = config('umi.assets_path') . '/ace';
         $userName = Auth::user()->name;
-        $logout = '';
+        $logout = url('logout');
+        $refresh = url('refresh');
+
         #region head of master page
         $html = <<<EOD
         <div class="navbar-header pull-left">
@@ -355,14 +357,14 @@ EOD;
 
                         <li class="divider"></li>
                         <li>
-                            <a href="refresh">
+                            <a href="$refresh">
                                 <i class="ace-icon fa fa-refresh"></i>
                                 refresh (Clean Cache)
                             </a>
                         </li>
                         <li class="divider"></li>
                         <li>
-                            <a href="logout">
+                            <a href="$logout">
                                 <i class="ace-icon fa fa-power-off"></i>
                                 Logout
                             </a>
@@ -373,6 +375,7 @@ EOD;
         </div>
 EOD;
         #endregion
+
         return $html;
     }
 }

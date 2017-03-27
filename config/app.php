@@ -174,8 +174,17 @@ return [
          */
         App\Providers\AppServiceProvider::class,
         App\Providers\AuthServiceProvider::class,
+
+        /*
+         * umi admin
+         */
         YM\UmiServiceProvider::class,
-        YM\UmiEventServiceProvider::class,
+
+        /*
+         * umi auth package - to support umi admin
+         */
+        YM\umiAuth\umiAuthServiceProvider::class,
+
         //App\Providers\BroadcastServiceProvider::class,
         //App\Providers\EventServiceProvider::class,
         //App\Providers\RouteServiceProvider::class,
@@ -227,7 +236,6 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'Umi' => YM\Facades\Umi::class,
     ],
 
 ];
