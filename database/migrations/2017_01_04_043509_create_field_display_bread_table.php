@@ -21,6 +21,8 @@ class CreateFieldDisplayBreadTable extends Migration
             $table->string('type');
             $table->string('relation_display');
             $table->string('display_name');
+            $table->integer('order')->default(0);
+            $table->tinyInteger('is_showing')->default(0);
             $table->timestamps();
         });
 
@@ -32,6 +34,8 @@ class CreateFieldDisplayBreadTable extends Migration
             $table->string('type');
             $table->string('relation_display');
             $table->string('display_name');
+            $table->integer('order')->default(0);
+            $table->tinyInteger('is_showing')->default(0);
             $table->timestamps();
         });
 
@@ -45,6 +49,8 @@ class CreateFieldDisplayBreadTable extends Migration
             $table->string('display_name');
             $table->string('validation');
             $table->string('details');
+            $table->integer('order')->default(0);
+            $table->tinyInteger('is_editable')->default(0);
             $table->timestamps();
         });
 
@@ -58,6 +64,8 @@ class CreateFieldDisplayBreadTable extends Migration
             $table->string('display_name');
             $table->string('validation');
             $table->string('details');
+            $table->integer('order')->default(0);
+            $table->tinyInteger('is_editable')->default(0);
             $table->timestamps();
         });
     }

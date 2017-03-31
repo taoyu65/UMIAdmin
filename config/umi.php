@@ -50,7 +50,7 @@ return [
     | 超级管理员不依赖数据库记录, 为了防止操作失误删除管理员或者其权限, 使权限管理逻辑更加清晰
     |
     | application allows only one super admin exist(can be implemented multiple
-    | super admins by overriding interface)
+    | different super admins by overriding interface, that admin can be customized)
     | super admin has all authority including Url(entrance of web page) and BREAD
     | super admin doesn't depend on record of database, prevent mistake of operation
     | of deleting the record, to make the business logical of authority is clear
@@ -84,9 +84,26 @@ return [
     |--------------------------------------------------------------------------
     */
 
-    'unAuthorizedAccessStyle' => 'invisible',
+    'unAuthorizedAccessStyle' => 'disable',
 
-    //不包含的表
+    /*
+    |--------------------------------------------------------------------------
+    | 数据表browser的时候 是否显示用户自定义的数据类型 (如果开启可设置外键为对应数据表的内容)
+    | when the data table is showing on browser see if shows the new format
+    | that custom made (if open than can set a foreign key to specific name from
+    | the table related to)
+    |--------------------------------------------------------------------------
+    */
+
+    'data_field_reformat' => true,
+
+    /*
+    |--------------------------------------------------------------------------
+    | 设置数据表名字的列表 为不可编辑 不具备BREAD功能
+    | a list that does not have BREAD function
+    |--------------------------------------------------------------------------
+    */
+
     'bread_except' => [],
 
     //数据类型
