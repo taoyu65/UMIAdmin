@@ -2,11 +2,8 @@
 
 namespace YM\Umi\DataTable\DataType;
 
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Config;
 use YM\Models\FieldDisplayBrowser;
 use YM\Models\Table;
-use YM\Umi\Contracts\DataType\DataTypeInterface;
 use YM\Umi\FactoryDataType;
 
 class DataTypeOperation
@@ -14,7 +11,6 @@ class DataTypeOperation
     private $bread;
     private $tableName;
     private $tableId;
-    private $minute;
 
     #database table name
     private $browser = 'umi_field_display_browser';
@@ -43,18 +39,14 @@ class DataTypeOperation
 
         $this->tableName = $tableName;
 
-        $this->minute = Config::get('umi.cache_minutes');
-
         $table = new Table();
         $this->tableId = $table->getTableId($this->tableName);
     }
 
     private function getDataSet($tableId)
     {
-        return Cache::remember('dataSetBrowser' . $tableId, $this->minute, function () use ($tableId){
-            return FieldDisplayBrowser::where('table_id', $tableId)
-                ->where('is_showing', 1)->get();
-        });
+        $fieldDisplayBrowser = new FieldDisplayBrowser();
+        return $fieldDisplayBrowser->DataSetBrowser($tableId);
     }
 
     #仅仅为数据浏览所用 just use for the browser
@@ -76,20 +68,59 @@ class DataTypeOperation
     {
         return $this->getDataSet($this->tableId)
             ->map(function ($item) {
-                return [$item->field => $item->type];
-            });
+                return [
+                    $item->field => [
+                        'type'              => $item->type,
+                        'relation_display'  => $item->relation_display
+                    ]
+                ];
+            })->collapse();
     }
 
     #根据数据类型重写数据格式 get regulated data according to the custom required
     public function regulatedDataSet($dataSet)
     {
-        $regulatingFields = $this->getRegulatingType();
-        $factory = new FactoryDataType();
-        foreach ($regulatingFields as $field) {var_dump($field);
-            //$factoryDataType = $factory->getDataType($dataType);
-            //dd($factoryDataType->showField());
+        $dataTypes = $this->getRegulatingType();
+        $factory = new FactoryDataType($dataTypes);
+
+        $arrDisorder = [];
+        foreach ($dataTypes as $field => $others) {
+            $column = $dataSet->pluck($field)->toArray();
+            $regulator = $factory->getInstance($field);
+            list($relatedTable, $relatedField) = $this->getTableField($others['relation_display']);
+            $column = $regulator->regulateDataBrowser($column, $relatedTable, $relatedField);
+            array_push($arrDisorder, $column);
+        }
+        $regulatedDateSet = $this->swapRowColumn($arrDisorder);
+
+        return $regulatedDateSet;
+    }
+
+    private function getTableField($relationship)
+    {
+        $arr = explode(':', $relationship);
+
+        #如果不是分为2个部分, 则参数错误 返回原有数据
+        #if does not have 2 parts, the parameter is wrong than return original data
+        if (count($arr) != 2)
+            return ['', ''];
+        return [$arr[0], $arr[1]];
+    }
+
+    private function swapRowColumn($arr)
+    {
+        #初始化 initial
+        $returnArr = [];
+        for ($i = 0; $i < count($arr[0]); $i++) {
+            $returnArr[$i] = array();
         }
 
-        return $dataSet;
+        for ($i = 0; $i < count($arr); $i++) {
+            for ($j = 0; $j < count($arr[$i]); $j++) {
+                $returnArr[$j][$i] = $arr[$i][$j];
+            }
+        }
+
+        return $returnArr;
     }
 }

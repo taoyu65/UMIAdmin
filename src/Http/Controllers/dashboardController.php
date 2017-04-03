@@ -29,7 +29,8 @@ class DashBoardController extends Controller
 
     public function getRefresh()
     {
+        $url = base64_decode($_REQUEST['u']);
         Cache::flush();
-        return redirect()->route('dashboard');
+        return redirect($url);
     }
 }

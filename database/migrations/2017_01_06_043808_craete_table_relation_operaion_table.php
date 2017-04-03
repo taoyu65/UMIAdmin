@@ -13,7 +13,7 @@ class CraeteTableRelationOperaionTable extends Migration
      */
     public function up()
     {
-        Schema::create('table_relation_operation', function (Blueprint $table) {
+        Schema::create('umi_table_relation_operation', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('active_table_id')->unsigned();
             $table->string('active_table_field');
@@ -34,6 +34,6 @@ class CraeteTableRelationOperaionTable extends Migration
      */
     public function down()
     {
-        Schema::drop('table_relation_operation');
+        Schema::drop('umi_table_relation_operation');
     }
 }

@@ -3,7 +3,7 @@
 namespace YM\Umi;
 
 use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\DB;
+use YM\Models\Umi;
 use YM\umiAuth\Facades\umiAuth;
 use YM\Umi\DataTable\DataType\DataTypeOperation;
 
@@ -28,12 +28,6 @@ class umiDataTableBuilder
     {
         $administrator = new administrator();
         $this->tableName = $administrator->currentTableName();
-
-        #检查是否为 不可编辑的数据表
-        #check if a data table without editable
-        $nonEditList = Config::get('umi.bread_except');
-        if (in_array($this->tableName, $nonEditList, true))
-            throw new \Exception('this table is not editable');
 
         #获取所有BREAD 权限
         #get all bread authorization
@@ -122,7 +116,11 @@ EOD;
 
         #数据表内容按照类型重写 table body will be rewrite according to the custom data type
         $fields = $dataTypeOp->getFields();
-        $dataSet = DB::table($this->tableName)->select($fields)->get();
+        $perPage = Config::get('umi.umi_table_perPage');
+        $umiModel = new Umi();
+        $dataSet = $umiModel->getSelectedTable($this->tableName, $fields)->paginate($perPage);
+        $args = $this->getArgs(['id']); //获取参数 get args
+        $links = $dataSet->appends($args)->links();
 
         #是否开启 数据映射功能 if available for data reformat
         if (Config::get('umi.data_field_reformat'))
@@ -167,6 +165,7 @@ EOD;
 			</div>
 		</div>
 EOD;
+        $html .= $links;
         return $html;
     }
 
@@ -176,6 +175,23 @@ EOD;
 
 EOD;
         return $html;
+    }
+
+    /**
+     * @param $args - 获取url参数, 可以指定键值数组 get url args, can be array of key like ['id','key','search']
+     * @return array - 参数的键值 the key
+     */
+    private function getArgs($args)
+    {
+        $args = is_array($args) ? $args : [$args];
+        $arr = [];
+
+        for ($i = 0; $i < count($args); $i++) {
+            $key = $args[$i];
+            $value = isset($_REQUEST[$key]) ? $_REQUEST[$key] : '';
+            $arr[$key] =  $value;
+        }
+        return $arr;
     }
 
     #region component

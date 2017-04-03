@@ -14,7 +14,7 @@ class CreateFieldDisplayBreadTable extends Migration
     public function up()
     {
         #field_display_browser
-        Schema::create('field_display_browser', function (Blueprint $table) {
+        Schema::create('umi_field_display_browser', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('table_id')->unsigned();
             $table->string('field');
@@ -27,7 +27,7 @@ class CreateFieldDisplayBreadTable extends Migration
         });
 
         #field_display_read
-        Schema::create('field_display_read', function (Blueprint $table) {
+        Schema::create('umi_field_display_read', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('table_id')->unsigned();
             $table->string('field');
@@ -40,7 +40,7 @@ class CreateFieldDisplayBreadTable extends Migration
         });
 
         #field_display_edit
-        Schema::create('field_display_edit', function (Blueprint $table) {
+        Schema::create('umi_field_display_edit', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('table_id')->unsigned();
             $table->string('field');
@@ -55,7 +55,7 @@ class CreateFieldDisplayBreadTable extends Migration
         });
 
         #field_display_add
-        Schema::create('field_display_add', function (Blueprint $table) {
+        Schema::create('umi_field_display_add', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('table_id')->unsigned();
             $table->string('field');
@@ -77,9 +77,9 @@ class CreateFieldDisplayBreadTable extends Migration
      */
     public function down()
     {
-        Schema::drop('field_display_browser');
-        Schema::drop('field_display_read');
-        Schema::drop('field_display_edit');
-        Schema::drop('field_display_add');
+        Schema::drop('umi_field_display_browser');
+        Schema::drop('umi_field_display_read');
+        Schema::drop('umi_field_display_edit');
+        Schema::drop('umi_field_display_add');
     }
 }

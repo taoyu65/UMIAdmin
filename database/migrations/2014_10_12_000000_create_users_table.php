@@ -13,7 +13,7 @@ class CreateUsersTable extends Migration
      */
     public function up()
     {
-        Schema::create('users', function (Blueprint $table) {
+        Schema::create('umi_users', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
             $table->string('email')->unique();
@@ -22,7 +22,7 @@ class CreateUsersTable extends Migration
             $table->timestamps();
         });
 
-        Schema::create('user_role', function (Blueprint $table) {
+        Schema::create('umi_user_role', function (Blueprint $table) {
             $table->integer('user_id')->unsigned();
             $table->integer('role_id')->unsigned();
         });
@@ -35,7 +35,7 @@ class CreateUsersTable extends Migration
      */
     public function down()
     {
-        Schema::drop('users');
-        Schema::drop('user_role');
+        Schema::drop('umi_users');
+        Schema::drop('umi_user_role');
     }
 }

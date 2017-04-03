@@ -2,6 +2,7 @@
 
 namespace YM\Umi\Auth;
 
+use Illuminate\Support\Facades\URL;
 use YM\Umi\Contracts\PrintHtml\MasterPageInterface;
 use Illuminate\Support\Facades\Auth;
 
@@ -59,7 +60,7 @@ EOD;
         $path = config('umi.assets_path') . '/ace';
         $userName = Auth::user()->name;
         $logout = url('logout');
-        $refresh = url('refresh');
+        $refresh =  url('refresh') . '?u=' . base64_encode(URL::full());
 
         #region head of master page
         $html = <<<EOD

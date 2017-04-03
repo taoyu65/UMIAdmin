@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMenusTable extends Migration
+class CreateBadgesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,14 +13,12 @@ class CreateMenusTable extends Migration
      */
     public function up()
     {
-        Schema::create('umi_menus', function (Blueprint $table) {
+        Schema::create('umi_badges', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('menu_id')->unsigned();
-            $table->string('title');
-            $table->string('url');
-            $table->string('target')->default('_self');
-            $table->string('icon_class');
-            $table->integer('order')->unsigned();
+            $table->integer('table_id')->unsigned();
+            $table->string('field');
+            $table->string('badge_name');
+            $table->string('class');
             $table->timestamps();
         });
     }
@@ -32,6 +30,6 @@ class CreateMenusTable extends Migration
      */
     public function down()
     {
-        Schema::drop('umi_menus');
+        Schema::drop('umi_badges');
     }
 }

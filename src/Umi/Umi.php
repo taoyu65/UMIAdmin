@@ -14,7 +14,7 @@ class Umi
     public function breadcrumb()
     {
         $result = [];
-        $pars = Request::segments();//var_dump($pars);
+        $pars = Request::segments();
         $count = count($pars);
         $breadcrumbs = Config::get('umiBreadcrumbs.dashboard');
 

@@ -25,6 +25,6 @@ class AdminDataTableWithSearch extends umiDataTableAbstract
 
     public function footer()
     {
-        return '545';
+        return 'customize footer';
     }
 }

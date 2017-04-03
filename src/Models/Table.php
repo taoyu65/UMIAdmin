@@ -30,9 +30,14 @@ class Table extends Model
         return $this->belongsTo('TableRelationOperation', 'response_table_id');
     }
 
+    public function getTableById($id)
+    {
+        return $this->cacheTable->find($id);
+    }
+
     public function getTableName($id)
     {
-        return self::find($id)->table_name;
+        return $this->getTableById($id)->table_name;
     }
 
     public function getTableId($tableName)
@@ -41,5 +46,10 @@ class Table extends Model
         if ($record)
             return $record->id;
         return 0;
+    }
+
+    public function getAllTable()
+    {
+        return $this->cacheTable;
     }
 }
