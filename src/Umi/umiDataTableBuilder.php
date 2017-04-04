@@ -53,8 +53,24 @@ class umiDataTableBuilder
 
     public function tableSearch()
     {
-        $html = <<<EOD
-EOD;
+        $html = <<<UMI
+        search
+UMI;
+        return $html;
+    }
+
+    public function tableHeadAlert($superAdmin = false)
+    {
+        $html = <<<UMI
+        <div class="alert alert-info">
+			<button type="button" class="close" data-dismiss="alert">
+				<i class="ace-icon fa fa-times"></i>
+			</button>
+			<strong>This is Table's head!</strong>
+			This alert needs your attention, but it's not super important.
+			<br />
+		</div>
+UMI;
         return $html;
     }
 
@@ -66,12 +82,12 @@ EOD;
         #新建按钮 button of new
         $buttonAdd = $this->ButtonAdd($superAdmin);
 
-        $html = <<<EOD
+        $html = <<<UMI
         <p>
             $buttonDelete
             $buttonAdd
 		</p>
-EOD;
+UMI;
         return $html;
     }
 
@@ -83,12 +99,12 @@ EOD;
         $buttonDelete = $this->ButtonDelete(true);
         $buttonAdd = $this->ButtonAdd(true);
 
-        $html = <<<EOD
+        $html = <<<UMI
         <p>
             $buttonDelete
             $buttonAdd
 		</p>
-EOD;
+UMI;
         return $html;
     }
 
@@ -141,7 +157,7 @@ EOD;
                 $trBodyHtml .= '</tr>';
             }
         }
-        $html = <<<EOD
+        $html = <<<UMI
         <div class="row">
 		    <div class="col-xs-12">
 			    <table id="dynamic-table" class="table table-striped table-bordered table-hover">
@@ -164,16 +180,34 @@ EOD;
 				</table>
 			</div>
 		</div>
-EOD;
+UMI;
         $html .= $links;
         return $html;
     }
 
     public function tableFoot($superAdmin = false)
     {
-        $html = <<<EOD
+        $html = <<< UMI
+        <div class="alert alert-block alert-success">
+			<button type="button" class="close" data-dismiss="alert">
+				<i class="ace-icon fa fa-times"></i>
+			</button>
 
-EOD;
+			<p>
+				<strong>
+					<i class="ace-icon fa fa-check"></i>
+					This is Table's Foot
+				</strong>
+				You can customize this footer.<br>
+				Footer, Header, Body of Table can be different by extending a new class for the a new administrator
+			</p>
+
+			<p>
+				<button class="btn btn-sm btn-success">Do This</button>
+				<button class="btn btn-sm btn-info">Or This One</button>
+			</p>
+		</div>
+UMI;
         return $html;
     }
 
@@ -197,14 +231,15 @@ EOD;
     #region component
     private function checkboxHtml()
     {
-        $html = <<<EOD
+        $disabled = $this->delete ? '' : 'disabled';
+        $html = <<<UMI
         <td class="center">
 	        <label class="pos-rel">
-	            <input type="checkbox" class="ace" />
+	            <input type="checkbox" class="ace" $disabled/>
 	            <span class="lbl"></span>
 	        </label>
 	    </td>
-EOD;
+UMI;
         return $html;
     }
 
@@ -218,7 +253,7 @@ EOD;
         $linkHideDelete = $this->LinkHideDelete($superAdmin);
         $linkHideBrowser = $this->LinkHideBrowser($superAdmin);
 
-        $html = <<<EOD
+        $html = <<<UMI
         <td>
 	    	<div class="hidden-sm hidden-xs btn-group">
 	    		$buttonSmallEdit
@@ -244,7 +279,7 @@ EOD;
 	    		</div>
 	    	</div>
 	    </td>
-EOD;
+UMI;
         return $html;
     }
 
@@ -259,12 +294,12 @@ EOD;
     }
     private function ButtonAddHtml($disable = '')
     {
-        $html = <<<EOD
+        $html = <<<UMI
         <button class="$this->BtnCssNew $disable">
 	    	<i class="ace-icon fa fa-plus"></i>
             New
 	    </button>
-EOD;
+UMI;
         return $html;
     }
 
@@ -280,12 +315,12 @@ EOD;
 
     private function ButtonDeleteHtml($disable = '')
     {
-        $html = <<<EOD
+        $html = <<<UMI
         <button class="$this->BtnCssDelete $disable">
 	    	<i class="ace-icon fa fa-trash-o"></i>
 	    	Delete
 	    </button>
-EOD;
+UMI;
         return $html;
     }
 
@@ -301,11 +336,11 @@ EOD;
 
     private function ButtonSmallEditHtml($disable = '')
     {
-        $html = <<<EOD
+        $html = <<<UMI
         <button class="$this->BtnCssSmallEdit $disable">
             <i class="ace-icon fa fa-pencil bigger-120"></i>
         </button>
-EOD;
+UMI;
         return $html;
     }
 
@@ -321,11 +356,11 @@ EOD;
 
     private function ButtonSmallBrowserHtml($disable = '')
     {
-        $html = <<<EOD
+        $html = <<<UMI
         <button class="$this->BtnCssSmallBrowser $disable">
             <i class="ace-icon fa fa-eye bigger-120"></i>
         </button>
-EOD;
+UMI;
         return $html;
     }
 
@@ -341,11 +376,11 @@ EOD;
 
     private function ButtonSmallDeleteHtml($disable = '')
     {
-        $html = <<<EOD
+        $html = <<<UMI
         <button class="$this->BtnCssSmallDelete $disable">
             <i class="ace-icon fa fa-trash-o bigger-120"></i>
         </button>
-EOD;
+UMI;
         return $html;
     }
 
@@ -362,7 +397,7 @@ EOD;
     private function LinkHideBrowserHtml($disable = '')
     {
         if ($disable === 'disabled') {
-            $html = <<<EOD
+            $html = <<<UMI
             <li>
                 <a href="#">
                     <span class="green" style="cursor:not-allowed">
@@ -370,9 +405,9 @@ EOD;
                     </span>
                 </a>
             </li>
-EOD;
+UMI;
         } else {
-            $html = <<<EOD
+            $html = <<<UMI
             <li>
                 <a href="#" class="tooltip-info disabled" data-rel="tooltip" title="View">
                     <span class="green">
@@ -380,7 +415,7 @@ EOD;
                     </span>
                 </a>
             </li>
-EOD;
+UMI;
         }
         return $html;
     }
@@ -398,7 +433,7 @@ EOD;
     private function LinkHideEditHtml($disable = '')
     {
         if ($disable === 'disabled') {
-            $html = <<<EOD
+            $html = <<<UMI
             <li>
                 <a href="#">
                     <span class="blue" style="cursor:not-allowed">
@@ -406,9 +441,9 @@ EOD;
                     </span>
                 </a>
             </li>
-EOD;
+UMI;
         } else {
-            $html = <<<EOD
+            $html = <<<UMI
             <li>
                 <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
                     <span class="blue">
@@ -416,7 +451,7 @@ EOD;
                     </span>
                 </a>
             </li>
-EOD;
+UMI;
         }
 
         return $html;
@@ -435,7 +470,7 @@ EOD;
     private function LinkHideDeleteHtml($disable = '')
     {
         if ($disable === 'disabled') {
-            $html = <<<EOD
+            $html = <<<UMI
             <li>
                 <a href="#">
                     <span class="red" style="cursor:not-allowed">
@@ -443,9 +478,9 @@ EOD;
                     </span>
                 </a>
             </li>
-EOD;
+UMI;
         } else {
-            $html = <<<EOD
+            $html = <<<UMI
             <li>
                 <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
                     <span class="red">
@@ -453,7 +488,7 @@ EOD;
                     </span>
                 </a>
             </li>
-EOD;
+UMI;
         }
         return $html;
     }
@@ -469,7 +504,7 @@ EOD;
     {
         $showingButton = $url === '' ? '' : '<p><button class="btn btn-sm btn-success">Go Set Up</button> <button class="btn btn-sm">Not Now</button></p>';
 
-        $html = <<<EOD
+        $html = <<<UMI
         <div class="alert alert-danger">
 	    	<button type="button" class="close" data-dismiss="alert">
 	    		<i class="ace-icon fa fa-times"></i>
@@ -482,7 +517,7 @@ EOD;
 	    	<br />
 	    	$showingButton
 	    </div>
-EOD;
+UMI;
         return $html;
     }
     #endregion

@@ -29,7 +29,7 @@ class ForeignKeyDataType extends DataTypeAbstract
     {
         $js = '{$(\'[data-rel=tooltip]\').tooltip();}';
         $url = Config::get('umi.assets_path') . '/ace/js/jquery.easypiechart.min.js';
-        $html = <<< EOD
+        $html = <<< UMI
         <i class='ace-icon fa fa-exclamation-circle red tooltip-error'
         title='Does not Exist on the target table.This is the value of itself'
         style='cursor: pointer'
@@ -41,7 +41,7 @@ class ForeignKeyDataType extends DataTypeAbstract
         jQuery(function($) $js);
         </script>
 
-EOD;
+UMI;
         return $html;
     }
 }

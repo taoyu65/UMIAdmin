@@ -3,7 +3,9 @@
 namespace YM\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Config;
 
 class User extends Model
 {
@@ -15,6 +17,17 @@ class User extends Model
     {
         return $this->hasOne($this->modelNameSpace . '\RoleMenu', 'role_id');
     }
-/*
-    */
+
+    public function menusJson()
+    {
+        $minute = Config::get('umi.cache_minutes');
+        $json = Cache::remember('menuJson', $minute, function () {
+
+            return self::find(Auth::user()->id)
+                ->MenuJson()
+                ->firstOrFail()
+                ->json;
+        });
+        return $json;
+    }
 }

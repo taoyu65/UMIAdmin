@@ -35,15 +35,6 @@ class administrator
         return $this->isSuperAdmin;
     }
 
-    public function menusJson()
-    {
-        $json = Cache::remember('menuJson', $this->minute, function () {
-            $user = User::find(Auth::user()->id);
-            return $user->MenuJson()->firstOrFail()->json;
-        });
-        return $json;
-    }
-
     public static function setCurrentTable($tableName)
     {
         static::$currentControlledTable = $tableName;

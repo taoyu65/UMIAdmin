@@ -5,8 +5,9 @@ namespace YM\Umi;
 use YM\Exceptions\UmiException;
 use YM\Models\Menu;
 use Exception;
+use YM\Models\User;
 
-class MenusBuilder
+class umiMenusBuilder
 {
     private $menus;
 
@@ -48,7 +49,7 @@ class MenusBuilder
                 $class = $menuLevelStyle[$menu->id];
             //-----------------------------------------------------------------------
             if ($this->menus->isSubMenu($menu->id)) {
-                $html .= <<<EOD
+                $html .= <<<UMI
                 <li class="$class">
                     <a href="$url" target="$menu->target" class="dropdown-toggle">
 			            <i class="menu-icon fa $menu->icon_class"></i>
@@ -56,13 +57,13 @@ class MenusBuilder
 			            <b class="arrow fa fa-angle-down"></b>
 		            </a>
                     <b class="arrow"></b>
-EOD;
+UMI;
                 $html .= '<ul class="submenu">';
                 $html .= $this->recursionAllMenus($menuLevelStyle, $menu->id);
                 $html .= '</ul>';
                 $html .= '</li>';
             } else {
-                $html .= <<<EOD
+                $html .= <<<UMI
                 <li class="$class">
                     <a href="$url" target="$menu->target">
 			            <i class="menu-icon fa $menu->icon_class"></i>
@@ -70,7 +71,7 @@ EOD;
 		            </a>
                     <b class="arrow"></b>
                 </li>
-EOD;
+UMI;
             }
         }
         return $html;
@@ -94,10 +95,22 @@ EOD;
 
 #region Menus for administrator------------------------------------------------------------------------
 
-    #根据权限获取部分菜单
-    #get part of menus according to the authorization
-    public function Menus($json)
+    /**
+     * 根据不同的json加载不同菜单
+     * load different menus according to the json
+     * @param string $json
+     *              - 为空    : 根据当前用户从数据库加载json  get json by search from database according to current user
+     *              - 不为空   : 根据参数加载json    get json by the parameter has given
+     * @return string
+     * @throws Exception
+     */
+    public function Menus($json = '')
     {
+        $json = $json === '' ? $this->menusJson() : $json;
+
+        if (!is_string($json) || !is_array(json_decode($json)))
+            throw new Exception('loading Menus was failed');
+
         $html = '';//$this->dashboard();
         try {
             $jsonMenus = json_decode($json);
@@ -172,7 +185,7 @@ EOD;
                 $class = $menuLevelStyle[$objMenu->id];
             //-----------------------------------------------------------------------
             if (array_key_exists('children', $jsonMenu)){
-                $html .= <<<EOD
+                $html .= <<<UMI
                 <li class='$class'>
                     <a href="$url" target="$objMenu->target" class="dropdown-toggle">
 			            <i class="menu-icon fa $objMenu->icon_class"></i>
@@ -180,13 +193,13 @@ EOD;
 			            <b class="arrow fa fa-angle-down"></b>
 		            </a>
                     <b class="arrow"></b>
-EOD;
+UMI;
                 $html .= '<ul class="submenu">';
                 $html .= $this->recursionPartMenus($jsonMenu->children, $menuLevelStyle, 1);
                 $html .= '</ul>';
                 $html .= '</li>';
             } else {
-                $html .= <<<EOD
+                $html .= <<<UMI
                 <li class='$class'>
                     <a href="$url" target="$objMenu->target">
 			            <i class="menu-icon fa $objMenu->icon_class"></i>
@@ -194,7 +207,7 @@ EOD;
 		            </a>
                     <b class="arrow"></b>
                 </li>
-EOD;
+UMI;
             }
 
         }
@@ -206,7 +219,7 @@ EOD;
     private function dashboard()
     {
         $dashboard = route('dashboard');
-        $html = <<<EOD
+        $html = <<<UMI
         <li class="" id="dashboard">
 		    <a href="$dashboard">
 			    <i class="menu-icon fa fa-tachometer"></i>
@@ -214,7 +227,7 @@ EOD;
 			</a>
             <b class="arrow"></b>
 		</li>
-EOD;
+UMI;
         return $html;
     }
 
@@ -236,5 +249,12 @@ EOD;
             }
         }
         return $activeOrOpen;
+    }
+
+    #获取此用户的menu的json值 #get this user's json of menu
+    public function menusJson()
+    {
+        $user = new User();
+        return $user->menusJson();
     }
 }

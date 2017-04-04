@@ -8,25 +8,25 @@ abstract class umiDataTableAbstract implements umiDataTableInterface
 {
     public function header()
     {
-        $html = <<<EOD
+        $html = <<<UMI
         search area showing.
-EOD;
+UMI;
         return $html;
     }
 
     public function tableBody()
     {
-        $html = <<<EOD
+        $html = <<<UMI
 
-EOD;
+UMI;
         return $html;
     }
 
     public function footer()
     {
-        $html = <<<EOD
+        $html = <<<UMI
         page footer
-EOD;
+UMI;
         return $html;
     }
 }

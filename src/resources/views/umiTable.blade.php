@@ -13,8 +13,8 @@
 
     {!! $header !!}
 
-    {!! $tableBody !!}}
+    {!! $tableBody !!}
 
-    {!! $footer !!}}
+    {!! $footer !!}
 
 @endsection

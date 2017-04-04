@@ -2,34 +2,21 @@
 
 namespace YM\Umi\Auth;
 
-use YM\Umi\MenusBuilder;
+use YM\Umi\umiMenusBuilder;
 
 class SuperAdminMasterPage extends UmiMasterPage
 {
-    private $menus;
+    private $menusBuilder;
 
     public function __construct()
     {
-        $this->menus = new MenusBuilder();
-    }
+        parent::__construct();
 
-    public function header()
-    {
-        return parent::header();
+        $this->menusBuilder = new umiMenusBuilder();
     }
 
     public function sideMenu()
     {
-        return $this->menus->AllMenus();
-    }
-
-    public function body()
-    {
-        return parent::body();
-    }
-
-    public function footer()
-    {
-        return parent::footer();
+        return $this->menusBuilder->AllMenus();
     }
 }
