@@ -4,10 +4,13 @@ namespace YM\Http\Controllers;
 
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Gate;
+use YM\Models\Table;
 use YM\Umi\FactoryBreadBrowser;
+use YM\Umi\umiDataTableBuilder;
+
 use YM\umiAuth\Facades\umiAuth;
 use YM\umiAuth\src\Models\Role;
-
+use YM\Umi\DataTable\DataType\DataTypeOperation;
 class umiTableController extends Controller
 {
     public function index($tableName = '')
@@ -41,6 +44,13 @@ class umiTableController extends Controller
 //        umiAuth::user();
         //umiAuth::attach($role);
         //umiAuth::detach([32,33]);
+//        $ta = new Table();
+//        var_dump($ta->getTableName(17));
+//        $a = new DataTypeOperation('browser', '');
+//        $aa = $a->getTHead();
+//        foreach ($aa as $b) {
+//            //var_dump($b->id);
+//        }
         //
         if ($tableName == '') return view('umi::umiTableAll');
 

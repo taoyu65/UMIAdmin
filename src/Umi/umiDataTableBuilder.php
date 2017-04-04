@@ -54,7 +54,7 @@ class umiDataTableBuilder
     public function tableSearch()
     {
         $html = <<<UMI
-        search
+        searchs
 UMI;
         return $html;
     }

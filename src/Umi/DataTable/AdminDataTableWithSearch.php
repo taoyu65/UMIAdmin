@@ -3,30 +3,31 @@
 namespace YM\Umi\DataTable;
 
 use YM\Umi\umiDataTableBuilder;
+use YM\Umi\umiSearchBuilder;
 
 class AdminDataTableWithSearch extends umiDataTableAbstract
 {
-    protected $head;
-    protected $foot;
-
     private $umiDataTable;
 
     public function __construct()
     {
         $this->umiDataTable = new umiDataTableBuilder();
+    }
 
-        $this->head = $this->umiDataTable->tableHeadAlert();
-        $this->foot = $this->umiDataTable->tableFoot();
+    public function search()
+    {
+        $search = new umiSearchBuilder();
+        return $search->searchHtml();
     }
 
     public function headerAlert()
     {
-        return $this->head;
+        return $this->umiDataTable->tableHeadAlert();
     }
 
     public function header()
     {
-         return $this->umiDataTable->tableSearch() .
+         return $this->search() .
          $this->headerAlert() .
          $this->umiDataTable->tableHead();
     }
@@ -38,6 +39,6 @@ class AdminDataTableWithSearch extends umiDataTableAbstract
 
     public function footer()
     {
-        return $this->foot;
+        return $this->umiDataTable->tableFoot();
     }
 }

@@ -108,7 +108,7 @@
                 <div class="login-container">
                     <div class="center">
                         <h1>
-                            <i class="ace-icon fa fa-leaf green"></i>
+                            <i class="ace-icon fa fa-paw green"></i>
                             <span class="red">UMI</span>
                             <span class="white" id="id-text2">Admin</span>
                         </h1>
