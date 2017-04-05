@@ -14,29 +14,33 @@ use YM\Models\User;
 class administrator
 {
     private $isSuperAdmin = false;
+    private $minute;
+    private $userName;
+
+    private static $currentControlledTable;
 
     public function __construct()
     {
-
+        $this->minute = Config::get('umi.cache_minutes');
+        $this->userName = Auth::user()->name;
     }
 
     public function isSuperAdmin()
     {
         if (Config::get('umi.url_auth')) {
-            $this->isSuperAdmin = Auth::user()->name === Config::get('umi.super_admin') ? true : false;
+            $this->isSuperAdmin = $this->userName === Config::get('umi.super_admin') ? true : false;
         } else {
             $this->isSuperAdmin = true;
         }
         return $this->isSuperAdmin;
     }
 
-    public function menusJson()
+    public static function setCurrentTable($tableName)
     {
-        $minute = Config::get('umi.cache_minutes');
-        $json = Cache::remember('menuJson', $minute, function () {
-            $user = User::find(Auth::user()->id);
-            return $user->MenuJson()->firstOrFail()->json;
-        });
-        return $json;
+        static::$currentControlledTable = $tableName;
+    }
+    public static function currentTableName()
+    {
+        return static::$currentControlledTable;
     }
 }

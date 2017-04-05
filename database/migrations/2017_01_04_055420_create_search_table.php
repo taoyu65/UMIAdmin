@@ -13,7 +13,7 @@ class CreateSearchTable extends Migration
      */
     public function up()
     {
-        Schema::create('search_tab', function (Blueprint $table) {
+        Schema::create('umi_search_tab', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('table_id')->unsigned();
             $table->string('tab_title');
@@ -21,7 +21,7 @@ class CreateSearchTable extends Migration
             $table->timestamps();
         });
 
-        Schema::create('search', function (Blueprint $table) {
+        Schema::create('umi_search', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('table_tab_id')->unsigned();
             $table->string('field');
@@ -39,7 +39,7 @@ class CreateSearchTable extends Migration
      */
     public function down()
     {
-        Schema::drop('search_tab');
-        Schema::drop('search');
+        Schema::drop('umi_search_tab');
+        Schema::drop('umi_search');
     }
 }

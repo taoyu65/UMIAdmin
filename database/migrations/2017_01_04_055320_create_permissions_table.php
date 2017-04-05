@@ -13,7 +13,7 @@ class CreatePermissionsTable extends Migration
      */
     public function up()
     {
-        Schema::create('permissions', function (Blueprint $table) {
+        Schema::create('umi_permissions', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('table_id')->unsigned();
             $table->string('key');
@@ -21,7 +21,7 @@ class CreatePermissionsTable extends Migration
             $table->timestamps();
         });
 
-        Schema::create('permission_role', function (Blueprint $table) {
+        Schema::create('umi_permission_role', function (Blueprint $table) {
             $table->integer('permission_id')->unsigned();
             $table->integer('role_id')->unsigned();
         });
@@ -34,7 +34,7 @@ class CreatePermissionsTable extends Migration
      */
     public function down()
     {
-        Schema::drop('permissions');
-        Schema::drop('permission_role');
+        Schema::drop('umi_permissions');
+        Schema::drop('umi_permission_role');
     }
 }

@@ -13,7 +13,7 @@ class CreateMenusTable extends Migration
      */
     public function up()
     {
-        Schema::create('menus', function (Blueprint $table) {
+        Schema::create('umi_menus', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('menu_id')->unsigned();
             $table->string('title');
@@ -32,6 +32,6 @@ class CreateMenusTable extends Migration
      */
     public function down()
     {
-        Schema::drop('menus');
+        Schema::drop('umi_menus');
     }
 }

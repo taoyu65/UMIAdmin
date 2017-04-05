@@ -13,7 +13,7 @@ class CreateTablesTable extends Migration
      */
     public function up()
     {
-        Schema::create('tables', function (Blueprint $table) {
+        Schema::create('umi_tables', function (Blueprint $table) {
             $table->increments('id');
             $table->string('table_name')->unique();
             $table->string('type');
@@ -28,6 +28,6 @@ class CreateTablesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('tables');
+        Schema::drop('umi_tables');
     }
 }

@@ -21,7 +21,7 @@ class Menu extends Model
 
         $minute = Config::get('umi.cache_minutes');
         $this->MenuTable = Cache::remember('menuTable', $minute, function () {
-            return DB::table($this->table)->get();
+            return collect(DB::table($this->table)->orderBy('order')->get());
         });
     }
 
@@ -35,10 +35,7 @@ class Menu extends Model
         return $this->MenuTable->where('menu_id', $id)->count();
     }
 
-    /**
-     * @param $arrIds - array of id of table <menus>. like [1,2,3]
-     * @return mixed
-     */
+    #array of table's id <menus>. like [1,2,3]
     public function getMenusById($arrIds)
     {
         return $this->MenuTable->whereIn('id', $arrIds);
@@ -47,5 +44,10 @@ class Menu extends Model
     public function getOneMenu($id)
     {
         return $this->MenuTable->where('id', $id)->first();
+    }
+
+    public function getAllRecord()
+    {
+        return $this->MenuTable;
     }
 }

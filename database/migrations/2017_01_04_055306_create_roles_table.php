@@ -13,11 +13,17 @@ class CreateRolesTable extends Migration
      */
     public function up()
     {
-        Schema::create('roles', function (Blueprint $table) {
+        Schema::create('umi_roles', function (Blueprint $table) {
             $table->increments('id');
             $table->string('role_name')->unique();
             $table->string('display_name');
             $table->timestamps();
+        });
+
+        Schema::create('umi_role_menu', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('role_id')->unsigned();
+            $table->text('json');
         });
     }
 
@@ -28,6 +34,7 @@ class CreateRolesTable extends Migration
      */
     public function down()
     {
-        Schema::drop('roles');
+        Schema::drop('umi_roles');
+        Schema::drop('umi_role_menu');
     }
 }

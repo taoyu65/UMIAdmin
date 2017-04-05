@@ -2,38 +2,21 @@
 
 namespace YM\Umi\Auth;
 
-use YM\Umi\administrator;
-use YM\Umi\Menus;
+use YM\Umi\umiMenusBuilder;
 
 class AdminMasterPage extends UmiMasterPage
 {
-    private $menus;
-    private $administrator;
+    private $menusBuilder;
 
     public function __construct()
     {
-        $this->menus = new Menus();
-        $this->administrator = new administrator();
-    }
+        parent::__construct();
 
-    public function header()
-    {
-        return parent::header();
+        $this->menusBuilder = new umiMenusBuilder();
     }
 
     public function sideMenu()
     {
-        $json = $this->administrator->menusJson();
-        return $this->menus->Menus($json);
-    }
-
-    public function body()
-    {
-        return parent::body();
-    }
-
-    public function footer()
-    {
-        return parent::footer();
+        return $this->menusBuilder->Menus();
     }
 }

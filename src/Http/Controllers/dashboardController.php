@@ -20,10 +20,17 @@ class DashBoardController extends Controller
         }
     }
 
-    public function logout()
+    public function getLogout()
     {
         Auth::logout();
         Cache::flush();
         return redirect()->route('admin');
+    }
+
+    public function getRefresh()
+    {
+        $url = base64_decode($_REQUEST['u']);
+        Cache::flush();
+        return redirect($url);
     }
 }
