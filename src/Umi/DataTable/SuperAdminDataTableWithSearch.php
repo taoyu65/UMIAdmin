@@ -13,9 +13,22 @@ class SuperAdminDataTableWithSearch extends umiDataTableAbstract
         $this->umiDataTable = new umiDataTableBuilder();
     }
 
+    public function search()
+    {
+        $search = new umiSearchBuilder();
+        return $search->searchHtml();
+    }
+
+    public function headerAlert()
+    {
+        return $this->umiDataTable->tableHeadAlert(true);
+    }
+
     public function header()
     {
-        return $this->umiDataTable->tableHead(true);
+        return $this->search() .
+        $this->headerAlert() .
+        $this->umiDataTable->tableHead(true);
     }
 
     public function tableBody()

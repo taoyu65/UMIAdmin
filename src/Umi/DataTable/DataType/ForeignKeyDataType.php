@@ -3,7 +3,7 @@
 namespace YM\Umi\DataTable\DataType;
 
 use Illuminate\Support\Facades\Config;
-use YM\Models\Umi;
+use YM\Models\UmiModel;
 
 class ForeignKeyDataType extends DataTypeAbstract
 {
@@ -13,7 +13,7 @@ class ForeignKeyDataType extends DataTypeAbstract
 
     public function regulateDataBrowser($dataList, $relatedTable = '', $relatedField = '', $option = [])
     {
-        $umiTable = new Umi();
+        $umiTable = new UmiModel();
         $re = [];
         $currentPageData = $umiTable->getFieldByIds($relatedTable, $dataList);
         foreach ($dataList as $data) {

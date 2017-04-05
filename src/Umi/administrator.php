@@ -3,9 +3,8 @@
 namespace YM\Umi;
 
 use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Auth;
-use YM\Models\User;
+use YM\Models\Table;
 
 /**
  * register as a singleton, the class keep all the status of user
@@ -17,7 +16,8 @@ class administrator
     private $minute;
     private $userName;
 
-    private static $currentControlledTable;
+    protected $tableName;
+    protected $tableId;
 
     public function __construct()
     {
@@ -35,12 +35,24 @@ class administrator
         return $this->isSuperAdmin;
     }
 
-    public static function setCurrentTable($tableName)
+    public function userName()
     {
-        static::$currentControlledTable = $tableName;
+        return $this->userName;
     }
-    public static function currentTableName()
+
+    public function setCurrentTableName($tableName)
     {
-        return static::$currentControlledTable;
+        $this->tableName = $tableName;
+    }
+
+    public function getCurrentTableName()
+    {
+        return $this->tableName;
+    }
+
+    public function getCurrentTableId($tableName)
+    {
+        $table = new Table();
+        return $table->getTableId($tableName);
     }
 }

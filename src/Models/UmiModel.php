@@ -4,7 +4,7 @@ namespace YM\Models;
 
 use Illuminate\Support\Facades\DB;
 
-class Umi
+class UmiModel
 {
     #此模型不对应任何数据表, 仅做动态数据查询
     #this model does not relate any data table, only for dynamic data operation

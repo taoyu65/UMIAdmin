@@ -2,39 +2,36 @@
 
 namespace YM\Umi;
 
-use Illuminate\Support\Facades\Request;
-
 class Umi
 {
+    private $administrator;
+
+    protected $currentTableName;
+    protected $currentTableId;
+
     public function __construct()
     {
+        $this->administrator = app('YM\Umi\administrator');
     }
 
-    #not completed for breadcrumb function
-    public function breadcrumb()
+    public function userName()
     {
-        $result = [];
-        $pars = Request::segments();
-        $count = count($pars);
-        $breadcrumbs = Config::get('umiBreadcrumbs.dashboard');
-
-        for ($i = $count - 1; $i < $count; $i--) {
-            $par = $pars[$i];
-
-        }
-
-        return $result;
+        return $this->administrator->UserName();
     }
 
-    public function recursion($breadcrumbs, $target)
+    public function setCurrentTableName($tableName)
     {
-        foreach ($breadcrumbs as $breadcrumb) {
-            if (array_key_exists($target, $breadcrumb)) {
+        $this->currentTableName = $tableName;
+        $this->currentTableId = $this->administrator->getCurrentTableId($tableName);
+    }
 
-            }
-            if (array_key_exists('children', $breadcrumb)) {
-                $this->recursion($breadcrumb);
-            }
-        }
+    public function currentTableName()
+    {
+        return $this->currentTableName;
+    }
+
+    public function currentTableId()
+    {
+        return $this->currentTableId;
     }
 }

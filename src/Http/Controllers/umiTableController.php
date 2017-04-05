@@ -3,6 +3,7 @@
 namespace YM\Http\Controllers;
 
 use Illuminate\Routing\Controller;
+use YM\Facades\Umi;
 use Illuminate\Support\Facades\Gate;
 use YM\Models\Table;
 use YM\Umi\FactoryBreadBrowser;
@@ -11,6 +12,7 @@ use YM\Umi\umiDataTableBuilder;
 use YM\umiAuth\Facades\umiAuth;
 use YM\umiAuth\src\Models\Role;
 use YM\Umi\DataTable\DataType\DataTypeOperation;
+
 class umiTableController extends Controller
 {
     public function index($tableName = '')
@@ -53,6 +55,8 @@ class umiTableController extends Controller
 //        }
         //
         if ($tableName == '') return view('umi::umiTableAll');
+
+        Umi::setCurrentTableName($tableName);
 
         $factoryBread = new FactoryBreadBrowser($tableName);
         $breadBrowser = $factoryBread->getBreadBrowser();

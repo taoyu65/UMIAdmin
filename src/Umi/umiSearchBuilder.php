@@ -1,16 +1,19 @@
 <?php
 namespace YM\Umi;
 
-use YM\Facades\Umi;
+use YM\Models\SearchTab;
+use YM\Facades\Umi as Ym;
 
 class umiSearchBuilder
 {
     private $contentList = [];
     private $firstIcon;
+    private $tableName;
 
     public function __construct()
     {
         $this->firstIcon = 'green ace-icon fa fa-search bigger-120';
+
     }
 
     public function searchHtml()
@@ -21,11 +24,16 @@ class umiSearchBuilder
     #region component
     private function search()
     {
-        $tabs = $this->searchTab('dafs','');
-        $tabs .= $this->searchTab('new','');$tabs .= $this->searchTab('new','');$tabs .= $this->searchTab('new?yes:no','active');
+        $tabs = '';
 
-//        foreach () {
-//        }
+        $searchTab = new SearchTab();
+
+        $active = 'active';
+        $searchTabList = $searchTab->searchTabs(Ym::currentTableId());
+        foreach ($searchTabList as $searchTab) {
+            $tabs .= $this->searchTab($searchTab->tab_title, $active);
+            $active = '';
+        }
 
         $content = '';
         foreach ($this->contentList as $item) {

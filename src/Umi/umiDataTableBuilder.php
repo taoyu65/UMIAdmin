@@ -3,7 +3,8 @@
 namespace YM\Umi;
 
 use Illuminate\Support\Facades\Config;
-use YM\Models\Umi;
+use YM\Models\UmiModel;
+use YM\Facades\Umi as Ym;
 use YM\umiAuth\Facades\umiAuth;
 use YM\Umi\DataTable\DataType\DataTypeOperation;
 
@@ -26,8 +27,7 @@ class umiDataTableBuilder
 
     public function __construct()
     {
-        $administrator = new administrator();
-        $this->tableName = $administrator->currentTableName();
+        $this->tableName = Ym::currentTableName();
 
         #获取所有BREAD 权限
         #get all bread authorization
@@ -49,14 +49,6 @@ class umiDataTableBuilder
         #获取按钮没有被授权时候的样式,可以设置为不显示或者不可点击
         #get style of button when unauthorized, does not show or not editable
         $this->buttonStyle = Config::get('umi.unAuthorizedAccessStyle');
-    }
-
-    public function tableSearch()
-    {
-        $html = <<<UMI
-        searchs
-UMI;
-        return $html;
     }
 
     public function tableHeadAlert($superAdmin = false)
@@ -133,7 +125,7 @@ UMI;
         #数据表内容按照类型重写 table body will be rewrite according to the custom data type
         $fields = $dataTypeOp->getFields();
         $perPage = Config::get('umi.umi_table_perPage');
-        $umiModel = new Umi();
+        $umiModel = new UmiModel();
         $dataSet = $umiModel->getSelectedTable($this->tableName, $fields)->paginate($perPage);
         $args = $this->getArgs(['id']); //获取参数 get args
         $links = $dataSet->appends($args)->links();
