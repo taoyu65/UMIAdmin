@@ -1,6 +1,7 @@
 <?php
 namespace YM\Umi;
 
+use YM\Models\Search;
 use YM\Models\SearchTab;
 use YM\Facades\Umi as Ym;
 
@@ -8,12 +9,15 @@ class umiSearchBuilder
 {
     private $contentList = [];
     private $firstIcon;
-    private $tableName;
+    private $currentTableId;
+    private $searchContent;
+    private $search;
 
     public function __construct()
     {
         $this->firstIcon = 'green ace-icon fa fa-search bigger-120';
-
+        $this->currentTableId = Ym::currentTableId();
+        $this->search = new Search();
     }
 
     public function searchHtml()
@@ -24,17 +28,32 @@ class umiSearchBuilder
     #region component
     private function search()
     {
-        $tabs = '';
-
         $searchTab = new SearchTab();
 
-        $active = 'active';
-        $searchTabList = $searchTab->searchTabs(Ym::currentTableId());
+        $searchTabList = $searchTab->searchTabs($this->currentTableId);
+
+        #获得并缓存所有当前标签的搜索选项
+        #get and cache all the content of current tab
+        $tabIdList = $searchTabList->pluck('id')->flatten()->all();     //即将被缓存的数据的索引 all the index of data will be cached
+        if ($tabIdList == null) return;
+
+        #缓存数据  cached data
+        $this->searchContent = $this->search->content($tabIdList);
+
+        #循环所有标签     #for each all the tabs
+        $active = 'active';     //第一个标签默认为激活    the first tab will be active by default
+        $tabs = '';
         foreach ($searchTabList as $searchTab) {
-            $tabs .= $this->searchTab($searchTab->tab_title, $active);
+            $tabDataId = $searchTab->id;
+            $tabUiId = 'tab' . $tabDataId;
+
+            $active2 = isset($_REQUEST["dda"]) ? $_REQUEST["dda"] : $active;
+
+            $tabs .= $this->searchTab($searchTab->tab_title, $tabUiId, $active2, $tabDataId);
             $active = '';
         }
 
+        #内容 contents
         $content = '';
         foreach ($this->contentList as $item) {
             $content .= $item;
@@ -55,86 +74,89 @@ UMI;
         return $html;
     }
 
-    private function searchTab($tabName, $active)
+    private function searchTab($tabName, $tabUiId, $active, $tabDataId)
     {
-        $html = '';
-
-        #选项卡类型  #tab's type
-        $realTabName = explode('?', $tabName);
-        $type = count($realTabName) === 2 ? 'dropdown' : 'tab';
-
         #第一张选显卡显示home(默认)的小图标   #the default home icon on the first tab will be showing
         $homeIcon = $this->firstIcon == '' ? '' : "<i class='$this->firstIcon'></i>";
         $this->firstIcon = '';
 
-        if ($type === 'tab') {
+        #选项卡的激活状态 tab's active status
+        $contentActive = $active == 'active' ? 'in active' : '';
+        if (isset($_REQUEST['dda'])) {
+            $contentActive = $tabUiId == $_REQUEST['dda'] ? 'in active' : '';
+        }
+        $active = $contentActive == 'in active' ? 'active' : '';
 
-            $html =<<<UMI
-
+        $html =<<<UMI
             <li class="$active">
-                <a data-toggle="tab" href="#$tabName">
+                <a data-toggle="tab" href="#$tabUiId">
                     $homeIcon
                     $tabName
                 </a>
             </li>
 UMI;
-            #添加标签所对应的内容     #add content for current tab
-            $content = $this->getContent($tabName, $active);
-            array_push($this->contentList, $this->addContent($tabName, $content, $active));
 
-        } elseif ($type === 'dropdown') {
+        #添加标签所对应的内容     #add content for current tab
+        $content = $this->getContent($tabDataId);
+        array_push($this->contentList, $this->addContent($tabDataId, $tabUiId, $content, $contentActive));
 
-            $dropDownName = $realTabName[0];
-            $dropDownList = explode(':', $realTabName[1]);
-
-            $html .= <<<UMI
-            <li class="dropdown $active">
-                <a data-toggle="dropdown" class="dropdown-toggle" href="#">
-
-                    $dropDownName &nbsp;
-                    <i class="green ace-icon fa fa-question bigger-120"></i>
-                    <i class="ace-icon fa fa-caret-down bigger-110 width-auto"></i>
-                </a>
-                <ul class="dropdown-menu dropdown-info">
-UMI;
-
-            $contentActive = 'in active';
-            foreach ($dropDownList as $dropDown ) {
-                $html .= <<<UMI
-                    <li>
-                        <a data-toggle="tab" href="#$dropDownName$dropDown">$dropDown</a>
-                    </li>
-UMI;
-                #添加标签所对应的内容     #add content for current tab
-                $content = $this->getContent($dropDownName.$dropDown, $active);
-                array_push($this->contentList, $this->addContent($dropDownName.$dropDown, $content, $contentActive));
-                $contentActive = '';
-            }
-
-            $html .= <<<UMI
-                </ul>
-            </li>
-UMI;
-        } else{
-            return '';
-        }
         return $html;
     }
 
-    private function addContent($contentId, $content, $active)
+    private function addContent($tabDataId, $tabUiId, $content, $active)
     {
+
+        $tableName = Ym::currentTableName();
+        $token = csrf_field();
+        $menuId = isset($_REQUEST['id']) ? $_REQUEST['id'] : '';
+        $queryString = "id=$menuId";//$_SERVER['QUERY_STRING'];
+
         $html =<<<UMI
-        <div id="$contentId" class="tab-pane fade $active">
-            <p>$content</p>
+        <div id="$tabUiId" class="tab-pane fade $active">
+            <form class="form-horizontal" role="form" method="post" action="$tableName?$queryString">
+                $token
+                <div class="form-group">
+                    $content
+                    <input type="hidden" name="dda" value="$tabUiId">
+                    <input type="hidden" name="std" value="$tabDataId">
+                </div>
+                <div class="row">
+			    <div class="col-md-12">
+					<button class="btn btn-sm btn-info" type="submit" >
+						<i class="ace-icon fa fa-search bigger-110"></i>
+						Search
+					</button>
+					&nbsp; &nbsp; &nbsp;
+					<button class="btn btn-sm" type="reset">
+						<i class="ace-icon fa fa-undo bigger-110"></i>
+						Reset
+					</button>
+				</div>
+			    </div>
+            </form>
         </div>
 UMI;
         return $html;
     }
 
-    private function getContent($tabName, $active)
+    private function getContent($tabDataId)
     {
+        $searchFields = $this->searchContent->where('search_tab_id', $tabDataId);
+
+        $contentHtml = '';
+        foreach ($searchFields as $searchField) {
+            if ($searchField == null) return '';
+            $dataType = $searchField->type;
+            $dataTypeFactory = new FactorySearchDataType($dataType);
+            $search = $dataTypeFactory->getInstance();
+            if ($search != null){
+                $content = $search->searchFieldInput($searchField);
+                $contentHtml .= $content;
+            }
+        }
+
         $html =<<<UMI
-        $tabName
+        $contentHtml
 UMI;
         return $html;
     }

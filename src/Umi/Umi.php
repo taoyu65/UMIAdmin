@@ -32,6 +32,6 @@ class Umi
 
     public function currentTableId()
     {
-        return $this->currentTableId;
+        return $this->currentTableId == null ? $this->setCurrentTableName($this->currentTableName) : $this->currentTableId;
     }
 }

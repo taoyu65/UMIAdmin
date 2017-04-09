@@ -21,7 +21,7 @@ Route::group(['middleware' => 'umi.url.auth'], function () {
         return view('umi::dashboard');
     }]);
 
-    Route::get('umiTable/{table?}', [
+    Route::match(['post','get'], 'umiTable/{table?}', [
         'middleware'=> 'umi.bread.access',
         'uses'      => 'umiTableController@index',
         'as'        => 'umiTable'

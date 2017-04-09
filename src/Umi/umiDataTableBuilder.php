@@ -3,6 +3,7 @@
 namespace YM\Umi;
 
 use Illuminate\Support\Facades\Config;
+use YM\Models\Search;
 use YM\Models\UmiModel;
 use YM\Facades\Umi as Ym;
 use YM\umiAuth\Facades\umiAuth;
@@ -126,8 +127,37 @@ UMI;
         $fields = $dataTypeOp->getFields();
         $perPage = Config::get('umi.umi_table_perPage');
         $umiModel = new UmiModel();
-        $dataSet = $umiModel->getSelectedTable($this->tableName, $fields)->paginate($perPage);
-        $args = $this->getArgs(['id']); //获取参数 get args
+
+        #获取数据 get data table
+        $whereList = $this->getWhere();
+        $dataSet = $umiModel->getSelectedTable($this->tableName, $fields);
+
+        #获取搜索结果分页参数     #get the parameter of result of searching for paginate
+        $whereLink = '';
+        if (\Request::isMethod('post')){
+            if ($whereList != null) {
+                foreach ($whereList as $where) {
+                    $value = $_REQUEST[$where->field . '-' . $where->id];
+                    if ($value == '') continue;
+                    if ($where->is_fuzzy) {
+                        $whereLink .= "`$where->field` like '%$value%' and ";
+                    } else {
+                        $whereLink .= "`$where->field`='$value' and ";
+                    }
+                }
+                $whereLink = $whereLink == '' ? '' : $whereLink . ' 1=1';
+            }
+        } else {
+            if (isset($_REQUEST['w']))
+                $whereLink = base64_decode($_REQUEST['w']);
+        }
+
+        #将参数添加到url接连 并生成新的数据        #add parameter into url link and generate new data table
+        $dataSet = $whereLink == '' ? $dataSet : $dataSet->whereRaw($whereLink);
+        $dataSet = $dataSet->paginate($perPage);
+        $args = $this->getArgs(['id', 'dd', 'dda', 'page']); //获取参数 get args
+        if ($whereLink != '')
+            $args['w'] = base64_encode($whereLink);
         $links = $dataSet->appends($args)->links();
 
         #是否开启 数据映射功能 if available for data reformat
@@ -177,6 +207,18 @@ UMI;
         return $html;
     }
 
+    public function getWhere()
+    {
+        if (\Request::isMethod('post')) {
+            #获取search_tab_id        #get search_tab_id
+            if (isset($_REQUEST['std'])) {
+                $search = new Search();
+                $searchList = $search->getSearchByTabId($_REQUEST['std'])->all();
+                return $searchList;
+            }
+        }
+    }
+
     public function tableFoot($superAdmin = false)
     {
         $html = <<< UMI
@@ -215,7 +257,8 @@ UMI;
         for ($i = 0; $i < count($args); $i++) {
             $key = $args[$i];
             $value = isset($_REQUEST[$key]) ? $_REQUEST[$key] : '';
-            $arr[$key] =  $value;
+            if ($value != '')
+                $arr[$key] =  $value;
         }
         return $arr;
     }

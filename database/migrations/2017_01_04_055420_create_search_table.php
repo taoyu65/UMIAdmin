@@ -23,7 +23,7 @@ class CreateSearchTable extends Migration
 
         Schema::create('umi_search', function (Blueprint $table) {
             $table->increments('id');
-            $table->integer('table_tab_id')->unsigned();
+            $table->integer('search_tab_id')->unsigned();
             $table->string('field');
             $table->string('display_name');
             $table->string('type');
