@@ -2,12 +2,11 @@
 
 namespace YM\Umi\Search\DataType;
 
-use YM\Models\Search;
 use YM\Umi\Contracts\Search\SearchDataTypeInterface;
 
 class SearchDataTypeAbstract implements SearchDataTypeInterface
 {
-    public function searchFieldInput (Search $search)
+    public function searchFieldInput ($search)
     {
         $displayName = $search->display_name;
         $id = $search->id;

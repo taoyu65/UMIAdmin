@@ -10,8 +10,9 @@ use Illuminate\Support\Facades\DB;
 class Menu extends Model
 {
     protected $table = 'umi_menus';
+    protected $openCache = true;
 
-    private $MenuTable;
+    private $cachedTable;
 
     public function __construct()
     {
@@ -19,35 +20,48 @@ class Menu extends Model
         #cache for the side menu from table menus
         parent::__construct();
 
-        $minute = Config::get('umi.cache_minutes');
-        $this->MenuTable = Cache::remember('menuTable', $minute, function () {
-            return collect(DB::table($this->table)->orderBy('order')->get());
-        });
+        if ($this->openCache){
+            $minute = Config::get('umi.cache_minutes');
+            $this->cachedTable = Cache::remember($this->table, $minute, function () {
+                return DB::table($this->table)->orderBy('order')->get();
+            });
+        }
+
     }
 
     public function getMenus($menu_id)
     {
-        return $this->MenuTable->where('menu_id', $menu_id);
+        if ($this->openCache)
+            return $this->cachedTable->where('menu_id', $menu_id);
+        return self::where('menu_id', $menu_id);
     }
 
     public function isSubMenu($id)
     {
-        return $this->MenuTable->where('menu_id', $id)->count();
+        if ($this->openCache)
+            return $this->cachedTable->where('menu_id', $id)->count();
+        return self::where('menu_id', $id)->count();
     }
 
     #array of table's id <menus>. like [1,2,3]
     public function getMenusById($arrIds)
     {
-        return $this->MenuTable->whereIn('id', $arrIds);
+        if ($this->openCache)
+            return $this->cachedTable->whereIn('id', $arrIds);
+        return self::whereIn('id', $arrIds);
     }
 
     public function getOneMenu($id)
     {
-        return $this->MenuTable->where('id', $id)->first();
+        if ($this->openCache)
+            return $this->cachedTable->where('id', $id)->first();
+        return self::where('id', $id)->first();
     }
 
     public function getAllRecord()
     {
-        return $this->MenuTable;
+        if ($this->openCache)
+            return $this->cachedTable;
+        return self::all();
     }
 }

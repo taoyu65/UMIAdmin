@@ -10,26 +10,27 @@ use Illuminate\Support\Facades\DB;
 class SearchTab extends Model
 {
     protected $table = 'umi_search_tab';
+    protected $openCache = true;
 
-    private $cacheSearch;
+    private $cachedTable;
 
     public function __construct()
     {
-//        $minute = Config::get('umi.cache_minutes');
-//        $this->cacheSearch = Cache::remember('searchTable', $minute, function () {
-//            return DB::table('umi_search_tab')->orderBy('order');
-//        });
-
-
+        if ($this->openCache) {
+            $minute = Config::get('umi.cache_minutes');
+            $this->cachedTable = Cache::remember($this->table, $minute, function () {
+                return DB::table('umi_search_tab')->orderBy('order')->get();
+            });
+        }
     }
 
     public function searchTabs($tableId)
     {
+        if ($this->openCache)
+            return $this->cachedTable
+                ->where('table_id', $tableId);
         return self::where('table_id', $tableId)
             ->orderBy('order')
             ->get();
-        /*return self::where('table_id', $tableId)
-            ->orderBy('order')
-            ->get();*/
     }
 }

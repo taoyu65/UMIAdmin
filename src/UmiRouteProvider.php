@@ -37,7 +37,7 @@ class UmiRouteProvider extends ServiceProvider
 
         ###config
         $this->publishes([
-            __DIR__ . ''
+            __DIR__ . '/Config/umi.php' => app()->basePath() . '/config/umi.php',
         ]);
 
         ###views

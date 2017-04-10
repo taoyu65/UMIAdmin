@@ -10,14 +10,18 @@ use Illuminate\Support\Facades\DB;
 class Table extends Model
 {
     protected $table = 'umi_tables';
-    private $cacheTable;
+    protected $openCache = true;
+
+    private $cachedTable;
 
     public function __construct()
     {
-        $minute = Config::get('umi.cache_minutes');
-        $this->cacheTable = Cache::remember('tables', $minute, function (){
-            return DB::table('umi_tables')->get();
-        });
+        if ($this->openCache){
+            $minute = Config::get('umi.cache_minutes');
+            $this->cachedTable = Cache::remember($this->table, $minute, function (){
+                return DB::table('umi_tables')->get();
+            });
+        }
     }
 
     public function TableRelationOperationActive()
@@ -32,7 +36,9 @@ class Table extends Model
 
     public function getTableById($id)
     {
-        return $this->cacheTable->find($id);
+        if ($this->openCache)
+            return $this->cachedTable->find($id);
+        return self::find($id);
     }
 
     public function getTableName($id)
@@ -42,7 +48,12 @@ class Table extends Model
 
     public function getTableId($tableName)
     {
-        $record = $this->cacheTable->where('table_name', $tableName)->first();
+        if ($this->openCache){
+            $record = $this->cachedTable->where('table_name', $tableName)->first();
+        } else {
+            $record = self::where('table_name', $tableName)->first();
+        }
+
         if ($record)
             return $record->id;
         return 0;
@@ -50,6 +61,8 @@ class Table extends Model
 
     public function getAllTable()
     {
-        return $this->cacheTable;
+        if ($this->openCache)
+            return $this->cachedTable;
+        return self::all();
     }
 }
