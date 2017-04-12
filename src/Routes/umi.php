@@ -1,6 +1,9 @@
 <?php
 
 #log in and out----------------------------------------------------
+Route::get('/', function () {
+    return view('umi::login');
+});
 Route::get('admin', ['as' => 'admin', function () {
     return view('umi::login');
 }]);

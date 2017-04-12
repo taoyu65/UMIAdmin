@@ -4,8 +4,8 @@ namespace YM\umiAuth;
 
 use YM\umiAuth\src\contracts\umiAuthInterface;
 use YM\umiAuth\src\Models\User;
-use YM\umiAuth\traits\umiAuthPermissionTrait;
-use YM\umiAuth\traits\umiAuthRoleTrait;
+use YM\umiAuth\Traits\umiAuthPermissionTrait;
+use YM\umiAuth\Traits\umiAuthRoleTrait;
 
 class umiAuth implements umiAuthInterface
 {
