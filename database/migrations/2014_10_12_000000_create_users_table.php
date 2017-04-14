@@ -26,6 +26,12 @@ class CreateUsersTable extends Migration
             $table->integer('user_id')->unsigned();
             $table->integer('role_id')->unsigned();
         });
+
+        Schema::create('umi_user_menu', function (Blueprint $table) {
+            $table->increments('id');
+            $table->integer('user_id')->unsigned();
+            $table->text('json');
+        });
     }
 
     /**
@@ -37,5 +43,6 @@ class CreateUsersTable extends Migration
     {
         Schema::drop('umi_users');
         Schema::drop('umi_user_role');
+        Schema::drop('umi_user_menu');
     }
 }

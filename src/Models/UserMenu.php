@@ -4,9 +4,9 @@ namespace YM\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class RoleMenu extends Model
+class UserMenu extends Model
 {
-    protected $table = 'umi_role_menu';
+    protected $table = 'umi_user_menu';
 
     public $timestamps = false;
 }
