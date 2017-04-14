@@ -11,18 +11,12 @@ class ForeignKeyDataType extends DataTypeAbstract
     {
     }
 
-    public function regulateDataBrowser($dataList, $relatedTable = '', $relatedField = '', $option = [])
+    public function regulateDataBrowser($data, $relatedTable = '', $relatedField = '', $option = [])
     {
-        $umiTable = new UmiModel();
-        $re = [];
-        $currentPageData = $umiTable->getFieldByIds($relatedTable, $dataList);
-        foreach ($dataList as $data) {
-            $targetData = $currentPageData->where('id', $data)->first();
-            $data = ($targetData === null) ? $this->getNoExistData($data) : $targetData->$relatedField;
-            $value = "<i class='ace-icon fa fa-key purple'></i> " . $data;
-            array_push($re, $value);
-        }
-        return $re;
+        $umiTable = new UmiModel($relatedTable);
+        $targetData = $umiTable->getRowById($relatedTable, $data);
+        $returnData = $targetData == null ? $this->getNoExistData($data) : $targetData->$relatedField;
+        return $returnData;
     }
 
     public function getNoExistData($data)

@@ -3,26 +3,19 @@
 namespace YM\Umi\DataTable\DataType;
 
 use YM\Models\Badge;
-use YM\Models\Table;
+use YM\Facades\Umi;
 
 class BadgesDataType extends DataTypeAbstract
 {
-    public function regulateDataBrowser($dataList, $relatedTable = '', $relatedField = '', $option = [])
+    public function regulateDataBrowser($data, $relatedTable = '', $relatedField = '', $option = [])
     {
-        $table = new Table();
-        $tableId = $table->getTableId($relatedTable);
-
+        $tableId = Umi::currentTableId();
         $badge = new Badge();
         $dataSet = $badge->getBadges($tableId, $relatedField);
         $dataSet = $dataSet->pluck('class', 'badge_name');
         $dataSetArr = $dataSet->toArray();
 
-        $re = [];
-        foreach ($dataList as $item) {
-            $badge = $dataSet->keys()->contains($item) ? $this->getBadgeHtml($item, $dataSetArr[$item]) : $item;
-            array_push($re, $badge);
-        }
-        return $re;
+        return $dataSet->keys()->contains($data) ? $this->getBadgeHtml($data, $dataSetArr[$data]) : $data;
     }
 
     private function getBadgeHtml($value, $style)

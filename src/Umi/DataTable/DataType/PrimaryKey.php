@@ -4,13 +4,9 @@ namespace YM\Umi\DataTable\DataType;
 
 class PrimaryKey extends DataTypeAbstract
 {
-    public function regulateDataBrowser($dataList, $relatedTable = '', $relatedField = '', $option = [])
+    public function regulateDataBrowser($data, $relatedTable = '', $relatedField = '', $option = [])
     {
-        $re = [];
-        foreach ($dataList as $item) {
-            array_push($re, $this->getHtml($item));
-        }
-        return $re;
+        return $this->getHtml($data);
     }
 
     public function getHtml($data)

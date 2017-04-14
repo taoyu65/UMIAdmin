@@ -6,15 +6,11 @@ use Illuminate\Support\Facades\Config;
 
 class StarDataType extends DataTypeAbstract
 {
-    public function regulateDataBrowser($dataList, $relatedTable = '', $relatedField = '', $option = [])
+    public function regulateDataBrowser($data, $relatedTable = '', $relatedField = '', $option = [])
     {
-        $count = count($dataList);
-        for ($i = 0; $i < $count; $i++) {
-            $data = $dataList[$i];
-            if (is_numeric($data) && $data > 0 && $data < 5)
-                $dataList[$i] = $this->getStar($data);
-        }
-        return $dataList;
+        if (is_numeric($data) && $data > 0 && $data < 5)
+            return $this->getStar($data);
+        return $data;
     }
 
     private function getStar($num)

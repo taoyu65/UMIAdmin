@@ -88,8 +88,15 @@ class DataTypeOperation
             $column = $dataSet->pluck($field)->toArray();
             $regulator = $factory->getInstance($field);
             list($relatedTable, $relatedField) = $this->getTableField($others['relation_display']);
-            $column = $regulator->regulateDataBrowser($column, $relatedTable, $relatedField);
-            array_push($arrDisorder, $column);
+            //
+            $newColumn = [];
+            foreach ($column as $value) {
+                $newField = $regulator->regulateDataBrowser($value, $relatedTable, $relatedField);
+                array_push($newColumn, $newField);
+            }
+            //
+
+            array_push($arrDisorder, $newColumn);
         }
         $regulatedDateSet = $this->swapRowColumn($arrDisorder);
 
