@@ -2,28 +2,16 @@
 
 namespace YM\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\DB;
-
-class FieldDisplayBrowser extends Model
+class FieldDisplayBrowser extends UmiBase
 {
     protected $table = 'umi_field_display_browser';
-    protected $openCache = true;
 
-    private $cachedTable;
-    //private $minute;
+    protected $openCache = true;
+    protected $cacheAllRecord = true;
 
     public function __construct()
     {
-        if ($this->openCache) {
-            //$this->minute = Config::get('umi.cache_minutes');
-            $minute = Config::get('umi.cache_minutes');
-            $this->cachedTable = Cache::remember($this->table, $minute, function () {
-                return DB::table('umi_field_display_browser')->orderBy('order')->get();
-            });
-        }
+        parent::__construct('order');
     }
 
     public function DataSetBrowser($tableId)

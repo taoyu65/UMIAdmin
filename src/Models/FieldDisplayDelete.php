@@ -2,9 +2,7 @@
 
 namespace YM\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
-class FieldDisplayDelete extends Model
+class FieldDisplayDelete extends UmiBase
 {
     protected $table = 'umi_field_display_delete';
 }

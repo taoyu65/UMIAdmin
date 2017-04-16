@@ -8,6 +8,6 @@ class TROperationAbstract implements TROperationInterface
 {
     public function operation($activeTableId, $activeFieldId, $responseTableId, $responseField)
     {
-        // TODO: Implement operation() method.
+
     }
 }

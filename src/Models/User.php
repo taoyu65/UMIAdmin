@@ -22,7 +22,6 @@ class User extends Model
     {
         $minute = Config::get('umi.cache_minutes');
         $json = Cache::remember('menuJson', $minute, function () {
-
             return self::find(Auth::user()->id)
                 ->MenuJson()
                 ->firstOrFail()

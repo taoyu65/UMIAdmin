@@ -2,11 +2,7 @@
 
 namespace YM\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
-class UserMenu extends Model
+class UserMenu extends UmiBase
 {
     protected $table = 'umi_user_menu';
-
-    public $timestamps = false;
 }

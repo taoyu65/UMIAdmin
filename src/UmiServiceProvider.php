@@ -2,7 +2,6 @@
 
 namespace YM;
 
-use Illuminate\Foundation\Support\Providers\EventServiceProvider;
 use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
 use YM\Http\Middleware\UmiUrlAuthMiddleware;
@@ -36,7 +35,7 @@ class UmiServiceProvider extends ServiceProvider
 
         #事件提供者
         #regist event service
-        $this->app->register(EventServiceProvider::class);
+        $this->app->register(UmiEventServiceProvider::class);
 
         #数据表(tables)的单例模式
         #singleton for data table 'tables'

@@ -2,9 +2,7 @@
 
 namespace YM\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
-class Role extends Model
+class Role extends UmiBase
 {
     protected $table = 'umi_roles';
 

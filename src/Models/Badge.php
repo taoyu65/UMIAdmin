@@ -2,27 +2,12 @@
 
 namespace YM\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\DB;
-
-class Badge extends Model
+class Badge extends UmiBase
 {
     protected $table = 'umi_badges';
+
     protected $openCache = true;
-
-    private $cachedTable;
-
-    public function __construct()
-    {
-        if ($this->openCache) {
-            $minute = Config::get('umi.cache_minutes');
-            $this->cachedTable = Cache::remember($this->table, $minute, function () {
-                return DB::table('umi_badges')->get();
-            });
-        }
-    }
+    protected $cacheAllRecord = true;
 
     public function getBadges($tableId, $field)
     {

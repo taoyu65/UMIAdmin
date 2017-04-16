@@ -4,7 +4,7 @@ namespace YM\Facades;
 
 use Illuminate\Support\Facades\Facade;
 
-class umi extends Facade
+class Umi extends Facade
 {
     protected static function getFacadeAccessor()
     {

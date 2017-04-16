@@ -2,9 +2,7 @@
 
 namespace YM\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
-class FieldDisplayRead extends Model
+class FieldDisplayRead extends UmiBase
 {
     protected $table = 'umi_field_display_read';
 }

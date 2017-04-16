@@ -2,11 +2,7 @@
 
 namespace YM\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
-class UserRole extends Model
+class UserRole extends UmiBase
 {
     protected $table = 'umi_user_role';
-
-    public $timestamps = false;
 }

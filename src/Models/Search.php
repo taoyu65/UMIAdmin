@@ -1,27 +1,13 @@
 <?php
+
 namespace YM\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\DB;
-
-class Search extends Model
+class Search extends UmiBase
 {
     protected $table = 'umi_search';
+
     protected $openCache = true;
-
-    private $cachedTable;
-
-    public function __construct()
-    {
-        if ($this->openCache) {
-            $minute = Config::get('umi.cache_minutes');
-            $this->cachedTable = Cache::remember($this->table, $minute, function () {
-                return DB::table('umi_search')->get();
-            });
-        }
-    }
+    protected $cacheAllRecord = true;
 
     public function content($tabIdList)
     {

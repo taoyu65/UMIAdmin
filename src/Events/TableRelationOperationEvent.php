@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Events;
+namespace YM\Events;
 
 use Illuminate\Broadcasting\Channel;
 use Illuminate\Queue\SerializesModels;
@@ -12,15 +12,19 @@ class TableRelationOperationEvent
     use InteractsWithSockets, SerializesModels;
 
     public $type;
+    public $tableId;
+    public $whenToOperate;
 
     /**
      * Create a new event instance.
      *
-     * @return void
+     * @param $tableId
+     * @param $whenToOperate
      */
-    public function __construct($aaa, $type)
+    public function __construct($tableId, $whenToOperate = 'after')
     {
-        $this->type = $type;
+        $this->tableId = $tableId;
+        $this->whenToOperate = $whenToOperate;
     }
 
     /**

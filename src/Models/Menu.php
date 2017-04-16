@@ -2,31 +2,16 @@
 
 namespace YM\Models;
 
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Facades\Cache;
-use Illuminate\Support\Facades\Config;
-use Illuminate\Support\Facades\DB;
-
-class Menu extends Model
+class Menu extends UmiBase
 {
     protected $table = 'umi_menus';
-    protected $openCache = true;
 
-    private $cachedTable;
+    protected $openCache = true;
+    protected $cacheAllRecord = true;
 
     public function __construct()
     {
-        #缓存左边栏的菜单 从数据表menus
-        #cache for the side menu from table menus
-        parent::__construct();
-
-        if ($this->openCache){
-            $minute = Config::get('umi.cache_minutes');
-            $this->cachedTable = Cache::remember($this->table, $minute, function () {
-                return DB::table($this->table)->orderBy('order')->get();
-            });
-        }
-
+        parent::__construct('order');
     }
 
     public function getMenus($menu_id)

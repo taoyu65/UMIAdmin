@@ -7,10 +7,9 @@ use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvi
 class UmiEventServiceProvider extends ServiceProvider
 {
     protected $listen = [
-        'App\Events\TableRelationOperationEvent' =>
-            [
-                'App\Listeners\TableRelationOperationListener'
-            ],
+        'YM\Events\TableRelationOperationEvent' => [
+            'YM\Listeners\TableRelationOperationListener'
+        ],
     ];
 
     public function boot()

@@ -3,15 +3,12 @@
 namespace YM\Http\Controllers;
 
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Event;
+use YM\Events\TableRelationOperationEvent;
 use YM\Facades\Umi;
-use Illuminate\Support\Facades\Gate;
-use YM\Models\Table;
-use YM\Umi\FactoryBreadBrowser;
-use YM\Umi\umiDataTableBuilder;
 
-use YM\umiAuth\Facades\umiAuth;
-use YM\umiAuth\src\Models\Role;
-use YM\Umi\DataTable\DataType\DataTypeOperation;
+use YM\Umi\FactoryBreadBrowser;
+
 
 class umiTableController extends Controller
 {
@@ -53,6 +50,9 @@ class umiTableController extends Controller
 //        foreach ($aa as $b) {
 //            //var_dump($b->id);
 //        }
+        //var_dump('fdsa2');
+        //Event::fire(new TableRelationOperationEvent('', 'delete'));
+        //var_dump('fdsa');
         //
         if ($tableName == '') return view('umi::umiTableAll');
 

@@ -7,11 +7,12 @@ use Illuminate\Container\Container;
 use Illuminate\Http\Request;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Event;
 use YM\Facades\Umi;
 use YM\Models\Table;
 use Illuminate\Support\Facades\App;
 
-class test extends Controller
+class testController extends Controller
 {
     //
     public $wo = 'i am class ';
@@ -19,7 +20,7 @@ class test extends Controller
     public function ttt()
     {
         $a = $this;
-        //\Event::fire(new TableRelationOperationEvent($a ,'delete'));
+        Event::fire(new TableRelationOperationEvent($a ,'delete'));
        /*$container = new Container();
         $container->bind('YM\Models\Table');*/
 
