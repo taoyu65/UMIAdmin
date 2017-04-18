@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CraeteTableRelationOperaionTable extends Migration
+class CreateTableRelationOperationTable extends Migration
 {
     /**
      * Run the migrations.
@@ -15,13 +15,15 @@ class CraeteTableRelationOperaionTable extends Migration
     {
         Schema::create('umi_table_relation_operation', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('rule_name');
+            $table->string('custom_rule_name');
+            $table->string('operation_type');
             $table->integer('active_table_id')->unsigned();
             $table->string('active_table_field');
-            $table->string('special_relation');
-            $table->string('response_action');
-            $table->integer('response_table_id');
-            $table->string('where');
+            $table->integer('response_table_id')->unsigned();
+            $table->string('response_table_field');
             $table->string('field_display');
+            $table->string('check_where');
             $table->string('details');
             $table->timestamps();
         });

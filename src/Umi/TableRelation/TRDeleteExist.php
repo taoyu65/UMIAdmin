@@ -2,11 +2,10 @@
 
 namespace YM\Umi\TableRelation;
 
-class TRDeleteInterlock extends TROperationAbstract
+class TRDeleteExist extends TROperationAbstract
 {
     public function operation($activeTableId, $activeFieldId, $responseTableId, $responseField)
     {
-        //var_dump("$activeTableId, $activeFieldId, $responseTableId, $responseField");
         /*foreach ($operationObjects as $operationObject) {
             $whereRight = $operationObject->active_table_id;
             $whereLeft = $operationObject->response_table_field;
@@ -15,6 +14,6 @@ class TRDeleteInterlock extends TROperationAbstract
             $re = DB::table($responseTableName)->where($whereLeft, $whereRight)->delete();
             var_dump($re);
         }*/
-        return 'a';
+        return true;
     }
 }

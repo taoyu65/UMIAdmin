@@ -2,6 +2,9 @@
 
 namespace YM\Umi;
 
+use YM\Umi\TableRelation\TRCheckDelete;
+use YM\Umi\TableRelation\TRCustomerDelete;
+use YM\Umi\TableRelation\TRDeleteExist;
 use YM\Umi\TableRelation\TRDeleteInterlock;
 
 class FactoryTableRelation
@@ -11,25 +14,43 @@ class FactoryTableRelation
 
     }
 
-    public function executeRelationOperation($responseAction, $specialRelation)
+    public function getInstanceOfRelationOperation($rule_name, $operation_type)
     {
-        switch ($responseAction) {
-            case 'add':
+        switch ($rule_name) {
+            case 'interlock':
+                if ($operation_type == 'delete')
+                    return new TRDeleteInterlock();
                 break;
-            case 'delete':
-                switch ($specialRelation) {
-                    case 'interlock':
-                        return new TRDeleteInterlock();
-                    case 'exist':
-                        break;
+            case 'exist':
+                if ($operation_type == 'delete')
+                    return new TRDeleteExist();
+                break;
+            case 'check':
+                switch ($operation_type) {
+                    case 'add':
+                        return null;
+                    case 'delete':
+                        return new TRCheckDelete();
+                    case 'edit':
+                        return null;
                     default:
-                        break;
+                        return null;
                 }
-                break;
-            case 'edit':
-                break;
+            case 'customer':
+                switch ($operation_type) {
+                    case 'add':
+                        return null;
+                    case 'delete':
+                        return new TRCustomerDelete();
+                    case 'edit':
+                        return null;
+                    default:
+                        return null;
+                }
             default:
-                break;
+                return null;
         }
+
+
     }
 }

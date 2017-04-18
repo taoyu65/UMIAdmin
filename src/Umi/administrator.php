@@ -43,6 +43,15 @@ class administrator
     public function setCurrentTableName($tableName)
     {
         $this->tableName = $tableName;
+        $this->tableId = $this->setCurrentTableId($tableName);
+    }
+
+    public function setCurrentTableId($tableName)
+    {
+        //$table = new Table();
+        $table = app('YM\Models\Table');
+        $this->tableId = $table->getTableId($tableName);
+        return $this->tableId;
     }
 
     public function getCurrentTableName()
@@ -50,9 +59,8 @@ class administrator
         return $this->tableName;
     }
 
-    public function getCurrentTableId($tableName)
+    public function getCurrentTableId()
     {
-        $table = new Table();
-        return $table->getTableId($tableName);
+        return $this->tableId;
     }
 }
