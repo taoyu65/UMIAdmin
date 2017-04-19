@@ -6,7 +6,7 @@ use YM\Umi\Contracts\TableRelation\TROperationInterface;
 
 class TROperationAbstract implements TROperationInterface
 {
-    public function operation($activeTableId, $activeFieldId, $responseTableId, $responseField)
+    public function operation($activeTableName, $activeField, $activeFieldValue, $responseTableName, $responseField)
     {
 
     }

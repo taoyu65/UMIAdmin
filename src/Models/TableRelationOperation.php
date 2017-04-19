@@ -6,8 +6,8 @@ class TableRelationOperation extends UmiBase
 {
     protected $table = 'umi_table_relation_operation';
 
-    protected $openCache = false;
-    protected $cacheAllRecord = false;
+    protected $openCache = true;
+    protected $cacheAllRecord = true;
 
     public function getTableRelationOperationByTableId($tableId)
     {

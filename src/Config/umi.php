@@ -115,14 +115,16 @@ return [
 
     'umi_table_perPage' => 3,
 
-    //数据类型
-    'data_type' => [
-        'text',
-        'dollar',
-        'link',
-        'date',
-        'picture',
-        'select',
-        'bool'
-    ],
+    /*
+    |--------------------------------------------------------------------------
+    | 是否开启数据表关联操作 - 如果开启可以自定义规则, 设置表之间关系的操作, 比如删除一条记录前
+    | 检查其他表是否存在此数据, 或者更新一条记录 其他相关表相应进行更新. 等等
+    | if open data table relation operation, if it's open than can customize some
+    | operation like before delete one record has to be checked in other data table
+    | make sure that record does not exist. or update one field than other table's
+    | field will be updated as well, etc
+    |--------------------------------------------------------------------------
+    */
+
+    'table_relation_operation' => true,
 ];

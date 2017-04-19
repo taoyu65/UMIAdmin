@@ -4,5 +4,5 @@ namespace YM\Umi\Contracts\TableRelation;
 
 interface TROperationInterface
 {
-    public function operation($activeTableId, $activeFieldId, $responseTableId, $responseField);
+    public function operation($activeTableName, $activeField, $activeFieldValue, $responseTableName, $responseField);
 }

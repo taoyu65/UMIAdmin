@@ -4,7 +4,6 @@ namespace YM\Umi;
 
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Auth;
-use YM\Models\Table;
 
 /**
  * register as a singleton, the class keep all the status of user

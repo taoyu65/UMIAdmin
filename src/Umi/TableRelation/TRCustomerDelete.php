@@ -4,7 +4,7 @@ namespace YM\Umi\TableRelation;
 
 class TRCustomerDelete extends TROperationAbstract
 {
-    public function operation($activeTableId, $activeFieldId, $responseTableId, $responseField)
+    public function operation($activeTableName, $activeField, $activeFieldValue, $responseTableName, $responseField)
     {
         /*foreach ($operationObjects as $operationObject) {
             $whereRight = $operationObject->active_table_id;

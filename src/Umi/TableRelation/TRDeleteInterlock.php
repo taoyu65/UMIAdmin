@@ -4,7 +4,7 @@ namespace YM\Umi\TableRelation;
 
 class TRDeleteInterlock extends TROperationAbstract
 {
-    public function operation($activeTableId, $activeFieldId, $responseTableId, $responseField)
+    public function operation($activeTableName, $activeField, $activeFieldValue, $responseTableName, $responseField)
     {
         //var_dump("$activeTableId, $activeFieldId, $responseTableId, $responseField");
         /*foreach ($operationObjects as $operationObject) {

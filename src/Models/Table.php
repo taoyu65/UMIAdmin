@@ -22,7 +22,7 @@ class Table extends UmiBase
     public function getTableById($id)
     {
         if ($this->openCache)
-            return $this->cachedTable->find($id);
+            return $this->cachedTable->where('id', $id)->first();
         return self::find($id);
     }
 
