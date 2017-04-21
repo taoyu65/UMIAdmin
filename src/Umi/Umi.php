@@ -25,8 +25,7 @@ class Umi
 
     public function currentTableName()
     {
-        //return $this->administrator->getCurrentTableName();
-        return $this->table->getTable();
+        return $this->administrator->getCurrentTableName();
     }
 
     public function currentTableId()

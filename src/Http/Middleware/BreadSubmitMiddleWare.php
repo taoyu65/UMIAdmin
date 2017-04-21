@@ -7,7 +7,6 @@ use Illuminate\Support\Facades\Config;
 use YM\Facades\Umi;
 use YM\Umi\TableRelation\UmiTableRelation;
 
-
 class BreadSubmitMiddleWare
 {
     public function handle($request, Closure $next)

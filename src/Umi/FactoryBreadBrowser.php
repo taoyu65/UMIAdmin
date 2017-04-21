@@ -4,7 +4,6 @@ namespace YM\Umi;
 
 use Illuminate\Support\Facades\Config;
 use YM\Umi\DataTable\AdminDataTable;
-use YM\Umi\DataTable\AdminDataTableWithSearch;
 use YM\Umi\DataTable\customTestAdmin;
 use YM\Umi\DataTable\SuperAdminDataTable;
 use YM\Umi\DataTable\SuperAdminDataTableWithSearch;
