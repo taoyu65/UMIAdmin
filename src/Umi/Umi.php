@@ -7,6 +7,9 @@ class Umi
     private $administrator;
     private $table;
 
+    private static $currentTableName;
+    private static $currentTableId;
+
     public function __construct()
     {
         $this->administrator = app('YM\Umi\administrator');
@@ -20,17 +23,21 @@ class Umi
 
     public function setCurrentTableName($tableName)
     {
-        $this->administrator->setCurrentTableName($tableName);
+        //$this->administrator->setCurrentTableName($tableName);
+        self::$currentTableName = $tableName;
+        self::$currentTableId = $this->table->getTableId($tableName);
     }
 
     public function currentTableName()
     {
-        return $this->administrator->getCurrentTableName();
+        //return $this->administrator->getCurrentTableName();
+        return self::$currentTableName;
     }
 
     public function currentTableId()
     {
-        return $this->administrator->getCurrentTableId();
+        return self::$currentTableId;
+        //return $this->administrator->getCurrentTableId();
     }
 
     public function getTableNameById($tableId)

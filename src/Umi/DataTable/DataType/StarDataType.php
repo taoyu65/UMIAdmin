@@ -8,7 +8,7 @@ class StarDataType extends DataTypeAbstract
 {
     public function regulateDataBrowser($data, $relatedTable = '', $relatedField = '', $option = [])
     {
-        if (is_numeric($data) && $data > 0 && $data < 5)
+        if (is_numeric($data) && $data > 0 && $data < 6)
             return $this->getStar($data);
         return $data;
     }

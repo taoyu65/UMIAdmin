@@ -1,6 +1,7 @@
 @extends('umi::layouts.master')
 
 @section('content')
+
     <div class="page-header">
         <h1>
             UMI Tables
@@ -17,4 +18,12 @@
 
     {!! $footer !!}
 
+    <script type="text/javascript">
+        jQuery(function($) {
+        });
+
+        function umiTableDelete(tableName, id) {
+            layer.msg(tableName + id);
+        }
+    </script>
 @endsection

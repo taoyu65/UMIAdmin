@@ -56,15 +56,6 @@ class UmiModel
 
     public function getSelectedTable($tableName, $fields)
     {
-        $minute = Config::get('umi.cache_minutes');
-
-        /*if ($this->openCache) {
-            return Cache::remember($tableName . 'getSelectedTable', $minute, function () use ($tableName, $fields) {
-                return DB::table($tableName)
-                    ->select($fields);
-            });
-        }*/
-
         return DB::table($tableName)
             ->select($fields);
     }

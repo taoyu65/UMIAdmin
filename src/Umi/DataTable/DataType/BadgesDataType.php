@@ -9,7 +9,7 @@ class BadgesDataType extends DataTypeAbstract
 {
     public function regulateDataBrowser($data, $relatedTable = '', $relatedField = '', $option = [])
     {
-        $tableId = Umi::currentTableId();
+        $tableId = Umi::currentTableId();// dd($tableId);
         $badge = new Badge();
         $dataSet = $badge->getBadges($tableId, $relatedField);
         $dataSet = $dataSet->pluck('class', 'badge_name');

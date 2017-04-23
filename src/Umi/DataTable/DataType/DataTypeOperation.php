@@ -88,13 +88,12 @@ class DataTypeOperation
             $column = $dataSet->pluck($field)->toArray();
             $regulator = $factory->getInstance($field);
             list($relatedTable, $relatedField) = $this->getTableField($others['relation_display']);
-            //
+
             $newColumn = [];
             foreach ($column as $value) {
                 $newField = $regulator->regulateDataBrowser($value, $relatedTable, $relatedField);
                 array_push($newColumn, $newField);
             }
-            //
 
             array_push($arrDisorder, $newColumn);
         }
@@ -114,6 +113,8 @@ class DataTypeOperation
         return [$arr[0], $arr[1]];
     }
 
+    #返回指定数组的行和列换位的新数组
+    #return a new array that original row and column swapped
     private function swapRowColumn($arr)
     {
         #初始化 initial

@@ -2,7 +2,7 @@
 
 namespace YM\Umi\DataTable\DataType;
 
-class PrimaryKey extends DataTypeAbstract
+class KeyIcon extends DataTypeAbstract
 {
     public function regulateDataBrowser($data, $relatedTable = '', $relatedField = '', $option = [])
     {

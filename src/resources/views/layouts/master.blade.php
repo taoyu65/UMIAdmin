@@ -5,7 +5,8 @@
     <meta charset="utf-8" />
     <title>Dashboard - UMI Admin</title>
 
-    <?php $path = config('umi.assets_path') . '/ace' ?>
+    <?php $assetPath = config('umi.assets_path') ?>
+    <?php $path = $assetPath . '/ace' ?>
 
     <meta name="description" content="overview &amp; stats" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
@@ -150,11 +151,8 @@
 <script src="{{$path}}/js/ace-elements.min.js"></script>
 <script src="{{$path}}/js/ace.min.js"></script>
 
-<!-- inline scripts related to this page -->
-<script type="text/javascript">
-    jQuery(function($) {
+<!-- layer scripts -->
+<script src="{{$assetPath}}/layer/layer.js"></script>
 
-    })
-</script>
 </body>
 </html>

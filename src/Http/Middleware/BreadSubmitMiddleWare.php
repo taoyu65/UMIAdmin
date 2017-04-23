@@ -24,7 +24,9 @@ class BreadSubmitMiddleWare
         #the action before the data table operation
         if (!$umiTR->executeBeforeAction(1)) {
             $request['TRO_Available'] = false;
-            $request['TRO_WrongMessage'] = $umiTR->message;var_dump($request['TRO_WrongMessage']);
+            $request['TRO_WrongMessage'] = $umiTR->message;
+            var_dump($request['TRO_WrongMessage']);
+            //todo delete var_dump
         }
         //Event::fire(new TableRelationOperationEvent($tableId, 'before'));
 

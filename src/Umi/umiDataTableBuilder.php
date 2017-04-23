@@ -23,8 +23,12 @@ class umiDataTableBuilder
     protected $BtnCssDelete = 'btn btn-sm btn-danger';
     protected $BtnCssNew = 'btn btn-sm btn-success';
     protected $BtnCssSmallEdit = 'btn btn-xs btn-info';
-    protected $BtnCssSmallBrowser = 'btn btn-xs btn-warning';
+    protected $BtnCssSmallRead = 'btn btn-xs btn-warning';
     protected $BtnCssSmallDelete = 'btn btn-xs btn-danger';
+
+    #默认数据表主键为id 可以通过继承修改
+    #default data table's primary key is id, can be changed by inheriting this class
+    protected $tableId = 'id';
 
     public function __construct()
     {
@@ -70,7 +74,7 @@ UMI;
     public function tableHead($superAdmin = false)
     {
         #删除按钮 button of delete
-        $buttonDelete = $this->ButtonDelete($superAdmin);
+        $buttonDelete = '';//$this->ButtonDelete($superAdmin);
 
         #新建按钮 button of new
         $buttonAdd = $this->ButtonAdd($superAdmin);
@@ -89,7 +93,7 @@ UMI;
     #function or UI
     public function tableHeadSuperAdmin()
     {
-        $buttonDelete = $this->ButtonDelete(true);
+        $buttonDelete = '';//$this->ButtonDelete(true);
         $buttonAdd = $this->ButtonAdd(true);
 
         $html = <<<UMI
@@ -154,7 +158,7 @@ UMI;
 
         #将参数添加到url接连 并生成新的数据        #add parameter into url link and generate new data table
         $dataSet = $whereLink == '' ? $dataSet : $dataSet->whereRaw($whereLink);
-        $dataSet = $dataSet->paginate($perPage);
+        $dataSet = $dataSet->paginate($perPage);//dd($dataSet);
         $args = $this->getArgs(['id', 'dd', 'dda', 'page']); //获取参数 get args
         if ($whereLink != '')
             $args['w'] = base64_encode($whereLink);
@@ -175,6 +179,7 @@ UMI;
                     $trBodyHtml .= $value;
                     $trBodyHtml .= '</td>';
                 }
+
                 $trBodyHtml .= $this->breadButtonHtml($superAdmin);     //获取按钮 get button
                 $trBodyHtml .= '</tr>';
             }
@@ -185,12 +190,12 @@ UMI;
 			    <table id="dynamic-table" class="table table-striped table-bordered table-hover">
 				    <thead>
 					    <tr>
-						    <th class="center">
+						    <!--<th class="center">
 							    <label class="pos-rel">
 									<input type="checkbox" class="ace" />
 									<span class="lbl"></span>
 								</label>
-							</th>
+							</th>-->
 							$tHeadHtml
 							<th></th>
 		                </tr>
@@ -275,25 +280,26 @@ UMI;
 	        </label>
 	    </td>
 UMI;
-        return $html;
+        return '';
+        //return $html;
     }
 
     private function breadButtonHtml($superAdmin)
     {
         #表格右侧小按钮 small button on the right side of table
         $buttonSmallEdit = $this->ButtonSmallEdit($superAdmin);
-        $buttonSmallBrowser = $this->ButtonSmallBrowser($superAdmin);
+        $buttonSmallRead = $this->ButtonSmallRead($superAdmin);
         $buttonSmallDelete = $this->ButtonSmallDelete($superAdmin);
         $linkHideEdit = $this->LinkHideEdit($superAdmin);
         $linkHideDelete = $this->LinkHideDelete($superAdmin);
-        $linkHideBrowser = $this->LinkHideBrowser($superAdmin);
+        $linkHideRead = $this->LinkHideRead($superAdmin);
 
         $html = <<<UMI
         <td>
 	    	<div class="hidden-sm hidden-xs btn-group">
 	    		$buttonSmallEdit
 
-	    		$buttonSmallBrowser
+	    		$buttonSmallRead
 
 	    		$buttonSmallDelete
 	    	</div>
@@ -305,7 +311,7 @@ UMI;
 	    			</button>
 
 	    			<ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
-	    				$linkHideBrowser
+	    				$linkHideRead
 
                         $linkHideEdit
 
@@ -379,20 +385,20 @@ UMI;
         return $html;
     }
 
-    private function ButtonSmallBrowser($superAdmin)
+    private function ButtonSmallRead($superAdmin)
     {
-        if ($superAdmin || $this->browser) {
-            return $this->ButtonSmallBrowserHtml();
+        if ($superAdmin || $this->read) {
+            return $this->ButtonSmallReadHtml();
         } else {
             return $this->buttonStyle === 'disable' ?
-                $this->ButtonSmallBrowserHtml('disabled') : '';
+                $this->ButtonSmallReadHtml('disabled') : '';
         }
     }
 
-    private function ButtonSmallBrowserHtml($disable = '')
+    private function ButtonSmallReadHtml($disable = '')
     {
         $html = <<<UMI
-        <button class="$this->BtnCssSmallBrowser $disable">
+        <button class="$this->BtnCssSmallRead $disable">
             <i class="ace-icon fa fa-eye bigger-120"></i>
         </button>
 UMI;
@@ -412,24 +418,24 @@ UMI;
     private function ButtonSmallDeleteHtml($disable = '')
     {
         $html = <<<UMI
-        <button class="$this->BtnCssSmallDelete $disable">
+        <button class="$this->BtnCssSmallDelete $disable" $disable onclick="umiTableDelete('$this->tableName', '12');">
             <i class="ace-icon fa fa-trash-o bigger-120"></i>
         </button>
 UMI;
         return $html;
     }
 
-    private function LinkHideBrowser($superAdmin)
+    private function LinkHideRead($superAdmin)
     {
-        if ($superAdmin || $this->browser) {
-            return $this->LinkHideBrowserHtml();
+        if ($superAdmin || $this->read) {
+            return $this->LinkHideReadHtml();
         } else {
             return $this->buttonStyle === 'disable' ?
-                $this->LinkHideBrowserHtml('disabled') : '';
+                $this->LinkHideReadHtml('disabled') : '';
         }
     }
 
-    private function LinkHideBrowserHtml($disable = '')
+    private function LinkHideReadHtml($disable = '')
     {
         if ($disable === 'disabled') {
             $html = <<<UMI

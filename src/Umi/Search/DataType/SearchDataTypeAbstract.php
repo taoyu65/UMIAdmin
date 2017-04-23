@@ -13,7 +13,6 @@ class SearchDataTypeAbstract implements SearchDataTypeInterface
         $field = $search->field;
 
         $html = <<<UMI
-
 		<div class="col-sm-3">
 		    <label>$displayName</label>: &nbsp;
 			<input type="text" name="$field-$id"  />

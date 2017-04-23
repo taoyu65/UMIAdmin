@@ -7,7 +7,7 @@ use YM\Umi\DataTable\DataType\DateDataType;
 use YM\Umi\DataTable\DataType\DropDownDataType;
 use YM\Umi\DataTable\DataType\ForeignKeyDataType;
 use YM\Umi\DataTable\DataType\LabelDataType;
-use YM\Umi\DataTable\DataType\PrimaryKey;
+use YM\Umi\DataTable\DataType\KeyIcon;
 use YM\Umi\DataTable\DataType\StarDataType;
 
 class FactoryDataType
@@ -36,8 +36,8 @@ class FactoryDataType
                 return new ForeignKeyDataType();
             case 'badge':
                 return new BadgesDataType();
-            case 'primaryKey':
-                return new PrimaryKey();
+            case 'keyIcon':
+                return new KeyIcon();
             default:
                 throw new \Exception("You have not set up this data type: $dataType");
         }
