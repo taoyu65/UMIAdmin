@@ -25,9 +25,13 @@ Route::group(['middleware' => 'umi.url.auth'], function () {
     }]);
 
     Route::match(['post','get'], 'umiTable/{table?}', [
-        //'middleware'=> ['umi.bread.access', 'umi.bread.submit'],
         'uses'      => 'umiTableController@index',
         'as'        => 'umiTable'
+    ]);
+
+    Route::get('deleting/{table}/{id}', [
+        'middleware'=> ['umi.bread.access:delete', 'umi.bread.submit'],
+        'uses'      => 'umiTableDeleteController@deleting'
     ]);
 });
 #------------------------------------------------------------------

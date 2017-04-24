@@ -180,7 +180,12 @@ UMI;
                     $trBodyHtml .= '</td>';
                 }
 
-                $trBodyHtml .= $this->breadButtonHtml($superAdmin);     //获取按钮 get button
+                #获取数据行的主键值
+                #get value of primary key of record
+                $primaryKey = Config::get('umi.primary_key');
+                $recordId = array_has($ds, $primaryKey) ? $ds[$primaryKey] : 0;
+
+                $trBodyHtml .= $this->breadButtonHtml($recordId, $superAdmin);     //获取按钮 get button
                 $trBodyHtml .= '</tr>';
             }
         }
@@ -284,15 +289,15 @@ UMI;
         //return $html;
     }
 
-    private function breadButtonHtml($superAdmin)
+    private function breadButtonHtml($recordId, $superAdmin)
     {
         #表格右侧小按钮 small button on the right side of table
-        $buttonSmallEdit = $this->ButtonSmallEdit($superAdmin);
-        $buttonSmallRead = $this->ButtonSmallRead($superAdmin);
-        $buttonSmallDelete = $this->ButtonSmallDelete($superAdmin);
-        $linkHideEdit = $this->LinkHideEdit($superAdmin);
-        $linkHideDelete = $this->LinkHideDelete($superAdmin);
-        $linkHideRead = $this->LinkHideRead($superAdmin);
+        $buttonSmallEdit = $this->ButtonSmallEdit($recordId, $superAdmin);
+        $buttonSmallRead = $this->ButtonSmallRead($recordId, $superAdmin);
+        $buttonSmallDelete = $this->ButtonSmallDelete($recordId, $superAdmin);
+        $linkHideEdit = $this->LinkHideEdit($recordId, $superAdmin);
+        $linkHideDelete = $this->LinkHideDelete($recordId, $superAdmin);
+        $linkHideRead = $this->LinkHideRead($recordId, $superAdmin);
 
         $html = <<<UMI
         <td>
@@ -365,17 +370,17 @@ UMI;
         return $html;
     }
 
-    private function ButtonSmallEdit($superAdmin)
+    private function ButtonSmallEdit($recordId, $superAdmin)
     {
         if ($superAdmin || $this->edit) {
-            return $this->ButtonSmallEditHtml();
+            return $this->ButtonSmallEditHtml($recordId);
         } else {
             return $this->buttonStyle === 'disable' ?
-                $this->ButtonSmallEditHtml('disabled') : '';
+                $this->ButtonSmallEditHtml($recordId, 'disabled') : '';
         }
     }
 
-    private function ButtonSmallEditHtml($disable = '')
+    private function ButtonSmallEditHtml($recordId, $disable = '')
     {
         $html = <<<UMI
         <button class="$this->BtnCssSmallEdit $disable">
@@ -385,17 +390,17 @@ UMI;
         return $html;
     }
 
-    private function ButtonSmallRead($superAdmin)
+    private function ButtonSmallRead($recordId, $superAdmin)
     {
         if ($superAdmin || $this->read) {
-            return $this->ButtonSmallReadHtml();
+            return $this->ButtonSmallReadHtml($recordId);
         } else {
             return $this->buttonStyle === 'disable' ?
-                $this->ButtonSmallReadHtml('disabled') : '';
+                $this->ButtonSmallReadHtml($recordId, 'disabled') : '';
         }
     }
 
-    private function ButtonSmallReadHtml($disable = '')
+    private function ButtonSmallReadHtml($recordId, $disable = '')
     {
         $html = <<<UMI
         <button class="$this->BtnCssSmallRead $disable">
@@ -405,37 +410,37 @@ UMI;
         return $html;
     }
 
-    private function ButtonSmallDelete($superAdmin)
+    private function ButtonSmallDelete($recordId, $superAdmin)
     {
         if ($superAdmin || $this->delete) {
-            return $this->ButtonSmallDeleteHtml();
+            return $this->ButtonSmallDeleteHtml($recordId);
         } else {
             return $this->buttonStyle === 'disable' ?
-                $this->ButtonSmallDeleteHtml('disabled') : '';
+                $this->ButtonSmallDeleteHtml($recordId, 'disabled') : '';
         }
     }
 
-    private function ButtonSmallDeleteHtml($disable = '')
+    private function ButtonSmallDeleteHtml($recordId, $disable = '')
     {
         $html = <<<UMI
-        <button class="$this->BtnCssSmallDelete $disable" $disable onclick="umiTableDelete('$this->tableName', '12');">
+        <button class="$this->BtnCssSmallDelete $disable" $disable onclick="umiTableDelete('$this->tableName', '$recordId');">
             <i class="ace-icon fa fa-trash-o bigger-120"></i>
         </button>
 UMI;
         return $html;
     }
 
-    private function LinkHideRead($superAdmin)
+    private function LinkHideRead($recordId, $superAdmin)
     {
         if ($superAdmin || $this->read) {
-            return $this->LinkHideReadHtml();
+            return $this->LinkHideReadHtml($recordId);
         } else {
             return $this->buttonStyle === 'disable' ?
-                $this->LinkHideReadHtml('disabled') : '';
+                $this->LinkHideReadHtml($recordId, 'disabled') : '';
         }
     }
 
-    private function LinkHideReadHtml($disable = '')
+    private function LinkHideReadHtml($recordId, $disable = '')
     {
         if ($disable === 'disabled') {
             $html = <<<UMI
@@ -461,17 +466,17 @@ UMI;
         return $html;
     }
 
-    private function LinkHideEdit($superAdmin)
+    private function LinkHideEdit($recordId, $superAdmin)
     {
         if ($superAdmin || $this->edit) {
-            return $this->LinkHideEditHtml();
+            return $this->LinkHideEditHtml($recordId);
         } else {
             return $this->buttonStyle === 'disable' ?
-                $this->LinkHideEditHtml('disabled') : '';
+                $this->LinkHideEditHtml($recordId, 'disabled') : '';
         }
     }
 
-    private function LinkHideEditHtml($disable = '')
+    private function LinkHideEditHtml($recordId, $disable = '')
     {
         if ($disable === 'disabled') {
             $html = <<<UMI
@@ -498,17 +503,17 @@ UMI;
         return $html;
     }
 
-    private function LinkHideDelete($superAdmin)
+    private function LinkHideDelete($recordId, $superAdmin)
     {
         if ($superAdmin || $this->delete) {
-            return $this->LinkHideDeleteHtml();
+            return $this->LinkHideDeleteHtml($recordId);
         } else {
             return $this->buttonStyle === 'disable' ?
-                $this->LinkHideDeleteHtml('disabled') : '';
+                $this->LinkHideDeleteHtml($recordId, 'disabled') : '';
         }
     }
 
-    private function LinkHideDeleteHtml($disable = '')
+    private function LinkHideDeleteHtml($recordId, $disable = '')
     {
         if ($disable === 'disabled') {
             $html = <<<UMI

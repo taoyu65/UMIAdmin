@@ -23,7 +23,15 @@
         });
 
         function umiTableDelete(tableName, id) {
-            layer.msg(tableName + id);
-        }
+            var url = "{{url('deleting')}}/" + tableName + '/' + id;
+            layer.open ({
+                type: 2,
+                title: 'Deleting',
+                maxmin: true,
+                shadeClose: false,
+                area : ['800px' , '520px'],
+                content: url
+            });
+        };
     </script>
 @endsection

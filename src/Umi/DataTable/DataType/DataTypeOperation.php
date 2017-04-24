@@ -97,7 +97,7 @@ class DataTypeOperation
 
             array_push($arrDisorder, $newColumn);
         }
-        $regulatedDateSet = $this->swapRowColumn($arrDisorder);
+        $regulatedDateSet = $this->swapRowColumn($arrDisorder, $dataTypes);
 
         return $regulatedDateSet;
     }
@@ -115,8 +115,9 @@ class DataTypeOperation
 
     #返回指定数组的行和列换位的新数组
     #return a new array that original row and column swapped
-    private function swapRowColumn($arr)
+    private function swapRowColumn($arr, $dataType)
     {
+        $dataType = $dataType->keys()->toArray();
         #初始化 initial
         $returnArr = [];
         for ($i = 0; $i < count($arr[0]); $i++) {
@@ -125,10 +126,17 @@ class DataTypeOperation
 
         for ($i = 0; $i < count($arr); $i++) {
             for ($j = 0; $j < count($arr[$i]); $j++) {
-                $returnArr[$j][$i] = $arr[$i][$j];
+                $returnArr[$j][$i] = [$dataType[$i] => $arr[$i][$j]];
             }
         }
 
-        return $returnArr;
+        #增加数组键名为字段名称
+        #add key name of array as the field's name of data table
+        $arrWithKey = [];
+        foreach ($returnArr as $arr) {
+            array_push($arrWithKey, array_collapse($arr));
+        }
+
+        return $arrWithKey;
     }
 }
