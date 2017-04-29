@@ -23,7 +23,9 @@ class CreateTableRelationOperationTable extends Migration
             $table->integer('response_table_id')->unsigned();
             $table->string('response_table_field');
             $table->string('field_display');
-            $table->string('check_where');
+            $table->string('check_value');
+            $table->string('check_operation', 20);
+            $table->boolean('is_extra_operation')->default(0);
             $table->string('details');
             $table->timestamps();
         });

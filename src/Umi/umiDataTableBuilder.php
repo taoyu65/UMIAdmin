@@ -4,6 +4,7 @@ namespace YM\Umi;
 
 use Illuminate\Support\Facades\Config;
 use YM\Models\Search;
+use YM\Models\TableRelationOperation;
 use YM\Models\UmiModel;
 use YM\Facades\Umi as Ym;
 use YM\umiAuth\Facades\umiAuth;
@@ -116,7 +117,8 @@ UMI;
         if (!($superAdmin || $this->browser))
             return $this->wrongMessage('you are not authorized to browser this data table');
 
-        #数据表头 table Head
+        #数据表头
+        #table Head
         $dataTypeOp = new DataTypeOperation('browser', $this->tableName);
         $tHeads = $dataTypeOp->getTHead();
         if (!count($tHeads))
@@ -127,16 +129,19 @@ UMI;
             $tHeadHtml .= "<th>$displayName</th>";
         }
 
-        #数据表内容按照类型重写 table body will be rewrite according to the custom data type
+        #数据表内容按照类型重写
+        #table body will be rewrite according to the custom data type
         $fields = $dataTypeOp->getFields();
         $perPage = Config::get('umi.umi_table_perPage');
         $umiModel = new UmiModel();
 
-        #获取数据 get data table
+        #获取数据
+        #get data table
         $whereList = $this->getWhere();
         $dataSet = $umiModel->getSelectedTable($this->tableName, $fields);
 
-        #获取搜索结果分页参数     #get the parameter of result of searching for paginate
+        #获取搜索结果分页参数
+        #get the parameter of result of searching for paginate
         $whereLink = '';
         if (\Request::isMethod('post')){
             if ($whereList != null) {
@@ -156,7 +161,8 @@ UMI;
                 $whereLink = base64_decode($_REQUEST['w']);
         }
 
-        #将参数添加到url接连 并生成新的数据        #add parameter into url link and generate new data table
+        #将参数添加到url接连 并生成新的数据
+        #add parameter into url link and generate new data table
         $dataSet = $whereLink == '' ? $dataSet : $dataSet->whereRaw($whereLink);
         $dataSet = $dataSet->paginate($perPage);//dd($dataSet);
         $args = $this->getArgs(['id', 'dd', 'dda', 'page']); //获取参数 get args
@@ -164,13 +170,36 @@ UMI;
             $args['w'] = base64_encode($whereLink);
         $links = $dataSet->appends($args)->links();
 
-        #是否开启 数据映射功能 if available for data reformat
+        #获取用于执行数据库关联操作的数据
+        #get data for execute data table relation operation
+        $TRO = new TableRelationOperation();
+        $rules = $TRO->getRulesByNames(Ym::currentTableId(), false);
+        $activeFieldValueList = [];
+        if ($rules) {
+            foreach ($dataSet as $ds) {
+                $activeFieldValue = '';
+                foreach ($rules as $rule) {
+                    $activeTableField = $rule->active_table_field;
+                    $dsActField = $ds->$activeTableField;
+                    $activeFieldValue .= "\"$activeTableField\":\"$dsActField\",";
+                }
+                #转换成对象类型
+                #turn into object
+                $activeFieldValue = $activeFieldValue == '' ? '' : "{" . trim($activeFieldValue,',') . "}";
+                array_push($activeFieldValueList, $activeFieldValue);
+            }
+        }
+
+        #是否开启 数据映射功能
+        #if available for data reformat
         if (Config::get('umi.data_field_reformat'))
             $dataSet = $dataTypeOp->regulatedDataSet($dataSet);
 
-        #数据表内容 table body
+        #数据表内容
+        #table body
         $trBodyHtml = '';
         if ($dataSet) {
+            $pointer = 0;
             foreach ($dataSet as $ds) {
                 $trBodyHtml .= '<tr>';
                 $trBodyHtml .= $this->checkboxHtml();
@@ -185,8 +214,11 @@ UMI;
                 $primaryKey = Config::get('umi.primary_key');
                 $recordId = array_has($ds, $primaryKey) ? $ds[$primaryKey] : 0;
 
-                $trBodyHtml .= $this->breadButtonHtml($recordId, $superAdmin);     //获取按钮 get button
+                $activeFieldValue = $activeFieldValueList[$pointer];
+                $trBodyHtml .= $this->breadButtonHtml($recordId, $superAdmin, $activeFieldValue);     //获取按钮 get button
                 $trBodyHtml .= '</tr>';
+
+                $pointer++;
             }
         }
         $html = <<<UMI
@@ -289,12 +321,13 @@ UMI;
         //return $html;
     }
 
-    private function breadButtonHtml($recordId, $superAdmin)
+    private function breadButtonHtml($recordId, $superAdmin, $activeFieldValue)
     {
-        #表格右侧小按钮 small button on the right side of table
+        #表格右侧小按钮
+        #small button on the right side of table
         $buttonSmallEdit = $this->ButtonSmallEdit($recordId, $superAdmin);
         $buttonSmallRead = $this->ButtonSmallRead($recordId, $superAdmin);
-        $buttonSmallDelete = $this->ButtonSmallDelete($recordId, $superAdmin);
+        $buttonSmallDelete = $this->ButtonSmallDelete($recordId, $superAdmin, $activeFieldValue);
         $linkHideEdit = $this->LinkHideEdit($recordId, $superAdmin);
         $linkHideDelete = $this->LinkHideDelete($recordId, $superAdmin);
         $linkHideRead = $this->LinkHideRead($recordId, $superAdmin);
@@ -410,20 +443,21 @@ UMI;
         return $html;
     }
 
-    private function ButtonSmallDelete($recordId, $superAdmin)
+    private function ButtonSmallDelete($recordId, $superAdmin, $activeFieldValue)
     {
         if ($superAdmin || $this->delete) {
-            return $this->ButtonSmallDeleteHtml($recordId);
+            return $this->ButtonSmallDeleteHtml($recordId, $activeFieldValue);
         } else {
             return $this->buttonStyle === 'disable' ?
-                $this->ButtonSmallDeleteHtml($recordId, 'disabled') : '';
+                $this->ButtonSmallDeleteHtml($recordId, $activeFieldValue, 'disabled') : '';
         }
     }
 
-    private function ButtonSmallDeleteHtml($recordId, $disable = '')
+    private function ButtonSmallDeleteHtml($recordId, $activeFieldValue, $disable = '')
     {
+        $activeFieldValue = base64_encode($activeFieldValue);
         $html = <<<UMI
-        <button class="$this->BtnCssSmallDelete $disable" $disable onclick="umiTableDelete('$this->tableName', '$recordId');">
+        <button class="$this->BtnCssSmallDelete $disable" $disable onclick="umiTableDelete('$this->tableName', '$recordId', '$activeFieldValue');">
             <i class="ace-icon fa fa-trash-o bigger-120"></i>
         </button>
 UMI;

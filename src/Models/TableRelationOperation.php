@@ -17,15 +17,17 @@ class TableRelationOperation extends UmiBase
         return self::where('active_table_id', $tableId)->get();
     }
 
-    public function getRulesByNames($nameList, $tableId)
+    # 参数isExtraOperation 为数据库中的字段 表示 除了本身操作以外是否有其他数据操作除
+    # parameter isExtraOperation is a field of data base, to see if there is extra operation other than itself
+    public function getRulesByNames($tableId, $isExtraOperation = false)
     {
         if ($this->openCache)
             return $this->cachedTable
                 ->where('active_table_id', $tableId)
-                ->whereIn('rule_name', $nameList);
+                ->where('is_extra_operation', $isExtraOperation);
 
         return self::where('active_table_id', $tableId)
-            ->whereIn('rule_name', $nameList)
+            ->where('is_extra_operation', $isExtraOperation)
             ->get();
     }
 }

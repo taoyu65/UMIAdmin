@@ -2,6 +2,7 @@
 
 namespace YM\Http\Controllers;
 
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use YM\Facades\Umi;
 use YM\Umi\FactoryBreadBrowser;
@@ -65,5 +66,13 @@ class umiTableController extends Controller
             'tableBody' => $tableBody,
             'footer'    => $footer
         ]);
+    }
+
+    public function deleting($table, $id, $activeFields = '', Request $request)
+    {
+        $actionAvailable = isset($request['TRO_Available']) && $request['TRO_Available'] === false ? false : true;
+        $message = $request['TRO_Message'];
+        $list = compact('table', 'id', 'activeFields', 'actionAvailable', 'message');
+        return view('umi::umiTableDeleting', $list);
     }
 }

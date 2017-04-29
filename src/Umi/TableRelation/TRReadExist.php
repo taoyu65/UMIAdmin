@@ -5,10 +5,10 @@ namespace YM\Umi\TableRelation;
 use Illuminate\Support\Facades\DB;
 
 /*
- * 当删除一个记录时, 检查是否在其他数据表的某个字段存在此数据值
- * when delete a record, check other data table if has a same value at the given field
+ * 当查看一个记录时, 检查是否在其他数据表的某个字段存在此数据值
+ * when read a record, check other data table if has a same value at the given field
  */
-class TRDeleteExist extends TROperationAbstract
+class TRReadExist extends TROperationAbstract
 {
     public function operation($activeTableName, $activeField, $currentFieldValue, $targetValue, $responseTableName, $responseField, $checkOperation = '=')
     {
@@ -35,7 +35,7 @@ class TRDeleteExist extends TROperationAbstract
 				<i class="ace-icon fa fa-times"></i>
 				Whoops! Found at least one record in the Table : "$responseTableName"
 			</strong>
-			Because the policy "<strong style="color: red">EXIST</strong>" has been applied on this delete action, you can not delete this record until manually delete all the
+			Because the policy "<strong style="color: red">EXIST</strong>" has been applied on this delete action, you can not read this record until manually delete all the
 			records relate to Table "$activeTableName"
 			<br>
 			<strong style="color: grey">

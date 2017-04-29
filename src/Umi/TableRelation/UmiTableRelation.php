@@ -22,12 +22,14 @@ class UmiTableRelation
         $this->factory = new FactoryTableRelation();
     }
 
-    public function executeBeforeAction($activeFieldValue)
+    public function executeBeforeAction($activeFieldValues)
     {
         $checked = true;
         $TRO = new TableRelationOperation();
-        $rules = $TRO->getRulesByNames(['exist', 'check'], $this->tableId);
+        $rules = $TRO->getRulesByNames($this->tableId, false);
         $checkBool = true;
+
+        $activeFieldValues = json_decode($activeFieldValues, true);
         foreach ($rules as $rule) {
             $RO = $this->factory->getInstanceOfRelationOperation($rule->rule_name, $rule->operation_type);
             $bool = false;
@@ -35,13 +37,17 @@ class UmiTableRelation
             $activeTableName = YM::getTableNameById($rule->active_table_id);
             $responseTableName = YM::getTableNameById($rule->response_table_id);
 
+            $checkOperation = $rule->check_operation === '' ? '=' : $rule->check_operation;
+            $currentFieldValue = $activeFieldValues[$rule->active_table_field];
             if ($RO != null) {
                     $re = $RO->operation(
                     $activeTableName,
                     $rule->active_table_field,
-                    $activeFieldValue,
+                    $currentFieldValue,
+                    $rule->check_value,
                     $responseTableName,
-                    $rule->response_table_field
+                    $rule->response_table_field,
+                    $checkOperation
                 );
 
                 #如果是检查类型的规则并且为真 则不能执行动作并且返回错误信息

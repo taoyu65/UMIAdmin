@@ -4,17 +4,14 @@ namespace YM\Umi\TableRelation;
 
 class TRDeleteInterlock extends TROperationAbstract
 {
-    public function operation($activeTableName, $activeField, $activeFieldValue, $responseTableName, $responseField)
+    public function operation($activeTableName, $activeField, $currentFieldValue, $targetValue, $responseTableName, $responseField, $checkOperation = '=')
     {
         try {
-            $record = DB::table($responseTableName)
-                ->where($responseField, $activeFieldValue)
-                ->first();
+
         } catch (\Exception $e) {
             return 'parameter wrong';
         }
-        return $record ?
-            $this->errMessage($activeTableName, $responseTableName) :
+        return
             true;
     }
 

@@ -22,13 +22,14 @@
         jQuery(function($) {
         });
 
-        function umiTableDelete(tableName, id) {
-            var url = "{{url('deleting')}}/" + tableName + '/' + id;
-            layer.open ({
+        function umiTableDelete(tableName, id, activeFields) {
+            var urlActiveFields = (activeFields === '') ? '' : '/' + activeFields;
+            var url = "<?php echo e(url('deleting')); ?>/" + tableName + '/' + id + urlActiveFields;
+            var delConfirm = layer.open ({
                 type: 2,
                 title: 'Deleting',
                 maxmin: true,
-                shadeClose: false,
+                shadeClose: true,
                 area : ['800px' , '520px'],
                 content: url
             });
