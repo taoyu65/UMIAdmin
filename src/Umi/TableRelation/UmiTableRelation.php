@@ -40,7 +40,7 @@ class UmiTableRelation
             $checkOperation = $rule->check_operation === '' ? '=' : $rule->check_operation;
             $currentFieldValue = $activeFieldValues[$rule->active_table_field];
             if ($RO != null) {
-                    $re = $RO->operation(
+                    $re = $RO->showConfirmation(
                     $activeTableName,
                     $rule->active_table_field,
                     $currentFieldValue,

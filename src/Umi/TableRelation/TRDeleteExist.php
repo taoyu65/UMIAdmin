@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\DB;
  */
 class TRDeleteExist extends TROperationAbstract
 {
-    public function operation($activeTableName, $activeField, $currentFieldValue, $targetValue, $responseTableName, $responseField, $checkOperation = '=')
+    public function showConfirmation($activeTableName, $activeField, $currentFieldValue, $targetValue, $responseTableName, $responseField, $checkOperation = '=')
     {
         if (($checkOperation === '<' || $checkOperation === '>') && is_numeric($currentFieldValue))
             abort('503', 'parameter should be number according to the operation character');

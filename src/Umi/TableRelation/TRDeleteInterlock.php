@@ -4,7 +4,7 @@ namespace YM\Umi\TableRelation;
 
 class TRDeleteInterlock extends TROperationAbstract
 {
-    public function operation($activeTableName, $activeField, $currentFieldValue, $targetValue, $responseTableName, $responseField, $checkOperation = '=')
+    public function showConfirmation($activeTableName, $activeField, $currentFieldValue, $targetValue, $responseTableName, $responseField, $checkOperation = '=')
     {
         try {
 

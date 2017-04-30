@@ -4,6 +4,8 @@ namespace YM;
 
 use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
+use YM\Http\Middleware\TableRelationConfirmationMiddleware;
+use YM\Http\Middleware\TableRelationExecuteMiddleware;
 use YM\Http\Middleware\UmiUrlAuthMiddleware;
 use YM\Http\Middleware\BreadAccessMiddleWare;
 use YM\Http\Middleware\BreadSubmitMiddleWare;
@@ -53,7 +55,9 @@ class UmiServiceProvider extends ServiceProvider
 
         $router->middleware('umi.bread.access', BreadAccessMiddleWare::class);
 
-        $router->middleware('umi.bread.submit', BreadSubmitMiddleWare::class);
+        $router->middleware('umi.TRelation.confirmation', TableRelationConfirmationMiddleware::class);
+
+        $router->middleware('umi.TRelation.execute', TableRelationExecuteMiddleware::class);
     }
 
 }

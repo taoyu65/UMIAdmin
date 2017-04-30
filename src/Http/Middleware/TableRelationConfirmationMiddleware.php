@@ -7,7 +7,7 @@ use Illuminate\Support\Facades\Config;
 use YM\Facades\Umi;
 use YM\Umi\TableRelation\UmiTableRelation;
 
-class BreadSubmitMiddleWare
+class TableRelationConfirmationMiddleware
 {
     public function handle($request, Closure $next)
     {
@@ -41,6 +41,7 @@ class BreadSubmitMiddleWare
             //todo - 如果阅读 则直接执行规则, 并返回已经操作的数据的信息 显示出来
             //todo - 如果添加
             //todo 因为要自定义操作, 所有字段custom_rule_name将有值, 其他操作需要屏蔽带有值的自定义操作, 也就是修改查询条件过滤这个字段的值
+            //todo - 新的从这里继续, 先实现仅仅confirmation的, 给一个参数控制 是否进行extra operation.
         }
         //Event::fire(new TableRelationOperationEvent($tableId, 'after'));
 

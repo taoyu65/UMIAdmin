@@ -5,8 +5,8 @@ namespace YM\Umi\Contracts\TableRelation;
 interface TROperationInterface
 {
     /**
-     * 数据表关系操作
-     * The operation of data table
+     * 数据表关系操作之前的检查工作 以及返回不符合条件信息
+     * confirming check before the action and return the message that do not match the rule
      * @param $activeTableName
      *          - 正在被操作数据表名
      *          - table name of being operated
@@ -32,5 +32,7 @@ interface TROperationInterface
      *          - 返回布尔值true则通过验证可以执行此操作, 返回字符串则为错误信息, 并显示在客户端
      *          - when return true is passed and can be operated, if return a string than will be a wrong message and showing on the client side
      */
-    public function operation($activeTableName, $activeField, $currentFieldValue, $targetValue, $responseTableName, $responseField, $checkOperation = '=');
+    public function showConfirmation($activeTableName, $activeField, $currentFieldValue, $targetValue, $responseTableName, $responseField, $checkOperation = '=');
+
+    //public function executeExtraOperation();
 }

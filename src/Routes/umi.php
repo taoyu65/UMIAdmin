@@ -30,7 +30,7 @@ Route::group(['middleware' => 'umi.url.auth'], function () {
     ]);
 
     Route::get('deleting/{table}/{id}/{fields?}', [
-        'middleware'=> ['umi.bread.access:delete', 'umi.bread.submit'],
+        'middleware'=> ['umi.bread.access:delete', 'umi.TRelation.confirmation'],
         'uses'      => 'umiTableController@deleting'
     ]);
 });

@@ -8,7 +8,7 @@ namespace YM\Umi\TableRelation;
  */
 class TRReadSelfCheck extends TROperationAbstract
 {
-    public function operation($activeTableName, $activeField, $currentFieldValue, $targetValue, $responseTableName, $responseField, $checkOperation = '=')
+    public function showConfirmation($activeTableName, $activeField, $currentFieldValue, $targetValue, $responseTableName, $responseField, $checkOperation = '=')
     {
         $re = false;
         switch ($checkOperation) {
