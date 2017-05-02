@@ -24,7 +24,7 @@
 
         function umiTableDelete(tableName, id, activeFields) {
             var urlActiveFields = (activeFields === '') ? '' : '/' + activeFields;
-            var url = "<?php echo e(url('deleting')); ?>/" + tableName + '/' + id + urlActiveFields;
+            var url = "{{url('deleting')}}/" + tableName + '/' + id + urlActiveFields;
             var delConfirm = layer.open ({
                 type: 2,
                 title: 'Deleting',

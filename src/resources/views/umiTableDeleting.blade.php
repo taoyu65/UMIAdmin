@@ -21,8 +21,16 @@
             <div class="alert alert-warning">
                 Confirm to delete this record?
                 <br /><br /><p>
-                    <button class="btn btn-sm btn-danger">Delete</button>
-                    <button class="btn btn-sm btn-info" id="clsDelete" >Close</button>
+                    <form method="post" action="{{url("delete")}}/{{$table}}">
+                        {!! csrf_field() !!}
+
+                        <input type="hidden" name="hidden_tn" value="{{$table}}">
+                        <input type="hidden" name="hidden_ti" value="{{$id}}">
+                        <input type="hidden" name="hidden_afv" value="{{$activeFieldValue}}">
+
+                        <button class="btn btn-sm btn-danger" type="submit">Delete</button>
+                        <button class="btn btn-sm btn-info" id="clsDelete" type="button">Close</button>
+                    </form>
                 </p>
             </div>
         @endif

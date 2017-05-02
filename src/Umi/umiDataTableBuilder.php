@@ -173,7 +173,8 @@ UMI;
         #获取用于执行数据库关联操作的数据
         #get data for execute data table relation operation
         $TRO = new TableRelationOperation();
-        $rules = $TRO->getRulesByNames(Ym::currentTableId(), false);
+        //$rules = $TRO->getRulesByNames(Ym::currentTableId(), false);
+        $rules = $TRO->getTableRelationOperationByTableId(Ym::currentTableId());
         $activeFieldValueList = [];
         if ($rules) {
             foreach ($dataSet as $ds) {

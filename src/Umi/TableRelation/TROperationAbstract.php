@@ -38,4 +38,9 @@ class TROperationAbstract implements TROperationInterface
     {
 
     }
+
+    public function executeExtraOperation($activeTableName, $activeField, $currentFieldValue, $targetValue, $responseTableName, $responseField, $checkOperation = '=')
+    {
+        return null;
+    }
 }

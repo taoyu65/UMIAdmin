@@ -34,5 +34,5 @@ interface TROperationInterface
      */
     public function showConfirmation($activeTableName, $activeField, $currentFieldValue, $targetValue, $responseTableName, $responseField, $checkOperation = '=');
 
-    //public function executeExtraOperation();
+    public function executeExtraOperation($activeTableName, $activeField, $currentFieldValue, $targetValue, $responseTableName, $responseField, $checkOperation = '=');
 }

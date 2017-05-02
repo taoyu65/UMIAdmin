@@ -15,6 +15,11 @@ class TRDeleteInterlock extends TROperationAbstract
             true;
     }
 
+    public function executeExtraOperation($activeTableName, $activeField, $currentFieldValue, $targetValue, $responseTableName, $responseField, $checkOperation = '=')
+    {
+
+    }
+
     private function errMessage($activeTableName, $responseTableName)
     {
         $html = <<<UMI

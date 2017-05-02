@@ -67,12 +67,4 @@ class umiTableController extends Controller
             'footer'    => $footer
         ]);
     }
-
-    public function deleting($table, $id, $activeFields = '', Request $request)
-    {
-        $actionAvailable = isset($request['TRO_Available']) && $request['TRO_Available'] === false ? false : true;
-        $message = $request['TRO_Message'];
-        $list = compact('table', 'id', 'activeFields', 'actionAvailable', 'message');
-        return view('umi::umiTableDeleting', $list);
-    }
 }

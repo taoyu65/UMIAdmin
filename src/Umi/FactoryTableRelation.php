@@ -7,7 +7,6 @@ use YM\Umi\TableRelation\TREditExist;
 use YM\Umi\TableRelation\TREditSelfCheck;
 use YM\Umi\TableRelation\TRReadExist;
 use YM\Umi\TableRelation\TRReadSelfCheck;
-use YM\Umi\TableRelation\TRCustomerDelete;
 use YM\Umi\TableRelation\TRDeleteExist;
 use YM\Umi\TableRelation\TRDeleteInterlock;
 
@@ -27,6 +26,8 @@ class FactoryTableRelation
                 if ($operation_type == 'delete')
                     return new TRDeleteInterlock();
                 break;
+            case 'custom':
+//todo - finish custom
             #检查其他数据表是否存在当前选定的数据值
             #check other data table if current value from selected exist
             case 'exist':

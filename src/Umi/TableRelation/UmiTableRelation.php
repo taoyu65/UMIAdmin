@@ -8,30 +8,20 @@ use YM\Umi\FactoryTableRelation;
 
 class UmiTableRelation
 {
-    private $records;
-    private $factory;
-
     public $message;
-    public $tableId;
-
-    public function __construct()
-    {
-        $this->tableId = YM::currentTableId();
-        $TRO = new TableRelationOperation();
-        $this->records = $TRO->getTableRelationOperationByTableId($this->tableId);
-        $this->factory = new FactoryTableRelation();
-    }
 
     public function executeBeforeAction($activeFieldValues)
     {
         $checked = true;
+        $tableId = YM::currentTableId();
         $TRO = new TableRelationOperation();
-        $rules = $TRO->getRulesByNames($this->tableId, false);
+        $rules = $TRO->getRulesByNames($tableId, false);
         $checkBool = true;
 
         $activeFieldValues = json_decode($activeFieldValues, true);
+        $factory = new FactoryTableRelation();
         foreach ($rules as $rule) {
-            $RO = $this->factory->getInstanceOfRelationOperation($rule->rule_name, $rule->operation_type);
+            $RO = $factory->getInstanceOfRelationOperation($rule->rule_name, $rule->operation_type);
             $bool = false;
             $re = '';
             $activeTableName = YM::getTableNameById($rule->active_table_id);
@@ -63,8 +53,35 @@ class UmiTableRelation
         return $checked;
     }
 
-    public function executeAfterAction()
+    public function executeAfterAction($activeFieldValues)
     {
-        return false;
+        $TRO = new TableRelationOperation();
+        $tableId = YM::currentTableId();
+        $rules = $TRO->getRulesByNames($tableId, true);
+
+        $factory = new FactoryTableRelation();
+        foreach ($rules as $rule) {
+            $RO = $factory->getInstanceOfRelationOperation($rule->rule_name, $rule->operation_type);
+
+            $activeTableName = YM::getTableNameById($rule->active_table_id);
+            $responseTableName = YM::getTableNameById($rule->response_table_id);
+
+            $checkOperation = $rule->check_operation === '' ? '=' : $rule->check_operation;
+            $activeFieldValues = json_decode($activeFieldValues, true);
+            $currentFieldValue = $activeFieldValues[$rule->active_table_field];
+
+            if ($RO != null) {
+                $re = $RO->executeExtraOperation(
+                    $activeTableName,
+                    $rule->active_table_field,
+                    $currentFieldValue,
+                    $rule->check_value,
+                    $responseTableName,
+                    $rule->response_table_field,
+                    $checkOperation
+                );
+                //todo - show message
+            }
+        }
     }
 }

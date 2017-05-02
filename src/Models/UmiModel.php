@@ -59,4 +59,9 @@ class UmiModel
         return DB::table($tableName)
             ->select($fields);
     }
+
+    public function delete($table, $id)
+    {
+        return DB::table($table)->whereId($id)->delete();
+    }
 }
