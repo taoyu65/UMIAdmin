@@ -2,6 +2,8 @@
 
 namespace YM\Umi;
 
+use Illuminate\Support\Facades\Session;
+
 class Umi
 {
     private $administrator;
@@ -48,5 +50,29 @@ class Umi
     public function getTableIdByTableName($tableName)
     {
         return $this->table->getTableId($tableName);
+    }
+
+    public function showMessage($title, $content = '', $options = [])
+    {
+        #设置默认的样式为深绿色的界面 gritter-sucdess
+        #set default style as a gritter-success
+        if (!array_key_exists('class_name', $options))
+            $options['class_name'] = 'gritter-success';
+
+        $opt = '';
+        foreach ($options as $key => $value) {
+            $opt .= "$key:'$value',";
+        }
+
+        $html = <<< UMI
+        <script>
+            $.gritter.add({
+                title: '$title',
+                text: '$content',
+                $opt
+            });
+        </script>
+UMI;
+        Session::flash('showMessage', $html);
     }
 }

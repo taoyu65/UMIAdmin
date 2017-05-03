@@ -26,8 +26,10 @@
     <link rel="stylesheet" href="{{$path}}/css/ace-part2.min.css" class="ace-main-stylesheet" />
     <![endif]-->
 
+    <!-- ace plugin -->
     <link rel="stylesheet" href="{{$path}}/css/ace-skins.min.css" />
     <link rel="stylesheet" href="{{$path}}/css/ace-rtl.min.css" />
+    <link rel="stylesheet" href="{{$path}}/css/jquery.gritter.min.css" />
 
     <!--[if lte IE 9]>
     <link rel="stylesheet" href="{{$path}}/css/ace-ie.min.css" />
@@ -153,6 +155,13 @@
 
 <!-- layer scripts -->
 <script src="{{$assetPath}}/layer/layer.js"></script>
+
+<!-- ace plugin -->
+<script src="{{$path}}/js/jquery.gritter.min.js"></script>
+
+<!-- 显示操作信息 使用 gritter 和 一次性的快闪session -->
+<!-- show all the operation information, use gritter and flash session -->
+{!! \Illuminate\Support\Facades\Session::get('showMessage') !!}
 
 </body>
 </html>

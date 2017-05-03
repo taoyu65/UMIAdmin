@@ -21,7 +21,10 @@ class UmiTableRelation
         $activeFieldValues = json_decode($activeFieldValues, true);
         $factory = new FactoryTableRelation();
         foreach ($rules as $rule) {
-            $RO = $factory->getInstanceOfRelationOperation($rule->rule_name, $rule->operation_type);
+            $RO = $factory->getInstanceOfRelationOperation(
+                $rule->rule_name,
+                $rule->operation_type
+                );
             $bool = false;
             $re = '';
             $activeTableName = YM::getTableNameById($rule->active_table_id);
@@ -61,7 +64,11 @@ class UmiTableRelation
 
         $factory = new FactoryTableRelation();
         foreach ($rules as $rule) {
-            $RO = $factory->getInstanceOfRelationOperation($rule->rule_name, $rule->operation_type);
+            $RO = $factory->getInstanceOfRelationOperation(
+                $rule->rule_name,
+                $rule->operation_type,
+                $rule->customer_rule_name
+            );
 
             $activeTableName = YM::getTableNameById($rule->active_table_id);
             $responseTableName = YM::getTableNameById($rule->response_table_id);
@@ -80,7 +87,26 @@ class UmiTableRelation
                     $rule->response_table_field,
                     $checkOperation
                 );
-                //todo - show message
+                $action = $rule->operation_type;
+                if ($re) {//todo - 这个优先, 由于用了session 并且是flash 当出现2个 message的时候 只能显示一个. 搞定这个
+                   YM::showMessage(
+                       "$action success! - positive $action",
+                       "There are <strong style=\'color: orange\'>$re</strong> records have been <strong style=\'color: orange\'>DELETE</strong> from table: <strong style=\'color: orange\'>$responseTableName</strong> due to the relation operation rules",
+                       [
+                           'class_name' => 'gritter-info',
+                           'time'       => 10000
+                       ]
+                       );
+                } else {
+                    YM::showMessage(
+                        "$action failed",
+                        "No records got deleted either something wrong or no related records have been found, just in case the redundancy please manage the data manually ",
+                        [
+                            'class_name' => 'gritter-error',
+                            'sticky'     => true
+                        ]
+                    );
+                }
             }
         }
     }

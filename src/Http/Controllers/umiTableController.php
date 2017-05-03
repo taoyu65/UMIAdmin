@@ -4,6 +4,7 @@ namespace YM\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Session;
 use YM\Facades\Umi;
 use YM\Umi\FactoryBreadBrowser;
 

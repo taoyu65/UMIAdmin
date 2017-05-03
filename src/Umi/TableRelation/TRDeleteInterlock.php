@@ -17,7 +17,7 @@ class TRDeleteInterlock extends TROperationAbstract
 
     public function executeExtraOperation($activeTableName, $activeField, $currentFieldValue, $targetValue, $responseTableName, $responseField, $checkOperation = '=')
     {
-
+        return 1;//todo - orgernize
     }
 
     private function errMessage($activeTableName, $responseTableName)

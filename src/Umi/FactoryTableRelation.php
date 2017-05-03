@@ -9,6 +9,7 @@ use YM\Umi\TableRelation\TRReadExist;
 use YM\Umi\TableRelation\TRReadSelfCheck;
 use YM\Umi\TableRelation\TRDeleteExist;
 use YM\Umi\TableRelation\TRDeleteInterlock;
+use ReflectionClass;
 
 class FactoryTableRelation
 {
@@ -17,7 +18,7 @@ class FactoryTableRelation
 
     }
 
-    public function getInstanceOfRelationOperation($rule_name, $operation_type)
+    public function getInstanceOfRelationOperation($rule_name, $operation_type, $customerRuleName = '')
     {
         switch ($rule_name) {
             #数据表的联动删除, 当当前数据记录被删除时 一并删除其他对应的数据表的记录
@@ -27,7 +28,13 @@ class FactoryTableRelation
                     return new TRDeleteInterlock();
                 break;
             case 'custom':
-//todo - finish custom
+                try {
+                    $customer = new ReflectionClass("YM\\Umi\\TableRelation\\$customerRuleName");
+                    return $customer->newInstance();
+                } catch (\Exception $exception) {
+                    echo $exception->getMessage();
+                }
+                break;
             #检查其他数据表是否存在当前选定的数据值
             #check other data table if current value from selected exist
             case 'exist':
