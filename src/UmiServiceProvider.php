@@ -8,7 +8,6 @@ use YM\Http\Middleware\TableRelationConfirmationMiddleware;
 use YM\Http\Middleware\TableRelationExecuteMiddleware;
 use YM\Http\Middleware\UmiUrlAuthMiddleware;
 use YM\Http\Middleware\BreadAccessMiddleWare;
-use YM\Http\Middleware\BreadSubmitMiddleWare;
 use YM\Umi\Umi;
 
 class UmiServiceProvider extends ServiceProvider
