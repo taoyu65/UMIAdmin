@@ -22,7 +22,6 @@ class CreateUmiTableRelationOperationTable extends Migration
             $table->string('active_table_field');
             $table->integer('response_table_id')->unsigned();
             $table->string('response_table_field');
-            $table->string('field_display');
             $table->string('check_value');
             $table->string('check_operation', 20);
             $table->boolean('is_extra_operation')->default(0);

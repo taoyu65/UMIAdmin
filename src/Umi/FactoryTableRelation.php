@@ -24,8 +24,20 @@ class FactoryTableRelation
             #数据表的联动删除, 当当前数据记录被删除时 一并删除其他对应的数据表的记录
             #when delete current record, all the record from other table that has relation will be deleted at the same time
             case 'interlock':
-                if ($operation_type == 'delete')
-                    return new TRDeleteInterlock();
+                switch ($operation_type) {
+                    case 'read':
+                        #可以自定义添加方法 (new一个对象后 去掉break;)
+                        #can add custom method (delete break; after new a object)
+                        break;
+                    case 'delete':
+                        return new TRDeleteInterlock();
+                    case 'edit':
+                        #可以自定义添加方法 (new一个对象后 去掉break;)
+                        #can add custom method (delete break; after new a object)
+                        break;
+                    default:
+                        return null;
+                }
                 break;
             case 'custom':
                 try {

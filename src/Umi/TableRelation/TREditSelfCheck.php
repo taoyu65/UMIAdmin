@@ -58,7 +58,7 @@ class TREditSelfCheck extends TROperationAbstract
 				Because the policy "<strong style="color: red">SELF CHECK</strong>" has been applied on this read action
 				<br>
 				<strong style="color: grey">
-				    <i>policy: The value ($currentFieldValue) of field "$activeField" from table "$activeTableName" has to be "$checkOperation" the value($targetValue)</i>
+				    <i>policy: The value ($currentFieldValue) from field "$activeField" of table "$activeTableName" has to be "$checkOperation" the value($targetValue)</i>
 				</strong>
 			<br />
 		</div>

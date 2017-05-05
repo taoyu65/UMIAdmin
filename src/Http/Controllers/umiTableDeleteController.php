@@ -26,14 +26,13 @@ class umiTableDeleteController extends Controller
         $umiModel = new UmiModel();
         $id = $request['hidden_ti'];
         $count = 1;//$umiModel->delete($table, $id);
-        //todo - replace js alert, use gritter js
-        //todo - recover the delete action, now use number 1 instead.
+        ////todo - waiting for final test
         if ($count){
             $request['action_success'] = true;
 
             Umi::showMessage(
-                'Delete success - active delete',
-                "There is <strong style=\'color: orange\'>1</strong> record has been deleted from table: <strong style=\'color: orange\'>$table</strong>",
+                "Delete success! - <strong style=\'color: orange\'>active delete</strong>",
+                "Record of ID: <strong style=\'color: orange\'>$id</strong> has been deleted from table: <strong style=\'color: orange\'>$table</strong>",
                 [
                     'time' => 10000
                 ]

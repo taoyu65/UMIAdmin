@@ -30,4 +30,18 @@ class TableRelationOperation extends UmiBase
             ->where('is_extra_operation', $isExtraOperation)
             ->get();
     }
+
+    #f
+    #
+    public function getRulesForConfirmation($tableId)
+    {
+        if ($this->openCache)
+            return $this->cachedTable
+                ->where('active_table_id', $tableId)
+                ->sortBy('is_extra_operation');
+
+        return self::where('active_table_id', $tableId)
+            ->orderBy('is_extra_operation')
+            ->get();
+    }
 }

@@ -59,7 +59,7 @@ class TRDeleteSelfCheck extends TROperationAbstract
 			records relate to Table "$activeTableName"
 			<br>
 			<strong style="color: grey">
-			    <i>policy: The value ($currentFieldValue) of field "$activeField" from table "$activeTableName" has to be "$checkOperation" the value($targetValue)</i>
+			    <i>policy: The value ($currentFieldValue) from field "$activeField" of table "$activeTableName" has to be "$checkOperation" the value($targetValue)</i>
 			</strong>
 			<br />
 		</div>

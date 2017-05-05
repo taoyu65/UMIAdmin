@@ -11,6 +11,11 @@
     <script src="{{$path}}/js/jquery-2.1.4.min.js"></script>
 </head>
 <body>
+
 @yield('body')
+
+<!-- layer scripts -->
+<script src="{{$assetPath}}/layer/layer.js"></script>
+
 </body>
 </html>

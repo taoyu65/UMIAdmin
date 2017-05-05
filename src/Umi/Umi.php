@@ -73,6 +73,9 @@ class Umi
             });
         </script>
 UMI;
+        if (Session::has('showMessage'))
+            $html .= Session::get('showMessage');
+
         Session::flash('showMessage', $html);
     }
 }

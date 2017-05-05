@@ -10,28 +10,29 @@ class UmiTableRelation
 {
     public $message;
 
-    public function executeBeforeAction($activeFieldValues)
+    public function showConfirmation($activeFieldValues)
     {
-        $checked = true;
         $tableId = YM::currentTableId();
         $TRO = new TableRelationOperation();
-        $rules = $TRO->getRulesByNames($tableId, false);
-        $checkBool = true;
+        $rules = $TRO->getRulesForConfirmation($tableId);
 
         $activeFieldValues = json_decode($activeFieldValues, true);
         $factory = new FactoryTableRelation();
         foreach ($rules as $rule) {
             $RO = $factory->getInstanceOfRelationOperation(
                 $rule->rule_name,
-                $rule->operation_type
+                $rule->operation_type,
+                $rule->customer_rule_name
                 );
-            $bool = false;
+
             $re = '';
             $activeTableName = YM::getTableNameById($rule->active_table_id);
             $responseTableName = YM::getTableNameById($rule->response_table_id);
 
             $checkOperation = $rule->check_operation === '' ? '=' : $rule->check_operation;
-            $currentFieldValue = $activeFieldValues[$rule->active_table_field];
+            //$currentFieldValue = $activeFieldValues[$rule->active_table_field];
+            $currentFieldValue = $rule->check_value ? $rule->check_value : $activeFieldValues[$rule->active_table_field];
+
             if ($RO != null) {
                     $re = $RO->showConfirmation(
                     $activeTableName,
@@ -42,27 +43,27 @@ class UmiTableRelation
                     $rule->response_table_field,
                     $checkOperation
                 );
-
-                #如果是检查类型的规则并且为真 则不能执行动作并且返回错误信息
-                #if the policy is the type of checking and return true than the action will be defeat and return wrong message.
-                if (is_bool($re) && $re === true) $bool = true;
             }
 
-            if (!($bool && $checkBool)) {
+            if ($rule->is_extra_operation) {
+                $this->message .= $re;
+                //return true;
+            } else {
                 $this->message = $re;
-                return false;
+                if ($re !== true) return false;
             }
         }
-        return $checked;
+        return true;
     }
 
-    public function executeAfterAction($activeFieldValues)
+    public function executeExtraOperation($activeFieldValues)
     {
         $TRO = new TableRelationOperation();
         $tableId = YM::currentTableId();
         $rules = $TRO->getRulesByNames($tableId, true);
 
         $factory = new FactoryTableRelation();
+        $activeFieldValues = json_decode($activeFieldValues, true);
         foreach ($rules as $rule) {
             $RO = $factory->getInstanceOfRelationOperation(
                 $rule->rule_name,
@@ -74,8 +75,8 @@ class UmiTableRelation
             $responseTableName = YM::getTableNameById($rule->response_table_id);
 
             $checkOperation = $rule->check_operation === '' ? '=' : $rule->check_operation;
-            $activeFieldValues = json_decode($activeFieldValues, true);
-            $currentFieldValue = $activeFieldValues[$rule->active_table_field];
+            //$currentFieldValue = $activeFieldValues[$rule->active_table_field];
+            $currentFieldValue = $rule->check_value ? $rule->check_value : $activeFieldValues[$rule->active_table_field];
 
             if ($RO != null) {
                 $re = $RO->executeExtraOperation(
@@ -88,9 +89,9 @@ class UmiTableRelation
                     $checkOperation
                 );
                 $action = $rule->operation_type;
-                if ($re) {//todo - 这个优先, 由于用了session 并且是flash 当出现2个 message的时候 只能显示一个. 搞定这个
+                if ($re) {
                    YM::showMessage(
-                       "$action success! - positive $action",
+                       "Relation $action success! - <strong style=\'color: orange\'>positive $action</strong>",
                        "There are <strong style=\'color: orange\'>$re</strong> records have been <strong style=\'color: orange\'>DELETE</strong> from table: <strong style=\'color: orange\'>$responseTableName</strong> due to the relation operation rules",
                        [
                            'class_name' => 'gritter-info',
@@ -99,7 +100,7 @@ class UmiTableRelation
                        );
                 } else {
                     YM::showMessage(
-                        "$action failed",
+                        "Relation $action failed! - <strong style=\'color: orange\'>positive $action</strong>",
                         "No records got deleted either something wrong or no related records have been found, just in case the redundancy please manage the data manually ",
                         [
                             'class_name' => 'gritter-error',
