@@ -372,6 +372,7 @@ UMI;
                 $this->ButtonAddHtml('disabled') : '';
         }
     }
+
     private function ButtonAddHtml($disable = '')
     {
         $html = <<<UMI

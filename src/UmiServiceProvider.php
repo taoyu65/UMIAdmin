@@ -7,8 +7,7 @@ use Illuminate\Support\ServiceProvider;
 use YM\Http\Middleware\TableRelationConfirmationMiddleware;
 use YM\Http\Middleware\TableRelationExecuteMiddleware;
 use YM\Http\Middleware\UmiUrlAuthMiddleware;
-use YM\Http\Middleware\BreadAccessMiddleWare;
-use YM\Http\Middleware\BreadSubmitMiddleWare;
+use YM\Http\Middleware\BreadAccessMiddleware;
 use YM\Umi\Umi;
 
 class UmiServiceProvider extends ServiceProvider
@@ -53,7 +52,7 @@ class UmiServiceProvider extends ServiceProvider
         #URL authority control to check if has permission to load
         $router->middleware('umi.url.auth', UmiUrlAuthMiddleware::class);
 
-        $router->middleware('umi.bread.access', BreadAccessMiddleWare::class);
+        $router->middleware('umi.bread.access', BreadAccessMiddleware::class);
 
         $router->middleware('umi.TRelation.confirmation', TableRelationConfirmationMiddleware::class);
 

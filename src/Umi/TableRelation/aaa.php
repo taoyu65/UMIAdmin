@@ -12,7 +12,7 @@ class aaa extends TROperationAbstract
 {
     public function showConfirmation($activeTableName, $activeField, $currentFieldValue, $targetValue, $responseTableName, $responseField, $checkOperation = '=')
     {
-        return 'aaa'. $activeTableName;
+        return $this->errMessage($activeTableName, $currentFieldValue, $responseTableName, $responseField);
 //        return '' ?
 //            $this->errMessage($activeTableName, $currentFieldValue, $responseTableName, $responseField) :
 //            true;
@@ -27,7 +27,10 @@ class aaa extends TROperationAbstract
     private function errMessage($activeTableName, $currentFieldValue, $responseTableName, $responseField)
     {
         $html = <<<UMI
-        
+        sdafasdf
+        <div title="sdaf">
+        sdfasdfa
+</div>
 UMI;
         return $html;
     }

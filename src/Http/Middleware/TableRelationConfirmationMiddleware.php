@@ -34,11 +34,7 @@ class TableRelationConfirmationMiddleware
         #transferring all data to the next level which is extra operation layer
         $request['activeFieldValue'] = $activeFieldValues;
 
-        //Event::fire(new TableRelationOperationEvent($tableId, 'before'));
-
         $response = $next($request);
-
-        //Event::fire(new TableRelationOperationEvent($tableId, 'after'));
 
         return $response;
     }

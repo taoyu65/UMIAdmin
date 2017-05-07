@@ -77,7 +77,6 @@ class UmiRouteProvider extends ServiceProvider
     protected function mapWebRoutes()
     {
         Route::group([
-            //todo: the following comment is for testing avoid the csrf
             'middleware' => 'web',
             'namespace' => $this->namespace,
         ], function ($router) {

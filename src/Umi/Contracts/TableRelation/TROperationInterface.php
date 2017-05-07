@@ -34,5 +34,7 @@ interface TROperationInterface
      */
     public function showConfirmation($activeTableName, $activeField, $currentFieldValue, $targetValue, $responseTableName, $responseField, $checkOperation = '=');
 
+    #具体的执行操作 参数和showConfirmation相同
+    #specific action all the parameter are same as showConfirmation
     public function executeExtraOperation($activeTableName, $activeField, $currentFieldValue, $targetValue, $responseTableName, $responseField, $checkOperation = '=');
 }

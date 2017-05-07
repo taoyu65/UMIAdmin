@@ -5,7 +5,7 @@ namespace YM\Umi\Auth;
 use YM\Umi\Contracts\PrintHtml\MasterPageInterface;
 use YM\Umi\umiMasterPageBuilder;
 
-abstract class UmiMasterPage implements MasterPageInterface
+abstract class UmiMasterPageAbstract implements MasterPageInterface
 {
     private $masterPageBuilder;
 

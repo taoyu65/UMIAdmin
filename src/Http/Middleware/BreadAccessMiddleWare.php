@@ -6,7 +6,7 @@ use Closure;
 use YM\Exceptions\UmiException;
 use YM\umiAuth\umiAuth;
 
-class BreadAccessMiddleWare
+class BreadAccessMiddleware
 {
     public function handle($request, Closure $next, $action)
     {

@@ -4,7 +4,7 @@ namespace YM\Umi\Auth;
 
 use YM\Umi\umiMenusBuilder;
 
-class SuperAdminMasterPage extends UmiMasterPage
+class SuperAdminMasterPage extends UmiMasterPageAbstract
 {
     private $menusBuilder;
 
