@@ -9,6 +9,11 @@ use Illuminate\Support\Facades\Cache;
 
 class DashBoardController extends Controller
 {
+    public function index()
+    {
+        return view('umi::dashboard');
+    }
+
     public function dashboard(Request $request)
     {
         $userName = $request->get('username');

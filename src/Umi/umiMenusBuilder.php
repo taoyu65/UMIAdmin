@@ -177,7 +177,13 @@ UMI;
         $level .= $levelInit;
         foreach ($jsonMenus as $jsonMenu) {
             $objMenu = $this->menus->getOneMenu($jsonMenu->id);
-            $rootMenu = $level == 0 ? '<span class="menu-text">' . $objMenu->title . '</span>' : $objMenu->title;
+
+            #输出自定义图标 (标题后面的小图标)
+            #getting the custom icon which is behind the title
+            $extraIconHtml = $objMenu->extra_icon_html;
+
+            $titleWithIcon = $objMenu->title . $extraIconHtml;
+            $rootMenu = $level == 0 ? '<span class="menu-text">' . $titleWithIcon . '</span>' : $titleWithIcon;
             //menus class(active or open) -------------------------------------------
             $url = $objMenu->url === '#' ? '#' : url($objMenu->url) . '?id=' . $objMenu->id;
             $class = '';
@@ -251,7 +257,8 @@ UMI;
         return $activeOrOpen;
     }
 
-    #获取此用户的menu的json值 #get this user's json of menu
+    #获取此用户的menu的json值
+    #get this user's json of menu
     public function menusJson()
     {
         $user = new User();

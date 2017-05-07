@@ -20,6 +20,7 @@ class CreateMenusTable extends Migration
             $table->string('url');
             $table->string('target')->default('_self');
             $table->string('icon_class');
+            $table->string('extra_icon_html');
             $table->integer('order')->unsigned();
             $table->timestamps();
         });
