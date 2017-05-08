@@ -5,8 +5,8 @@
         <div class="well">
             <h1 class="grey lighter smaller">
                 <span class="blue bigger-125">
-                    <i class="ace-icon fa fa-random"></i>
-                    406
+                    <i class="ace-icon fa fa-user"></i>
+                    403
                 </span>
                 {{$exception->getMessage()}}
             </h1>
@@ -18,6 +18,10 @@
                     <li>
                         <i class="ace-icon fa fa-hand-o-right blue"></i>
                         contact administrator
+                    </li>
+                    <li>
+                        <i class="ace-icon fa fa-hand-o-right blue"></i>
+                        do not manually type url in the browser
                     </li>
                 </ul>
             </div>

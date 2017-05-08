@@ -14,7 +14,7 @@ class BreadAccessMiddleware
         $table = $request->route()->parameter('table');
         $permission = $action . '-' . $table;
         if (!$umiAuth->can($permission))
-            throw new UmiException("You are not authorized to $action this record");
+            abort(403, "You are not authorized to $action this record");
 
         return $next($request);
     }

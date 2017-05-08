@@ -5,12 +5,15 @@
         <div class="well">
             <h1 class="grey lighter smaller">
                 <span class="blue bigger-125">
-                    <i class="ace-icon fa fa-random"></i>
-                    406
+                    <i class="ace-icon fa fa-caret-right"></i>
+                    404
                 </span>
                 {{$exception->getMessage()}}
             </h1>
             <hr />
+            <h3 class="lighter smaller">
+                We looked everywhere but we couldn't find it!
+            </h3>
             <div class="space"></div>
             <div>
                 <h4 class="lighter smaller">Meanwhile, try one of the following:</h4>

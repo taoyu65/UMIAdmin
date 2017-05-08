@@ -1,47 +1,38 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>Be right back.</title>
+@extends('umi::layouts.model')
 
-        <link href="https://fonts.googleapis.com/css?family=Lato:100" rel="stylesheet" type="text/css">
-
-        <style>
-            html, body {
-                height: 100%;
-            }
-
-            body {
-                margin: 0;
-                padding: 0;
-                width: 100%;
-                color: #B0BEC5;
-                display: table;
-                font-weight: 100;
-                font-family: 'Lato', sans-serif;
-            }
-
-            .container {
-                text-align: center;
-                display: table-cell;
-                vertical-align: middle;
-            }
-
-            .content {
-                text-align: center;
-                display: inline-block;
-            }
-
-            .title {
-                font-size: 72px;
-                margin-bottom: 40px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="container">
-            <div class="content">
-                <div class="title">Be right back.{{$exception->getMessage()}}</div>
+@section('body')
+    <div class="error-container">
+        <div class="well">
+            <h1 class="grey lighter smaller">
+                <span class="blue bigger-125">
+                    <i class="ace-icon fa fa-random"></i>
+                    503
+                </span>
+                {{$exception->getMessage()}}
+            </h1>
+            <hr />
+            <div class="space"></div>
+            <div>
+                <h4 class="lighter smaller">Meanwhile, try one of the following:</h4>
+                <ul class="list-unstyled spaced inline bigger-110 margin-15">
+                    <li>
+                        <i class="ace-icon fa fa-hand-o-right blue"></i>
+                        contact administrator
+                    </li>
+                </ul>
+            </div>
+            <hr />
+            <div class="space"></div>
+            <div class="center">
+                <a href="javascript:history.back()" class="btn btn-grey">
+                    <i class="ace-icon fa fa-arrow-left"></i>
+                    Go Back
+                </a>
+                <a href="{{route('dashboard')}}" class="btn btn-primary">
+                    <i class="ace-icon fa fa-tachometer"></i>
+                    Dashboard
+                </a>
             </div>
         </div>
-    </body>
-</html>
+    </div>
+@endsection

@@ -26,17 +26,32 @@ Route::group(['middleware' => 'umi.url.auth'], function () {
         'as'        => 'dashboard'
     ]);
 
-    #表关系操作 #table relation operation
-    Route::get('relationOpe', [
-        'uses'      => 'relationOperationController@index',
+    #表关系操作
+    #table relation operation
+    #---------------------------------------------------------------
+    Route::get('relationOpe/{table}/browser', [
+        'middleware'=> ['umi.bread.access:browser'],
+        'uses'      => 'relationOperationController@browser',
         'as'        => 'relationOpe'
     ]);
+    Route::get('relationOpe/adding', [
+       'uses'       => 'relationOperationController@adding',
+       'as'         => 'relationAdding'
+    ]);
+    Route::post('relationOpe/{table}/add', [
+        'middleware'=> ['umi.bread.access:add'],
+        'uses'      => 'relationOperationController@add',
+    ]);
+    #---------------------------------------------------------------
 
-    #权限管理 #authority management
+    #权限管理
+    #authority management
+    #---------------------------------------------------------------
     Route::get('authority', [
         'uses'      => 'authorityController@index',
         'as'        => 'authority'
     ]);
+    #---------------------------------------------------------------
 
     #数据表 #table
     Route::match(['post','get'], 'umiTable/{table?}', [
