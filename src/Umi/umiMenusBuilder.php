@@ -178,6 +178,9 @@ UMI;
         foreach ($jsonMenus as $jsonMenu) {
             $objMenu = $this->menus->getOneMenu($jsonMenu->id);
 
+            if (!$objMenu)
+                abort(404, "Could not find the menu that ID is $jsonMenu->id");
+
             #输出自定义图标 (标题后面的小图标)
             #getting the custom icon which is behind the title
             $extraIconHtml = $objMenu->extra_icon_html;

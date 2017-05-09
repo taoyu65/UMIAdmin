@@ -121,7 +121,7 @@ UMI;
         #table Head
         $dataTypeOp = new DataTypeOperation('browser', $this->tableName);
         $tHeads = $dataTypeOp->getTHead();
-        if (!count($tHeads))
+        if (!$tHeads->first())
             return $this->wrongMessage('Please open and set up field shows up function', '#');
         $tHeadHtml = '';
         foreach ($tHeads as $tHead) {

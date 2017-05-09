@@ -3,6 +3,7 @@
 namespace YM\Umi\DataTable;
 
 use YM\Umi\umiDataTableBuilder;
+use YM\Umi\umiSearchBuilder;
 
 class SuperAdminDataTableWithSearch extends umiDataTableAbstract
 {
