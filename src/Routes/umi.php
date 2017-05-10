@@ -29,11 +29,6 @@ Route::group(['middleware' => 'umi.url.auth'], function () {
     #表关系操作
     #table relation operation
     #---------------------------------------------------------------
-    Route::get('relationOpe/{table}/browser', [
-        'middleware'=> ['umi.bread.access:browser'],
-        'uses'      => 'relationOperationController@browser',
-        'as'        => 'relationOpe'
-    ]);
     Route::get('relationOpe/adding', [
        'uses'       => 'relationOperationController@adding',
        'as'         => 'relationAdding'

@@ -2,6 +2,7 @@
 
 namespace YM\Umi;
 
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Session;
 
 class Umi
@@ -25,21 +26,18 @@ class Umi
 
     public function setCurrentTableName($tableName)
     {
-        //$this->administrator->setCurrentTableName($tableName);
         self::$currentTableName = $tableName;
         self::$currentTableId = $this->table->getTableId($tableName);
     }
 
     public function currentTableName()
     {
-        //return $this->administrator->getCurrentTableName();
         return self::$currentTableName;
     }
 
     public function currentTableId()
     {
         return self::$currentTableId;
-        //return $this->administrator->getCurrentTableId();
     }
 
     public function getTableNameById($tableId)
@@ -54,7 +52,7 @@ class Umi
 
     public function showMessage($title, $content = '', $options = [])
     {
-        #设置默认的样式为深绿色的界面 gritter-sucdess
+        #设置默认的样式为深绿色的界面 gritter-success
         #set default style as a gritter-success
         if (!array_key_exists('class_name', $options))
             $options['class_name'] = 'gritter-success';
@@ -77,5 +75,43 @@ UMI;
             $html .= Session::get('showMessage');
 
         Session::flash('showMessage', $html);
+    }
+
+    #加密 #encrypt
+    function umiEncrypt($str)
+    {
+        $yuan = Config::get('umi.key_active');
+        $jia = Config::get('umi.key_positive');
+
+        $results = '';
+        if (strlen($str) == 0) return false;
+        for ($i = 0; $i < strlen($str); $i++) {
+            for ($j = 0; $j < strlen($yuan); $j++) {
+                if ($str[$i] == $yuan[$j]) {
+                    $results .= $jia[$j];
+                    break;
+                }
+            }
+        }
+        return $results;
+    }
+
+    #解密 #decrypt
+    function umiDecrypt($str)
+    {
+        $yuan = Config::get('umi.key_active');
+        $jia = Config::get('umi.key_positive');
+
+        $results = '';
+        if (strlen($str) == 0) return false;
+        for ($i = 0; $i < strlen($str); $i++) {
+            for ($j = 0; $j < strlen($jia); $j++) {
+                if ($str[$i] == $jia[$j]) {
+                    $results .= $yuan[$j];
+                    break;
+                }
+            }
+        }
+        return $results;
     }
 }

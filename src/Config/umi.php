@@ -100,7 +100,7 @@ return [
     /*
     |--------------------------------------------------------------------------
     | 设置数据表名字的列表 为不可编辑 不具备BREAD功能
-    | a list that does not have BREAD function
+    | a table's name list that does not have BREAD function
     |--------------------------------------------------------------------------
     */
 
@@ -136,4 +136,14 @@ return [
     */
 
     'primary_key' => 'id',
+
+    /*
+    |--------------------------------------------------------------------------
+    | 自定义加密, 解密
+    | custom encrypt and decrypt
+    |--------------------------------------------------------------------------
+    */
+
+    'key_active'   => 'abA!c1dB#ef2@Cg$h%iD_3jkl^E:m}4n.o{&F*p)5q(G-r[sH]6tuIv7w+Jxy8z9K0',
+    'key_positive' => 'zAy%0Bx+1C$wDv^Eu2-t3(F{sr&G4q_pH5*on6I)m:l7.Jk]j8K}ih@gf9#ed!cb[a'
 ];

@@ -6,6 +6,7 @@ use YM\Exceptions\UmiException;
 use YM\Models\Menu;
 use Exception;
 use YM\Models\User;
+use YM\Facades\Umi as YM;
 
 class umiMenusBuilder
 {
@@ -178,8 +179,19 @@ UMI;
         foreach ($jsonMenus as $jsonMenu) {
             $objMenu = $this->menus->getOneMenu($jsonMenu->id);
 
-            if (!$objMenu)
-                abort(404, "Could not find the menu that ID is $jsonMenu->id");
+            if (!$objMenu) {
+                YM::showMessage(
+                    "Could not find the menu that ID is $jsonMenu->id",
+                    "please manually check related data table",
+                    [
+                        'sticky'     => true,
+                        'class_name' => 'gritter-error'
+                    ]
+                );
+                break;
+                //abort(404, "Could not find the menu that ID is $jsonMenu->id");
+            }
+
 
             #输出自定义图标 (标题后面的小图标)
             #getting the custom icon which is behind the title
