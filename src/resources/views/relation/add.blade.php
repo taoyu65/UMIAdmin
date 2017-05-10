@@ -11,6 +11,20 @@
         </h1>
     </div>
 
+    <div class="alert alert-block alert-success">
+        <button type="button" class="close" data-dismiss="alert">
+            <i class="ace-icon fa fa-times"></i>
+        </button>
+
+        <p>
+            <strong>
+                <i class="ace-icon fa fa-check"></i>
+                Hands Up!
+            </strong>
+            You can turn off this function in config file.
+        </p>
+    </div>
+
     <div class="row">
         <div class="col-xs-6 col-sm-3 pricing-box">
             <div class="widget-box widget-color-red3">
@@ -43,7 +57,8 @@
 
                             <li>
                                 <i class="ace-icon fa fa-info-circle pink"></i>
-                                Example: article and comments - when an article is deleted then all the comments will be deleted
+                                Example: article and comments - when an article is deleted then<br>
+                                all the comments will be deleted<br><br>
                             </li>
                         </ul>
 
@@ -128,9 +143,9 @@
         </div>
 
         <div class="col-xs-6 col-sm-3 pricing-box">
-            <div class="widget-box widget-color-red3">
+            <div class="widget-box widget-color-blue">
                 <div class="widget-header">
-                    <h5 class="widget-title bigger lighter"><strong>Delete Interlock</strong></h5>
+                    <h5 class="widget-title bigger lighter"><strong>Self Check</strong></h5>
                 </div>
 
                 <div class="widget-body">
@@ -138,12 +153,28 @@
                         <ul class="list-unstyled spaced2">
                             <li>
                                 <i class="ace-icon fa fa-check green"></i>
-                                Delete action
+                                Action: Delete Read Edit Add
                             </li>
 
                             <li>
-                                <i class="ace-icon fa fa-check green"></i>
-                                After you delete one record all the records from other tables will be deleted according to the rules you make
+                                <i class="ace-icon fa fa-times red"></i>
+                                Extra operation: effect other tables
+                            </li>
+
+                            <li>
+                                <i class="ace-icon fa fa-times red"></i>
+                                Related other tables
+                            </li>
+
+                            <li>
+                                <i class="ace-icon fa fa-commenting blue"></i>
+                                Check the specific field to match the rule from this table before the action
+                            </li>
+
+                            <li>
+                                <i class="ace-icon fa fa-info-circle pink"></i>
+                                Example: article - Delete or update would be execute only when the article has been published
+                                <br><br>
                             </li>
                         </ul>
 
@@ -152,11 +183,20 @@
                             <span class="label label-xlg label-grey arrowed-in-right arrowed-in">
                                 Delete
                             </span>
+                            <span class="label label-xlg label-grey arrowed-in-right arrowed-in">
+                                Read
+                            </span>
+                            <span class="label label-xlg label-grey arrowed-in-right arrowed-in">
+                               Edit
+                            </span>
+                            <span class="label label-xlg label-grey arrowed-in-right arrowed-in">
+                                Add
+                            </span>
                         </div>
                     </div>
 
                     <div>
-                        <a href="#" class="btn btn-block btn-danger">
+                        <a href="#" class="btn btn-block btn-primary">
                             <i class="ace-icon fa fa-arrow-right bigger-110"></i>
                             <span>Next</span>
                         </a>
@@ -166,9 +206,9 @@
         </div>
 
         <div class="col-xs-6 col-sm-3 pricing-box">
-            <div class="widget-box widget-color-red3">
+            <div class="widget-box widget-color-green">
                 <div class="widget-header">
-                    <h5 class="widget-title bigger lighter"><strong>Delete Interlock</strong></h5>
+                    <h5 class="widget-title bigger lighter"><strong>Custom</strong></h5>
                 </div>
 
                 <div class="widget-body">
@@ -176,12 +216,28 @@
                         <ul class="list-unstyled spaced2">
                             <li>
                                 <i class="ace-icon fa fa-check green"></i>
-                                Delete action
+                                Action: Delete Read Edit Add
                             </li>
 
                             <li>
                                 <i class="ace-icon fa fa-check green"></i>
-                                After you delete one record all the records from other tables will be deleted according to the rules you make
+                                Extra operation: effect other tables
+                            </li>
+
+                            <li>
+                                <i class="ace-icon fa fa-check green"></i>
+                                Related other tables
+                            </li>
+
+                            <li>
+                                <i class="ace-icon fa fa-commenting blue"></i>
+                                Custom rules to achieve specific function, need to program your own code, custom rule name will be function name
+                            </li>
+
+                            <li>
+                                <i class="ace-icon fa fa-info-circle pink"></i>
+                                Example: After a article get deleted and the number of amount of that author's article will be subtract by one (article table and
+                                amount of article may not be the same table)
                             </li>
                         </ul>
 
@@ -190,11 +246,20 @@
                             <span class="label label-xlg label-grey arrowed-in-right arrowed-in">
                                 Delete
                             </span>
+                            <span class="label label-xlg label-grey arrowed-in-right arrowed-in">
+                                Read
+                            </span>
+                            <span class="label label-xlg label-grey arrowed-in-right arrowed-in">
+                               Edit
+                            </span>
+                            <span class="label label-xlg label-grey arrowed-in-right arrowed-in">
+                                Add
+                            </span>
                         </div>
                     </div>
 
                     <div>
-                        <a href="#" class="btn btn-block btn-danger">
+                        <a href="#" class="btn btn-block btn-success">
                             <i class="ace-icon fa fa-arrow-right bigger-110"></i>
                             <span>Next</span>
                         </a>
