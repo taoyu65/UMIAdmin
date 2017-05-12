@@ -52,26 +52,26 @@
 
                             <li>
                                 <i class="ace-icon fa fa-commenting blue"></i>
-                                After you delete one record all the records from other tables will be deleted according to the rules you make
+                                After you delete one record and all the records from another tables will be deleted according to the rules you make
+
                             </li>
 
                             <li>
                                 <i class="ace-icon fa fa-info-circle pink"></i>
-                                Example: article and comments - when an article is deleted then<br>
-                                all the comments will be deleted<br><br>
+                                Example: article and comments - when an article is deleted then all the comments will be deleted. Or delete a user and all the data from different table relative user will be deleted
                             </li>
                         </ul>
 
                         <hr />
                         <div class="price">
-                            <span class="label label-xlg label-grey arrowed-in-right arrowed-in">
+                           <span class="label label-white middle">
                                 Delete
                             </span>
                         </div>
                     </div>
 
                     <div>
-                        <a href="#" class="btn btn-block btn-danger">
+                        <a href="{{url_with_para('relationOpe/adding/interlock')}}" class="btn btn-block btn-danger">
                             <i class="ace-icon fa fa-arrow-right bigger-110"></i>
                             <span>Next</span>
                         </a>
@@ -106,34 +106,34 @@
 
                             <li>
                                 <i class="ace-icon fa fa-commenting blue"></i>
-                                Check other tables and match the rule before the activate the main action
+                                Check the field from another tables and the rules have to be matched before activate the main action (button available)
                             </li>
 
                             <li>
                                 <i class="ace-icon fa fa-info-circle pink"></i>
-                                Example: article and article's classification - before delete an article's classification you want to check if there is an article still use this classification
+                                Example: article and its classification - before deleting an article's classification you want to check if there any article still use this classification (prevent pointing a data does not exist)
                             </li>
                         </ul>
 
                         <hr />
                         <div class="price">
-                            <span class="label label-xlg label-grey arrowed-in-right arrowed-in">
+                           <span class="label label-white middle">
                                 Delete
                             </span>
-                            <span class="label label-xlg label-grey arrowed-in-right arrowed-in">
+                            <span class="label label-white middle">
                                 Read
                             </span>
-                            <span class="label label-xlg label-grey arrowed-in-right arrowed-in">
+                            <span class="label label-white middle">
                                Edit
                             </span>
-                            <span class="label label-xlg label-grey arrowed-in-right arrowed-in">
+                            <span class="label label-white middle">
                                 Add
                             </span>
                         </div>
                     </div>
 
                     <div>
-                        <a href="#" class="btn btn-block btn-warning">
+                        <a href="{{url_with_para('relationOpe/adding/exist')}}" class="btn btn-block btn-warning">
                             <i class="ace-icon fa fa-arrow-right bigger-110"></i>
                             <span>Next</span>
                         </a>
@@ -168,35 +168,34 @@
 
                             <li>
                                 <i class="ace-icon fa fa-commenting blue"></i>
-                                Check the specific field to match the rule from this table before the action
+                                Check the specific field to match the rule from the table itself(not other table) before the execute the main action
                             </li>
 
                             <li>
                                 <i class="ace-icon fa fa-info-circle pink"></i>
-                                Example: article - Delete or update would be execute only when the article has been published
-                                <br><br>
+                                Example: article - this table has a field is marked publish, for protecting un-publish article you can set rule that any action will be execute only when the article has been published
                             </li>
                         </ul>
 
                         <hr />
                         <div class="price">
-                            <span class="label label-xlg label-grey arrowed-in-right arrowed-in">
+                            <span class="label label-white middle">
                                 Delete
                             </span>
-                            <span class="label label-xlg label-grey arrowed-in-right arrowed-in">
+                            <span class="label label-white middle">
                                 Read
                             </span>
-                            <span class="label label-xlg label-grey arrowed-in-right arrowed-in">
+                            <span class="label label-white middle">
                                Edit
                             </span>
-                            <span class="label label-xlg label-grey arrowed-in-right arrowed-in">
+                            <span class="label label-white middle">
                                 Add
                             </span>
                         </div>
                     </div>
 
                     <div>
-                        <a href="#" class="btn btn-block btn-primary">
+                        <a href="{{url_with_para('relationOpe/adding/selfCheck')}}" class="btn btn-block btn-primary">
                             <i class="ace-icon fa fa-arrow-right bigger-110"></i>
                             <span>Next</span>
                         </a>
@@ -231,42 +230,41 @@
 
                             <li>
                                 <i class="ace-icon fa fa-commenting blue"></i>
-                                Custom rules to achieve specific function, need to program your own code, custom rule name will be function name
+                                Custom rules to achieve specific function, need to program your own code, custom rule name is the function name
                             </li>
 
                             <li>
                                 <i class="ace-icon fa fa-info-circle pink"></i>
-                                Example: After a article get deleted and the number of amount of that author's article will be subtract by one (article table and
-                                amount of article may not be the same table)
+                                Example: After a article get deleted and the number of amount of that author's article will be subtract by one (article table and amount of article may not be the same table)
                             </li>
                         </ul>
 
                         <hr />
                         <div class="price">
-                            <span class="label label-xlg label-grey arrowed-in-right arrowed-in">
+                            <span class="label label-white middle">
                                 Delete
                             </span>
-                            <span class="label label-xlg label-grey arrowed-in-right arrowed-in">
+                            <span class="label label-white middle">
                                 Read
                             </span>
-                            <span class="label label-xlg label-grey arrowed-in-right arrowed-in">
+                            <span class="label label-white middle">
                                Edit
                             </span>
-                            <span class="label label-xlg label-grey arrowed-in-right arrowed-in">
+                            <span class="label label-white middle">
                                 Add
                             </span>
                         </div>
                     </div>
 
                     <div>
-                        <a href="#" class="btn btn-block btn-success">
+                        <a href="{{url_with_para('relationOpe/adding/custom')}}" class="btn btn-block btn-success">
                             <i class="ace-icon fa fa-arrow-right bigger-110"></i>
                             <span>Next</span>
                         </a>
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     </div>
 
 @endsection

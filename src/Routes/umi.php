@@ -29,7 +29,7 @@ Route::group(['middleware' => 'umi.url.auth'], function () {
     #表关系操作
     #table relation operation
     #---------------------------------------------------------------
-    Route::get('relationOpe/adding', [
+    Route::get('relationOpe/adding/{type?}', [
        'uses'       => 'relationOperationController@adding',
        'as'         => 'relationAdding'
     ]);
