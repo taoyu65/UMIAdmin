@@ -14,7 +14,11 @@
     <!-- bootstrap & fontawesome -->
     <link rel="stylesheet" href="{{$path}}/css/bootstrap.min.css" />
     <link rel="stylesheet" href="{{$path}}/font-awesome/4.5.0/css/font-awesome.min.css" />
-    <!-- page specific plugin styles -->
+
+    <!-- plug in -->
+    <link rel="stylesheet" href="{{$path}}/css/jquery.gritter.min.css" />
+    <link rel="stylesheet" href="{{$path}}/css/chosen.min.css" />
+    <link rel="stylesheet" href="{{$path}}/css/select2.min.css" />
 
     <!-- text fonts -->
     <link rel="stylesheet" href="{{$path}}/css/fonts.googleapis.com.css" />
@@ -26,10 +30,8 @@
     <link rel="stylesheet" href="{{$path}}/css/ace-part2.min.css" class="ace-main-stylesheet" />
     <![endif]-->
 
-    <!-- ace plugin -->
     <link rel="stylesheet" href="{{$path}}/css/ace-skins.min.css" />
     <link rel="stylesheet" href="{{$path}}/css/ace-rtl.min.css" />
-    <link rel="stylesheet" href="{{$path}}/css/jquery.gritter.min.css" />
 
     <!--[if lte IE 9]>
     <link rel="stylesheet" href="{{$path}}/css/ace-ie.min.css" />
@@ -42,6 +44,7 @@
     <!--[if IE]>
     <script src="{{$path}}/js/jquery-1.11.3.min.js"></script>
     <![endif]-->
+
 </head>
 
 <body class="no-skin">

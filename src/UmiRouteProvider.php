@@ -98,7 +98,7 @@ class UmiRouteProvider extends ServiceProvider
             'namespace' => $this->namespace,
             'prefix' => 'api',
         ], function ($router) {
-            require base_path('routes/api.php');
+            require base_path($this->umi_path . 'Routes/api.php');
         });
     }
 }

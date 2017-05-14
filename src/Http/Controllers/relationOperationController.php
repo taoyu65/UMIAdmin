@@ -2,17 +2,21 @@
 
 namespace YM\Http\Controllers;
 
-use Illuminate\Routing\Controller;
+use YM\Models\Table;
+use YM\Models\UmiBase;
 
-class relationOperationController extends Controller
+class relationOperationController extends UmiBase
 {
     public function adding($type = 'all')
     {
+        $table = new Table();
+        $tableNames = $table->getTableNameAndIdList();
+
         switch ($type) {
             case 'all':
                 return view('umi::relation.guide');
             case 'interlock':
-                return view('umi::relation.interlock');
+                return view('umi::relation.interlock', compact('tableNames'));
             case 'exist':
                 return view('umi::relation.exist');
             case 'custom':

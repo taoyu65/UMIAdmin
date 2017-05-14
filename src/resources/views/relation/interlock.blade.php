@@ -1,6 +1,10 @@
 @extends('umi::layouts.master')
 
 @section('content')
+
+    <?php $assetPath = config('umi.assets_path') ?>
+    <?php $path = $assetPath . '/ace' ?>
+
     <div class="page-header">
         <h1>
             Relation Operation
@@ -27,183 +31,21 @@
         </p>
     </div>
 
-    <form class="form-horizontal" id="validation-form" method="post">
-        <div class="form-group">
-            <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="email">Email Address:</label>
+    <form class="form-horizontal" id="validation-form" method="get">
 
-            <div class="col-xs-12 col-sm-9">
-                <div class="clearfix">
-                    <input type="email" name="email" id="email" class="col-xs-12 col-sm-6" />
-                </div>
-            </div>
-        </div>
-
-        <div class="space-2"></div>
+        <input type="hidden" name="rule_name" value="interlock">
+        <input type="hidden" name="operation_type" value="delete">
+        <input type="hidden" name="is_extra_operation" value="1">
 
         <div class="form-group">
-            <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="password">Password:</label>
+            <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="activeTable">Active Table</label>
 
-            <div class="col-xs-12 col-sm-9">
-                <div class="clearfix">
-                    <input type="password" name="password" id="password" class="col-xs-12 col-sm-4" />
-                </div>
-            </div>
-        </div>
-
-        <div class="space-2"></div>
-
-        <div class="form-group">
-            <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="password2">Confirm Password:</label>
-
-            <div class="col-xs-12 col-sm-9">
-                <div class="clearfix">
-                    <input type="password" name="password2" id="password2" class="col-xs-12 col-sm-4" />
-                </div>
-            </div>
-        </div>
-
-        <div class="hr hr-dotted"></div>
-
-        <div class="form-group">
-            <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="name">Company Name:</label>
-
-            <div class="col-xs-12 col-sm-9">
-                <div class="clearfix">
-                    <input type="text" id="name" name="name" class="col-xs-12 col-sm-5" />
-                </div>
-            </div>
-        </div>
-
-        <div class="space-2"></div>
-
-        <div class="form-group">
-            <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="phone">Phone Number:</label>
-
-            <div class="col-xs-12 col-sm-9">
-                <div class="input-group">
-																		<span class="input-group-addon">
-																			<i class="ace-icon fa fa-phone"></i>
-																		</span>
-
-                    <input type="tel" id="phone" name="phone" />
-                </div>
-            </div>
-        </div>
-
-        <div class="space-2"></div>
-
-        <div class="form-group">
-            <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="url">Company URL:</label>
-
-            <div class="col-xs-12 col-sm-9">
-                <div class="clearfix">
-                    <input type="url" id="url" name="url" class="col-xs-12 col-sm-8" />
-                </div>
-            </div>
-        </div>
-
-        <div class="hr hr-dotted"></div>
-
-        <div class="form-group">
-            <label class="control-label col-xs-12 col-sm-3 no-padding-right">Subscribe to</label>
-
-            <div class="col-xs-12 col-sm-9">
-                <div>
-                    <label>
-                        <input name="subscription" value="1" type="checkbox" class="ace" />
-                        <span class="lbl"> Latest news and announcements</span>
-                    </label>
-                </div>
-
-                <div>
-                    <label>
-                        <input name="subscription" value="2" type="checkbox" class="ace" />
-                        <span class="lbl"> Product offers and discounts</span>
-                    </label>
-                </div>
-            </div>
-        </div>
-
-        <div class="space-2"></div>
-
-        <div class="form-group">
-            <label class="control-label col-xs-12 col-sm-3 no-padding-right">Gender</label>
-
-            <div class="col-xs-12 col-sm-9">
-                <div>
-                    <label class="line-height-1 blue">
-                        <input name="gender" value="1" type="radio" class="ace" />
-                        <span class="lbl"> Male</span>
-                    </label>
-                </div>
-
-                <div>
-                    <label class="line-height-1 blue">
-                        <input name="gender" value="2" type="radio" class="ace" />
-                        <span class="lbl"> Female</span>
-                    </label>
-                </div>
-            </div>
-        </div>
-
-        <div class="hr hr-dotted"></div>
-
-        <div class="form-group">
-            <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="state">State</label>
-
-            <div class="col-xs-12 col-sm-9">
-                <select id="state" name="state" class="select2" data-placeholder="Click to Choose...">
+            <div class="col-xs-12 col-sm-4">
+                <select id="activeTable" name="activeTable" class="chosen-select form-control" data-placeholder="Click to Choose...">
                     <option value="">&nbsp;</option>
-                    <option value="AL">Alabama</option>
-                    <option value="AK">Alaska</option>
-                    <option value="AZ">Arizona</option>
-                    <option value="AR">Arkansas</option>
-                    <option value="CA">California</option>
-                    <option value="CO">Colorado</option>
-                    <option value="CT">Connecticut</option>
-                    <option value="DE">Delaware</option>
-                    <option value="FL">Florida</option>
-                    <option value="GA">Georgia</option>
-                    <option value="HI">Hawaii</option>
-                    <option value="ID">Idaho</option>
-                    <option value="IL">Illinois</option>
-                    <option value="IN">Indiana</option>
-                    <option value="IA">Iowa</option>
-                    <option value="KS">Kansas</option>
-                    <option value="KY">Kentucky</option>
-                    <option value="LA">Louisiana</option>
-                    <option value="ME">Maine</option>
-                    <option value="MD">Maryland</option>
-                    <option value="MA">Massachusetts</option>
-                    <option value="MI">Michigan</option>
-                    <option value="MN">Minnesota</option>
-                    <option value="MS">Mississippi</option>
-                    <option value="MO">Missouri</option>
-                    <option value="MT">Montana</option>
-                    <option value="NE">Nebraska</option>
-                    <option value="NV">Nevada</option>
-                    <option value="NH">New Hampshire</option>
-                    <option value="NJ">New Jersey</option>
-                    <option value="NM">New Mexico</option>
-                    <option value="NY">New York</option>
-                    <option value="NC">North Carolina</option>
-                    <option value="ND">North Dakota</option>
-                    <option value="OH">Ohio</option>
-                    <option value="OK">Oklahoma</option>
-                    <option value="OR">Oregon</option>
-                    <option value="PA">Pennsylvania</option>
-                    <option value="RI">Rhode Island</option>
-                    <option value="SC">South Carolina</option>
-                    <option value="SD">South Dakota</option>
-                    <option value="TN">Tennessee</option>
-                    <option value="TX">Texas</option>
-                    <option value="UT">Utah</option>
-                    <option value="VT">Vermont</option>
-                    <option value="VA">Virginia</option>
-                    <option value="WA">Washington</option>
-                    <option value="WV">West Virginia</option>
-                    <option value="WI">Wisconsin</option>
-                    <option value="WY">Wyoming</option>
+                    @foreach($tableNames as $tableName => $tableId)
+                        <option value="{{$tableId}}">{{$tableName}}</option>
+                    @endforeach
                 </select>
             </div>
         </div>
@@ -211,22 +53,18 @@
         <div class="space-2"></div>
 
         <div class="form-group">
-            <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="platform">Platform</label>
+            <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="responseTable">Response Table</label>
 
             <div class="col-xs-12 col-sm-9">
                 <div class="clearfix">
-                    <select class="input-medium" id="platform" name="platform">
-                        <option value="">------------------</option>
-                        <option value="linux">Linux</option>
-                        <option value="windows">Windows</option>
-                        <option value="mac">Mac OS</option>
-                        <option value="ios">iOS</option>
-                        <option value="android">Android</option>
+                    <select class="input-medium" id="responseTable" name="responseTable">
+                        <option value="">select active table</option>
                     </select>
                 </div>
             </div>
         </div>
 
+        <div class="hr hr-dotted"></div>
         <div class="space-2"></div>
 
         <div class="form-group">
@@ -249,94 +87,72 @@
                 </label>
             </div>
         </div>
-
-        <button class="btn btn-success btn-next" type="submit">
+        <button class="btn btn-success btn-sm btn-next" type="submit">
             Add
             <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
         </button>
-
     </form>
 
-    <?php $assetPath = config('umi.assets_path') ?>
-    <?php $path = $assetPath . '/ace' ?>
+
     <script src="{{$path}}/js/jquery.validate.min.js"></script>
+    <script src="{{$path}}/js/chosen.jquery.min.js"></script>
+    <script src="{{$assetPath}}/js/jquery.form.js"></script>
+
     <script type="text/javascript">
+
         jQuery(function($) {
+            if(!ace.vars['touch']) {
+                $('.chosen-select').chosen({allow_single_deselect:true});
+
+                //resize the chosen on window resize
+                $(window)
+                    .off('resize.chosen')
+                    .on('resize.chosen', function() {
+                        $('.chosen-select').each(function() {
+                            var $this = $(this);
+                            $this.next().css({'width': $this.parent().width()});
+                        })
+                    }).trigger('resize.chosen');
+                //resize chosen on sidebar collapse/expand
+                /*$(document).on('settings.ace.chosen', function(e, event_name, event_val) {
+                    if(event_name != 'sidebar_collapsed') return;
+                    $('.chosen-select').each(function() {
+                        var $this = $(this);
+                        $this.next().css({'width': $this.parent().width()});
+                    })
+                });*/
+            }
+
+            //数据验证
+            //validation
             $('#validation-form').validate({
                 errorElement: 'div',
                 errorClass: 'help-block',
                 focusInvalid: false,
                 ignore: "",
                 rules: {
-                    email: {
-                        required: true,
-                        email:true
-                    },
-                    password: {
-                        required: true,
-                        minlength: 5
-                    },
-                    password2: {
-                        required: true,
-                        minlength: 5,
-                        equalTo: "#password"
-                    },
-                    name: {
+                    activeTable: {
                         required: true
                     },
-                    phone: {
-                        required: true,
-                        phone: 'required'
-                    },
-                    url: {
-                        required: true,
-                        url: true
-                    },
-                    comment: {
+                    responseTable: {
                         required: true
-                    },
-                    state: {
-                        required: true
-                    },
-                    platform: {
-                        required: true
-                    },
-                    subscription: {
-                        required: true
-                    },
-                    gender: {
-                        required: true,
                     },
                     agree: {
                         required: true,
                     }
                 },
-
                 messages: {
-                    email: {
-                        required: "Please provide a valid email.",
-                        email: "Please provide a valid email."
-                    },
-                    password: {
-                        required: "Please specify a password.",
-                        minlength: "Please specify a secure password."
-                    },
-                    state: "Please choose state",
-                    subscription: "Please choose at least one option",
-                    gender: "Please choose gender",
+                    activeTable: "Please choose active table",
+                    responseTable: "Please choose response table",
                     agree: "Please accept our policy"
                 },
-
-
                 highlight: function (e) {
                     $(e).closest('.form-group').removeClass('has-info').addClass('has-error');
                 },
-
                 success: function (e) {
                     $(e).closest('.form-group').removeClass('has-error');//.addClass('has-info');
                     $(e).remove();
                 },
-
                 errorPlacement: function (error, element) {
                     if(element.is('input[type=checkbox]') || element.is('input[type=radio]')) {
                         var controls = element.closest('div[class*="col-"]');
@@ -351,11 +167,49 @@
                     }
                     else error.insertAfter(element.parent());
                 },
-
                 submitHandler: function (form) {
+                    alert( "submitted!" );
                 },
                 invalidHandler: function (form) {
                 }
+            });
+
+            //获取主动表的二级联动数据
+            //get active table drop down list
+            $('#activeTable').change(function () {
+                if ($('#activeTable').val() === ''){
+                    return false;
+                }
+
+                var tableId = $(this).children('option:selected').val();
+
+                //加载符号
+                //showing loading icon
+                $('#responseTable').after("<i id='responseLoading' class='ace-icon fa fa-spinner fa-spin orange bigger-125'></i>");
+
+                //获取数据
+                //get data
+                var table = $('#activeTable').find("option:selected").text();
+                var url = "{{url('api/fields')}}" + '/' +table;
+                $.ajax({
+                    type: 'get',
+                    url: url,
+                    dataType: 'json',
+                    success: function (data) {
+                        //填充数据
+                        //fill in data
+                        $('#responseTable option').remove();
+                        $('#responseTable').next().remove();
+                        $.each(data, function (name, value) {
+                            $('#responseTable').append("<option value='" + value + "'>" + value + "</option>");
+                        });
+                    },
+                    error: function () {
+                        layer.alert('loading data was wrong!', function (){
+                            window.history.back();
+                        });
+                    }
+                });
             });
         });
     </script>

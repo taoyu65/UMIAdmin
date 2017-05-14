@@ -50,4 +50,13 @@ class Table extends UmiBase
             return $this->cachedTable;
         return self::all();
     }
+
+    #仅仅获取id和table_name的字段 以键值对返回
+    #only get id and table_name return as key=>value
+    public function getTableNameAndIdList()
+    {
+        return $this->getAllTable()->map(function ($value) {
+            return [$value->table_name => $value->id];
+        })->collapse()->toArray();
+    }
 }

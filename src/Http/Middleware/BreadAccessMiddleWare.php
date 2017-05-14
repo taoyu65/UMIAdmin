@@ -3,7 +3,6 @@
 namespace YM\Http\Middleware;
 
 use Closure;
-use YM\Exceptions\UmiException;
 use YM\umiAuth\umiAuth;
 
 class BreadAccessMiddleware
