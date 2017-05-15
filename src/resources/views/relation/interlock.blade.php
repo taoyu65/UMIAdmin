@@ -31,15 +31,54 @@
         </p>
     </div>
 
+    <div class="col-xs-12">
+        <div class="widget-box">
+            <div class="widget-header">
+                <h4 class="widget-title">
+                    Tooltips
+                    <small>Example of interlock delete</small>
+                </h4>
+                <div class="widget-toolbar">
+                    <a href="#" data-action="collapse">
+                        <i class="ace-icon fa fa-chevron-up"></i>
+                    </a>
+
+                    <a href="#" data-action="close">
+                        <i class="ace-icon fa fa-times"></i>
+                    </a>
+                </div>
+            </div>
+
+            <div class="widget-body">
+                <div class="widget-main">
+                    <p class="muted">
+                        user table has fields id, user_name<br>
+                        article table has fields id, user_id, article_title, content<br>
+                        Now you want when delete a user and all the user's article get deleted as well, you can set
+                        active table: user,
+                        active field: id,
+                        response table: article,
+                        response filed: user_id (normally is foreign key)<br>
+                        <span class="red2">
+                            Advantage: delete action will follow the rule you make (no long active field match response field). The rule like
+                            when delete record from active table then all the records will be deleted base on response field match custom rule
+                        </span>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>&nbsp;
+    <div class="hr hr-dotted"></div>
+
     <form class="form-horizontal" id="validation-form" method="get">
 
         <input type="hidden" name="rule_name" value="interlock">
         <input type="hidden" name="operation_type" value="delete">
         <input type="hidden" name="is_extra_operation" value="1">
 
+        {{--active table--}}
         <div class="form-group">
-            <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="activeTable">Active Table</label>
-
+            <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="activeTable">Active Table</label>
             <div class="col-xs-12 col-sm-4">
                 <select id="activeTable" name="activeTable" class="chosen-select form-control" data-placeholder="Click to Choose...">
                     <option value="">&nbsp;</option>
@@ -48,19 +87,106 @@
                     @endforeach
                 </select>
             </div>
+            <i class="fa fa-question-circle fa-lg popover-info blue" aria-hidden="true" data-rel="popover"
+               data-trigger="hover" style="transform: translate(0,4px);" data-placement="auto right"
+               title="Active Table"
+               data-content="The record that you are going to delete from which table"></i>
         </div>
 
         <div class="space-2"></div>
 
         <div class="form-group">
-            <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="responseTable">Response Table</label>
-
-            <div class="col-xs-12 col-sm-9">
+            <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="responseTable">Active Field </label>
+            <div class="col-xs-12 col-sm-4">
                 <div class="clearfix">
-                    <select class="input-medium" id="responseTable" name="responseTable">
+                    <select class="form-control" id="activeField" name="activeField">
                         <option value="">select active table</option>
                     </select>
                 </div>
+            </div>
+            <i class="fa fa-question-circle fa-lg popover-info blue" aria-hidden="true" data-rel="popover"
+               data-trigger="hover" style="transform: translate(0,4px);" data-placement="auto right"
+               title="Active Field"
+               data-content="The record that you are going to delete from which table"></i>
+        </div>
+
+        <div class="hr hr-dotted"></div>
+        <div class="space-2"></div>
+
+        {{--response table--}}
+        <div class="form-group">
+            <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="responseTable">Response Table</label>
+            <div class="col-xs-12 col-sm-4">
+                <select id="responseTable" name="responseTable" class="chosen-select form-control" data-placeholder="Click to Choose...">
+                    <option value="">&nbsp;</option>
+                    @foreach($tableNames as $tableName => $tableId)
+                        <option value="{{$tableId}}">{{$tableName}}</option>
+                    @endforeach
+                </select>
+            </div>
+            <i class="fa fa-question-circle fa-lg popover-info blue" aria-hidden="true" data-rel="popover"
+               data-trigger="hover" style="transform: translate(0,4px);" data-placement="auto right"
+               title="Response Table"
+               data-content="Which table will be related by deleting of active table's record"></i>
+        </div>
+
+        <div class="space-2"></div>
+
+        <div class="form-group">
+            <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="responseField">Response Field</label>
+            <div class="col-xs-12 col-sm-4">
+                <div class="clearfix">
+                    <select class="form-control" id="responseField" name="responseField">
+                        <option value="">select response table</option>
+                    </select>
+                </div>
+            </div>
+            <i class="fa fa-question-circle fa-lg popover-info blue" aria-hidden="true" data-rel="popover"
+               data-trigger="hover" style="transform: translate(0,4px);" data-placement="auto right"
+               title="Response Field"
+               data-content="This field will match active filed to achieve deletion of relation"></i>
+        </div>
+
+        <div class="hr hr-dotted"></div>
+        <div class="space-2"></div>
+
+        {{--advantage--}}
+        <div class="form-group">
+            <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="detail">Advantage</label>
+            <div class="col-xs-4">
+                <label>
+                    <input name="switch-field-1" id="advantageSwitch" class="ace ace-switch ace-switch-7" type="checkbox" />
+                    <span class="lbl"></span>
+                </label>
+            </div>
+            <i class="fa fa-question-circle fa-lg popover-error red2" aria-hidden="true" data-rel="popover"
+               data-trigger="hover" style="transform: translate(0,4px);" data-placement="auto right"
+               title="Custom Rule"
+               data-content="Set the rule to match active field for deleting of records"></i>
+        </div>
+
+        <div id="advantage">
+            <div class="form-group">
+                <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="operation">Operation</label>
+                <div class="col-xs-12 col-sm-4">
+                    <div class="clearfix">
+                        <select class="form-control" id="operation" name="operation">
+                            @foreach($operationCharacter as $item)
+                                <option value="{{$item}}">{{$item}}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="targetValue">Target Value</label>
+                <div class="col-xs-12 col-sm-4">
+                    <input class="form-control" type="text" name="targetValue" id="targetValue">
+                </div>
+                <i class="fa fa-question-circle fa-lg popover-error red2" aria-hidden="true" data-rel="popover"
+                   data-trigger="hover" style="transform: translate(0,4px);" data-placement="auto right"
+                   title="Warning"
+                   data-content="Please set correct type of value to match response field. TRUE:1 FALSE:0"></i>
             </div>
         </div>
 
@@ -68,31 +194,19 @@
         <div class="space-2"></div>
 
         <div class="form-group">
-            <label class="control-label col-xs-12 col-sm-3 no-padding-right" for="comment">Comment</label>
-
-            <div class="col-xs-12 col-sm-9">
-                <div class="clearfix">
-                    <textarea class="input-xlarge" name="comment" id="comment"></textarea>
-                </div>
+            <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="detail">Detail</label>
+            <div class="col-xs-12 col-sm-4">
+                <textarea class="form-control" name="detail" id="detail"></textarea>
             </div>
         </div>
 
         <div class="space-8"></div>
 
-        <div class="form-group">
-            <div class="col-xs-12 col-sm-4 col-sm-offset-3">
-                <label>
-                    <input name="agree" id="agree" type="checkbox" class="ace" />
-                    <span class="lbl"> I accept the policy</span>
-                </label>
-            </div>
-        </div>
         <button class="btn btn-success btn-sm btn-next" type="submit">
             Add
-            <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
+            <i class="ace-icon fa fa-plus"></i>
         </button>
     </form>
-
 
     <script src="{{$path}}/js/jquery.validate.min.js"></script>
     <script src="{{$path}}/js/chosen.jquery.min.js"></script>
@@ -101,10 +215,26 @@
     <script type="text/javascript">
 
         jQuery(function($) {
+            $('[data-rel=popover]').popover({
+                html:false,
+            });
+
+            //
+            //
+            $('#advantageSwitch').click(function () {
+                if ($('#advantageSwitch').is(":checked")) {
+                    $('#activeField').attr('disabled', 'disabled');
+                    $('#activeField').val(0);
+                } else {
+                    $('#activeField').removeAttr('disabled');
+                }
+            });
+
+
+            //自动调整下拉框大小
+            //resize the chosen on window resize
             if(!ace.vars['touch']) {
                 $('.chosen-select').chosen({allow_single_deselect:true});
-
-                //resize the chosen on window resize
                 $(window)
                     .off('resize.chosen')
                     .on('resize.chosen', function() {
@@ -185,7 +315,7 @@
 
                 //加载符号
                 //showing loading icon
-                $('#responseTable').after("<i id='responseLoading' class='ace-icon fa fa-spinner fa-spin orange bigger-125'></i>");
+                $('#activeField').after("<i id='responseLoading' class='ace-icon fa fa-spinner fa-spin orange bigger-125'></i>");
 
                 //获取数据
                 //get data
@@ -198,10 +328,48 @@
                     success: function (data) {
                         //填充数据
                         //fill in data
-                        $('#responseTable option').remove();
-                        $('#responseTable').next().remove();
+                        $('#activeField option').remove();
+                        $('#activeField').next().remove();
                         $.each(data, function (name, value) {
-                            $('#responseTable').append("<option value='" + value + "'>" + value + "</option>");
+                            $('#activeField').append("<option value='" + value + "'>" + value + "</option>");
+                        });
+                    },
+                    error: function () {
+                        layer.alert('loading data was wrong!', function (){
+                            window.history.back();
+                        });
+                    }
+                });
+            });
+
+            //获取被动表的二级联动数据
+            //get response table drop down list
+            $('#responseTable').change(function () {
+                if ($('#responseTable').val() === ''){
+                    return false;
+                }
+
+                var tableId = $(this).children('option:selected').val();
+
+                //加载符号
+                //showing loading icon
+                $('#responseField').after("<i id='responseLoading' class='ace-icon fa fa-spinner fa-spin orange bigger-125'></i>");
+
+                //获取数据
+                //get data
+                var table = $('#responseTable').find("option:selected").text();
+                var url = "{{url('api/fields')}}" + '/' +table;
+                $.ajax({
+                    type: 'get',
+                    url: url,
+                    dataType: 'json',
+                    success: function (data) {
+                        //填充数据
+                        //fill in data
+                        $('#responseField option').remove();
+                        $('#responseField').next().remove();
+                        $.each(data, function (name, value) {
+                            $('#responseField').append("<option value='" + value + "'>" + value + "</option>");
                         });
                     },
                     error: function () {

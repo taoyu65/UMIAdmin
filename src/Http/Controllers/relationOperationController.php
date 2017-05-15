@@ -2,6 +2,7 @@
 
 namespace YM\Http\Controllers;
 
+use Illuminate\Support\Facades\Config;
 use YM\Models\Table;
 use YM\Models\UmiBase;
 
@@ -12,11 +13,13 @@ class relationOperationController extends UmiBase
         $table = new Table();
         $tableNames = $table->getTableNameAndIdList();
 
+        $operationCharacter = Config::get('umiEnum.operational_character');
+
         switch ($type) {
             case 'all':
                 return view('umi::relation.guide');
             case 'interlock':
-                return view('umi::relation.interlock', compact('tableNames'));
+                return view('umi::relation.interlock', compact('tableNames', 'operationCharacter'));
             case 'exist':
                 return view('umi::relation.exist');
             case 'custom':

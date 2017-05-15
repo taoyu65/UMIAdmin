@@ -21,6 +21,9 @@ class UmiServiceProvider extends ServiceProvider
         $this->mergeConfigFrom(
             __DIR__ . '/Config/umi.php', 'umi'
         );
+        $this->mergeConfigFrom(
+            __DIR__ . '/Config/umiEnum.php', 'umiEnum'
+        );
 
         $this->app->singleton('umi', function () {
             return new Umi();
