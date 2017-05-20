@@ -230,7 +230,7 @@
 
                             <li>
                                 <i class="ace-icon fa fa-commenting blue"></i>
-                                Custom rules to achieve specific function, need to program your own code, custom rule name is the function name
+                                Custom rules to achieve specific function, need to program your own code, rule's name is the function name
                             </li>
 
                             <li>

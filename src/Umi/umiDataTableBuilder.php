@@ -458,8 +458,9 @@ UMI;
     private function ButtonSmallDeleteHtml($recordId, $activeFieldValue, $disable = '')
     {
         $activeFieldValue = base64_encode($activeFieldValue);
+        $tableName = $this->tableName;//Ym::umiEncrypt($this->tableName);
         $html = <<<UMI
-        <button class="$this->BtnCssSmallDelete $disable" $disable onclick="umiTableDelete('$this->tableName', '$recordId', '$activeFieldValue');">
+        <button class="$this->BtnCssSmallDelete $disable" $disable onclick="umiTableDelete('$tableName', '$recordId', '$activeFieldValue');">
             <i class="ace-icon fa fa-trash-o bigger-120"></i>
         </button>
 UMI;

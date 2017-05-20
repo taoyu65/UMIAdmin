@@ -35,7 +35,7 @@ Route::group(['middleware' => 'umi.url.auth'], function () {
     ]);
     Route::post('relationOpe/{table}/add', [
         'middleware'=> ['umi.bread.access:add'],
-        'uses'      => 'relationOperationController@add',
+        'uses'      => 'relationOperationController@operationAdd',
     ]);
     #---------------------------------------------------------------
 

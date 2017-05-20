@@ -2,12 +2,15 @@
 
 namespace YM\Models;
 
+use Illuminate\Support\Facades\DB;
+
 class TableRelationOperation extends UmiBase
 {
     protected $table = 'umi_table_relation_operation';
 
     protected $openCache = true;
     protected $cacheAllRecord = true;
+    public $timestamps = true;
 
     public function getTableRelationOperationByTableId($tableId)
     {
@@ -31,8 +34,8 @@ class TableRelationOperation extends UmiBase
             ->get();
     }
 
-    #f
-    #
+    #获取规则 - 执行操作以前的提示
+    #get rules which are the confirmation before any action
     public function getRulesForConfirmation($tableId)
     {
         if ($this->openCache)
@@ -43,5 +46,16 @@ class TableRelationOperation extends UmiBase
         return self::where('active_table_id', $tableId)
             ->orderBy('is_extra_operation')
             ->get();
+    }
+
+    public function add($compact)
+    {
+        $TRO = new self();
+        foreach ($compact as $item => $value) {
+            $TRO->$item = $value;
+        }
+
+        return $TRO->save();
+        //DB::table($this->table)->insert($compact);
     }
 }

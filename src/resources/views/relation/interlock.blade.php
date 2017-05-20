@@ -67,11 +67,12 @@
                 </div>
             </div>
         </div>
-    </div>&nbsp;
+    </div>&nbsp
     <div class="hr hr-dotted"></div>
 
-    <form class="form-horizontal" id="validation-form" method="get">
+    <form class="form-horizontal" id="validation-form" method="post" action="{{url('relationOpe') . '/' . $currentTableName . '/add'}}">
 
+        {!! csrf_field() !!}
         <input type="hidden" name="rule_name" value="interlock">
         <input type="hidden" name="operation_type" value="delete">
         <input type="hidden" name="is_extra_operation" value="1">
@@ -165,7 +166,7 @@
                data-content="Set the rule to match active field for deleting of records"></i>
         </div>
 
-        <div id="advantage">
+        <div id="advantage" hidden="hidden">
             <div class="form-group">
                 <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="operation">Operation</label>
                 <div class="col-xs-12 col-sm-4">
@@ -181,7 +182,9 @@
             <div class="form-group">
                 <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="targetValue">Target Value</label>
                 <div class="col-xs-12 col-sm-4">
-                    <input class="form-control" type="text" name="targetValue" id="targetValue">
+                    <div class="clearfix">
+                        <input class="form-control" type="text" name="targetValue" id="targetValue" disabled="disabled">
+                    </div>
                 </div>
                 <i class="fa fa-question-circle fa-lg popover-error red2" aria-hidden="true" data-rel="popover"
                    data-trigger="hover" style="transform: translate(0,4px);" data-placement="auto right"
@@ -206,6 +209,11 @@
             Add
             <i class="ace-icon fa fa-plus"></i>
         </button>
+        &nbsp;&nbsp;
+        <button class="btn btn-primary btn-sm btn-next" type="button" id="back">
+            Back
+            <i class="ace-icon fa fa-arrow-left"></i>
+        </button>
     </form>
 
     <script src="{{$path}}/js/jquery.validate.min.js"></script>
@@ -213,23 +221,42 @@
     <script src="{{$assetPath}}/js/jquery.form.js"></script>
 
     <script type="text/javascript">
-
         jQuery(function($) {
             $('[data-rel=popover]').popover({
                 html:false,
             });
 
-            //
-            //
+            $('#back').click(function () {
+                window.history.back();
+            });
+
+            //如果高级模式加载的时候开启 则初始化active field 为不可用
+            //when web page is loading with advantage function activated then disabled active field.
+            if ($('#advantageSwitch').is(":checked")) {
+                $('#activeField').attr('disabled', 'disabled');
+                $('#activeField option').remove();
+                $('#activeField').val(0);
+                //show advantage
+                $('#advantage').removeAttr('hidden');
+                $('#targetValue').removeAttr('disabled');
+            }
+
+            //高级模式打开后 active field将不可用
+            //advantage model, active field will be locked
             $('#advantageSwitch').click(function () {
                 if ($('#advantageSwitch').is(":checked")) {
                     $('#activeField').attr('disabled', 'disabled');
-                    $('#activeField').val(0);
+                    $('#activeField option').remove();
+                    //show advantage
+                    $('#advantage').removeAttr('hidden');
+                    $('#targetValue').removeAttr('disabled');
                 } else {
                     $('#activeField').removeAttr('disabled');
+                    //show advantage
+                    $('#advantage').attr('hidden', 'hidden');
+                    $('#targetValue').attr('disabled', 'disabled');
                 }
             });
-
 
             //自动调整下拉框大小
             //resize the chosen on window resize
@@ -264,17 +291,25 @@
                     activeTable: {
                         required: true
                     },
+                    activeField: {
+                        required: true
+                    },
                     responseTable: {
                         required: true
                     },
-                    agree: {
+                    responseField: {
+                        required: true
+                    },
+                    targetValue: {
                         required: true,
                     }
                 },
                 messages: {
                     activeTable: "Please choose active table",
+                    activeField: "please choose active field",
                     responseTable: "Please choose response table",
-                    agree: "Please accept our policy"
+                    responseField: "please choose response field",
+                    targetValue: "please input a value"
                 },
                 highlight: function (e) {
                     $(e).closest('.form-group').removeClass('has-info').addClass('has-error');
@@ -298,7 +333,7 @@
                     else error.insertAfter(element.parent());
                 },
                 submitHandler: function (form) {
-                    alert( "submitted!" );
+                    form.submit();
                 },
                 invalidHandler: function (form) {
                 }
@@ -308,6 +343,10 @@
             //get active table drop down list
             $('#activeTable').change(function () {
                 if ($('#activeTable').val() === ''){
+                    return false;
+                }
+
+                if ($('#advantageSwitch').is(":checked")) {
                     return false;
                 }
 
