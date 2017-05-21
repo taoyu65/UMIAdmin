@@ -27,7 +27,8 @@
                 <i class="ace-icon fa fa-check"></i>
                 Hands Up!
             </strong>
-            You can turn off this function in config file.
+            You can turn off this function (relation operation) in config file.<br>
+            <span class="red2"><strong>Function Description: When the rule is matched, the extra action will be completed</strong></span>
         </p>
     </div>
 
@@ -36,7 +37,7 @@
             <div class="widget-header">
                 <h4 class="widget-title">
                     Tooltips
-                    <small>Example of Custom delete</small>
+                    <small>Example of Custom operation</small>
                 </h4>
                 <div class="widget-toolbar">
                     <a href="#" data-action="collapse">
@@ -52,9 +53,13 @@
             <div class="widget-body">
                 <div class="widget-main">
                     <p class="muted">
+                        <span class="red">
+                            Warning: The custom rule name will be the function name which you will manually program with
+                        </span><br>
                         You can customize any rule, set the correct table and field that can receive the right data for special operation <br>
-                        <span class="red2">
-                            Advantage: The custom rule name will be the function name which you will manually program with
+                        <span class="blue">
+                            Advantage: delete action will follow the rule you make (no long active field match response field). The rule such as
+                            when delete record from active table then all the records will be deleted base on response field match custom rule
                         </span>
                     </p>
                 </div>
@@ -66,8 +71,8 @@
     <form class="form-horizontal" id="validation-form" method="post" action="{{url('relationOpe') . '/' . $currentTableName . '/add'}}">
 
         {!! csrf_field() !!}
-        <input type="hidden" name="rule_name" value="interlock">
-        <input type="hidden" name="operation_type" value="delete">
+        <input type="hidden" name="rule_name" value="custom">
+        {{--<input type="hidden" name="operation_type" value="delete">--}}
         <input type="hidden" name="is_extra_operation" value="1">
 
         {{--custom rule name--}}
@@ -82,6 +87,23 @@
                data-trigger="hover" style="transform: translate(0,4px);" data-placement="auto right"
                title="Rule Name"
                data-content="Will be method name you are going to program, has to be valid function name"></i>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="operationType">Action</label>
+            <div class="col-xs-12 col-sm-4">
+                <div class="clearfix">
+                    <select class="form-control" id="operationType" name="operationType">
+                            <option value="">Please select an operation type</option>
+                        @foreach($actions as $item)
+                            <option value="{{$item}}">{{$item}}</option>
+                        @endforeach
+                    </select>
+                </div>
+            </div>
+            <i class="fa fa-question-circle fa-lg popover-info blue" aria-hidden="true" data-rel="popover"
+               data-trigger="hover" style="transform: translate(0,4px);" data-placement="auto right"
+               title="Operation Type"
+               data-content="What action will trigger the relation operation"></i>
         </div>
 
         <div class="hr hr-dotted"></div>
@@ -101,7 +123,7 @@
             <i class="fa fa-question-circle fa-lg popover-info blue" aria-hidden="true" data-rel="popover"
                data-trigger="hover" style="transform: translate(0,4px);" data-placement="auto right"
                title="Active Table"
-               data-content="The record that you are going to delete from which table"></i>
+               data-content="The record that you are going to operate from which table"></i>
         </div>
 
         <div class="space-2"></div>
@@ -118,7 +140,7 @@
             <i class="fa fa-question-circle fa-lg popover-info blue" aria-hidden="true" data-rel="popover"
                data-trigger="hover" style="transform: translate(0,4px);" data-placement="auto right"
                title="Active Field"
-               data-content="The record that you are going to delete from which table"></i>
+               data-content="The record that you are going to operate from which table"></i>
         </div>
 
         <div class="hr hr-dotted"></div>
@@ -138,7 +160,7 @@
             <i class="fa fa-question-circle fa-lg popover-info blue" aria-hidden="true" data-rel="popover"
                data-trigger="hover" style="transform: translate(0,4px);" data-placement="auto right"
                title="Response Table"
-               data-content="Which table will be related by deleting of active table's record"></i>
+               data-content="Which table will be related by operation of active table's record"></i>
         </div>
 
         <div class="space-2"></div>
@@ -155,7 +177,7 @@
             <i class="fa fa-question-circle fa-lg popover-info blue" aria-hidden="true" data-rel="popover"
                data-trigger="hover" style="transform: translate(0,4px);" data-placement="auto right"
                title="Response Field"
-               data-content="This field will match active filed to achieve deletion of relation"></i>
+               data-content="This field will match active filed to achieve operation of relation"></i>
         </div>
 
         <div class="hr hr-dotted"></div>
@@ -163,7 +185,7 @@
 
         {{--advantage--}}
         <div class="form-group">
-            <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="detail">Advantage</label>
+            <label class="control-label col-xs-12 col-sm-1 no-padding-right blue" for="detail">Advantage</label>
             <div class="col-xs-4">
                 <label>
                     <input name="switch-field-1" id="advantageSwitch" class="ace ace-switch ace-switch-7" type="checkbox" />
@@ -173,7 +195,7 @@
             <i class="fa fa-question-circle fa-lg popover-error red2" aria-hidden="true" data-rel="popover"
                data-trigger="hover" style="transform: translate(0,4px);" data-placement="auto right"
                title="Custom Rule"
-               data-content="Set the rule to match active field for deleting of records"></i>
+               data-content="Set the rule to match active field for operation of records"></i>
         </div>
 
         <div id="advantage" hidden="hidden">
@@ -193,7 +215,8 @@
                 <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="targetValue">Target Value</label>
                 <div class="col-xs-12 col-sm-4">
                     <div class="clearfix">
-                        <input class="form-control" type="text" name="targetValue" id="targetValue" disabled="disabled">
+                        <input class="form-control" type="text" name="targetValue" id="targetValue" disabled="disabled"
+                               placeholder="This value will be matched to response field">
                     </div>
                 </div>
                 <i class="fa fa-question-circle fa-lg popover-error red2" aria-hidden="true" data-rel="popover"
@@ -215,7 +238,7 @@
 
         <div class="space-8"></div>
 
-        <button class="btn btn-success btn-sm btn-next" type="submit">
+        <button class="btn btn-success btn-sm btn-next" type="submit" id="submitBtn">
             Add
             <i class="ace-icon fa fa-plus"></i>
         </button>
@@ -226,212 +249,98 @@
         </button>
     </form>
 
+    <script>
+        $('#submitBtn').attr('disabled', 'disabled');
+    </script>
+
     <script src="{{$path}}/js/jquery.validate.min.js"></script>
     <script src="{{$path}}/js/chosen.jquery.min.js"></script>
     <script src="{{$assetPath}}/js/jquery.form.js"></script>
 
-    <script type="text/javascript">
-        jQuery(function($) {
-            $('[data-rel=popover]').popover({
-                html:false,
-            });
+    <script type="text/javascript" src="{{$assetPath}}/js/relationPage/operationPage.js"></script>
+    <script>
+        //获取主动表的二级联动数据
+        //get active table drop down list
+        $('#activeTable').change(function () {
+            if ($('#activeTable').val() === ''){
+                return false;
+            }
 
-            $('#back').click(function () {
-                window.history.back();
-            });
-            
-            //如果高级模式加载的时候开启 则初始化active field 为不可用
-            //when web page is loading with advantage function activated then disabled active field.
             if ($('#advantageSwitch').is(":checked")) {
-                $('#activeField').attr('disabled', 'disabled');
-                $('#activeField option').remove();
-                $('#activeField').val(0);
-                //show advantage
-                $('#advantage').removeAttr('hidden');
-                $('#targetValue').removeAttr('disabled');
+                return false;
             }
 
-            //高级模式打开后 active field将不可用
-            //advantage model, active field will be locked
-            $('#advantageSwitch').click(function () {
-                if ($('#advantageSwitch').is(":checked")) {
-                    $('#activeField').attr('disabled', 'disabled');
+            var tableId = $(this).children('option:selected').val();
+
+            //加载符号
+            //showing loading icon
+            $('#activeField').after("<i id='responseLoading' class='ace-icon fa fa-spinner fa-spin orange bigger-125'></i>");
+
+            //获取数据
+            //get data
+            var table = $('#activeTable').find("option:selected").text();
+            var url = "{{url('api/fields')}}" + '/' +table;
+            $.ajax({
+                type: 'get',
+                url: url,
+                dataType: 'json',
+                success: function (data) {
+                    //填充数据
+                    //fill in data
                     $('#activeField option').remove();
-                    //show advantage
-                    $('#advantage').removeAttr('hidden');
-                    $('#targetValue').removeAttr('disabled');
-                } else {
-                    $('#activeField').removeAttr('disabled');
-                    //show advantage
-                    $('#advantage').attr('hidden', 'hidden');
-                    $('#targetValue').attr('disabled', 'disabled');
+                    $('#activeField').next().remove();
+                    $.each(data, function (name, value) {
+                        $('#activeField').append("<option value='" + value + "'>" + value + "</option>");
+                    });
+                },
+                error: function () {
+                    layer.alert('loading data was wrong!', function (){
+                        window.history.back();
+                    });
                 }
             });
+        });
 
-            //自动调整下拉框大小
-            //resize the chosen on window resize
-            if(!ace.vars['touch']) {
-                $('.chosen-select').chosen({allow_single_deselect:true});
-                $(window)
-                    .off('resize.chosen')
-                    .on('resize.chosen', function() {
-                        $('.chosen-select').each(function() {
-                            var $this = $(this);
-                            $this.next().css({'width': $this.parent().width()});
-                        })
-                    }).trigger('resize.chosen');
-                //resize chosen on sidebar collapse/expand
-                /*$(document).on('settings.ace.chosen', function(e, event_name, event_val) {
-                 if(event_name != 'sidebar_collapsed') return;
-                 $('.chosen-select').each(function() {
-                 var $this = $(this);
-                 $this.next().css({'width': $this.parent().width()});
-                 })
-                 });*/
+        //获取被动表的二级联动数据
+        //get response table drop down list
+        $('#responseTable').change(function () {
+            if ($('#responseTable').val() === ''){
+                return false;
             }
 
-            //数据验证
-            //validation
-            $('#validation-form').validate({
-                errorElement: 'div',
-                errorClass: 'help-block',
-                focusInvalid: false,
-                ignore: "",
-                rules: {
-                    ruleName: {
-                        required: true
-                    },
-                    activeTable: {
-                        required: true
-                    },
-                    activeField: {
-                        required: true
-                    },
-                    responseTable: {
-                        required: true
-                    },
-                    responseField: {
-                        required: true
-                    },
-                    targetValue: {
-                        required: true,
-                    }
+            var tableId = $(this).children('option:selected').val();
+
+            //加载符号
+            //showing loading icon
+            $('#responseField').after("<i id='responseLoading' class='ace-icon fa fa-spinner fa-spin orange bigger-125'></i>");
+
+            //获取数据
+            //get data
+            var table = $('#responseTable').find("option:selected").text();
+            var url = "{{url('api/fields')}}" + '/' +table;
+            $.ajax({
+                type: 'get',
+                url: url,
+                dataType: 'json',
+                success: function (data) {
+                    //填充数据
+                    //fill in data
+                    $('#responseField option').remove();
+                    $('#responseField').next().remove();
+                    $.each(data, function (name, value) {
+                        $('#responseField').append("<option value='" + value + "'>" + value + "</option>");
+                    });
                 },
-                messages: {
-                    ruleName: "please input a valid value",
-                    activeTable: "Please choose active table",
-                    activeField: "please choose active field",
-                    responseTable: "Please choose response table",
-                    responseField: "please choose response field",
-                    targetValue: "please input a value"
-                },
-                highlight: function (e) {
-                    $(e).closest('.form-group').removeClass('has-info').addClass('has-error');
-                },
-                success: function (e) {
-                    $(e).closest('.form-group').removeClass('has-error');//.addClass('has-info');
-                    $(e).remove();
-                },
-                errorPlacement: function (error, element) {
-                    if(element.is('input[type=checkbox]') || element.is('input[type=radio]')) {
-                        var controls = element.closest('div[class*="col-"]');
-                        if(controls.find(':checkbox,:radio').length > 1) controls.append(error);
-                        else error.insertAfter(element.nextAll('.lbl:eq(0)').eq(0));
-                    }
-                    else if(element.is('.select2')) {
-                        error.insertAfter(element.siblings('[class*="select2-container"]:eq(0)'));
-                    }
-                    else if(element.is('.chosen-select')) {
-                        error.insertAfter(element.siblings('[class*="chosen-container"]:eq(0)'));
-                    }
-                    else error.insertAfter(element.parent());
-                },
-                submitHandler: function (form) {
-                    form.submit();
-                },
-                invalidHandler: function (form) {
+                error: function () {
+                    layer.alert('loading data was wrong!', function (){
+                        window.history.back();
+                    });
                 }
             });
+        });
 
-            //获取主动表的二级联动数据
-            //get active table drop down list
-            $('#activeTable').change(function () {
-                if ($('#activeTable').val() === ''){
-                    return false;
-                }
-
-                if ($('#advantageSwitch').is(":checked")) {
-                    return false;
-                }
-
-                var tableId = $(this).children('option:selected').val();
-
-                //加载符号
-                //showing loading icon
-                $('#activeField').after("<i id='responseLoading' class='ace-icon fa fa-spinner fa-spin orange bigger-125'></i>");
-
-                //获取数据
-                //get data
-                var table = $('#activeTable').find("option:selected").text();
-                var url = "{{url('api/fields')}}" + '/' +table;
-                $.ajax({
-                    type: 'get',
-                    url: url,
-                    dataType: 'json',
-                    success: function (data) {
-                        //填充数据
-                        //fill in data
-                        $('#activeField option').remove();
-                        $('#activeField').next().remove();
-                        $.each(data, function (name, value) {
-                            $('#activeField').append("<option value='" + value + "'>" + value + "</option>");
-                        });
-                    },
-                    error: function () {
-                        layer.alert('loading data was wrong!', function (){
-                            window.history.back();
-                        });
-                    }
-                });
-            });
-
-            //获取被动表的二级联动数据
-            //get response table drop down list
-            $('#responseTable').change(function () {
-                if ($('#responseTable').val() === ''){
-                    return false;
-                }
-
-                var tableId = $(this).children('option:selected').val();
-
-                //加载符号
-                //showing loading icon
-                $('#responseField').after("<i id='responseLoading' class='ace-icon fa fa-spinner fa-spin orange bigger-125'></i>");
-
-                //获取数据
-                //get data
-                var table = $('#responseTable').find("option:selected").text();
-                var url = "{{url('api/fields')}}" + '/' +table;
-                $.ajax({
-                    type: 'get',
-                    url: url,
-                    dataType: 'json',
-                    success: function (data) {
-                        //填充数据
-                        //fill in data
-                        $('#responseField option').remove();
-                        $('#responseField').next().remove();
-                        $.each(data, function (name, value) {
-                            $('#responseField').append("<option value='" + value + "'>" + value + "</option>");
-                        });
-                    },
-                    error: function () {
-                        layer.alert('loading data was wrong!', function (){
-                            window.history.back();
-                        });
-                    }
-                });
-            });
+        $(document).ready(function(){
+            $('#submitBtn').removeAttr('disabled');
         });
     </script>
 @endsection
