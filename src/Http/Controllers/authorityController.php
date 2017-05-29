@@ -8,6 +8,6 @@ class authorityController extends Controller
 {
     public function index()
     {
-        return view('umi::authority');
+        return view('umi::authority.authority');
     }
 }

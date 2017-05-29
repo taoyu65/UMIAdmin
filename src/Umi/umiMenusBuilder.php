@@ -5,12 +5,15 @@ namespace YM\Umi;
 use YM\Exceptions\UmiException;
 use YM\Models\Menu;
 use Exception;
+use YM\Models\TableRelationOperation;
 use YM\Models\User;
 use YM\Facades\Umi as YM;
 
 class umiMenusBuilder
 {
     private $menus;
+    private $tableName;
+    private $relationOperationRuleList;
 
     public function __construct()
     {
@@ -278,5 +281,81 @@ UMI;
     {
         $user = new User();
         return $user->menusJson();
+    }
+
+#Menu tree for management (drag and drop)-------------------------------------------------------
+    public function showDragDropTree($tableName)
+    {
+        $TRO = new TableRelationOperation();
+        $tableId = YM::getTableIdByTableName($tableName);
+        $this->tableName = $tableName;
+        $this->relationOperationRuleList = $TRO->getRulesForConfirmation($tableId);
+
+        $html = '';
+        $html .= '<div class="dd dd-draghandle" id="nestable">';
+        $html .= $this->menuManagement();
+        $html .= '</div>';
+
+        return $html;
+    }
+
+    private function menuManagement($menu_id = 0)
+    {
+        $menus = $this->menus->getMenus($menu_id);
+        if ($menus->count() === 0) return '';
+
+        $html = '<ol class="dd-list">';
+        foreach ($menus as $menu) {
+            $itemId = $menu->id;
+            $iconClass = $menu->icon_class;
+            $title = $menu->title;
+            $recursiveOL = $this->menuManagement($menu->id);
+
+            #获取数据库连级删除的参数field
+            #get parameter "field" for relation operation
+            $parameterField = YM::parameterTRO($menu, $this->relationOperationRuleList);
+            $breadButton = $this->breadButton($itemId, $parameterField);
+
+            $html .= $LI =<<<UMI
+            <li class="dd-item dd2-item" data-id="$itemId">
+                <div class="dd-handle dd2-handle">
+                    <i class="normal-icon ace-icon fa $iconClass bigger-130"></i>
+
+                    <i class="drag-icon ace-icon fa fa-arrows bigger-125"></i>
+                </div>
+                <div class="dd2-content">
+                    $title
+                    $breadButton
+                </div>
+                $recursiveOL
+           </li>
+UMI;
+        }
+        $html .= '</ol>';
+
+        return $html;
+    }
+
+    private function breadButton($itemId, $parameterField)
+    {
+        $deleteUrl = url('deleting') . "/$this->tableName/$itemId/$parameterField";
+        //todo  - need to finish add, browser, edit, still waiting for the main function and than make a link.
+        $html =<<<UMI
+        <div class="pull-right action-buttons">
+            <a class="green" href="#">
+                <i class="ace-icon fa fa-plus bigger-130"></i>
+            </a>
+            <a class="orange" href="#">
+                <i class="ace-icon fa fa-eye bigger-130"></i>
+            </a>
+            <a class="blue" href="#">
+                <i class="ace-icon fa fa-pencil bigger-130"></i>
+            </a>
+            <a class="red" href="#" onclick="showDeleting('$deleteUrl')">
+                <i class="ace-icon fa fa-trash-o bigger-130"></i>
+            </a>
+       </div>
+UMI;
+        return $html;
     }
 }

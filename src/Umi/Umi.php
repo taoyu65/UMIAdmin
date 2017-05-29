@@ -4,6 +4,7 @@ namespace YM\Umi;
 
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Session;
+use YM\Models\TableRelationOperation;
 
 class Umi
 {
@@ -78,7 +79,7 @@ UMI;
     }
 
     #加密 #encrypt
-    function umiEncrypt($str)
+    public function umiEncrypt($str)
     {
         $yuan = Config::get('umi.key_active');
         $jia = Config::get('umi.key_positive');
@@ -97,7 +98,7 @@ UMI;
     }
 
     #解密 #decrypt
-    function umiDecrypt($str)
+    public function umiDecrypt($str)
     {
         $yuan = Config::get('umi.key_active');
         $jia = Config::get('umi.key_positive');
@@ -113,5 +114,20 @@ UMI;
             }
         }
         return $results;
+    }
+
+    #获取fields参数 用于执行数据表的关联操作 (把此值作为url参数添加到最后)
+    #   $record: 当前记录的对象或者数组
+    #get parameter "fields" is using for table relation operation (put at the end of url as a parameter)
+    #   $record: current record's object or array
+    public function parameterTRO($record, $relationOperationRuleList)
+    {
+        $returnArr = [];
+        foreach ($relationOperationRuleList as $item) {
+            $activeField = $item->active_table_field;
+            $returnArr[$activeField] = $record->$activeField;
+        }
+
+        return base64_encode(json_encode($returnArr));
     }
 }

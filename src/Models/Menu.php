@@ -49,4 +49,13 @@ class Menu extends UmiBase
             return $this->cachedTable;
         return self::all();
     }
+
+    public function updateOrder($id, $parentId, $order)
+    {
+        self::where('id', $id)
+            ->update([
+                'menu_id'   => $parentId,
+                'order'     => $order
+            ]);
+    }
 }

@@ -9,6 +9,8 @@ use YM\Umi\TableRelation\UmiTableRelation;
 
 class TableRelationConfirmationMiddleware
 {
+    #操作数据之前的行为 提示确认页面
+    #the action before the data table operation, confirmation page
     public function handle($request, Closure $next)
     {
         #是否开启数据表关连操作
@@ -16,17 +18,18 @@ class TableRelationConfirmationMiddleware
         if (Config::get('umi.table_relation_operation') == false)
             return $next($request);
 
-        Umi::setCurrentTableName($request->table);
-
-        $umiTR = new UmiTableRelation();
-
-        #操作数据之前的行为
-        #the action before the data table operation
+        #参数fields如果不设置 则不加载数据表的关联操作
+        #table relation operation will be not completed if parameter "fields" is not applied
         $activeFieldValues = $request->route()->parameter('fields');
         $deCodeActiveFieldValues = base64_decode($activeFieldValues);
+        if (!$activeFieldValues)
+            return $next($request);
+
+        Umi::setCurrentTableName($request->table);
 
         #使提交按钮不可用
         #make the submit button is unavailable
+        $umiTR = new UmiTableRelation();
         if (!$umiTR->showConfirmation($deCodeActiveFieldValues)) $request['TRO_Available'] = false;
         $request['TRO_Message'] = $umiTR->message;
 

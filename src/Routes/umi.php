@@ -26,6 +26,20 @@ Route::group(['middleware' => 'umi.url.auth'], function () {
         'as'        => 'dashboard'
     ]);
 
+    #菜单管理与操作
+    #side menu management
+    #---------------------------------------------------------------
+    Route::get('menuManagement/{table}', [
+        'middleware' => 'umi.bread.access:browser',
+        'uses'       => 'menuController@management',
+        'as'         => 'menuManagement'
+    ]);
+    Route::post('menuManagement/{table}/updateOrder', [
+        'middleware' => 'umi.bread.access:edit',
+        'uses'       => 'menuController@updateMenuOrder'
+    ]);
+    #---------------------------------------------------------------
+
     #表关系操作
     #table relation operation
     #---------------------------------------------------------------
@@ -57,6 +71,10 @@ Route::group(['middleware' => 'umi.url.auth'], function () {
     #删除确认页面 #confirmation before deletion
     Route::get('deleting/{table}/{id}/{fields?}', [
         'middleware'=> ['umi.bread.access:delete', 'umi.TRelation.confirmation'],
+        'uses'      => 'umiTableDeleteController@deleting'
+    ]);
+    Route::get('deleting/{table}/{id}', [
+        'middleware'=> ['umi.bread.access:delete'],
         'uses'      => 'umiTableDeleteController@deleting'
     ]);
 

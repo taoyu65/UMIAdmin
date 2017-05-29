@@ -164,7 +164,7 @@ UMI;
         #将参数添加到url接连 并生成新的数据
         #add parameter into url link and generate new data table
         $dataSet = $whereLink == '' ? $dataSet : $dataSet->whereRaw($whereLink);
-        $dataSet = $dataSet->paginate($perPage);//dd($dataSet);
+        $dataSet = $dataSet->paginate($perPage);
         $args = $this->getArgs(['id', 'dd', 'dda', 'page']); //获取参数 get args
         if ($whereLink != '')
             $args['w'] = base64_encode($whereLink);

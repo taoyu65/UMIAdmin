@@ -11,7 +11,7 @@ class UmiTableRelation
     public $message;
 
     public function showConfirmation($activeFieldValues)
-    {
+    {//todo - need to see authority for all the relation operation.
         $tableId = YM::currentTableId();
         $TRO = new TableRelationOperation();
         $rules = $TRO->getRulesForConfirmation($tableId);
