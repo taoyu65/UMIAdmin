@@ -14,7 +14,7 @@
 #common------------------------------------------------------------
     #通用数据选择器 通常在弹出页面选择一条记录的ID
     #common selector, normally select ID of record from modal page
-    Route::get('select/{table}', [
+    Route::get('selector/{table}/{property}', [
         'middleware'=> 'umi.bread.access:browser',
         'uses'      => 'commonController@selector',
         'as'        => 'selector'

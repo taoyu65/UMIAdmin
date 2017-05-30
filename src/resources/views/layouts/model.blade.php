@@ -13,7 +13,7 @@
 </head>
 <body>
 
-@yield('body')
+@yield('content')
 
 <!-- layer scripts -->
 <script src="{{$assetPath}}/layer/layer.js"></script>

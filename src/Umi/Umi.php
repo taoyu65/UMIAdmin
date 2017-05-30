@@ -87,11 +87,15 @@ UMI;
         $results = '';
         if (strlen($str) == 0) return false;
         for ($i = 0; $i < strlen($str); $i++) {
-            for ($j = 0; $j < strlen($yuan); $j++) {
-                if ($str[$i] == $yuan[$j]) {
-                    $results .= $jia[$j];
-                    break;
+            if (str_contains($yuan, $str[$i])) {
+                for ($j = 0; $j < strlen($yuan); $j++) {
+                    if ($str[$i] == $yuan[$j]) {
+                        $results .= $jia[$j];
+                        break;
+                    }
                 }
+            } else {
+                $results .= $str[$i];
             }
         }
         return $results;
@@ -106,11 +110,15 @@ UMI;
         $results = '';
         if (strlen($str) == 0) return false;
         for ($i = 0; $i < strlen($str); $i++) {
-            for ($j = 0; $j < strlen($jia); $j++) {
-                if ($str[$i] == $jia[$j]) {
-                    $results .= $yuan[$j];
-                    break;
+            if (str_contains($yuan, $str[$i])) {
+                for ($j = 0; $j < strlen($jia); $j++) {
+                    if ($str[$i] == $jia[$j]) {
+                        $results .= $yuan[$j];
+                        break;
+                    }
                 }
+            } else {
+                $results .= $str[$i];
             }
         }
         return $results;

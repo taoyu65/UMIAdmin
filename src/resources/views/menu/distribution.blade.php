@@ -141,20 +141,23 @@
                         $('#menuTreeUser').children('.dd').nestable('collapseAll');
                         break;
                     case 'refresh':
-                        menuTreeReload();
+                        ReloadMenuTree();
                         break;
                     case 'select-user':
-                        selectUser();
+                        selectUser(target);
                         break;
                 }
             });
         });
 
-
         //选择用户界面
         //page of selecting user
-        function selectUser() {
-            var url = '{{url("select/" . $userTableName)}}';
+        function selectUser(obj) {
+            //丧失焦点 (为了屏蔽打开窗口后, 点击空格再次打开窗口)
+            //lose focus (for after a modal window opens, chick space a new window will be open again)
+            obj.blur();
+
+            var url = '{{url("selector/" . $userTableName . '/' . $property)}}';
             layer.open({
                 type: 2,
                 title: 'select a user',
@@ -165,13 +168,17 @@
             });
         }
 
+        function LoadUserTree() {
+            alert('gg');
+        }
+
         //重新加载所有菜单
         //reload all the menus
-        function menuTreeReload() {
+        function ReloadMenuTree() {
             $('#menuTree').html('<i class="ace-icon fa fa-spinner fa-spin orange bigger-300"></i>');
 
             $.ajax({
-                url:"{{url('menuManagement/' . $tableName)}}/loadMenuTree",
+                url:"{{url('menuManagement/' . $table)}}/loadMenuTree",
                 success:function(data) {
                     $('#menuTree').html(data);
                 },
