@@ -25,7 +25,7 @@
                 <i class="ace-icon fa fa-check"></i>
                 Hands Up!
             </strong>
-            This list is the entire menus, If you want manage different user's menu, you can use another function called <strong>Distribution</strong>
+            This list is the <strong class="red">entire menus</strong>, If you want manage different user's menu, you can use another function called <strong>Distribution</strong>
         </p>
     </div>
 
@@ -124,7 +124,7 @@
                         });
                         var options = {
                             type: 'POST',
-                            url: "{{url('menuManagement/umi_menus/updateOrder')}}",
+                            url: "{{url('menuManagement/' . $tableName)}}/updateOrder",
                             data: {'menuJson':$('#menuJson').val()},
                             success: function (data) {
                                 layer.close(saveLayer);

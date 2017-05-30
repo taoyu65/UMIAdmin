@@ -1,14 +1,24 @@
 <?php
 
 #log in and out----------------------------------------------------
-Route::get('/', function () {
-    return view('umi::login');
-});
-Route::get('admin', ['as' => 'admin', function () {
-    return view('umi::login');
-}]);
-Route::post('submit', 'dashboardController@dashboard');
-Route::get('logout', 'dashboardController@getLogout');
+    Route::get('/', function () {
+        return view('umi::login');
+    });
+    Route::get('admin', ['as' => 'admin', function () {
+        return view('umi::login');
+    }]);
+    Route::post('submit', 'dashboardController@dashboard');
+    Route::get('logout', 'dashboardController@getLogout');
+#------------------------------------------------------------------
+
+#common------------------------------------------------------------
+    #通用数据选择器 通常在弹出页面选择一条记录的ID
+    #common selector, normally select ID of record from modal page
+    Route::get('select/{table}', [
+        'middleware'=> 'umi.bread.access:browser',
+        'uses'      => 'commonController@selector',
+        'as'        => 'selector'
+    ]);
 #------------------------------------------------------------------
 
 #main--------------------------------------------------------------
@@ -30,13 +40,21 @@ Route::group(['middleware' => 'umi.url.auth'], function () {
     #side menu management
     #---------------------------------------------------------------
     Route::get('menuManagement/{table}', [
-        'middleware' => 'umi.bread.access:browser',
-        'uses'       => 'menuController@management',
-        'as'         => 'menuManagement'
+        'middleware'=> 'umi.bread.access:browser',
+        'uses'      => 'menuController@management',
+        'as'        => 'menuManagement'
     ]);
     Route::post('menuManagement/{table}/updateOrder', [
-        'middleware' => 'umi.bread.access:edit',
-        'uses'       => 'menuController@updateMenuOrder'
+        'middleware'=> 'umi.bread.access:edit',
+        'uses'      => 'menuController@updateMenuOrder'
+    ]);
+    Route::get('menuManagement/{table}/distribution/{user?}', [
+        'middleware'=> 'umi.bread.access:browser',
+        'uses'      => 'menuController@distribution'
+    ]);
+    Route::get('menuManagement/{table}/loadMenuTree', [
+        'middleware'=> 'umi.bread.access:browser',
+        'uses'      => 'menuController@loadMenuTree'
     ]);
     #---------------------------------------------------------------
 
@@ -68,20 +86,17 @@ Route::group(['middleware' => 'umi.url.auth'], function () {
         'as'        => 'umiTable'
     ]);
 
-    #删除确认页面 #confirmation before deletion
+    #删除确认页面 和 执行删除
+    #confirmation page before deletion and command of deletion
+    #---------------------------------------------------------------
     Route::get('deleting/{table}/{id}/{fields?}', [
         'middleware'=> ['umi.bread.access:delete', 'umi.TRelation.confirmation'],
         'uses'      => 'umiTableDeleteController@deleting'
     ]);
-    Route::get('deleting/{table}/{id}', [
-        'middleware'=> ['umi.bread.access:delete'],
-        'uses'      => 'umiTableDeleteController@deleting'
-    ]);
-
-    #删除动作 #delete action
     Route::post('delete/{table}', [
         'middleware'=> ['umi.bread.access:delete', 'umi.TRelation.execute'],
         'uses'      => 'umiTableDeleteController@delete'
     ]);
+    #---------------------------------------------------------------
 });
 #------------------------------------------------------------------

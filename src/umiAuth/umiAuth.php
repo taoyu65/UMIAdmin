@@ -2,7 +2,7 @@
 
 namespace YM\umiAuth;
 
-use YM\umiAuth\src\contracts\umiAuthInterface;
+use YM\umiAuth\src\Contracts\umiAuthInterface;
 use YM\umiAuth\src\Models\User;
 use YM\umiAuth\Traits\umiAuthPermissionTrait;
 use YM\umiAuth\Traits\umiAuthRoleTrait;

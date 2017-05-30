@@ -5,10 +5,12 @@ return[
 #可以被自定义编辑的列表, 用于客户端下拉选择
 #editable list that use for client side of drop down list
 
-    #系统表名字 (如果在数据库中更改以下表名, 则必须同时修改以下表名
+    #系统表名字 (如果在数据库中更改以下表名, 则必须同时修改以下表名 原始表名=>修改表名)
     #system table name (if modify following table name in the database, then following table name has to be changed same time)
+    #originalTableName => changeableTableName
     'system_table_name'     => [
-        'umi_table_relation_operation' => 'umi_table_relation_operation'
+        'umi_table_relation_operation'  => 'umi_table_relation_operation',
+        'umi_users'                     => 'umi_users'
     ],
 
     #数据类型

@@ -56,7 +56,7 @@ return [
     | of deleting the record, to make the business logical of authority is clear
     */
 
-    'super_admin' => 'admin_tem',
+    'super_admin' => 'cancan',
 
     /*
     |--------------------------------------------------------------------------

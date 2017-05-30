@@ -284,7 +284,7 @@ UMI;
     }
 
 #Menu tree for management (drag and drop)-------------------------------------------------------
-    public function showDragDropTree($tableName)
+    public function showDragDropTree($tableName, $showOperationButton = false)
     {
         $TRO = new TableRelationOperation();
         $tableId = YM::getTableIdByTableName($tableName);
@@ -293,13 +293,13 @@ UMI;
 
         $html = '';
         $html .= '<div class="dd dd-draghandle" id="nestable">';
-        $html .= $this->menuManagement();
+        $html .= $this->menuManagement($showOperationButton);
         $html .= '</div>';
 
         return $html;
     }
 
-    private function menuManagement($menu_id = 0)
+    private function menuManagement($showOperationButton, $menu_id = 0)
     {
         $menus = $this->menus->getMenus($menu_id);
         if ($menus->count() === 0) return '';
@@ -309,12 +309,12 @@ UMI;
             $itemId = $menu->id;
             $iconClass = $menu->icon_class;
             $title = $menu->title;
-            $recursiveOL = $this->menuManagement($menu->id);
+            $recursiveOL = $this->menuManagement($showOperationButton, $menu->id);
 
             #获取数据库连级删除的参数field
             #get parameter "field" for relation operation
             $parameterField = YM::parameterTRO($menu, $this->relationOperationRuleList);
-            $breadButton = $this->breadButton($itemId, $parameterField);
+            $breadButton = $showOperationButton ? $this->breadButton($itemId, $parameterField) : '';
 
             $html .= $LI =<<<UMI
             <li class="dd-item dd2-item" data-id="$itemId">
