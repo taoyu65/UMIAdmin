@@ -14,7 +14,7 @@ class ForeignKeyDataType extends DataTypeAbstract
     public function regulateDataBrowser($data, $relatedTable = '', $relatedField = '', $option = [])
     {
         $umiTable = new UmiModel($relatedTable);
-        $targetData = $umiTable->getRowById($relatedTable, $data);
+        $targetData = $umiTable->getRowById($data);
         $returnData = $targetData == null ? $this->getNoExistData($data) : $targetData->$relatedField;
         return $returnData;
     }

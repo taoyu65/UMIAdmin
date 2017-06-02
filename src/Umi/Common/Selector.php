@@ -2,6 +2,8 @@
 
 namespace YM\Umi\Common;
 
+use YM\Facades\Umi;
+
 class Selector
 {
     public $title;
@@ -27,5 +29,17 @@ class Selector
     {
         $this->title = 'Selector';
         $this->selectTarget = 'id';
+    }
+
+    #转变json并且加密 作为url参数请求相应的功能
+    #turn into json and encrypt as part of url for requesting a related function
+    public function serialize()
+    {
+        return Umi::umiEncrypt(json_encode($this));
+    }
+
+    public function unSerialize($string)
+    {
+        return json_decode(Umi::umiDecrypt($string));
     }
 }

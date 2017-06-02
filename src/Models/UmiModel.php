@@ -15,10 +15,12 @@ class UmiModel
     protected $CacheSmallThan = 100;     //根据此值是否决定缓存  will no be cached when over sized
 
     private $cachedTable;
+    private $tableName;
 
-
-    public function __construct($tableName = '')
+    public function __construct($tableName)
     {
+        $this->tableName = $tableName;
+
         if ($this->openCache && $tableName != ''){
             $minute = Config::get('umi.cache_minutes');
 
@@ -36,32 +38,41 @@ class UmiModel
         }
     }
 
-    public function getRowById($tableName, $id)
+    public function getRowById($id)
     {
         $minute = Config::get('umi.cache_minutes');
 
         if ($this->openCache) {
-            return Cache::has($tableName) ?
-                Cache::get($tableName)->where('id', $id)->first():
-                Cache::remember($tableName . 'getRowById', $minute, function () use ($tableName, $id) {
-                    return DB::table($tableName)
+            return Cache::has($this->tableName) ?
+                Cache::get($this->tableName)->where('id', $id)->first():
+                Cache::remember($this->tableName . 'getRowById', $minute, function () use ($id) {
+                    return DB::table($this->tableName)
                         ->where('id', $id)
                         ->first();
                 });
         }
-        return DB::table($tableName)
+
+        return DB::table($this->tableName)
             ->whereIn('id', $id)
             ->first();
     }
 
-    public function getSelectedTable($tableName, $fields)
+    public function getRecordsByFields($fields)
     {
-        return DB::table($tableName)
+        $page = 1;//todo - per page need to go through config file, this is for test //Config::get('umi.umi_table_perPage');
+        return DB::table($this->tableName)
+            ->select($fields)
+            ->paginate($page);
+    }
+
+    public function getSelectedTable($fields)
+    {
+        return DB::table($this->tableName)
             ->select($fields);
     }
 
-    public function delete($table, $id)
+    public function delete($id)
     {
-        return DB::table($table)->whereId($id)->delete();
+        return DB::table($this->table)->whereId($id)->delete();
     }
 }

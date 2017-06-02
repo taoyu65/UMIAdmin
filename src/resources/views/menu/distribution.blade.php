@@ -163,7 +163,7 @@
                 title: 'select a user',
                 maxmin: true,
                 shadeClose: true,
-                area : ['800px' , '520px'],
+                area : ['800px' , '90%'],
                 content: url
             });
         }
@@ -196,7 +196,7 @@
                 title: 'deleting',
                 maxmin: true,
                 shadeClose: true,
-                area : ['800px' , '520px'],
+                area : ['800px' , '90%'],
                 content: url
             });
         }

@@ -9,7 +9,6 @@ use Illuminate\Support\Facades\Config;
 use YM\Models\Menu;
 use YM\Umi\Common\Selector;
 use YM\Umi\umiMenusBuilder;
-use YM\Facades\Umi;
 
 class menuController extends Controller
 {
@@ -54,6 +53,7 @@ class menuController extends Controller
     public function distribution($table)
     {
         $userTableName = Config::get('umiEnum.system_table_name.umi_users');
+
 #region selector
         #初始化一个选择用户的弹窗选择器  (用于选择一条记录的某一个数值并且返回到父窗口)
         #init a selector which is selecting a user (select a value from one record and return to its parent's window)
@@ -61,13 +61,12 @@ class menuController extends Controller
         $selector->title = 'Selector';
         $selector->tip = 'Please click row to select a user';
         $selector->selectTarget = 'id';
-        $selector->callback = ['LoadUserTree' => ['id']];
+        $selector->functionName = "LoadUserTree(id)";
         $selector->fields = ['id', 'name', 'email'];
 
         #转变json并且加密 作为url参数请求相应的功能
         #turn into json and encrypt as part of url for requesting a related function
-        $serializedSelector = Umi::umiEncrypt(json_encode($selector));
-        $property = $serializedSelector;
+        $property = $selector->serialize();
 #endregion
         $menu = new umiMenusBuilder();
         $menuTree = $menu->showDragDropTree($table);

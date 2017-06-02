@@ -133,12 +133,12 @@ UMI;
         #table body will be rewrite according to the custom data type
         $fields = $dataTypeOp->getFields();
         $perPage = Config::get('umi.umi_table_perPage');
-        $umiModel = new UmiModel();
+        $umiModel = new UmiModel($this->tableName);
 
         #获取数据
         #get data table
         $whereList = $this->getWhere();
-        $dataSet = $umiModel->getSelectedTable($this->tableName, $fields);
+        $dataSet = $umiModel->getSelectedTable($fields);
 
         #获取搜索结果分页参数
         #get the parameter of result of searching for paginate

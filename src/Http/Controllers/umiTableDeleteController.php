@@ -23,9 +23,9 @@ class umiTableDeleteController extends Controller
         if (!isset($request['hidden_ti']))
             throw new \Exception('wrong parameter');
 
-        $umiModel = new UmiModel();
+        $umiModel = new UmiModel($table);
         $id = $request['hidden_ti'];
-        $count = 1;//$umiModel->delete($table, $id);
+        $count = 1;//$umiModel->delete($id);
         ////todo - waiting for final test
         if ($count){
             $request['action_success'] = true;
