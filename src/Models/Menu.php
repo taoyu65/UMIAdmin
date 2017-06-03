@@ -14,11 +14,25 @@ class Menu extends UmiBase
         parent::__construct('order');
     }
 
-    public function getMenus($menu_id)
+    #获取菜单, 如果是用户的json菜单则接收jsonArr进行过滤
+    #getting menus, if it's user's json menu than receiving a jsonArr to be filtered
+    public function getMenus($menu_id, $jsonArr = '')
     {
-        if ($this->openCache)
-            return $this->cachedTable->where('menu_id', $menu_id);
-        return self::where('menu_id', $menu_id);
+        if ($this->openCache) {
+            $returnData = $this->cachedTable->where('menu_id', $menu_id);
+        } else {
+            $returnData = self::where('menu_id', $menu_id);
+        }
+
+        #用户menus为json格式, 从所有菜单中过滤
+        #user's menu is a type of json, will be filtered from all menus
+        if ($jsonArr != '') {
+            $returnData = $returnData->filter(function ($item) use ($jsonArr) {
+                return in_array($item->id, $jsonArr);
+            });
+        }
+
+        return $returnData;
     }
 
     public function isSubMenu($id)

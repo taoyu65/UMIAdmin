@@ -46,7 +46,18 @@
             </div>
 
             <div class="col-sm-12" id="menuTreeUser">
-                {!! $menuTree !!}
+                <div class="alert alert-block alert-success">
+                    <button type="button" class="close" data-dismiss="alert">
+                        <i class="ace-icon fa fa-times"></i>
+                    </button>
+                        <strong>
+                            <i class="ace-icon fa fa-check"></i>
+                            Select a user first.
+                        </strong>
+                        Drop Drag from right size menu tree to user tree rebuild a new user's menu!<br><br>
+                        If you want make a new Menu, Go to Side Menu->Management
+                    </p>
+                </div>
             </div>
         </div>
 
@@ -112,6 +123,23 @@
                 e.stopPropagation();
             });
 
+            $('#nestable-menu-user').on('click', function(e)
+            {
+                var target = $(e.target),
+                    action = target.data('action');
+                switch (action) {
+                    case 'expand-all':
+                        $('#menuTreeUser').children('.dd').nestable('expandAll');
+                        break;
+                    case 'collapse-all':
+                        $('#menuTreeUser').children('.dd').nestable('collapseAll');
+                        break;
+                    case 'select-user':
+                        selectUser(target);
+                        break;
+                }
+            });
+
             $('#nestable-menu').on('click', function(e)
             {
                 var target = $(e.target),
@@ -124,27 +152,7 @@
                         $('#menuTree').children('.dd').nestable('collapseAll');
                         break;
                     case 'refresh':
-                        menuTreeReload();
-                        break;
-                }
-            });
-
-            $('#nestable-menu-user').on('click', function(e)
-            {
-                var target = $(e.target),
-                    action = target.data('action');
-                switch (action) {
-                    case 'expand-all':
-                        $('#menuTreeUser').children('.dd').nestable('expandAll');
-                        break;
-                    case 'collapse-all':
-                        $('#menuTreeUser').children('.dd').nestable('collapseAll');
-                        break;
-                    case 'refresh':
                         ReloadMenuTree();
-                        break;
-                    case 'select-user':
-                        selectUser(target);
                         break;
                 }
             });
@@ -168,8 +176,22 @@
             });
         }
 
-        function LoadUserTree() {
-            alert('gg');
+        function LoadUserTree(value) {
+            layer.closeAll();
+
+            //加载用户菜单
+            //loading user menus
+            $('#menuTreeUser').html('<i class="ace-icon fa fa-spinner fa-spin orange bigger-300"></i>');
+
+            $.ajax({
+                url:"{{url('menuManagement/' . $table)}}/loadMenuTreeFromJson/" + value,
+                success:function(data) {
+                    $('#menuTreeUser').html(data);
+                },
+                error: function () {
+                    $('#menuTreeUser').html('something went wrong');
+                }
+            });
         }
 
         //重新加载所有菜单

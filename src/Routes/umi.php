@@ -56,6 +56,10 @@ Route::group(['middleware' => 'umi.url.auth'], function () {
         'middleware'=> 'umi.bread.access:browser',
         'uses'      => 'menuController@loadMenuTree'
     ]);
+    Route::get('menuManagement/{table}/loadMenuTreeFromJson/{userId}', [
+        'middleware'=> 'umi.bread.access:browser',
+        'uses'      => 'menuController@loadMenuTreeFromJson'
+    ]);
     #---------------------------------------------------------------
 
     #表关系操作

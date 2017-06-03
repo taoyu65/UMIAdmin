@@ -27,11 +27,12 @@
                 </thead>
                 <tbody>
                     @foreach($records as $record)
-                        <tr class="tr" onclick="parent.{{$selector->functionName}}" >
+                        <tr class="tr" onclick="parent.{{$selector->functionName}}($(this).find('#{{$selector->returnField}}').html())" >
                             @foreach($selector->fields as $item)
                                 <td>
-                                    {{$record->$item}}
-
+                                    <span id="{{$item}}">
+                                        {{$record->$item}}
+                                    </span>
                                 </td>
                             @endforeach
                         </tr>
@@ -43,7 +44,7 @@
         </div>
 
     </div>
-{{$selector->functionName}}
+
     <script type="text/javascript">
 
         $(document).ready(function () {

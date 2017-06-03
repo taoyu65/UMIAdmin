@@ -73,6 +73,6 @@ class UmiModel
 
     public function delete($id)
     {
-        return DB::table($this->table)->whereId($id)->delete();
+        return DB::table($this->tableName)->whereId($id)->delete();
     }
 }

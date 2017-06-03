@@ -7,6 +7,7 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Config;
 use YM\Models\Menu;
+use YM\Models\UserMenu;
 use YM\Umi\Common\Selector;
 use YM\Umi\umiMenusBuilder;
 
@@ -26,7 +27,7 @@ class menuController extends Controller
         $menu = new umiMenusBuilder();
 
         $tableName = $request->route()->parameter('table');
-        $menuTree = $menu->showDragDropTree($tableName, true);
+        $menuTree = $menu->showDragDropTree($tableName, '', true);
 
         return view('umi::menu.sideMenu', [
             'menuTree' => $menuTree,
@@ -60,8 +61,8 @@ class menuController extends Controller
         $selector = new Selector();
         $selector->title = 'Selector';
         $selector->tip = 'Please click row to select a user';
-        $selector->selectTarget = 'id';
-        $selector->functionName = "LoadUserTree(id)";
+        $selector->returnField = 'id';
+        $selector->functionName = "LoadUserTree";
         $selector->fields = ['id', 'name', 'email'];
 
         #转变json并且加密 作为url参数请求相应的功能
@@ -76,10 +77,10 @@ class menuController extends Controller
 
     #重新加载所有菜单 来自ajax请求
     #reload all the menus from ajax request
-    public function loadMenuTree($table)
+    public function loadMenuTree($table, $userIdArr = '', $showButton = false, $buttonException = [])
     {
         $menu = new umiMenusBuilder();
-        $menuTree = $menu->showDragDropTree($table);
+        $menuTree = $menu->showDragDropTree($table, $userIdArr, $showButton, $buttonException);
 
         #必须重新用js启动可拖拽功能
         #must to be restart the drag function with js command
@@ -89,9 +90,16 @@ class menuController extends Controller
 
     #从用户菜单的json字符串中加载菜单
     #load the menus from string of user's json menu
-    public function loadMenuTreeFromJson($userId)
+    public function loadMenuTreeFromJson($table, $userId)
     {
+        $userMenu = new UserMenu();
+        $json = $userMenu->userJsonMenu($userId);
+        $jsonArr = json_decode($json);
 
+        $stream = $this->getIdsFromJson($jsonArr);
+        $userIdArr = explode(',', trim($stream, ','));
+
+        return $this->loadMenuTree($table, $userIdArr, true, ['add']);
     }
 #region Private function
     private function recursiveUpdateOrder($currentMenu, $parentId = 0)
@@ -116,6 +124,19 @@ class menuController extends Controller
         if ($menu->menu_id != $parentId || $menu->order != $order) {
             $this->menu->updateOrder($id, $parentId, $order);
         }
+    }
+
+    private function getIdsFromJson($jsonArr)
+    {
+        $stream = '';
+
+        foreach ($jsonArr as $item) {
+            $stream .= $item->id . ',';
+            if (isset($item->children))
+                $stream .= $this->getIdsFromJson($item->children);
+        }
+
+        return $stream;
     }
 #endregion
 }

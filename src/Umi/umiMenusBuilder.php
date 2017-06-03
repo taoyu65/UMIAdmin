@@ -284,7 +284,14 @@ UMI;
     }
 
 #Menu tree for management (drag and drop)-------------------------------------------------------
-    public function showDragDropTree($tableName, $showOperationButton = false)
+
+    #加载菜单(用nestable插件显示)
+        #userIdArr:         数组形式的用户菜单, 包含所有ID(用于对原始菜单过滤)
+        #buttonException:   在显示按钮的同时, 哪个功能不显示 (browser, read, add, delete)
+    #load menus (with nestable plugin)
+        #userIdArr:         user's menu of array's type, include all ID (for filtering the original menu)
+        #buttonException:   when all buttons are showing, decide which button is not available. (browser, read, add, delete)
+    public function showDragDropTree($tableName, $userIdArr = '', $showButton = false, $buttonException = [])
     {
         $TRO = new TableRelationOperation();
         $tableId = YM::getTableIdByTableName($tableName);
@@ -293,15 +300,15 @@ UMI;
 
         $html = '';
         $html .= '<div class="dd dd-draghandle" id="nestable">';
-        $html .= $this->menuManagement($showOperationButton);
+        $html .= $this->menuManagement($showButton, $buttonException, $userIdArr);
         $html .= '</div>';
 
         return $html;
     }
 
-    private function menuManagement($showOperationButton, $menu_id = 0)
+    private function menuManagement($showButton = false, $buttonException = [], $userIdArr = '', $menu_id = 0)
     {
-        $menus = $this->menus->getMenus($menu_id);
+        $menus = $this->menus->getMenus($menu_id, $userIdArr);
         if ($menus->count() === 0) return '';
 
         $html = '<ol class="dd-list">';
@@ -309,12 +316,13 @@ UMI;
             $itemId = $menu->id;
             $iconClass = $menu->icon_class;
             $title = $menu->title;
-            $recursiveOL = $this->menuManagement($showOperationButton, $menu->id);
+            $recursiveOL = $this->menuManagement($showButton, $buttonException, $userIdArr, $menu->id);
 
             #获取数据库连级删除的参数field
             #get parameter "field" for relation operation
             $parameterField = YM::parameterTRO($menu, $this->relationOperationRuleList);
-            $breadButton = $showOperationButton ? $this->breadButton($itemId, $parameterField) : '';
+            //$breadButton = $showOperationButton ? $this->breadButton($itemId, $parameterField) : '';
+            $breadButton = $showButton ? $this->breadButton($itemId, $parameterField, $buttonException) : '';
 
             $html .= $LI =<<<UMI
             <li class="dd-item dd2-item" data-id="$itemId">
@@ -336,11 +344,61 @@ UMI;
         return $html;
     }
 
-    private function breadButton($itemId, $parameterField)
+    private function breadButton($itemId, $parameterField, $buttonException = [])
     {
+        if (!is_array($buttonException))
+            abort(503, 'parameter is wrong');
+
         $deleteUrl = url('deleting') . "/$this->tableName/$itemId/$parameterField";
         //todo  - need to finish add, browser, edit, still waiting for the main function and than make a link.
-        $html =<<<UMI
+
+        $html = '<div class="pull-right action-buttons">';
+
+        #add
+        if (in_array('add', $buttonException)) {
+            $html .= '<a class="grey" href="#" style="cursor: not-allowed">
+                        <i class="ace-icon fa fa-plus bigger-130"></i>
+                      </a>';
+        } else {
+            $html .= '<a class="green" href="#">
+                        <i class="ace-icon fa fa-plus bigger-130"></i>
+                      </a>';
+        }
+
+        #browser
+        if (in_array('browser', $buttonException)) {
+            $html .= '<a class="grey" href="#" style="cursor: not-allowed">
+                        <i class="ace-icon fa fa-eye bigger-130"></i>
+                      </a>';
+        } else {
+            $html .= '<a class="orange" href="#">
+                        <i class="ace-icon fa fa-eye bigger-130"></i>
+                      </a>';
+        }
+
+        #edit
+        if (in_array('edit', $buttonException)) {
+            $html .= '<a class="grey" href="#" style="cursor: not-allowed">
+                        <i class="ace-icon fa fa-pencil bigger-130"></i>
+                      </a>';
+        } else {
+            $html .= '<a class="blue" href="#">
+                        <i class="ace-icon fa fa-pencil bigger-130"></i>
+                      </a>';
+        }
+
+        #delete
+        if (in_array('delete', $buttonException)) {
+            $html .= '<a class="grey" href="#" style="cursor: not-allowed">
+                        <i class="ace-icon fa fa-trash-o bigger-130"></i>
+                      </a>';
+        } else {
+            $html .= '<a class="red" href="#" onclick="showDeleting(\'' . $deleteUrl . '\')">';
+            $html .= '    <i class="ace-icon fa fa-trash-o bigger-130"></i>';
+            $html .= '</a>';
+        }
+        $html .= '</div>';
+        /*$html =<<<UMI
         <div class="pull-right action-buttons">
             <a class="green" href="#">
                 <i class="ace-icon fa fa-plus bigger-130"></i>
@@ -355,7 +413,7 @@ UMI;
                 <i class="ace-icon fa fa-trash-o bigger-130"></i>
             </a>
        </div>
-UMI;
+UMI;*/
         return $html;
     }
 }
