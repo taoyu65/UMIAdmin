@@ -44,7 +44,7 @@ Route::group(['middleware' => 'umi.url.auth'], function () {
         'uses'      => 'menuController@management',
         'as'        => 'menuManagement'
     ]);
-    Route::post('menuManagement/{table}/updateOrder', [
+    Route::post('menuManagement/{table}/updateMenuTree', [
         'middleware'=> 'umi.bread.access:edit',
         'uses'      => 'menuController@updateMenuOrder'
     ]);
@@ -59,6 +59,10 @@ Route::group(['middleware' => 'umi.url.auth'], function () {
     Route::get('menuManagement/{table}/loadMenuTreeFromJson/{userId}', [
         'middleware'=> 'umi.bread.access:browser',
         'uses'      => 'menuController@loadMenuTreeFromJson'
+    ]);
+    Route::post('menuManagement/{table}/updateUserTree/{userId}', [
+        'middleware'=> 'umi.bread.access:edit',
+        'uses'      => 'menuController@updateUserTree'
     ]);
     #---------------------------------------------------------------
 

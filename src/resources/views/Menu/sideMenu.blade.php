@@ -52,7 +52,9 @@
 
     {{--neastable js tree--}}
     <div class="col-xs-12">
-        {!! $menuTree !!}
+        {{--<div class="dd dd-draghandle" id="nestableMenu">--}}
+            {!! $menuTree !!}
+        {{--</div>--}}
     </div>
 
     <div class="col-xs-12">
@@ -97,7 +99,7 @@
                 }
             };
             $('.dd').nestable().on('change', updateOutput);
-            updateOutput($('#nestable').data('output', $('#menuJson')));
+            updateOutput($('#nestableMenu').data('output', $('#menuJson')));
 
             //making the link enable to click
             $('.dd-handle a').on('mousedown', function(e){
@@ -124,7 +126,7 @@
                         });
                         var options = {
                             type: 'POST',
-                            url: "{{url('menuManagement/' . $tableName)}}/updateOrder",
+                            url: "{{url('menuManagement/' . $tableName)}}/updateMenuTree",
                             data: {'menuJson':$('#menuJson').val()},
                             success: function (data) {
                                 layer.close(saveLayer);

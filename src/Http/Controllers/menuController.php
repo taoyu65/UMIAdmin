@@ -24,10 +24,10 @@ class menuController extends Controller
     #load all menus and manage
     public function management(Request $request)
     {
-        $menu = new umiMenusBuilder();
+        $menuBuilder = new umiMenusBuilder();
 
         $tableName = $request->route()->parameter('table');
-        $menuTree = $menu->showDragDropTree($tableName, '', true);
+        $menuTree = $menuBuilder->showDragDropTree($tableName, true);
 
         return view('umi::menu.sideMenu', [
             'menuTree' => $menuTree,
@@ -46,12 +46,12 @@ class menuController extends Controller
         $tableName = $request->route()->parameter('table');
         Cache::pull($tableName);
 
-        echo $menuJson;
+        return 'Updated success';
     }
 
     #加载分配用户菜单页面
     #load distribution page of user's menus
-    public function distribution($table)
+    public function distribution($tableName)
     {
         $userTableName = Config::get('umiEnum.system_table_name.umi_users');
 
@@ -69,18 +69,19 @@ class menuController extends Controller
         #turn into json and encrypt as part of url for requesting a related function
         $property = $selector->serialize();
 #endregion
-        $menu = new umiMenusBuilder();
-        $menuTree = $menu->showDragDropTree($table);
 
-        return view('umi::menu.distribution', compact('menuTree', 'table', 'userTableName', 'property'));
+        $menuBuilder = new umiMenusBuilder();
+        $menuTree = $menuBuilder->showDragDropTree($tableName);
+
+        return view('umi::menu.distribution', compact('menuTree', 'tableName', 'userTableName', 'property'));
     }
 
     #重新加载所有菜单 来自ajax请求
     #reload all the menus from ajax request
-    public function loadMenuTree($table, $userIdArr = '', $showButton = false, $buttonException = [])
+    public function loadMenuTree($table, $showButton = false, $buttonException = [])
     {
-        $menu = new umiMenusBuilder();
-        $menuTree = $menu->showDragDropTree($table, $userIdArr, $showButton, $buttonException);
+        $menuBuilder = new umiMenusBuilder();
+        $menuTree = $menuBuilder->showDragDropTree($table, $showButton, $buttonException);
 
         #必须重新用js启动可拖拽功能
         #must to be restart the drag function with js command
@@ -92,14 +93,27 @@ class menuController extends Controller
     #load the menus from string of user's json menu
     public function loadMenuTreeFromJson($table, $userId)
     {
-        $userMenu = new UserMenu();
+        $userMenu = new UserMenu(false);
         $json = $userMenu->userJsonMenu($userId);
         $jsonArr = json_decode($json);
 
-        $stream = $this->getIdsFromJson($jsonArr);
-        $userIdArr = explode(',', trim($stream, ','));
+        $menuBuilder = new umiMenusBuilder();
+        return $menuBuilder->showDragDropTreeByJson($jsonArr);
+    }
 
-        return $this->loadMenuTree($table, $userIdArr, true, ['add']);
+    #更新用户菜单 以json方式进行数据存储
+    #update user's menu, as json type to storage data
+    public function updateUserTree(Request $request, $table, $userId)
+    {
+        $menuJsonUser = $request->input('menuJsonUser');
+
+        $userMenu = new UserMenu();
+        if ($userMenu->updateUserMenu($userId, $menuJsonUser) > 0) {
+            Cache::pull($table);
+            return 'Update success!';
+        } else {
+            return 'Nothing changes!';
+        }
     }
 #region Private function
     private function recursiveUpdateOrder($currentMenu, $parentId = 0)
@@ -124,19 +138,6 @@ class menuController extends Controller
         if ($menu->menu_id != $parentId || $menu->order != $order) {
             $this->menu->updateOrder($id, $parentId, $order);
         }
-    }
-
-    private function getIdsFromJson($jsonArr)
-    {
-        $stream = '';
-
-        foreach ($jsonArr as $item) {
-            $stream .= $item->id . ',';
-            if (isset($item->children))
-                $stream .= $this->getIdsFromJson($item->children);
-        }
-
-        return $stream;
     }
 #endregion
 }

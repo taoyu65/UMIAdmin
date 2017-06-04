@@ -9,6 +9,13 @@ class UserMenu extends UmiBase
     protected $openCache = true;
     protected $cacheAllRecord = true;
 
+    public function __construct($openCache = true, $orderBy = '', $order = 'asc')
+    {
+        parent::__construct($orderBy, $order);
+
+        $this->openCache = $openCache;
+    }
+
     public function userJsonMenu($userId)
     {
         if ($this->openCache) {
@@ -21,5 +28,11 @@ class UserMenu extends UmiBase
         return self::where('user_id', $userId)
             ->first()
             ->json;
+    }
+
+    public function updateUserMenu($userId, $json)
+    {
+        return self::where('user_id', $userId)
+            ->update(['json' => $json]);
     }
 }

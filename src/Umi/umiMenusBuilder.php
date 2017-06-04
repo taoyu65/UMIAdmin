@@ -284,14 +284,11 @@ UMI;
     }
 
 #Menu tree for management (drag and drop)-------------------------------------------------------
-
     #加载菜单(用nestable插件显示)
-        #userIdArr:         数组形式的用户菜单, 包含所有ID(用于对原始菜单过滤)
         #buttonException:   在显示按钮的同时, 哪个功能不显示 (browser, read, add, delete)
     #load menus (with nestable plugin)
-        #userIdArr:         user's menu of array's type, include all ID (for filtering the original menu)
         #buttonException:   when all buttons are showing, decide which button is not available. (browser, read, add, delete)
-    public function showDragDropTree($tableName, $userIdArr = '', $showButton = false, $buttonException = [])
+    public function showDragDropTree($tableName, $showButton = false, $buttonException = [])
     {
         $TRO = new TableRelationOperation();
         $tableId = YM::getTableIdByTableName($tableName);
@@ -299,16 +296,62 @@ UMI;
         $this->relationOperationRuleList = $TRO->getRulesForConfirmation($tableId);
 
         $html = '';
-        $html .= '<div class="dd dd-draghandle" id="nestable">';
-        $html .= $this->menuManagement($showButton, $buttonException, $userIdArr);
+        $html .= '<div class="dd dd-draghandle" id="nestableMenu">';
+        $html .= $this->menuManagement($showButton, $buttonException);
         $html .= '</div>';
 
         return $html;
     }
 
-    private function menuManagement($showButton = false, $buttonException = [], $userIdArr = '', $menu_id = 0)
+    #显示用户菜单, 从用户菜单json中读取, 可以定制
+    #show user's menu, reading from user's json, can be customized
+    public function showDragDropTreeByJson($jsonArr)
     {
-        $menus = $this->menus->getMenus($menu_id, $userIdArr);
+        $html = '';
+        $html .= '<div class="dd dd-draghandle" id="nestableUser">';
+        $html .= $this->createUserTree($jsonArr);
+        $html .= '</div>';
+
+        return $html;
+    }
+
+    #显示用户菜单, 从用户菜单json中读取, 可以定制
+    #show user's menu, reading from user's json, can be customized
+    private function createUserTree($jsonArr)
+    {
+        $html = '<ol class="dd-list">';
+
+        foreach ($jsonArr as $item) {
+            $record = $this->menus->getOneMenu($item->id);
+
+            $recursiveOL = '';
+            if (isset($item->children))
+                $recursiveOL = $this->createUserTree($item->children);
+
+            $html .= $LI =<<<UMI
+                <li class="dd-item dd2-item" data-id="$record->id">
+                     <div class="dd-handle dd2-handle">
+                         <i class="normal-icon ace-icon fa $record->icon_class bigger-130"></i>
+        
+                         <i class="drag-icon ace-icon fa fa-arrows bigger-125"></i>
+                     </div>
+                     <div class="dd2-content">
+                         $record->title
+                     </div>
+                     $recursiveOL
+                </li>
+UMI;
+        }
+        $html .= '</ol>';
+
+        return $html;
+    }
+
+    #显示所有菜单根据数据表字段生成, 用于超级用户读取全部数据
+    #show all menus from data table, for super administrator showing all the menus
+    private function menuManagement($showButton = false, $buttonException = [], $menu_id = 0)
+    {
+        $menus = $this->menus->getMenus($menu_id);
         if ($menus->count() === 0) return '';
 
         $html = '<ol class="dd-list">';
@@ -316,7 +359,7 @@ UMI;
             $itemId = $menu->id;
             $iconClass = $menu->icon_class;
             $title = $menu->title;
-            $recursiveOL = $this->menuManagement($showButton, $buttonException, $userIdArr, $menu->id);
+            $recursiveOL = $this->menuManagement($showButton, $buttonException, $menu->id);
 
             #获取数据库连级删除的参数field
             #get parameter "field" for relation operation

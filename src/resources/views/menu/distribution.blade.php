@@ -14,9 +14,22 @@
             </small>
         </h1>
     </div>
+    <div class="row">
+        <div class="alert alert-block alert-success">
+            <button type="button" class="close" data-dismiss="alert">
+                <i class="ace-icon fa fa-times"></i>
+            </button>
+            <strong>
+                <i class="ace-icon fa fa-check"></i>
+                Select a user first.
+            </strong>
+            Drag and Drop from right size menu tree to user tree rebuild a new user's menu!
+            If you want make a new Menu, Go to Side Menu->Management
+            </p>
+        </div>
+    </div>
 
     <div class="row">
-        {{-- User Tree --}}
         <div class="col-sm-6">
             <div class="col-sm-12">
                 <h3 class="header smaller lighter purple">
@@ -26,7 +39,7 @@
 
             <div class="col-sm-12">
                 <menu id="nestable-menu-user" class="nestable-menu-user">
-                    <button type="button" data-action="select-user" class="btn btn-purple btn-sm btn-next">
+                    <button type="button" data-action="select-user" class="btn btn-purple btn-sm btn-next" id="select-user">
                         Select a user
                         <i class="ace-icon fa fa-user-plus"></i>
                     </button>
@@ -38,7 +51,7 @@
                         Collapse All
                         <i class="ace-icon fa fa-compress"></i>
                     </button>
-                    <button type="button" data-action="save" class="btn btn-success btn-sm btn-next">
+                    <button type="button" data-action="save" class="btn btn-success btn-sm btn-next" id="save-user">
                         Save
                         <i class="ace-icon fa fa-plus"></i>
                     </button>
@@ -46,22 +59,9 @@
             </div>
 
             <div class="col-sm-12" id="menuTreeUser">
-                <div class="alert alert-block alert-success">
-                    <button type="button" class="close" data-dismiss="alert">
-                        <i class="ace-icon fa fa-times"></i>
-                    </button>
-                        <strong>
-                            <i class="ace-icon fa fa-check"></i>
-                            Select a user first.
-                        </strong>
-                        Drop Drag from right size menu tree to user tree rebuild a new user's menu!<br><br>
-                        If you want make a new Menu, Go to Side Menu->Management
-                    </p>
-                </div>
             </div>
         </div>
 
-        {{-- Menu Tree --}}
         <div class="col-sm-6">
             <div class="col-sm-12">
                 <h3 class="header smaller lighter red">
@@ -91,20 +91,92 @@
         </div>
     </div>
 
-    {{--neastable js tree--}}
-    <div class="col-xs-12">
-
-    </div>
-
-    <form method="post" id="updateOrderForm">
+    <form method="post" id="userTreeUpdateForm">
         {!! csrf_field() !!}
+        <input id="menuJsonUser" type="hidden">
+        <input id="userId" type="hidden">
     </form>
 
     <script src="{{$path}}/js/jquery.nestable.min.js"></script>
     <script src="{{$assetPath}}/js/jquery.form.js"></script>
     <script type="text/javascript">
+        var userId = '';
 
         $(document).ready(function () {
+            //init
+            $('#userId').val('');
+
+            //使得按钮可以点击
+            //making the link enable to click
+            $('.dd-handle a').on('mousedown', function(e){
+                e.stopPropagation();
+            });
+
+            //用户菜单按钮组
+            //button group of user's tree menu
+            $('#nestable-menu-user').on('click', function(e)
+            {
+                var target = $(e.target),
+                    action = target.data('action');
+                switch (action) {
+                    case 'expand-all':
+                        $('#nestableUser').nestable('expandAll');
+                        break;
+                    case 'collapse-all':
+                        $('#nestableUser').nestable('collapseAll');
+                        break;
+                    case 'select-user':
+                        selectUser(target);
+                        break;
+                    case 'save':
+                        if ($('#userId').val() == '')
+                            return false;
+                        var saveLayerUser = layer.load(0, {
+                            shade: [0.8, '#000000']
+                        });
+                        var options = {
+                            type: 'POST',
+                            url: "{{url('menuManagement/' . $tableName)}}/updateUserTree/" + $('#userId').val(),
+                            data: {'menuJsonUser':$('#menuJsonUser').val()},
+                            success: function (data) {
+                                layer.close(saveLayerUser);
+                                layer.alert(data, function (e) {
+                                    //window.location.reload();
+                                    layer.close(e);
+                                    LoadUserTree(userId);
+                                });
+                            }
+                        };
+                        $('#userTreeUpdateForm').ajaxSubmit(options);
+                        break;
+                }
+            });
+
+            //全部菜单按钮组
+            //button group of all tree menu
+            $('#nestable-menu').on('click', function(e)
+            {
+                var target = $(e.target),
+                    action = target.data('action');
+                switch (action) {
+                    case 'expand-all':
+                        $('#nestableMenu').nestable('expandAll');
+                        break;
+                    case 'collapse-all':
+                        $('#nestableMenu').nestable('collapseAll');
+                        break;
+                    case 'refresh':
+                        ReloadMenuTree();
+                        break;
+                }
+            });
+
+            $('#nestableMenu').nestable();
+        });
+
+        //当初始化和拖动菜单后重新计算json
+        //when init and drag tree, it will recalculate the json string
+        function resetJson(){
             var updateOutput = function(e) {
                 var list = e.length ? e : $(e.target),
                     output = list.data('output');
@@ -115,49 +187,9 @@
                     output.val('JSON browser support required for this demo.');
                 }
             };
-            $('.dd').nestable().on('change', updateOutput);
-            updateOutput($('#nestable').data('output', $('#menuJson')));
-
-            //making the link enable to click
-            $('.dd-handle a').on('mousedown', function(e){
-                e.stopPropagation();
-            });
-
-            $('#nestable-menu-user').on('click', function(e)
-            {
-                var target = $(e.target),
-                    action = target.data('action');
-                switch (action) {
-                    case 'expand-all':
-                        $('#menuTreeUser').children('.dd').nestable('expandAll');
-                        break;
-                    case 'collapse-all':
-                        $('#menuTreeUser').children('.dd').nestable('collapseAll');
-                        break;
-                    case 'select-user':
-                        selectUser(target);
-                        break;
-                }
-            });
-
-            $('#nestable-menu').on('click', function(e)
-            {
-                var target = $(e.target),
-                    action = target.data('action');
-                switch (action) {
-                    case 'expand-all':
-                        $('#menuTree').children('.dd').nestable('expandAll');
-                        break;
-                    case 'collapse-all':
-                        $('#menuTree').children('.dd').nestable('collapseAll');
-                        break;
-                    case 'refresh':
-                        ReloadMenuTree();
-                        break;
-                }
-            });
-        });
-
+            $('#nestableUser').nestable().on('change', updateOutput);
+            updateOutput($('#nestableUser').data('output', $('#menuJsonUser')));
+        }
         //选择用户界面
         //page of selecting user
         function selectUser(obj) {
@@ -177,6 +209,7 @@
         }
 
         function LoadUserTree(value) {
+            userId = value;
             layer.closeAll();
 
             //加载用户菜单
@@ -184,9 +217,12 @@
             $('#menuTreeUser').html('<i class="ace-icon fa fa-spinner fa-spin orange bigger-300"></i>');
 
             $.ajax({
-                url:"{{url('menuManagement/' . $table)}}/loadMenuTreeFromJson/" + value,
+                url:"{{url('menuManagement/' . $tableName)}}/loadMenuTreeFromJson/" + value,
                 success:function(data) {
                     $('#menuTreeUser').html(data);
+                    resetJson();
+                    //设置已经选择的用户 Set up a value that just selected
+                    $('#userId').val(value);
                 },
                 error: function () {
                     $('#menuTreeUser').html('something went wrong');
@@ -200,7 +236,7 @@
             $('#menuTree').html('<i class="ace-icon fa fa-spinner fa-spin orange bigger-300"></i>');
 
             $.ajax({
-                url:"{{url('menuManagement/' . $table)}}/loadMenuTree",
+                url:"{{url('menuManagement/' . $tableName)}}/loadMenuTree",
                 success:function(data) {
                     $('#menuTree').html(data);
                 },
