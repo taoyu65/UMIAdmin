@@ -393,6 +393,9 @@ UMI;
             abort(503, 'parameter is wrong');
 
         $deleteUrl = url('deleting') . "/$this->tableName/$itemId/$parameterField";
+        #添加规则最后的参数为:提供默认字段以及值
+        #add rule, the last parameter is: supply defaults value and its fields
+        $addUrl = url('adding'). "/$this->tableName/" . YM::serializeAndBase64(['menu_id' => $itemId]);
         //todo  - need to finish add, browser, edit, still waiting for the main function and than make a link.
 
         $html = '<div class="pull-right action-buttons">';
@@ -403,9 +406,9 @@ UMI;
                         <i class="ace-icon fa fa-plus bigger-130"></i>
                       </a>';
         } else {
-            $html .= '<a class="green" href="#">
-                        <i class="ace-icon fa fa-plus bigger-130"></i>
-                      </a>';
+            $html .= '<a class="green" href="#" onclick="showAdding(\'' . $addUrl . '\')">';
+            $html .= '    <i class="ace-icon fa fa-plus bigger-130"></i>';
+            $html .= '</a>';
         }
 
         #browser

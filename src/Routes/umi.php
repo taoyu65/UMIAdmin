@@ -106,5 +106,22 @@ Route::group(['middleware' => 'umi.url.auth'], function () {
         'uses'      => 'umiTableDeleteController@delete'
     ]);
     #---------------------------------------------------------------
+
+    #添加确认页面 和 执行添加
+    #confirmation page before adding and command of adding
+    #---------------------------------------------------------------
+
+    #添加规则最后的参数为:提供默认字段以及值
+    #add rule, the last parameter is: supply defaults value and its fields
+    Route::get('adding/{table}/{defaultValue?}', [
+        'middleware'=> ['umi.bread.access:add', 'umi.TRelation.confirmation'],
+        'uses'      => 'umiTableAddController@adding'
+    ]);
+    Route::post('add/{table}', [
+        'middleware'=> ['umi.bread.access:delete', 'umi.TRelation.execute'],
+        'uses'      => 'umiTableAddController@add'
+    ]);
+    #---------------------------------------------------------------
+
 });
 #------------------------------------------------------------------

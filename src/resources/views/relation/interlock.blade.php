@@ -309,7 +309,7 @@
         });
 
         $(document).ready(function(){
-                    $('#submitBtn').removeAttr('disabled');
+            $('#submitBtn').removeAttr('disabled');
         });
     </script>
 @endsection

@@ -52,7 +52,7 @@ class umiTableController extends Controller
         //Event::fire(new TableRelationOperationEvent('', 'delete'));
         //var_dump('fdsa');
         //
-        if ($tableName == '') return view('umi::umiTableAll');
+        if ($tableName == '') return view('umi::table.umiTableAll');
 
         Umi::setCurrentTableName($tableName);
 
@@ -62,7 +62,7 @@ class umiTableController extends Controller
         $tableBody = $breadBrowser->tableBody();
         $footer = $breadBrowser->footer();
 
-        return view('umi::umiTable', [
+        return view('umi::table.umiTable', [
             'header'    => $header,
             'tableBody' => $tableBody,
             'footer'    => $footer

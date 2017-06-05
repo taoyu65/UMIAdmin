@@ -4,7 +4,6 @@ namespace YM\Umi;
 
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Session;
-use YM\Models\TableRelationOperation;
 
 class Umi
 {
@@ -137,5 +136,16 @@ UMI;
         }
 
         return base64_encode(json_encode($returnArr));
+    }
+
+    #序列化后再用base64加密 用于在URL中传输数据, 和它的反向操作
+    #serialize and than base64 encrypt for transferring data through URL, and its reverse operation
+    public function serializeAndBase64($obj)
+    {
+        return base64_encode(serialize($obj));
+    }
+    public function unSerializeAndBase64($string)
+    {
+        return unserialize(base64_decode($string));
     }
 }

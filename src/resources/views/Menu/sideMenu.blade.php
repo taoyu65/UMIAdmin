@@ -146,10 +146,23 @@
         function showDeleting(url){
             layer.open({
                 type: 2,
-                title: 'deleting',
+                title: 'Deleting',
                 maxmin: true,
                 shadeClose: true,
-                area : ['800px' , '520px'],
+                area : ['80%' , '90%'],
+                content: url
+            });
+        }
+
+        //显示添加确认页面
+        //show the confirmation page before adding
+        function showAdding(url) {
+            layer.open({
+                type: 2,
+                title: 'Adding',
+                maxmin: true,
+                shadeClose: true,
+                area : ['80%' , '90%'],
                 content: url
             });
         }

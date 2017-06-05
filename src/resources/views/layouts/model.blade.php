@@ -15,8 +15,13 @@
 
 @yield('content')
 
+<script src="{{$path}}/js/bootstrap.min.js"></script>
 <!-- layer scripts -->
 <script src="{{$assetPath}}/layer/layer.js"></script>
+
+<!-- ace scripts -->
+<script src="{{$path}}/js/ace-elements.min.js"></script>
+<script src="{{$path}}/js/ace.min.js"></script>
 
 </body>
 </html>
