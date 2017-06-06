@@ -59,7 +59,7 @@
                         </span><br>
                         Operating current table (active table) only according the rule you make. The rule is checking current table itself <br>
                         Before do a action (delete, edit, read, or add a record) the rule will be applied.<br>
-                        For example: there are items table. You want to protect all the items which has 5 stars from deleting. So set the rule: active table - items, active field - stars, operation - "=", target value - "5"<br>
+                        For example: there are items with the property of 1-5 stars in the table. You want to protect all the items which has 5 stars from deleting. So set the rule: active table - items, active field - stars, operation - "=", target value - "5"<br>
                     </p>
                 </div>
             </div>
@@ -71,9 +71,8 @@
 
         {!! csrf_field() !!}
         <input type="hidden" name="rule_name" value="selfCheck">
-        {{--<input type="hidden" name="operation_type" value="delete">--}}
         <input type="hidden" name="is_extra_operation" value="0">
-
+        <input type="hidden" name="advantageSwitch" value="on">
         {{--custom rule name--}}
         <div class="form-group">
             <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="operationType">Action</label>
@@ -116,7 +115,7 @@
         <div class="space-2"></div>
 
         <div class="form-group">
-            <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="responseTable">Active Field </label>
+            <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="activeField">Active Field </label>
             <div class="col-xs-12 col-sm-4">
                 <div class="clearfix">
                     <select class="form-control" id="activeField" name="activeField">
@@ -132,58 +131,6 @@
 
         <div class="hr hr-dotted"></div>
         <div class="space-2"></div>
-
-        {{--response table--}}
-        {{--<div class="form-group">
-            <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="responseTable">Response Table</label>
-            <div class="col-xs-12 col-sm-4">
-                <select id="responseTable" name="responseTable" class="chosen-select form-control" data-placeholder="Click to Choose...">
-                    <option value="">&nbsp;</option>
-                    @foreach($tableNames as $tableName => $tableId)
-                        <option value="{{$tableId}}">{{$tableName}}</option>
-                    @endforeach
-                </select>
-            </div>
-            <i class="fa fa-question-circle fa-lg popover-info blue" aria-hidden="true" data-rel="popover"
-               data-trigger="hover" style="transform: translate(0,4px);" data-placement="auto right"
-               title="Response Table"
-               data-content="Which table will be related by operating of active table's record"></i>
-        </div>
-
-        <div class="space-2"></div>
-
-        <div class="form-group">
-            <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="responseField">Response Field</label>
-            <div class="col-xs-12 col-sm-4">
-                <div class="clearfix">
-                    <select class="form-control" id="responseField" name="responseField">
-                        <option value="">select response table</option>
-                    </select>
-                </div>
-            </div>
-            <i class="fa fa-question-circle fa-lg popover-info blue" aria-hidden="true" data-rel="popover"
-               data-trigger="hover" style="transform: translate(0,4px);" data-placement="auto right"
-               title="Response Field"
-               data-content="This field will match active filed to achieve operation of relation"></i>
-        </div>
-
-        <div class="hr hr-dotted"></div>
-        <div class="space-2"></div>--}}
-
-        {{--advantage--}}
-        {{--<div class="form-group">
-            <label class="control-label col-xs-12 col-sm-1 no-padding-right blue" for="detail">Advantage</label>
-            <div class="col-xs-4">
-                <label>
-                    <input name="switch-field-1" id="advantageSwitch" class="ace ace-switch ace-switch-7" type="checkbox" />
-                    <span class="lbl"></span>
-                </label>
-            </div>
-            <i class="fa fa-question-circle fa-lg popover-error red2" aria-hidden="true" data-rel="popover"
-               data-trigger="hover" style="transform: translate(0,4px);" data-placement="auto right"
-               title="Custom Rule"
-               data-content="Set the rule to match active field for operation of records"></i>
-        </div>--}}
 
         <div id="advantage">
             <div class="form-group">

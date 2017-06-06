@@ -43,12 +43,12 @@ class relationOperationController extends Controller
     {
         Validator::make($request->all(), [
             'activeTable'   => 'required',
-            'activeField'   => 'required',
+            /*'activeField'   => 'required',
             'responseTable' => 'required',
             'responseField' => 'required',
             'rule_name'     => 'required',
             'ruleName'      => 'required',
-            'targetValue'   => 'required'
+            'targetValue'   => 'required'*/
         ])->validate();
 
         $customer_rule_name = $request->ruleName === null ? '' : $request->ruleName;
@@ -57,11 +57,11 @@ class relationOperationController extends Controller
         $is_extra_operation = $request->input('is_extra_operation');
         $active_table_id = $request->activeTable;
         $active_table_field = $request->activeField === null ? '' : $request->activeField;
-        $response_table_id = $request->responseTable;
-        $response_table_field = $request->responseField;
+        $response_table_id = $request->responseTable === null ? 0 : $request->responseTable;
+        $response_table_field = $request->responseField === null ? '' : $request->responseField;
         $check_value = '';
         $check_operation = '';
-        if ($active_table_field === '') { //if advantage is open
+        if ($request->advantageSwitch == 'on') { //if advantage is open
             $check_value = $request->targetValue === null ? '' : $request->targetValue;
             $check_operation = $request->operation === null ? '' : $request->operation;
         }

@@ -180,7 +180,7 @@
             <label class="control-label col-xs-12 col-sm-1 no-padding-right blue" for="detail">Advantage</label>
             <div class="col-xs-4">
                 <label>
-                    <input name="switch-field-1" id="advantageSwitch" class="ace ace-switch ace-switch-7" type="checkbox" />
+                    <input name="advantageSwitch" id="advantageSwitch" class="ace ace-switch ace-switch-7" type="checkbox" />
                     <span class="lbl"></span>
                 </label>
             </div>
