@@ -46,6 +46,7 @@ class CreateFieldDisplayBreadTable extends Migration
             $table->string('field');
             $table->string('type');
             $table->string('relation_display');
+            $table->text('custom_value');
             $table->string('display_name');
             $table->string('validation');
             $table->string('details');
@@ -61,6 +62,7 @@ class CreateFieldDisplayBreadTable extends Migration
             $table->string('field');
             $table->string('type');
             $table->string('relation_display');
+            $table->text('custom_value');
             $table->string('display_name');
             $table->string('validation');
             $table->string('details');

@@ -16,10 +16,14 @@ class UmiModel
 
     private $cachedTable;
     private $tableName;
+    private $orderBy;
+    private $order;
 
-    public function __construct($tableName)
+    public function __construct($tableName, $orderBy = '', $order = '')
     {
         $this->tableName = $tableName;
+        $this->orderBy = $orderBy;
+        $this->order = $order;
 
         if ($this->openCache && $tableName != ''){
             $minute = Config::get('umi.cache_minutes');
@@ -29,11 +33,17 @@ class UmiModel
             $tableCount = Cache::remember($tableName.'count', $minute, function () use ($tableName) {
                 return DB::table($tableName)->count();
             });
-            if ($tableCount > $this->CacheSmallThan)
-                return;
 
-            $this->cachedTable = Cache::remember($tableName, $minute, function () use ($tableName) {
-                return DB::table($tableName)->get();
+            if ($tableCount > $this->CacheSmallThan) {
+                $this->openCache = false;
+                return;
+            }
+
+            $this->cachedTable = Cache::remember($tableName, $minute, function () use ($tableName, $orderBy, $order) {
+                if ($orderBy === '' && $order === '')
+                    return DB::table($tableName)->get();
+
+                return DB::table($tableName)->orderBy($orderBy, $order)->get();
             });
         }
     }
@@ -63,6 +73,23 @@ class UmiModel
         return DB::table($this->tableName)
             ->select($fields)
             ->paginate($page);
+    }
+
+    public function getRecordsByWhere($where, $value)
+    {
+        if ($this->openCache) {
+            return $this->cachedTable
+                ->where($where, $value);
+        }
+
+        $ds = DB::table($this->tableName)
+            ->where($where, $value);
+
+        if ($this->orderBy === '' && $this->order === '')
+            return $ds->get();
+
+        return $ds->order($this->orderBy, $this->order)
+            ->get();
     }
 
     public function getSelectedTable($fields)

@@ -27,7 +27,7 @@ class UmiTableRelation
 
             $re = '';
             $activeTableName = YM::getTableNameById($rule->active_table_id);
-            $responseTableName = YM::getTableNameById($rule->response_table_id);
+            $responseTableName = $rule->response_table_id ? YM::getTableNameById($rule->response_table_id) : '';
 
             $checkOperation = $rule->check_operation === '' ? '=' : $rule->check_operation;
             //$currentFieldValue = $activeFieldValues[$rule->active_table_field];

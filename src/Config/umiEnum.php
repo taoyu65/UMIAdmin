@@ -10,7 +10,8 @@ return[
     #originalTableName => changeableTableName
     'system_table_name'     => [
         'umi_table_relation_operation'  => 'umi_table_relation_operation',
-        'umi_users'                     => 'umi_users'
+        'umi_users'                     => 'umi_users',
+        'umi_field_display_add'         => 'umi_field_display_add'
     ],
 
     #数据类型
@@ -61,7 +62,7 @@ return[
     'operation_type'      => [
         'delete',
         'edit',
-        'add',
+        //'add',
         'read'
     ],
 ];

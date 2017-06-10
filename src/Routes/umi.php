@@ -114,11 +114,11 @@ Route::group(['middleware' => 'umi.url.auth'], function () {
     #添加规则最后的参数为:提供默认字段以及值
     #add rule, the last parameter is: supply defaults value and its fields
     Route::get('adding/{table}/{defaultValue?}', [
-        'middleware'=> ['umi.bread.access:add', 'umi.TRelation.confirmation'],
+        'middleware'=> ['umi.bread.access:add'],
         'uses'      => 'umiTableAddController@adding'
     ]);
     Route::post('add/{table}', [
-        'middleware'=> ['umi.bread.access:delete', 'umi.TRelation.execute'],
+        'middleware'=> ['umi.bread.access:delete'],
         'uses'      => 'umiTableAddController@add'
     ]);
     #---------------------------------------------------------------

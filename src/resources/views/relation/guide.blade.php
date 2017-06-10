@@ -91,7 +91,7 @@
                         <ul class="list-unstyled spaced2">
                             <li>
                                 <i class="ace-icon fa fa-check green"></i>
-                                Action: Delete Read Edit Add
+                                Action: Delete Read Edit
                             </li>
 
                             <li>
@@ -126,9 +126,6 @@
                             <span class="label label-white middle">
                                Edit
                             </span>
-                            <span class="label label-white middle">
-                                Add
-                            </span>
                         </div>
                     </div>
 
@@ -153,7 +150,7 @@
                         <ul class="list-unstyled spaced2">
                             <li>
                                 <i class="ace-icon fa fa-check green"></i>
-                                Action: Delete Read Edit Add
+                                Action: Delete Read Edit
                             </li>
 
                             <li>
@@ -188,9 +185,6 @@
                             <span class="label label-white middle">
                                Edit
                             </span>
-                            <span class="label label-white middle">
-                                Add
-                            </span>
                         </div>
                     </div>
 
@@ -215,7 +209,7 @@
                         <ul class="list-unstyled spaced2">
                             <li>
                                 <i class="ace-icon fa fa-check green"></i>
-                                Action: Delete Read Edit Add
+                                Action: Delete Read Edit
                             </li>
 
                             <li>
@@ -249,9 +243,6 @@
                             </span>
                             <span class="label label-white middle">
                                Edit
-                            </span>
-                            <span class="label label-white middle">
-                                Add
                             </span>
                         </div>
                     </div>

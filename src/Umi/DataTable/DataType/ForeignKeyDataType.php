@@ -19,7 +19,7 @@ class ForeignKeyDataType extends DataTypeAbstract
         return $returnData;
     }
 
-    public function getNoExistData($data)
+    private function getNoExistData($data)
     {
         $js = '{$(\'[data-rel=tooltip]\').tooltip();}';
         $url = Config::get('umi.assets_path') . '/ace/js/jquery.easypiechart.min.js';

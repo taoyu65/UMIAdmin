@@ -9,7 +9,7 @@ class KeyIcon extends DataTypeAbstract
         return $this->getHtml($data);
     }
 
-    public function getHtml($data)
+    private function getHtml($data)
     {
         return "<i class='ace-icon fa fa-key red'></i><span class='red'>$data</span>";
     }

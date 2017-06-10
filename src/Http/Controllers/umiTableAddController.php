@@ -4,19 +4,24 @@ namespace YM\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Config;
 use YM\Facades\Umi;
 use YM\Models\UmiModel;
+use YM\Umi\umiAddTableBuilder;
 
 class umiTableAddController extends Controller
 {
-    public function adding(Request $request, $table, $defaultValue)
+    # $defaultValue: 动态设置键值对代表 默认的字段和值.
+    # $defaultValue: dynamic set a key-value to represent default field and its value
+    public function adding(Request $request, $tableName, $defaultValue)
     {
-        $actionAvailable = isset($request['TRO_Available']) && $request['TRO_Available'] === false ? false : true;
-        $message = $request['TRO_Message'];
+//        $actionAvailable = isset($request['TRO_Available']) && $request['TRO_Available'] === false ? false : true;
+//        $message = $request['TRO_Message'];
 
-        $list = compact('table', 'actionAvailable', 'message', 'a');
-        //var_dump(Umi::unSerializeAndBase64($defaultValue));
-        return view('umi::table.umiTableAdding', $list);
+        $defaultValue = Umi::unSerializeAndBase64($defaultValue);
+
+        $display = $this->getTableFields($tableName, $defaultValue);
+        return view('umi::table.umiTableAdding', ['display' => $display]);
     }
 
     public function add(Request $request, $table)
@@ -41,5 +46,16 @@ class umiTableAddController extends Controller
 
             echo '<script>parent.window.location.reload();</script>';
         }*/
+    }
+
+    public function getTableFields($tableName, $defaultValue)
+    {
+        $tableNameLoadingFieldTable = Config::get('umiEnum.system_table_name.umi_field_display_add');
+        $tableId = Umi::getTableIdByTableName($tableName);
+        $umiModel = new UmiModel($tableNameLoadingFieldTable, 'order', 'asc');
+        $records = $umiModel->getRecordsByWhere('table_id', $tableId);
+
+        $builder = new umiAddTableBuilder();
+        return $builder->display($records, $defaultValue);
     }
 }

@@ -1,0 +1,133 @@
+<?php
+
+namespace YM\Umi;
+
+use YM\Facades\Umi as YM;
+
+class umiAddTableBuilder
+{
+    private $dataTypeFactory;
+
+    public function __construct()
+    {
+        $this->dataTypeFactory = new FactoryDataType();
+    }
+
+    public function display($records, $defaultValue)
+    {
+        if (!$records->count()) {
+            return $this->showingNoRecords();
+        }
+
+        $html = '<form class="form-horizontal" id="addForm" method="post" action="">';
+        $html .= csrf_field();
+
+        foreach ($records as $record) {
+            $html .= $this->row($record, $defaultValue);
+        }
+
+        $html .= $this->buttons();
+        $html .= "</form>";
+        $html .=<<<UMI
+        <script>
+            jQuery(function ($) {
+                $("#addForm").validate({errorClass: "red"});
+            })
+        </script>
+UMI;
+
+
+        return $html;
+    }
+
+#region method
+    #检查字段是否有默认值
+    #check the field if there is a default value
+    private function checkDefaultValue($fieldName, $defaultValueArr)
+    {
+        return array_has($defaultValueArr, $fieldName) ? $defaultValueArr[$fieldName] : '';
+    }
+#endregion
+
+#region component
+    private function row($record, $defaultValue)
+    {
+        $popoverTitle = $record->display_name ? $record->display_name : $record->field;
+        $popover = $this->popoverInfo($popoverTitle, $record->details);
+
+        $disabled = $record->is_editable ? '' : 'disabled';
+        $name = $record->field;
+        $property = compact('name','disabled');
+
+        $value = $this->checkDefaultValue($name, $defaultValue);
+        $dataTypeFactory = $this->dataTypeFactory->getInstance($record->type);
+        $validation = json_decode($record->validation);
+
+        $input = $dataTypeFactory->regulateDataEditAdd($value, '', '', $validation, [
+            'property'      => $property,
+            'customValue'   => json_decode($record->custom_value)
+        ]);
+
+        $html =<<<UMI
+        <div class="form-group">
+            <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="$name">$record->display_name</label>
+            <div class="col-xs-12 col-sm-4">
+                <div class="clearfix">
+                    <span >$input</span>
+                </div>
+            </div>
+            $popover
+        </div>
+        
+UMI;
+
+        return $html;
+    }
+
+    private function popoverInfo($title, $content)
+    {
+        if ($content == '')
+            return '';
+
+        $html =<<<UMI
+            <i class="fa fa-question-circle fa-lg popover-info blue" aria-hidden="true" data-rel="popover"
+                       data-trigger="hover" style="transform: translate(0,4px);" data-placement="auto right"
+                       title="$title"
+                       data-content="$content"></i>
+UMI;
+        return $html;
+    }
+
+    private function buttons()
+    {
+        $html = <<<UMI
+        <button class="btn btn-success btn-sm btn-next" type="submit" id="submitBtn">
+            Add
+            <i class="ace-icon fa fa-plus"></i>
+        </button>
+        &nbsp;&nbsp;
+        <button class="btn btn-primary btn-sm btn-next" type="button" id="clsDelete">
+            Close
+            <i class="ace-icon fa fa-arrow-left"></i>
+        </button>
+UMI;
+
+        return $html;
+    }
+
+    private function showingNoRecords()
+    {
+        $html =<<<UMI
+        <div class="alert alert-danger">
+            You have not set up which fields will be able to showed
+            <br /><br /><p>
+                <button class="btn btn-sm btn-success">Go Set Up</button>
+                <button class="btn btn-sm btn-info" id="clsDelete">Close</button>
+            </p>
+        </div>
+UMI;
+
+        return $html;
+    }
+#endregion
+}

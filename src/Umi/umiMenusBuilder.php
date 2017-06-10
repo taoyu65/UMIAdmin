@@ -365,7 +365,7 @@ UMI;
             #get parameter "field" for relation operation
             $parameterField = YM::parameterTRO($menu, $this->relationOperationRuleList);
             //$breadButton = $showOperationButton ? $this->breadButton($itemId, $parameterField) : '';
-            $breadButton = $showButton ? $this->breadButton($itemId, $parameterField, $buttonException) : '';
+            $breadButton = $showButton ? $this->breadButton($itemId, $menu_id, $parameterField, $buttonException) : '';
 
             $html .= $LI =<<<UMI
             <li class="dd-item dd2-item" data-id="$itemId">
@@ -387,7 +387,7 @@ UMI;
         return $html;
     }
 
-    private function breadButton($itemId, $parameterField, $buttonException = [])
+    private function breadButton($itemId, $menuId, $parameterField, $buttonException = [])
     {
         if (!is_array($buttonException))
             abort(503, 'parameter is wrong');
@@ -395,7 +395,8 @@ UMI;
         $deleteUrl = url('deleting') . "/$this->tableName/$itemId/$parameterField";
         #添加规则最后的参数为:提供默认字段以及值
         #add rule, the last parameter is: supply defaults value and its fields
-        $addUrl = url('adding'). "/$this->tableName/" . YM::serializeAndBase64(['menu_id' => $itemId]);
+        $parameterDefaultValue = YM::serializeAndBase64(array('menu_id' => $menuId));
+        $addUrl = url('adding'). "/$this->tableName" . "/$parameterDefaultValue";
         //todo  - need to finish add, browser, edit, still waiting for the main function and than make a link.
 
         $html = '<div class="pull-right action-buttons">';

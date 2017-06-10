@@ -28,6 +28,7 @@ class DataTypeAbstract implements DataTypeInterface
      *      - 字段验证规则
      *      - validation of field
      * @param array $option
+     *      - 'property': 包含input的属性 including the property of input
      * @return mixed
      * @internal param string $relationship - 如果该字段需要显示其他数据表的字段, 则需要relationship等于 表名:字段名, 还有外键id*      - 如果该字段需要显示其他数据表的字段, 则需要relationship等于 表名:字段名, 还有外键id
      *      - if data need to be showing as other table's field then need relationship = tableName:fieldName, and foreign id
@@ -36,4 +37,35 @@ class DataTypeAbstract implements DataTypeInterface
     {
         return $data;
     }
+
+    #input属性数组转换为字符串
+    #input property array turn into string
+    protected function getProperty($option)
+    {
+        if (!array_has($option, 'property'))
+            return '';
+
+        $property = '';
+        foreach ($option['property'] as $key => $value) {
+            if ($value == '')
+                break;
+            $property .= "$key=\"$value\" ";
+        }
+        return $property;
+    }
+
+    #解析validation并拼接字符串, 使用jquery validation
+    #analyize and joint the string, using jquery validation.
+    protected function getValidation($validation)
+    {
+        if (!$validation)
+            return '';
+
+        $validationRules = '';
+        foreach ($validation as $key => $value) {
+            $validationRules .= "$key=\"$value\" ";
+        }
+        return $validationRules;
+    }
+
 }
