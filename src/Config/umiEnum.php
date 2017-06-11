@@ -59,10 +59,16 @@ return[
 
     #数据表关系系统中, 可以触发操作的数据表操作类型
     #the action can be triggered by operation of data table
-    'operation_type'      => [
+    'operation_type'        => [
         'delete',
         'edit',
         //'add',
         'read'
     ],
+
+    'fillable'              => [
+        'umi_menus' => [
+            'menu_id', 'title', 'url', 'target', 'icon_class', 'order', 'extra_icon_html'
+        ]
+    ]
 ];

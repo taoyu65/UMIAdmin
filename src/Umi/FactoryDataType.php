@@ -10,6 +10,8 @@ use YM\Umi\DataTable\DataType\ForeignKeyDataType;
 use YM\Umi\DataTable\DataType\LabelDataType;
 use YM\Umi\DataTable\DataType\KeyIcon;
 use YM\Umi\DataTable\DataType\StarDataType;
+use YM\Umi\DataTable\DataType\TagsDataType;
+use YM\Umi\DataTable\DataType\TextAreaDataType;
 use YM\Umi\DataTable\DataType\TextBoxDataType;
 
 class FactoryDataType
@@ -39,6 +41,10 @@ class FactoryDataType
                 return new TextBoxDataType();
             case 'checkBox':
                 return new CheckBoxDataType();
+            case 'textArea':
+                return new TextAreaDataType();
+            case 'tags':
+                return new TagsDataType();
             case 'date':
                 return new DateDataType();
             case 'star':

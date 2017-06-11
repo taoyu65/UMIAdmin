@@ -9,9 +9,9 @@ class UserMenu extends UmiBase
     protected $openCache = true;
     protected $cacheAllRecord = true;
 
-    public function __construct($openCache = true, $orderBy = '', $order = 'asc')
+    public function __construct(array $attributes = [], $openCache = true, $orderBy = '', $order = 'asc')
     {
-        parent::__construct($orderBy, $order);
+        parent::__construct($attributes = [], $orderBy, $order);
 
         $this->openCache = $openCache;
     }

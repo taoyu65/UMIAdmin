@@ -2,16 +2,21 @@
 
 namespace YM\Models;
 
+use Illuminate\Support\Facades\Config;
+
 class Menu extends UmiBase
 {
     protected $table = 'umi_menus';
+    public $timestamps = true;
 
     protected $openCache = true;
     protected $cacheAllRecord = true;
 
-    public function __construct()
+    public function __construct(array $attributes = [], $orderBy = 'order', $order = 'asc')
     {
-        parent::__construct('order');
+        $this->fillable = Config::get('umiEnum.fillable.' . $this->table);
+
+        parent::__construct($attributes, $orderBy, $order);
     }
 
     #获取菜单
@@ -60,5 +65,14 @@ class Menu extends UmiBase
                 'menu_id'   => $parentId,
                 'order'     => $order
             ]);
+    }
+
+    public function insert($inputs)
+    {
+        try {
+            self::create($inputs);
+        } catch (\Exception $exception) {
+            abort(503, $exception->getMessage());
+        }
     }
 }

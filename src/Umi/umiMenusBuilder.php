@@ -395,7 +395,7 @@ UMI;
         $deleteUrl = url('deleting') . "/$this->tableName/$itemId/$parameterField";
         #添加规则最后的参数为:提供默认字段以及值
         #add rule, the last parameter is: supply defaults value and its fields
-        $parameterDefaultValue = YM::serializeAndBase64(array('menu_id' => $menuId));
+        $parameterDefaultValue = YM::serializeAndBase64(array('menu_id' => $itemId));
         $addUrl = url('adding'). "/$this->tableName" . "/$parameterDefaultValue";
         //todo  - need to finish add, browser, edit, still waiting for the main function and than make a link.
 

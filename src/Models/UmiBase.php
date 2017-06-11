@@ -27,8 +27,10 @@ class UmiBase extends Model
 
     public $timestamps = false;
 
-    public function __construct($orderBy = '', $order = 'asc')
+    public function __construct(array $attributes = [], $orderBy = '', $order = 'asc')
     {
+        parent::__construct($attributes);
+
         if (!$this->cacheAllRecord) return;
 
         $tableName = $this->table;

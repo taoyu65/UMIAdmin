@@ -9,9 +9,9 @@ class SearchTab extends UmiBase
     protected $openCache = true;
     protected $cacheAllRecord = true;
 
-    public function __construct()
+    public function __construct(array $attributes = [])
     {
-        parent::__construct('order');
+        parent::__construct($attributes, 'order');
     }
 
     public function searchTabs($tableId)

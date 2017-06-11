@@ -14,19 +14,24 @@ class DropDownDataType extends DataTypeAbstract
 
         $custom = $option['customValue']->dropDownBox;
         $placeholder = $custom->placeholder;
-//todo - dynamic output the options, and add the interface of input the custom_value
+        $options = $custom->option;
+
+        $optionHtml = '';
+        foreach ($options as $option) {
+            $optionHtml .= "<option value='$option->value'>$option->text</option>";
+        }
+
         $html =<<<UMI
         <select class="input-medium" $property $validationString>
 			<option value="">$placeholder</option>
-			<option value="linux">Linux</option>
-			<option value="windows">Windows</option>
-			<option value="mac">Mac OS</option>
-			<option value="ios">iOS</option>
-			<option value="android">Android</option>
+			$optionHtml
 	    </select>
 UMI;
         return $html;
     }
 
+    public function regulateDataEditAddInput()
+    {
 
+    }
 }

@@ -102,4 +102,19 @@ class UmiModel
     {
         return DB::table($this->tableName)->whereId($id)->delete();
     }
+
+    public function insert($fieldsArr)
+    {
+        return DB::table($this->tableName)->insert($fieldsArr);
+    }
+
+    public function getTableFields($tableName)
+    {
+        $db = env('DB_DATABASE');
+        $fields = DB::table('information_schema.COLUMNS')
+            ->select('COLUMN_NAME')
+            ->where(['TABLE_SCHEMA'=>$db,'TABLE_NAME'=>$tableName])
+            ->get();
+        return $fields;
+    }
 }

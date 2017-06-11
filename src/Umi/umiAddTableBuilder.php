@@ -13,13 +13,13 @@ class umiAddTableBuilder
         $this->dataTypeFactory = new FactoryDataType();
     }
 
-    public function display($records, $defaultValue)
+    public function display($records, $defaultValue, $tableName)
     {
         if (!$records->count()) {
             return $this->showingNoRecords();
         }
 
-        $html = '<form class="form-horizontal" id="addForm" method="post" action="">';
+        $html = '<form class="form-horizontal" id="addForm" method="post" action="' . url("add/$tableName") . '">';
         $html .= csrf_field();
 
         foreach ($records as $record) {
@@ -55,9 +55,9 @@ UMI;
         $popoverTitle = $record->display_name ? $record->display_name : $record->field;
         $popover = $this->popoverInfo($popoverTitle, $record->details);
 
-        $disabled = $record->is_editable ? '' : 'disabled';
+        $readonly = $record->is_editable ? '' : 'true " style="cursor: not-allowed ';
         $name = $record->field;
-        $property = compact('name','disabled');
+        $property = compact('name','readonly');
 
         $value = $this->checkDefaultValue($name, $defaultValue);
         $dataTypeFactory = $this->dataTypeFactory->getInstance($record->type);
@@ -108,7 +108,7 @@ UMI;
         &nbsp;&nbsp;
         <button class="btn btn-primary btn-sm btn-next" type="button" id="clsDelete">
             Close
-            <i class="ace-icon fa fa-arrow-left"></i>
+            <i class="ace-icon fa fa-close"></i>
         </button>
 UMI;
 

@@ -118,7 +118,7 @@ Route::group(['middleware' => 'umi.url.auth'], function () {
         'uses'      => 'umiTableAddController@adding'
     ]);
     Route::post('add/{table}', [
-        'middleware'=> ['umi.bread.access:delete'],
+        'middleware'=> ['umi.bread.access:add'],
         'uses'      => 'umiTableAddController@add'
     ]);
     #---------------------------------------------------------------
