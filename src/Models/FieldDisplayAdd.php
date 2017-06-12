@@ -2,9 +2,9 @@
 
 namespace YM\Models;
 
-class FieldDisplayRead extends UmiBase
+class FieldDisplayAdd extends UmiBase
 {
-    protected $table = 'umi_field_display_read';
+    protected $table = 'umi_field_display_add';
 
     protected $openCache = true;
     protected $cacheAllRecord = true;

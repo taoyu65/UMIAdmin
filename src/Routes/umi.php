@@ -82,9 +82,13 @@ Route::group(['middleware' => 'umi.url.auth'], function () {
     #权限管理
     #authority management
     #---------------------------------------------------------------
-    Route::get('authority', [
-        'uses'      => 'authorityController@index',
+    Route::get('authority/{table}/{type}', [
+        'uses'      => 'authorityController@bread',
         'as'        => 'authority'
+    ]);
+    Route::get('authority/{table}/id/{tableId}', [
+        //'middleware'=> ['umi.bread.access:browser'],
+        'uses'      => 'authorityController@loadFields'
     ]);
     #---------------------------------------------------------------
 

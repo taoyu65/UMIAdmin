@@ -93,7 +93,7 @@ class menuController extends Controller
     #load the menus from string of user's json menu
     public function loadMenuTreeFromJson($table, $userId)
     {
-        $userMenu = new UserMenu(false);
+        $userMenu = new UserMenu([],false);
         $json = $userMenu->userJsonMenu($userId);
         $jsonArr = json_decode($json);
 
