@@ -184,11 +184,6 @@ return [
          * umi auth package - to support umi admin
          */
         YM\umiAuth\umiAuthServiceProvider::class,
-
-        //App\Providers\BroadcastServiceProvider::class,
-        //App\Providers\EventServiceProvider::class,
-        //App\Providers\RouteServiceProvider::class,
-
     ],
 
     /*

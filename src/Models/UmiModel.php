@@ -112,9 +112,13 @@ class UmiModel
     {
         $db = env('DB_DATABASE');
         $fields = DB::table('information_schema.COLUMNS')
-            ->select('COLUMN_NAME')
+            ->select('COLUMN_NAME as name')
             ->where(['TABLE_SCHEMA'=>$db,'TABLE_NAME'=>$tableName])
-            ->get();
+            ->get()
+            ->map(function ($item){
+                return $item->name;
+            });
+
         return $fields;
     }
 }

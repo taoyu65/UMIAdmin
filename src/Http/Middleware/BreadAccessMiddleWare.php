@@ -15,7 +15,8 @@ class BreadAccessMiddleware
         //$table = Umi::umiDecrypt($table);
         $permission = $action . '-' . $table;
         if (!$umiAuth->can($permission))
-            abort(403, "You are not authorized to $action this record");
+            exit("You are not authorized to $action this record");
+            //abort(403, "You are not authorized to $action this record");
 
         return $next($request);
     }

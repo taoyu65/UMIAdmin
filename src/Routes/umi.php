@@ -86,9 +86,22 @@ Route::group(['middleware' => 'umi.url.auth'], function () {
         'uses'      => 'authorityController@bread',
         'as'        => 'authority'
     ]);
-    Route::get('authority/{table}/id/{tableId}', [
-        //'middleware'=> ['umi.bread.access:browser'],
-        'uses'      => 'authorityController@loadFields'
+    #---------------------------------------------------------------
+
+    #字段显示管理
+    #field display management
+    #---------------------------------------------------------------
+    Route::get('fieldDisplay/{table}/{type}', [
+        'uses'      => 'fieldDisplayController@display',
+        'as'        => 'fieldDisplay'
+    ]);
+    Route::get('fieldDisplay/{table}/id/{tableId}', [
+        'middleware'=> ['umi.bread.access:browser'],
+        'uses'      => 'fieldDisplayController@loadFields'
+    ]);
+    Route::get('fieldDisplay/{table}/quickAdd/{fields}/{selectedTableId}', [
+        'middleware'=> ['umi.bread.access:add'],
+        'uses'      => 'fieldDisplayController@quickAdd'
     ]);
     #---------------------------------------------------------------
 
