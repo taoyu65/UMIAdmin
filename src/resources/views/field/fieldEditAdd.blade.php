@@ -49,10 +49,10 @@
                             <div class="col-xs-12">
                                 <div class="space-2"></div>
                                 <div class="form-group">
-                                    <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="activeTable">Select Table</label>
+                                    <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="table_id">Select Table</label>
                                     <div class="col-xs-12 col-sm-4">
                                         <div class="clearfix">
-                                            <select class="form-control" id="tableName" name="tableName">
+                                            <select class="form-control" id="tableName" name="table_id">
                                                 <option value="">Please select a table</option>
                                                 @foreach($tableList as $item)
                                                     <option value="{{$item->id}}">{{$item->table_name}}</option>
@@ -60,14 +60,48 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="col-xs-12 col-sm-3">
+                                    <div class="col-xs-12 col-sm-6">
                                         <button type="button" class="btn btn-sm btn-round btn-pink" id="quickAdd"
-                                                data-rel="tooltip" data-placement="right" title="Fill up all missing fields">Quick Add</button>
+                                                data-rel="tooltip" data-placement="bottom" title="Fill up all missing fields">
+                                            Quick Add
+                                            <i class="fa fa-bolt"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-sm btn-round btn-default btn-inverse" id="hideQuickAdd">
+                                            Hide Fields
+                                            <i class="fa fa-eye-slash"></i>
+                                        </button>
+                                        <button type="button" class="btn btn-sm btn-round btn-light" id="showQuickAdd">
+                                            Show Fields
+                                            <i class="fa fa-eye"></i>
+                                        </button>
                                     </div>
                                 </div>
                                 <div class="space-2"></div>
+                            </div>
+                            <div class="col-xs-12">
                                 <div id="fieldDisplay">
+                                </div>
 
+                                <div class="hr hr-dotted"></div>
+                                <div class="space-2"></div>
+                            </div>
+                            <div class="col-xs-12">
+
+                                {{-- drop down box for selecting field --}}
+                                @include('umi::common.fieldsDropDownBox')
+
+                                <div class="form-group">
+                                    <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="activeTable">Type</label>
+                                    <div class="col-xs-12 col-sm-4">
+                                        <div class="clearfix">
+                                            <select class="form-control" name="type">
+                                                <option value="" title="asdf">Please select a Type</option>
+                                                {{--@foreach($types as $item)
+                                                    <option value="{{$item->id}}">{{$item->table_name}}</option>
+                                                @endforeach--}}
+                                            </select>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -84,6 +118,7 @@
 
     <script type="text/javascript">
         $(document).ready(function () {
+
             //刷新当前页面是保持数据显示
             //keep data display when refresh page
             var tableId = $('#tableName').val();
@@ -96,6 +131,7 @@
             }
 
             $('#tableName').change(function () {
+
                 if ($(this).val() === '') {
                     return false;
                 }
@@ -103,7 +139,6 @@
                 //加载符号
                 //showing loading icon
                 $('#fieldDisplay').html("<i id='responseLoading' class='ace-icon fa fa-spinner fa-spin orange bigger-170'></i>");
-
                 tableId = $(this).val();
                 loadTable(url + tableId);
             });
@@ -130,6 +165,9 @@
                         var load = layer.load(3, {shade: [0.5, '#000']});
                         var existFields = $('#existFields').val();
                         var url = "{{url('fieldDisplay')}}/{{$table}}/quickAdd/" + existFields + "/" + tableId;
+
+                        //确认执行快速添加字段
+                        //confirm to quick add fields
                         $.ajax({
                             type: 'get',
                             url: url,
@@ -152,6 +190,18 @@
                     function () {
                     }
                 );
+            });
+
+            //隐藏 查询出的字段列表
+            //hide all fields list from selecting table name
+            $('#hideQuickAdd').click(function () {
+                $('#fieldDisplay').slideUp();
+            });
+
+            //显示 查询出的字段列表
+            //show all fields list from selecting table name
+            $('#showQuickAdd').click(function () {
+                $('#fieldDisplay').slideDown();
             });
         });
 
@@ -182,7 +232,7 @@
                 type: 'get',
                 url: url,
                 success: function (data) {
-                    $('#fieldDisplay').html(data);
+                    $('#fieldDisplay').html(data).hide().slideDown(2000,function () {});
                 },
                 error: function () {
                     $('#fieldDisplay').html('loading error');

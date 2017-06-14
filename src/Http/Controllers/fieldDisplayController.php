@@ -5,7 +5,6 @@ namespace YM\Http\Controllers;
 use Illuminate\Routing\Controller;
 use YM\Models\FieldDisplayBrowser;
 use YM\Models\Table;
-use YM\Models\UmiModel;
 use YM\Umi\umiFieldDisplayBuilder;
 
 class fieldDisplayController extends Controller
@@ -28,6 +27,8 @@ class fieldDisplayController extends Controller
         }
     }
 
+    #获取并显示所有已经存在的字段
+    #get and show all fields that exist
     public function loadFields($table, $tableId)
     {
         $builder = new umiFieldDisplayBuilder();

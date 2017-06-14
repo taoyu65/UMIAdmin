@@ -2,7 +2,10 @@
 
 namespace YM\Models;
 
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\DB;
+use YM\Facades\Umi;
 
 class FieldDisplayBrowser extends UmiBase
 {
@@ -40,6 +43,39 @@ class FieldDisplayBrowser extends UmiBase
 
         return self::where('table_id', $tableId)
             ->get();
+    }
+
+    #一键增加所有用于显示的字段, 使用默认值 (排除已存在的字段)
+    #on click to add all fields that use for display as default value (not for exist fields)
+    public function quickAdd($table, $selectedTableId, $existFieldArr)
+    {
+        $tableName = Umi::getTableNameById($selectedTableId);
+        $umiModel = new UmiModel($tableName);
+        $allFields = $umiModel->getTableFields($tableName);
+
+        try {
+            $count = 0;
+            foreach ($allFields as $field) {
+                if (in_array($field, $existFieldArr))
+                    continue;
+
+                $re = DB::table($table)->insert([
+                    'table_id'  => $selectedTableId,
+                    'field'     => $field,
+                    'type'      => 'label',
+                    'relation_display'  => '',
+                    'display_name'      => $field,
+                    'order'             => $count,
+                    'is_showing'        => 1,
+                ]);
+                $count = $re ? $count+1 : $count;
+            }
+        } catch (\Exception $exception) {
+            exit($exception->getMessage());
+        }
+
+        Cache::pull($table);
+        return $count;
     }
 
     #确保数据表第一列为主键

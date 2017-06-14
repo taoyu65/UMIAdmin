@@ -17,13 +17,18 @@ return[
     #数据类型
     #data type
     'data_type'             => [
-        'text',
-        'dollar',
-        'link',
+        'label',
+        'textBox',
+        'checkBox',
+        'textArea',
+        'tags',
         'date',
-        'picture',
-        'select',
-        'bool'
+        'dollar',
+        'star',
+        'dropDownBox',
+        'foreignKey',
+        'badge',
+        'keyIcon'
     ],
 
     #值比较操作符
