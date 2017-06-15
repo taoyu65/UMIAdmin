@@ -17,18 +17,54 @@ return[
     #数据类型
     #data type
     'data_type'             => [
-        'label',
-        'textBox',
-        'checkBox',
-        'textArea',
-        'tags',
-        'date',
-        'dollar',
-        'star',
-        'dropDownBox',
-        'foreignKey',
-        'badge',
-        'keyIcon'
+        'label'         => [
+            'relation_display'  => 'false',
+            'custom_value'      => 'false'
+        ],
+        'textBox'       => [
+            'relation_display'  => 'false',
+            'custom_value'      => 'false'
+        ],
+        'checkBox'      => [
+            'relation_display'  => 'false',
+            'custom_value'      => 'false'
+        ],
+        'textArea'      => [
+            'relation_display'  => 'false',
+            'custom_value'      => 'false'
+        ],
+        'tags'          => [
+            'relation_display'  => 'false',
+            'custom_value'      => 'false'
+        ],
+        'date'          => [
+            'relation_display'  => 'false',
+            'custom_value'      => 'false'
+        ],
+        'dollar'        => [
+            'relation_display'  => 'false',
+            'custom_value'      => 'false'
+        ],
+        'star'          => [
+            'relation_display'  => 'false',
+            'custom_value'      => 'false'
+        ],
+        'dropDownBox'   => [
+            'relation_display'  => 'false',
+            'custom_value'      => 'true'
+        ],
+        'foreignKey'    => [
+            'relation_display'  => 'true',
+            'custom_value'      => 'false'
+        ],
+        'badge'         => [
+            'relation_display'  => 'false',
+            'custom_value'      => 'false'
+        ],
+        'keyIcon'       => [
+            'relation_display'  => 'false',
+            'custom_value'      => 'false'
+        ],
     ],
 
     #值比较操作符

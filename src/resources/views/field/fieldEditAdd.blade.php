@@ -52,8 +52,8 @@
                                     <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="table_id">Select Table</label>
                                     <div class="col-xs-12 col-sm-4">
                                         <div class="clearfix">
-                                            <select class="form-control" id="tableName" name="table_id">
-                                                <option value="">Please select a table</option>
+                                            <select class="form-control" id="tableName" name="table_id" required title="Please select a table">
+                                                <option value=""></option>
                                                 @foreach($tableList as $item)
                                                     <option value="{{$item->id}}">{{$item->table_name}}</option>
                                                 @endforeach
@@ -88,27 +88,39 @@
                             <div class="col-xs-12">
 
                                 {{-- drop down box for selecting field --}}
-                                @include('umi::common.fieldsDropDownBox')
+                                @include('umi::common.fieldDisplay.fieldsDropDownBox')
 
                                 <div class="form-group">
-                                    <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="activeTable">Type</label>
+                                    <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="activeTable">Data Type</label>
                                     <div class="col-xs-12 col-sm-4">
                                         <div class="clearfix">
-                                            <select class="form-control" name="type">
-                                                <option value="" title="asdf">Please select a Type</option>
-                                                {{--@foreach($types as $item)
-                                                    <option value="{{$item->id}}">{{$item->table_name}}</option>
-                                                @endforeach--}}
+                                            <select class="form-control" name="type" id="type">
+                                                <option value=''>Please select a Type</option>
+                                                @foreach($dataTypes as $key => $value)
+                                                    <option value="{{$key}}"
+                                                            relation_display="{{$value['relation_display']}}"
+                                                            custom_value="{{$value['custom_value']}}"
+                                                    >{{$key}}</option>
+                                                    {{--todo - now has new data type array, analyz and oupput different option load different function--}}
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>
                                 </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="activeTable">Relation Rule</label>
+                                    <div class="col-xs-12 col-sm-4">
+                                        <div class="clearfix">
+                                            <input class="form-control" name="relation_display">
+                                        </div>
+                                    </div>
+                                </div>
+
                             </div>
                         </div>
                         <div>
-                            <a href="#" class="btn btn-block btn-sm btn-success bolder">
-                                <span>Add Field</span>
-                            </a>
+                            <button class="btn btn-block btn-sm btn-success bolder" type="submit"><span class="bolder">Add Field</span></button>
                         </div>
                     </div>
                 </form>
@@ -116,8 +128,14 @@
         </div>
     </div>
 
+    <script src="{{$path}}/js/jquery.validate.min.js"></script>
+
     <script type="text/javascript">
         $(document).ready(function () {
+
+            //初始化
+            //init
+            $("#type").val('');
 
             //刷新当前页面是保持数据显示
             //keep data display when refresh page
@@ -132,6 +150,8 @@
 
             $('#tableName').change(function () {
 
+                $("#type").val('');
+
                 if ($(this).val() === '') {
                     return false;
                 }
@@ -141,6 +161,33 @@
                 $('#fieldDisplay').html("<i id='responseLoading' class='ace-icon fa fa-spinner fa-spin orange bigger-170'></i>");
                 tableId = $(this).val();
                 loadTable(url + tableId);
+            });
+
+            //选择数据类型
+            //select data type
+            $('#type').change(function () {
+
+                //badge类型比较特殊, 需要和badge数据表协同完成badge显示, 所以规则字段必须默认是 "表名:字段名"
+                //badge type is special, need to complete the function working with badge table, so the rule must be: "table name: field name"
+                if ($(this).val() === 'badge') {
+                    var tableName = $("#tableName").find("option:selected").text();
+                    var fieldName = $("#field").find("option:selected").text();
+
+                    if (tableName === '' || fieldName === '') {
+                        layer.alert('For badge: table name and field name can not be empty', '');
+                        $("#type").val('');
+                        return;
+                    }
+
+                    alert(tableName + ":" + fieldName);
+                    $('#relation_display').val();
+                    return;
+                }
+
+                var relation_display = $(this).find("option:selected").attr("relation_display");
+                var custom_value = $(this).find("option:selected").attr("custom_value");
+
+
             });
 
             $('[data-rel=tooltip]').tooltip();
@@ -202,6 +249,10 @@
             //show all fields list from selecting table name
             $('#showQuickAdd').click(function () {
                 $('#fieldDisplay').slideDown();
+            });
+
+            $('#validation-form').validate({
+                errorClass: "red"
             });
         });
 

@@ -1,17 +1,17 @@
 
 <div class="form-group">
-    <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="responseField">Field</label>
+    <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="responseField">Table Field</label>
     <div class="col-xs-12 col-sm-4">
         <div class="clearfix">
-            <select class="form-control" id="field" name="field">
-                <option value="">Please select table</option>
+            <select class="form-control" id="field" name="field" required title="Nothing can be selected">
+                <option value=""></option>
             </select>
         </div>
     </div>
     <i class="fa fa-question-circle fa-lg popover-info blue" aria-hidden="true" data-rel="popover"
        data-trigger="hover" style="transform: translate(0,4px);" data-placement="auto right"
-       title="Response Field"
-       data-content="This field will match active filed to achieve operation of relation"></i>
+       title="Field"
+       data-content="Select a Field that does not exist"></i>
 </div>
 
 <script>
@@ -26,6 +26,10 @@
             $('#field').html("<i id='responseLoading' class='ace-icon fa fa-spinner fa-spin orange bigger-170'></i>");
             loadTableFields($('#tableName'));
         }
+    });
+
+    $('#field').change(function () {
+        $("#type").val('');
     });
 
     //获取被动表的二级联动数据
@@ -44,12 +48,15 @@
         //获取数据
         //get data
         loadTableFields(this);
-
     });
 
     function loadTableFields(o) {
-        var table = $(o).find("option:selected").text();
-        var url = "{{url('api/fields')}}" + '/' +table;
+        var selected = $(o).find("option:selected");
+        var tableId = selected.val();
+        var table = selected.text();
+
+        var url = "{{url('api/fields/noExist')}}/{{$table}}/" +table + "/" + tableId;
+
         $.ajax({
             type: 'get',
             url: url,

@@ -3,6 +3,7 @@
 namespace YM\Http\Controllers;
 
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Config;
 use YM\Models\FieldDisplayBrowser;
 use YM\Models\Table;
 use YM\Umi\umiFieldDisplayBuilder;
@@ -13,7 +14,9 @@ class fieldDisplayController extends Controller
     {
         $tableModel = new Table();
         $tableList = $tableModel->getAllTable();
-        $list = compact('tableList', 'table');
+        $dataTypes = Config::get('umiEnum.data_type');
+
+        $list = compact('tableList', 'table', 'dataTypes');
 
         switch ($type) {
             case 'browser':
