@@ -1,9 +1,9 @@
 
 <div class="form-group">
-    <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="responseField">Table Field</label>
+    <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="field">Table Field</label>
     <div class="col-xs-12 col-sm-4">
         <div class="clearfix">
-            <select class="form-control" id="field" name="field" required title="Nothing can be selected">
+            <select class="form-control" id="field" name="field" required title="No more fields you can add, please select one to edit">
                 <option value=""></option>
             </select>
         </div>
@@ -30,10 +30,11 @@
 
     $('#field').change(function () {
         $("#type").val('');
+        $("#relation_display").val('');
     });
 
-    //获取被动表的二级联动数据
-    //get response table drop down list
+    //获取还未添加的字段
+    //get fields that have not added
     $('#tableName').change(function () {
         if ($(this).val() === ''){
             return false;

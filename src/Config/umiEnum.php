@@ -108,8 +108,14 @@ return[
     ],
 
     'fillable'              => [
-        'umi_menus' => [
+        'umi_menus'                 => [
             'menu_id', 'title', 'url', 'target', 'icon_class', 'order', 'extra_icon_html'
-        ]
+        ],
+        'umi_field_display_browser' => [
+            'table_id', 'field', 'type', 'relation_display', 'display_name', 'order', 'is_showing'
+        ],
+        'umi_field_display_read' => [
+            'table_id', 'field', 'type', 'relation_display', 'display_name', 'order', 'is_showing'
+        ],
     ]
 ];

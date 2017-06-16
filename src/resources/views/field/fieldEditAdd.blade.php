@@ -5,6 +5,9 @@
     <?php $assetPath = config('umi.assets_path') ?>
     <?php $path = $assetPath . '/ace' ?>
 
+    <script src="{{$assetPath}}/labelauty/js/jquery.validate.min.js"></script>
+    <link rel="stylesheet" href="{{$assetPath}}/labelauty/jquery-labelauty.css" />
+
     <div class="page-header">
         <h1>
             Field
@@ -30,20 +33,21 @@
 
     <div class="col-xs-12">
         <p>
-            <button class="btn btn-success large btn-round width-10 disabled">Browser <i class="fa fa-eye"></i></button>
-            <button class="btn btn-primary btn-round width-10">Read <i class="fa fa-book"></i></button>
-            <button class="btn btn-yellow btn-round width-10">Edit <i class="fa fa-pencil-square-o"></i></button>
-            <button class="btn btn-purple btn-round width-10">Add <i class="fa fa-plus"></i></button>
+            <button class="btn btn-success large btn-round width-10 {{$type==='browser'?'disabled':''}}" onclick="window.location.href='{{url("fieldDisplay/umi_field_display_browser/type/browser")}}'">Browser <i class="fa fa-eye"></i></button>
+            <button class="btn btn-primary large btn-round width-10 {{$type==='read'?'disabled':''}}" onclick="window.location.href='{{url("fieldDisplay/umi_field_display_read/type/read")}}'">Read <i class="fa fa-book"></i></button>
+            <button class="btn btn-yellow large btn-round width-10">Edit <i class="fa fa-pencil-square-o"></i></button>
+            <button class="btn btn-purple large btn-round width-10">Add <i class="fa fa-plus"></i></button>
         </p>
     </div>
 
     <div class="col-xs-12">
         <div class="">
-            <div class="widget-box widget-color-green">
+            <div class="widget-box widget-color-{{$type==='browser'?'green':'blue'}}">
                 <div class="widget-header">
                     <h5 class="widget-title bigger lighter bolder">Browser</h5>
                 </div>
-                <form class="form-horizontal" id="validation-form" method="post" action="">
+                <form class="form-horizontal" id="validation-form" method="post" action="{{url('fieldDisplay')}}/{{$table}}/add/{{$type}}">
+                    {!! csrf_field() !!}
                     <div class="widget-body">
                         <div class="widget-main no-padding">
                             <div class="col-xs-12">
@@ -91,10 +95,10 @@
                                 @include('umi::common.fieldDisplay.fieldsDropDownBox')
 
                                 <div class="form-group">
-                                    <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="activeTable">Data Type</label>
+                                    <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="type">Data Type</label>
                                     <div class="col-xs-12 col-sm-4">
                                         <div class="clearfix">
-                                            <select class="form-control" name="type" id="type">
+                                            <select class="form-control" name="type" id="type" required>
                                                 <option value=''>Please select a Type</option>
                                                 @foreach($dataTypes as $key => $value)
                                                     <option value="{{$key}}"
@@ -109,18 +113,46 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="activeTable">Relation Rule</label>
+                                    <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="relation_display">Relation Rule</label>
                                     <div class="col-xs-12 col-sm-4">
                                         <div class="clearfix">
-                                            <input class="form-control" name="relation_display">
+                                            <input class="form-control" name="relation_display" id="relation_display">
                                         </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="display_name">Display Name</label>
+                                    <div class="col-xs-12 col-sm-4">
+                                        <div class="clearfix">
+                                            <input class="form-control" name="display_name" id="display_name">
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="order">Order</label>
+                                    <div class="col-xs-12 col-sm-4">
+                                        <div class="clearfix">
+                                            <input class="form-control" name="order" id="order" number="true" value=0>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="isShowing">Is Showing</label>
+                                    <div class="col-xs-12 col-sm-1">
+                                        <input class="to-labelauty-icon" type="radio" name="is_showing" data-labelauty="Show" checked value="1"/>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-1">
+                                        <input class="to-labelauty-icon" type="radio" name="is_showing" data-labelauty="Hide" value="0"/>
                                     </div>
                                 </div>
 
                             </div>
                         </div>
                         <div>
-                            <button class="btn btn-block btn-sm btn-success bolder" type="submit"><span class="bolder">Add Field</span></button>
+                            <button class="btn btn-block btn-sm btn-{{$type==='browser'?'success':'primary'}} bolder" type="submit"><span class="bolder">Add Field</span></button>
                         </div>
                     </div>
                 </form>
@@ -129,6 +161,7 @@
     </div>
 
     <script src="{{$path}}/js/jquery.validate.min.js"></script>
+    <script src="{{$assetPath}}/labelauty/jquery-labelauty.js"></script>
 
     <script type="text/javascript">
         $(document).ready(function () {
@@ -136,6 +169,8 @@
             //初始化
             //init
             $("#type").val('');
+            $("#relation_display").val('');
+            $('#type').val('label');
 
             //刷新当前页面是保持数据显示
             //keep data display when refresh page
@@ -148,9 +183,12 @@
                 loadTable(url + tableId);
             }
 
+            //选择table
+            //select table
             $('#tableName').change(function () {
 
                 $("#type").val('');
+                $("#relation_display").val('');
 
                 if ($(this).val() === '') {
                     return false;
@@ -167,6 +205,10 @@
             //select data type
             $('#type').change(function () {
 
+                //每次选择类型都要清空规则 以免发生错误
+                //every time select data type, the rule must be empty just in case error occurs
+                $('#relation_display').val('');
+
                 //badge类型比较特殊, 需要和badge数据表协同完成badge显示, 所以规则字段必须默认是 "表名:字段名"
                 //badge type is special, need to complete the function working with badge table, so the rule must be: "table name: field name"
                 if ($(this).val() === 'badge') {
@@ -179,14 +221,24 @@
                         return;
                     }
 
-                    alert(tableName + ":" + fieldName);
-                    $('#relation_display').val();
+                    $('#relation_display').val(tableName + ":" + fieldName);
                     return;
                 }
 
+                //如果字段relation_display是真, 则需要一个规则,在弹出窗口定义规则
+                //if field relation_display is true, then need a rule that will be created in pop window
                 var relation_display = $(this).find("option:selected").attr("relation_display");
-                var custom_value = $(this).find("option:selected").attr("custom_value");
-
+                //var custom_value = $(this).find("option:selected").attr("custom_value");
+                if (relation_display === 'true') {
+                    var url = '{{url("relationRule/relation_display")}}';
+                    layer.open({
+                        type: 2,
+                        title: 'Creating a relation rule',
+                        shadeClose: true,
+                        area: ['800px', '60%'],
+                        content: url
+                    });
+                }
 
             });
 
@@ -251,8 +303,27 @@
                 $('#fieldDisplay').slideDown();
             });
 
+            //是否显示按钮
+            //is showing button
+            $('#isShowing').click(function () {alert($('#isShowing').val());
+                if ($(this).val() === "on") {
+                    $('#is_showing').val('1');
+                } else {
+                    $('#is_showing').val('0');
+                }
+            });
+
+            //验证
+            //validation
             $('#validation-form').validate({
                 errorClass: "red"
+            });
+
+            //单选框
+            //switch
+            $(".to-labelauty-icon").labelauty({
+                minimum_width: "120px",
+                same_width: true
             });
         });
 
@@ -283,7 +354,7 @@
                 type: 'get',
                 url: url,
                 success: function (data) {
-                    $('#fieldDisplay').html(data).hide().slideDown(2000,function () {});
+                    $('#fieldDisplay').html(data).hide().slideDown(1000,function () {});
                 },
                 error: function () {
                     $('#fieldDisplay').html('loading error');

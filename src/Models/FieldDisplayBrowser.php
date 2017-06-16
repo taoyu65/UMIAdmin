@@ -16,6 +16,7 @@ class FieldDisplayBrowser extends UmiBase
 
     public function __construct(array $attributes = [], $orderBy = '', $order = 'asc')
     {
+        $this->fillable = Config::get('umiEnum.fillable.' . $this->table);
         parent::__construct($attributes, 'order', $order);
     }
 
@@ -103,6 +104,24 @@ class FieldDisplayBrowser extends UmiBase
             }
         } else {
             return $dataSet;
+        }
+    }
+
+    public function checkBeforeInsert($tableId, $fieldName)
+    {
+        return self::where([
+            'table_id'  => $tableId,
+            'field'     => $fieldName
+        ])
+            ->count();
+    }
+    public function insert($inputs)
+    {
+        try {
+            self::create($inputs);
+            Cache::pull($this->table);
+        } catch (\Exception $exception) {
+            abort(503, $exception->getMessage());
         }
     }
 }

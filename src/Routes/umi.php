@@ -12,8 +12,8 @@
 #------------------------------------------------------------------
 
 #common------------------------------------------------------------
-    #通用数据选择器 通常在弹出页面选择一条记录的ID
-    #common selector, normally select ID of record from modal page
+    //通用数据选择器 通常在弹出页面选择一条记录的ID
+    //common selector, normally select ID of record from modal page
     Route::get('selector/{table}/{property}', [
         'middleware'=> 'umi.bread.access:browser',
         'uses'      => 'commonController@selector',
@@ -91,17 +91,24 @@ Route::group(['middleware' => 'umi.url.auth'], function () {
     #字段显示管理
     #field display management
     #---------------------------------------------------------------
-    Route::get('fieldDisplay/{table}/{type}', [
+    Route::get('fieldDisplay/{table}/type/{type}', [
         'uses'      => 'fieldDisplayController@display',
         'as'        => 'fieldDisplay'
     ]);
     Route::get('fieldDisplay/{table}/id/{tableId}', [
-        'middleware'=> ['umi.bread.access:browser'],
         'uses'      => 'fieldDisplayController@loadFields'
     ]);
     Route::get('fieldDisplay/{table}/quickAdd/{fields}/{selectedTableId}', [
         'middleware'=> ['umi.bread.access:add'],
         'uses'      => 'fieldDisplayController@quickAdd'
+    ]);
+    Route::get('relationRule/{dom}', [
+        'uses'      => 'fieldDisplayController@relationRule',
+        'as'        => 'relationRule'
+    ]);
+    Route::post('fieldDisplay/{table}/add/{type}', [
+        'middleware'=> ['umi.bread.access:add'],
+        'uses'      => 'fieldDisplayController@browserAdd'
     ]);
     #---------------------------------------------------------------
 
