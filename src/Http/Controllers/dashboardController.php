@@ -19,7 +19,6 @@ class DashBoardController extends Controller
         $userName = $request->get('username');
         $password = $request->get('password');
         if (Auth::attempt(['name' => $userName, 'password' => $password])) {
-//            return view('umi::dashboard');
             return redirect()->route('dashboard');
         } else {
             return view('umi::login', ['error' => '<script>alert("please check username or password")</script>']);

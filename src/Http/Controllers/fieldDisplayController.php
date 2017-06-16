@@ -41,6 +41,8 @@ class fieldDisplayController extends Controller
         return $builder->showExistRecords($table, $tableId);
     }
 
+    #快速添加所有字段 所有值为默认值
+    #quick add all the fields, all the value are default
     public function quickAdd($table, $fields, $selectedTableId)
     {
         $fieldsArr = json_decode(base64_decode($fields));
@@ -49,6 +51,10 @@ class fieldDisplayController extends Controller
         return $browserModel->quickAdd($table, $selectedTableId, $fieldsArr);
     }
 
+    #弹出窗口 新建显示数据关系的规则
+    #  $dom: 父窗口的dom id 用于显示生成的规则字符串
+    #pop window and new a rule of relation of data
+    #  $dom: dom of parent's window, use for displaying the rule string from generation
     public function relationRule($dom)
     {
         $tableModel = new Table();
@@ -59,6 +65,8 @@ class fieldDisplayController extends Controller
         return view('umi::field.relationRule', $list);
     }
 
+    #browser 和 read 的添加操作
+    #browser and read add operation
     public function browserAdd(Request $request, $table, $type)
     {
         if ($type === 'browser') {
