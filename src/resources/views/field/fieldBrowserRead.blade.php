@@ -22,7 +22,7 @@
 
     <div class="col-xs-12">
         <div class="">
-            <div class="widget-box widget-color-{{$type==='edit'?'orange':'purple'}}">
+            <div class="widget-box widget-color-{{$type==='browser'?'green':'blue'}}">
                 <div class="widget-header">
                     <h5 class="widget-title bigger lighter bolder">Browser</h5>
                 </div>
@@ -102,37 +102,10 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="custom_value">Custom Value</label>
-                                    <div class="col-xs-12 col-sm-4">
-                                        <div class="clearfix">
-                                            <input class="form-control" name="custom_value" id="custom_value">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
                                     <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="display_name">Display Name</label>
                                     <div class="col-xs-12 col-sm-4">
                                         <div class="clearfix">
                                             <input class="form-control" name="display_name" id="display_name">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="detail">Detail</label>
-                                    <div class="col-xs-12 col-sm-4">
-                                        <div class="clearfix">
-                                            <input class="form-control" name="detail" id="detail">
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="form-group">
-                                    <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="validation">Validation</label>
-                                    <div class="col-xs-12 col-sm-4">
-                                        <div class="clearfix">
-                                            <input class="form-control" name="validation" id="validation">
                                         </div>
                                     </div>
                                 </div>
@@ -147,19 +120,19 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="is_editable">Is Editable</label>
+                                    <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="is_showing">Is Showing</label>
                                     <div class="col-xs-12 col-sm-1">
-                                        <input class="to-labelauty-icon" type="radio" name="is_editable" data-labelauty="Edtiable" checked value="1"/>
+                                        <input class="to-labelauty-icon" type="radio" name="is_showing" data-labelauty="Show" checked value="1"/>
                                     </div>
                                     <div class="col-xs-12 col-sm-1">
-                                        <input class="to-labelauty-icon" type="radio" name="is_editable" data-labelauty="Not Editable" value="0"/>
+                                        <input class="to-labelauty-icon" type="radio" name="is_showing" data-labelauty="Hide" value="0"/>
                                     </div>
                                 </div>
 
                             </div>
                         </div>
                         <div>
-                            <button class="btn btn-block btn-sm btn-{{$type==='edit'?'warning':'purple'}} bolder" type="submit"><span class="bolder">Add Field</span></button>
+                            <button class="btn btn-block btn-sm btn-{{$type==='browser'?'success':'primary'}} bolder" type="submit"><span class="bolder">Add Field</span></button>
                         </div>
                     </div>
                 </form>

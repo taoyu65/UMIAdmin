@@ -11,11 +11,18 @@ return[
     'system_table_name'     => [
         'umi_table_relation_operation'  => 'umi_table_relation_operation',
         'umi_users'                     => 'umi_users',
-        'umi_field_display_add'         => 'umi_field_display_add'
+        'umi_field_display_add'         => 'umi_field_display_add',
+        'umi_field_display_browser'     => 'umi_field_display_browser',
+        'umi_field_display_read'        => 'umi_field_display_read',
+        'umi_field_display_edit'        => 'umi_field_display_edit'
     ],
 
     #数据类型
+    #   relation_display: 数据类型是否可用关系规则
+    #   custom_value: 数据类型是否具有自定义数据 (比如下拉列表可以自定义数据)
     #data type
+    #   relation_display: data type if can use relation rule
+    #   custom_value: data type if has custom value (drop down box may has custom data)
     'data_type'             => [
         'label'         => [
             'relation_display'  => 'false',
@@ -107,6 +114,8 @@ return[
         'read'
     ],
 
+    #可填充数据字段
+    #fields that can be filled
     'fillable'              => [
         'umi_menus'                 => [
             'menu_id', 'title', 'url', 'target', 'icon_class', 'order', 'extra_icon_html'
@@ -114,8 +123,14 @@ return[
         'umi_field_display_browser' => [
             'table_id', 'field', 'type', 'relation_display', 'display_name', 'order', 'is_showing'
         ],
-        'umi_field_display_read' => [
+        'umi_field_display_read'    => [
             'table_id', 'field', 'type', 'relation_display', 'display_name', 'order', 'is_showing'
+        ],
+        'umi_field_display_edit'    => [
+            'table_id', 'field', 'type', 'relation_display', 'custom_value', 'display_name', 'validation', 'detail', 'order', 'is_editable'
+        ],
+        'umi_field_display_add'     => [
+            'table_id', 'field', 'type', 'relation_display', 'custom_value', 'display_name', 'validation', 'detail', 'order', 'is_editable'
         ],
     ]
 ];

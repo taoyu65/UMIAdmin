@@ -13,6 +13,7 @@ class FieldDisplayBrowser extends UmiBase
 
     protected $openCache = true;
     protected $cacheAllRecord = true;
+    public $timestamps = true;
 
     public function __construct(array $attributes = [], $orderBy = '', $order = 'asc')
     {

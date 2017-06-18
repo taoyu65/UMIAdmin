@@ -132,7 +132,7 @@ Route::group(['middleware' => 'umi.url.auth'], function () {
     ]);
     //browser 和read 的添加操作
     //browser and read's add action
-    Route::post('fieldDisplay/{table}/add/{type}', [
+    Route::post('fieldDisplay/{table}/addType/{type}', [
         'middleware'=> ['umi.bread.access:add'],
         'uses'      => 'fieldDisplayController@browserAdd'
     ]);

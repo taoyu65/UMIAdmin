@@ -5,8 +5,11 @@ namespace YM\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Config;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use YM\Facades\Umi;
+use YM\Models\FieldDisplayAdd;
 use YM\Models\FieldDisplayBrowser;
+use YM\Models\FieldDisplayEdit;
 use YM\Models\FieldDisplayRead;
 use YM\Models\Table;
 use YM\Umi\umiFieldDisplayBuilder;
@@ -24,7 +27,7 @@ class fieldDisplayController extends Controller
         switch ($type) {
             case 'browser':
             case 'read':
-                return view('umi::field.fieldEditAdd', $list);
+                return view('umi::field.fieldBrowserRead', $list);
             case 'edit':
             case 'add':
                 return view('umi::field.fieldEditAdd', $list);
@@ -69,10 +72,21 @@ class fieldDisplayController extends Controller
     #browser and read add operation
     public function browserAdd(Request $request, $table, $type)
     {
-        if ($type === 'browser') {
-            $model = new FieldDisplayBrowser();
-        } else if ($type === 'read') {
-            $model = new FieldDisplayRead();
+        switch ($type) {
+            case 'browser':
+                $model = new FieldDisplayBrowser();
+                break;
+            case 'read':
+                $model = new FieldDisplayRead();
+                break;
+            case 'edit':
+                $model = new FieldDisplayEdit();
+                break;
+            case 'add':
+                $model = new FieldDisplayAdd();
+                break;
+            default:
+                throw new \Exception('Parameter is wrong');
         }
 
         if ($model->checkBeforeInsert($request->input('table_id'), $request->input('field'))) {
