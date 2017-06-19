@@ -104,7 +104,7 @@
                 var rule = tableName + ":" + fieldName;
 
                 if (tableName !== '' && fieldName !== '') {
-                    parent.$('#{{$dom}}').val(rule);
+                    parent.$('#{{$returnedDomId}}').val(rule);
                     parent.layer.closeAll();
                 } else {
                     layer.alert('Table name and Field Name can not be empty', '');
@@ -112,7 +112,7 @@
             });
 
             $('#close').click(function () {
-                parent.$('#{{$dom}}').val('');
+                parent.$('#{{$returnedDomId}}').val('');
                 parent.$('#type').val('');
                 parent.layer.closeAll();
             });

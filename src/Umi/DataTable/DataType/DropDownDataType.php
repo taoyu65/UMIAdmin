@@ -2,6 +2,8 @@
 
 namespace YM\Umi\DataTable\DataType;
 
+use YM\Models\Table;
+
 class DropDownDataType extends DataTypeAbstract
 {
     public function regulateDataEditAdd($dataList, $relatedTable = '', $relatedField = '', $validation = '', $option = [])
@@ -30,8 +32,12 @@ UMI;
         return $html;
     }
 
-    public function regulateDataEditAddInput()
+    public function dataTypeInterface($returnedDomId)
     {
+        $tableModel = new Table();
+        $tableList = $tableModel->getAllTable();
+        $list = compact('tableList', 'returnedDomId');
 
+        return view('umi::field.relationRule', $list);
     }
 }

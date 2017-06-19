@@ -56,6 +56,12 @@ class DataTypeAbstract implements DataTypeInterface
         return $data;
     }
 
+    #当选择数据类型时, 加载自定义录入界面
+    #when select a data type, autoload custom interface
+    public function dataTypeInterface($returnedDomId)
+    {
+        return '';
+    }
 
     #input属性数组转换为字符串
     #input property array turn into string

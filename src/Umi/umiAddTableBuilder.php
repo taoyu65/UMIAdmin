@@ -47,6 +47,17 @@ UMI;
     {
         return array_has($defaultValueArr, $fieldName) ? $defaultValueArr[$fieldName] : '';
     }
+
+    private function getTableField($relationship)
+    {
+        $arr = explode(':', $relationship);
+
+        #如果不是分为2个部分, 则参数错误 返回原有数据
+        #if does not have 2 parts, the parameter is wrong than return original data
+        if (count($arr) != 2)
+            return ['', ''];
+        return [$arr[0], $arr[1]];
+    }
 #endregion
 
 #region component
@@ -62,8 +73,9 @@ UMI;
         $value = $this->checkDefaultValue($name, $defaultValue);
         $dataTypeFactory = $this->dataTypeFactory->getInstance($record->type);
         $validation = json_decode($record->validation);
+        list($tableName, $field) = $this->getTableField($record->relation_display);
 
-        $input = $dataTypeFactory->regulateDataEditAdd($value, '', '', $validation, [
+        $input = $dataTypeFactory->regulateDataEditAdd($value, $tableName, $field, $validation, [
             'property'      => $property,
             'customValue'   => json_decode($record->custom_value)
         ]);

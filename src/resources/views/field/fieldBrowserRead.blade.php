@@ -209,6 +209,9 @@
                 //if field relation_display is true, then need a rule that will be created in pop window
                 var relation_display = $(this).find("option:selected").attr("relation_display");
                 //var custom_value = $(this).find("option:selected").attr("custom_value");
+                //todo - decision : all the custom_value and relation_rule will be going to data type class and build a new interface to let them implement
+                //todo - js and config parts can still just like that
+                //todo - the controller will deal with the factory to instance a object based on the different data type
                 if (relation_display === 'true') {
                     var url = '{{url("relationRule/relation_display")}}';
                     layer.open({

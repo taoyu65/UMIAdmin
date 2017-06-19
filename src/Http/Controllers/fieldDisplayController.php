@@ -12,6 +12,7 @@ use YM\Models\FieldDisplayBrowser;
 use YM\Models\FieldDisplayEdit;
 use YM\Models\FieldDisplayRead;
 use YM\Models\Table;
+use YM\Umi\FactoryDataType;
 use YM\Umi\umiFieldDisplayBuilder;
 
 class fieldDisplayController extends Controller
@@ -58,14 +59,17 @@ class fieldDisplayController extends Controller
     #  $dom: 父窗口的dom id 用于显示生成的规则字符串
     #pop window and new a rule of relation of data
     #  $dom: dom of parent's window, use for displaying the rule string from generation
-    public function relationRule($dom)
+    public function relationRule($dom, $dataType)
     {
-        $tableModel = new Table();
+        /*$tableModel = new Table();
         $tableList = $tableModel->getAllTable();
 
         $list = compact('tableList', 'dom');
 
-        return view('umi::field.relationRule', $list);
+        return view('umi::field.relationRule', $list);*/
+        $factory = new FactoryDataType();
+        $dataType = $factory->getInstance($dataType);
+        return $dataType->dataTypeInterface($dom);
     }
 
     #browser 和 read 的添加操作

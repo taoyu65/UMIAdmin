@@ -126,7 +126,7 @@ Route::group(['middleware' => 'umi.url.auth'], function () {
     //加载规则界面用于显示某些数据类型需要其他数据表协同处理的问题, 例如外键类型: 可以显示外键id对应表的字段的内容
     //load a interface that need generate a rule for special display. such as data type of foreign key: can display the field of value
     //which is related that foreign key.
-    Route::get('relationRule/{dom}', [
+    Route::get('relationRule/{dom}/{dataType}', [
         'uses'      => 'fieldDisplayController@relationRule',
         'as'        => 'relationRule'
     ]);

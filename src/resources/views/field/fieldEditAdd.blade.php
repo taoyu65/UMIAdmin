@@ -235,15 +235,28 @@
                 //如果字段relation_display是真, 则需要一个规则,在弹出窗口定义规则
                 //if field relation_display is true, then need a rule that will be created in pop window
                 var relation_display = $(this).find("option:selected").attr("relation_display");
-                //var custom_value = $(this).find("option:selected").attr("custom_value");
-                if (relation_display === 'true') {
-                    var url = '{{url("relationRule/relation_display")}}';
+                var custom_value = $(this).find("option:selected").attr("custom_value");
+                if (relation_display === 'true' || custom_value === 'true') {
+                    var dataType = $(this).val();
+                    var url = '{{url("relationRule/relation_display")}}/' + dataType;
                     layer.open({
                         type: 2,
                         title: 'Creating a relation rule',
-                        shadeClose: true,
+                        shadeClose: false,
                         area: ['800px', '60%'],
-                        content: url
+                        content: url,
+                        end: function () {
+                            //如果没有生成一个规则, 则数据类型选项重置为空
+                            //if no rule has been generated than data type will be reset to empty
+                            if (relation_display === 'true') {
+                                if ($('#relation_display').val() === '')
+                                    $(this).val('');
+                            }
+                            if (custom_value === 'true') {
+                                if ($('#custom_value').val() === '')
+                                    $(this).val('');
+                            }
+                        }
                     });
                 }
 
