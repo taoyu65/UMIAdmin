@@ -80,7 +80,7 @@
                                         </button>
 
                                         &nbsp; &nbsp; &nbsp;
-                                        <button class="btn" type="button" id="close">
+                                        <button class="btn" type="button" id="close_relation">
                                             <i class="ace-icon fa fa-times bigger-110"></i>
                                             Close
                                         </button>
@@ -119,7 +119,7 @@
                                     <label class="control-label col-sm-2 no-padding-right" for="ph">Place Holder</label>
                                     <div class="col-sm-4">
                                         <div class="clearfix">
-                                            <input type="text" class="form-control" name="ph" value="Please Select one...">
+                                            <input type="text" class="form-control" name="ph" id="ph" value="Please Select one...">
                                         </div>
                                     </div>
                                 </div>
@@ -163,7 +163,7 @@
                                             Generate Rule
                                         </button>
 
-                                        <button class="btn" type="button" id="close">
+                                        <button class="btn" type="button" id="close_generation">
                                             <i class="ace-icon fa fa-times bigger-110"></i>
                                             Close
                                         </button>
@@ -209,7 +209,7 @@
                 loadTable("{{url('api/fields')}}/" + tableName);
             });
 
-            $('#generate').click(function () {
+            $('#generate_relation').click(function () {
 
                 var tableName = $('#tableName').find("option:selected").text();
                 var fieldName = $('#field').find("option:selected").text();
@@ -223,7 +223,7 @@
                 }
             });
 
-            $('#close').click(function () {
+            $('#close_relation').click(function () {
                 parent.$('#{{$relationDisplayDomId}}').val('');
                 parent.$('#type').val('');
                 parent.layer.closeAll();
@@ -254,7 +254,19 @@
 
             $('#generate_customValue').click(function () {
                 var trs = $('#table').find('tr').filter('.myRow');
-                each();
+                var json = '';
+                var placeholder = $('#ph').val();
+                var optionsArr = [];
+                trs.each(function () {
+                    optionsArr.push();//todo - complete this json string joint
+                    alert($(this).find('#ddValue').val());
+                });
+            });
+
+            $('#close_generation').click(function () {
+                parent.$('#{{$relationDisplayDomId}}').val('');
+                parent.$('#type').val('');
+                parent.layer.closeAll();
             });
 //endregion
         });
