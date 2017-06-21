@@ -9,6 +9,9 @@
     <link rel="stylesheet" href="{{$path}}/css/bootstrap.min.css" />
     <link rel="stylesheet" href="{{$path}}/font-awesome/4.5.0/css/font-awesome.min.css" />
 
+    <!-- page specific plugin styles -->
+    <link rel="stylesheet" href="{{$path}}/css/jquery-ui.min.css" />
+
     <script src="{{$path}}/js/jquery-2.1.4.min.js"></script>
 </head>
 <body>

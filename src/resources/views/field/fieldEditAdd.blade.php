@@ -238,7 +238,7 @@
                 var custom_value = $(this).find("option:selected").attr("custom_value");
                 if (relation_display === 'true' || custom_value === 'true') {
                     var dataType = $(this).val();
-                    var url = '{{url("relationRule/relation_display")}}/' + dataType;
+                    var url = '{{url("relationRule/relation_display/custom_value")}}/' + dataType;
                     layer.open({
                         type: 2,
                         title: 'Creating a relation rule',

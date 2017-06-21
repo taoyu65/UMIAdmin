@@ -58,7 +58,7 @@ class DataTypeAbstract implements DataTypeInterface
 
     #当选择数据类型时, 加载自定义录入界面
     #when select a data type, autoload custom interface
-    public function dataTypeInterface($returnedDomId)
+    public function dataTypeInterface($relationDisplayDomId, $customValueDomId)
     {
         return '';
     }

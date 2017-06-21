@@ -59,7 +59,7 @@ class fieldDisplayController extends Controller
     #  $dom: 父窗口的dom id 用于显示生成的规则字符串
     #pop window and new a rule of relation of data
     #  $dom: dom of parent's window, use for displaying the rule string from generation
-    public function relationRule($dom, $dataType)
+    public function relationRule($relationDisplayDomId, $customValueDomId, $dataType)
     {
         /*$tableModel = new Table();
         $tableList = $tableModel->getAllTable();
@@ -69,7 +69,7 @@ class fieldDisplayController extends Controller
         return view('umi::field.relationRule', $list);*/
         $factory = new FactoryDataType();
         $dataType = $factory->getInstance($dataType);
-        return $dataType->dataTypeInterface($dom);
+        return $dataType->dataTypeInterface($relationDisplayDomId, $customValueDomId);
     }
 
     #browser 和 read 的添加操作

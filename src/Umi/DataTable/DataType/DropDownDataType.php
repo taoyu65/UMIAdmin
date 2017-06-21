@@ -32,12 +32,13 @@ UMI;
         return $html;
     }
 
-    public function dataTypeInterface($returnedDomId)
+    public function dataTypeInterface($relationDisplayDomId, $customValueDomId)
     {
         $tableModel = new Table();
         $tableList = $tableModel->getAllTable();
-        $list = compact('tableList', 'returnedDomId');
+        $list = compact('tableList', 'relationDisplayDomId', 'customValueDomId');
 
+        //todo - drop down box should be designed by a Tap card include 2 function 1.relation display which is done, 2. custom_value, customize the value and can be input
         return view('umi::field.relationRule', $list);
     }
 }
