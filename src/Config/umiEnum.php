@@ -17,61 +17,65 @@ return[
         'umi_field_display_edit'        => 'umi_field_display_edit'
     ],
 
-    #数据类型
+    #数据类型 browser, read 和 edit, add 会加载不同的数据类型.
     #   relation_display: 数据类型是否可用关系规则
     #   custom_value: 数据类型是否具有自定义数据 (比如下拉列表可以自定义数据)
-    #data type
+    #data type browser, read and edit, add will load different data type list
     #   relation_display: data type if can use relation rule
     #   custom_value: data type if has custom value (drop down box may has custom data)
     'data_type'             => [
-        'label'         => [
-            'relation_display'  => 'false',
-            'custom_value'      => 'false'
+        'browserRead'   => [
+            'label'         => [
+                'relation_display'  => 'false',
+                'custom_value'      => 'false'
+            ],
+            'dollar'        => [
+                'relation_display'  => 'false',
+                'custom_value'      => 'false'
+            ],
+            'star'          => [
+                'relation_display'  => 'false',
+                'custom_value'      => 'false'
+            ],
+            'foreignKey'    => [
+                'relation_display'  => 'true',
+                'custom_value'      => 'false'
+            ],
+            'badge'         => [
+                'relation_display'  => 'false',
+                'custom_value'      => 'false'
+            ],
+            'keyIcon'       => [
+                'relation_display'  => 'false',
+                'custom_value'      => 'false'
+            ],
         ],
-        'textBox'       => [
-            'relation_display'  => 'false',
-            'custom_value'      => 'false'
-        ],
-        'checkBox'      => [
-            'relation_display'  => 'false',
-            'custom_value'      => 'false'
-        ],
-        'textArea'      => [
-            'relation_display'  => 'false',
-            'custom_value'      => 'false'
-        ],
-        'tags'          => [
-            'relation_display'  => 'false',
-            'custom_value'      => 'false'
-        ],
-        'date'          => [
-            'relation_display'  => 'false',
-            'custom_value'      => 'false'
-        ],
-        'dollar'        => [
-            'relation_display'  => 'false',
-            'custom_value'      => 'false'
-        ],
-        'star'          => [
-            'relation_display'  => 'false',
-            'custom_value'      => 'false'
-        ],
-        'dropDownBox'   => [
-            'relation_display'  => 'false',
-            'custom_value'      => 'true'
-        ],
-        'foreignKey'    => [
-            'relation_display'  => 'true',
-            'custom_value'      => 'false'
-        ],
-        'badge'         => [
-            'relation_display'  => 'false',
-            'custom_value'      => 'false'
-        ],
-        'keyIcon'       => [
-            'relation_display'  => 'false',
-            'custom_value'      => 'false'
-        ],
+        'editAdd'       => [
+            'textBox'       => [
+                'relation_display'  => 'false',
+                'custom_value'      => 'false'
+            ],
+            'checkBox'      => [
+                'relation_display'  => 'false',
+                'custom_value'      => 'false'
+            ],
+            'textArea'      => [
+                'relation_display'  => 'false',
+                'custom_value'      => 'false'
+            ],
+            'tags'          => [
+                'relation_display'  => 'false',
+                'custom_value'      => 'false'
+            ],
+            'date'          => [
+                'relation_display'  => 'false',
+                'custom_value'      => 'false'
+            ],
+            'dropDownBox'   => [
+                'relation_display'  => 'false',
+                'custom_value'      => 'true'
+            ],
+        ]
     ],
 
     #值比较操作符
@@ -127,10 +131,10 @@ return[
             'table_id', 'field', 'type', 'relation_display', 'display_name', 'order', 'is_showing'
         ],
         'umi_field_display_edit'    => [
-            'table_id', 'field', 'type', 'relation_display', 'custom_value', 'display_name', 'validation', 'detail', 'order', 'is_editable'
+            'table_id', 'field', 'type', 'relation_display', 'custom_value', 'display_name', 'validation', 'details', 'order', 'is_editable'
         ],
         'umi_field_display_add'     => [
-            'table_id', 'field', 'type', 'relation_display', 'custom_value', 'display_name', 'validation', 'detail', 'order', 'is_editable'
+            'table_id', 'field', 'type', 'relation_display', 'custom_value', 'display_name', 'validation', 'details', 'order', 'is_editable'
         ],
     ]
 ];

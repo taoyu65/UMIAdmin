@@ -8,7 +8,7 @@
     <div class="col-sm-12">
         <h3 class="header blue lighter smaller">
             <i class="ace-icon fa fa-gear smaller-90"></i>
-            Generate Rules - Drop Down Box
+            Generate Rules - {{isset($isCustomValue)&&$isCustomValue=='true'?'Foreign Key':'Drop Down Box'}}
         </h3>
 
         <div id="tabs">
@@ -17,12 +17,12 @@
                     <a href="#tabs-1">Relation Display</a>
                 </li>
 
-                <li>
+                <li {{isset($isCustomValue)&&$isCustomValue=='true'?'hidden':''}}>
                     <a href="#tabs-2">Custom Value</a>
                 </li>
             </ul>
 
-            <div id="tabs-2">
+            <div id="tabs-1">
                 <div class="alert alert-block alert-danger">
                     <button type="button" class="close" data-dismiss="alert">
                         <i class="ace-icon fa fa-times"></i>
@@ -79,7 +79,6 @@
                                             Generate Rule
                                         </button>
 
-                                        &nbsp; &nbsp; &nbsp;
                                         <button class="btn" type="button" id="close_relation">
                                             <i class="ace-icon fa fa-times bigger-110"></i>
                                             Close
@@ -92,7 +91,7 @@
                 </div>
             </div>
 
-            <div id="tabs-1">
+            <div id="tabs-2">
                 <div class="alert alert-block alert-danger">
                     <button type="button" class="close" data-dismiss="alert">
                         <i class="ace-icon fa fa-times"></i>
@@ -178,8 +177,6 @@
         </div>
     </div>
 
-
-
     <script src="{{$path}}/js/jquery.validate.min.js"></script>
     <script src="{{$path}}/js/jquery-ui.min.js"></script>
 
@@ -257,10 +254,20 @@
                 var json = '';
                 var placeholder = $('#ph').val();
                 var optionsArr = [];
+                var returnObj = {};
+                var typeObj = {};
                 trs.each(function () {
-                    optionsArr.push();//todo - complete this json string joint
-                    alert($(this).find('#ddValue').val());
+                    var o = {};
+                    o.value = $(this).find('#ddValue').val();
+                    o.text =$(this).find('#ddText').val();
+                    optionsArr.push(o);
                 });
+                typeObj.placeholder = placeholder;
+                typeObj.option = optionsArr;
+                returnObj.dropDownBox = typeObj;
+                var jsonString = JSON.stringify(returnObj);
+                parent.$('#{{$customValueDomId}}').val(jsonString);
+                parent.layer.closeAll();
             });
 
             $('#close_generation').click(function () {

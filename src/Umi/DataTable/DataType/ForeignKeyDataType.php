@@ -3,6 +3,7 @@
 namespace YM\Umi\DataTable\DataType;
 
 use Illuminate\Support\Facades\Config;
+use YM\Models\Table;
 use YM\Models\UmiModel;
 
 class ForeignKeyDataType extends DataTypeAbstract
@@ -17,6 +18,16 @@ class ForeignKeyDataType extends DataTypeAbstract
         $targetData = $umiTable->getRowById($data);
         $returnData = $targetData == null ? $this->getNoExistData($data) : $targetData->$relatedField;
         return $returnData;
+    }
+
+    public function dataTypeInterface($relationDisplayDomId, $customValueDomId)
+    {
+        $tableModel = new Table();
+        $tableList = $tableModel->getAllTable();
+        $isCustomValue = 'true';
+        $list = compact('tableList', 'relationDisplayDomId', 'customValueDomId', 'isCustomValue');
+
+        return view('umi::common.fieldDisplay.relationRule', $list);
     }
 
     private function getNoExistData($data)

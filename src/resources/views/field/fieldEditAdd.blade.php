@@ -96,7 +96,7 @@
                                     <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="relation_display">Relation Rule</label>
                                     <div class="col-xs-12 col-sm-4">
                                         <div class="clearfix">
-                                            <input class="form-control" name="relation_display" id="relation_display">
+                                            <input class="form-control" name="relation_display" id="relation_display" placeholder="tableName:fieldName">
                                         </div>
                                     </div>
                                 </div>
@@ -120,10 +120,10 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="detail">Detail</label>
+                                    <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="details">Detail</label>
                                     <div class="col-xs-12 col-sm-4">
                                         <div class="clearfix">
-                                            <input class="form-control" name="detail" id="detail">
+                                            <input class="form-control" name="details" id="details">
                                         </div>
                                     </div>
                                 </div>
@@ -177,7 +177,7 @@
             //init
             $("#type").val('');
             $("#relation_display").val('');
-            $('#type').val('label');
+            $('#type').val('textBox');
 
             //刷新当前页面是保持数据显示
             //keep data display when refresh page
@@ -215,6 +215,7 @@
                 //每次选择类型都要清空规则 以免发生错误
                 //every time select data type, the rule must be empty just in case error occurs
                 $('#relation_display').val('');
+                $('#custom_value').val('');
 
                 //badge类型比较特殊, 需要和badge数据表协同完成badge显示, 所以规则字段必须默认是 "表名:字段名"
                 //badge type is special, need to complete the function working with badge table, so the rule must be: "table name: field name"
@@ -236,6 +237,7 @@
                 //if field relation_display is true, then need a rule that will be created in pop window
                 var relation_display = $(this).find("option:selected").attr("relation_display");
                 var custom_value = $(this).find("option:selected").attr("custom_value");
+
                 if (relation_display === 'true' || custom_value === 'true') {
                     var dataType = $(this).val();
                     var url = '{{url("relationRule/relation_display/custom_value")}}/' + dataType;
@@ -243,7 +245,7 @@
                         type: 2,
                         title: 'Creating a relation rule',
                         shadeClose: false,
-                        area: ['800px', '60%'],
+                        area: ['1000px', '70%'],
                         content: url,
                         end: function () {
                             //如果没有生成一个规则, 则数据类型选项重置为空

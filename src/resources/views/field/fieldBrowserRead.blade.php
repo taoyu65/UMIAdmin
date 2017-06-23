@@ -96,7 +96,7 @@
                                     <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="relation_display">Relation Rule</label>
                                     <div class="col-xs-12 col-sm-4">
                                         <div class="clearfix">
-                                            <input class="form-control" name="relation_display" id="relation_display">
+                                            <input class="form-control" name="relation_display" id="relation_display" placeholder="tableName:fieldName">
                                         </div>
                                     </div>
                                 </div>
@@ -205,7 +205,7 @@
                     return;
                 }
 
-                //如果字段relation_display是真, 则需要一个规则,在弹出窗口定义规则
+                /*//如果字段relation_display是真, 则需要一个规则,在弹出窗口定义规则
                 //if field relation_display is true, then need a rule that will be created in pop window
                 var relation_display = $(this).find("option:selected").attr("relation_display");
                 //var custom_value = $(this).find("option:selected").attr("custom_value");
@@ -213,7 +213,7 @@
                 //todo - js and config parts can still just like that
                 //todo - the controller will deal with the factory to instance a object based on the different data type
                 if (relation_display === 'true') {
-                    var url = '{{url("relationRule/relation_display")}}';
+                    var url = '';
                     layer.open({
                         type: 2,
                         title: 'Creating a relation rule',
@@ -221,8 +221,31 @@
                         area: ['800px', '60%'],
                         content: url
                     });
-                }
+                }*/
 
+                //如果字段relation_display是真, 则需要一个规则,在弹出窗口定义规则
+                //if field relation_display is true, then need a rule that will be created in pop window
+                var relation_display = $(this).find("option:selected").attr("relation_display");
+
+                if (relation_display === 'true') {
+                    var dataType = $(this).val();
+                    var url = '{{url("relationRule/relation_display/custom_value")}}/' + dataType;
+                    layer.open({
+                        type: 2,
+                        title: 'Creating a relation rule',
+                        shadeClose: false,
+                        area: ['1000px', '70%'],
+                        content: url,
+                        end: function () {
+                            //如果没有生成一个规则, 则数据类型选项重置为空
+                            //if no rule has been generated than data type will be reset to empty
+                            if (relation_display === 'true') {
+                                if ($('#relation_display').val() === '')
+                                    $(this).val('');
+                            }
+                        }
+                    });
+                }
             });
 
             $('[data-rel=tooltip]').tooltip();

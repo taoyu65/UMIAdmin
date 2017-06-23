@@ -5,7 +5,6 @@ namespace YM\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Config;
-use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use YM\Facades\Umi;
 use YM\Models\FieldDisplayAdd;
 use YM\Models\FieldDisplayBrowser;
@@ -21,16 +20,18 @@ class fieldDisplayController extends Controller
     {
         $tableModel = new Table();
         $tableList = $tableModel->getAllTable();
-        $dataTypes = Config::get('umiEnum.data_type');
-
-        $list = compact('tableList', 'table', 'dataTypes', 'type', 'browserDisabled');
+        $list = compact('tableList', 'table', 'type', 'browserDisabled');
 
         switch ($type) {
             case 'browser':
             case 'read':
+                $dataTypes = Config::get('umiEnum.data_type.browserRead');
+                $list['dataTypes'] = $dataTypes;
                 return view('umi::field.fieldBrowserRead', $list);
             case 'edit':
             case 'add':
+                $dataTypes = Config::get('umiEnum.data_type.editAdd');
+                $list['dataTypes'] = $dataTypes;
                 return view('umi::field.fieldEditAdd', $list);
             default:
                 abort(404, 'Error page');
@@ -50,8 +51,8 @@ class fieldDisplayController extends Controller
     public function quickAdd($table, $fields, $selectedTableId)
     {
         $fieldsArr = json_decode(base64_decode($fields));
-
         $browserModel = new FieldDisplayBrowser();
+
         return $browserModel->quickAdd($table, $selectedTableId, $fieldsArr);
     }
 
@@ -61,20 +62,15 @@ class fieldDisplayController extends Controller
     #  $dom: dom of parent's window, use for displaying the rule string from generation
     public function relationRule($relationDisplayDomId, $customValueDomId, $dataType)
     {
-        /*$tableModel = new Table();
-        $tableList = $tableModel->getAllTable();
-
-        $list = compact('tableList', 'dom');
-
-        return view('umi::field.relationRule', $list);*/
         $factory = new FactoryDataType();
         $dataType = $factory->getInstance($dataType);
+
         return $dataType->dataTypeInterface($relationDisplayDomId, $customValueDomId);
     }
 
-    #browser 和 read 的添加操作
-    #browser and read add operation
-    public function browserAdd(Request $request, $table, $type)
+    #data type 的添加操作
+    #data type of adding operation
+    public function dataTypeAdd(Request $request, $table, $type)
     {
         switch ($type) {
             case 'browser':

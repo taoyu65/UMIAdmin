@@ -130,11 +130,11 @@ Route::group(['middleware' => 'umi.url.auth'], function () {
         'uses'      => 'fieldDisplayController@relationRule',
         'as'        => 'relationRule'
     ]);
-    //browser 和read 的添加操作
-    //browser and read's add action
+    //data type 的添加操作
+    //data type of adding operation
     Route::post('fieldDisplay/{table}/addType/{type}', [
         'middleware'=> ['umi.bread.access:add'],
-        'uses'      => 'fieldDisplayController@browserAdd'
+        'uses'      => 'fieldDisplayController@dataTypeAdd'
     ]);
 #---------------------------------------------------------------
 
