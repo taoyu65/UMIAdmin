@@ -150,7 +150,6 @@
             //init
             $("#type").val('');
             $("#relation_display").val('');
-            $('#type').val('label');
 
             //刷新当前页面是保持数据显示
             //keep data display when refresh page
@@ -204,24 +203,6 @@
                     $('#relation_display').val(tableName + ":" + fieldName);
                     return;
                 }
-
-                /*//如果字段relation_display是真, 则需要一个规则,在弹出窗口定义规则
-                //if field relation_display is true, then need a rule that will be created in pop window
-                var relation_display = $(this).find("option:selected").attr("relation_display");
-                //var custom_value = $(this).find("option:selected").attr("custom_value");
-                //todo - decision : all the custom_value and relation_rule will be going to data type class and build a new interface to let them implement
-                //todo - js and config parts can still just like that
-                //todo - the controller will deal with the factory to instance a object based on the different data type
-                if (relation_display === 'true') {
-                    var url = '';
-                    layer.open({
-                        type: 2,
-                        title: 'Creating a relation rule',
-                        shadeClose: true,
-                        area: ['800px', '60%'],
-                        content: url
-                    });
-                }*/
 
                 //如果字段relation_display是真, 则需要一个规则,在弹出窗口定义规则
                 //if field relation_display is true, then need a rule that will be created in pop window

@@ -52,8 +52,8 @@
                         <i class="ace-icon fa fa-compress"></i>
                     </button>
                     <button type="button" data-action="save" class="btn btn-success btn-sm btn-next" id="save-user">
-                        Save
-                        <i class="ace-icon fa fa-plus"></i>
+                        Update
+                        <i class="ace-icon fa fa-arrow-up"></i>
                     </button>
                 </menu>
             </div>

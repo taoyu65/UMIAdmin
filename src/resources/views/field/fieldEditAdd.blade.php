@@ -177,7 +177,6 @@
             //init
             $("#type").val('');
             $("#relation_display").val('');
-            $('#type').val('textBox');
 
             //刷新当前页面是保持数据显示
             //keep data display when refresh page
