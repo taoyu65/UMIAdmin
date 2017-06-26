@@ -11,6 +11,8 @@ return[
     'system_table_name'     => [
         'umi_table_relation_operation'  => 'umi_table_relation_operation',
         'umi_users'                     => 'umi_users',
+        'umi_roles'                     => 'umi_roles',
+        'umi_menus'                     => 'umi_menus',
         'umi_field_display_add'         => 'umi_field_display_add',
         'umi_field_display_browser'     => 'umi_field_display_browser',
         'umi_field_display_read'        => 'umi_field_display_read',
@@ -121,6 +123,12 @@ return[
     #可填充数据字段
     #fields that can be filled
     'fillable'              => [
+        'umi_users'                 => [
+            'name', 'email', 'password', 'remember_token'
+        ],
+        'umi_roles'                 => [
+            'role_name', 'display_name'
+        ],
         'umi_menus'                 => [
             'menu_id', 'title', 'url', 'target', 'icon_class', 'order', 'extra_icon_html'
         ],

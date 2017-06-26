@@ -97,9 +97,15 @@ Route::group(['middleware' => 'umi.url.auth'], function () {
 #权限管理
 #authority management
 #---------------------------------------------------------------
-    Route::get('authority/{table}/{type}', [
-        'uses'      => 'authorityController@bread',
-        'as'        => 'authority'
+    Route::get('authority/permission/wizard', [
+        'uses'      => 'authorityController@wizard',
+        'as'        => 'wizard'
+    ]);
+    Route::get('authority/ajax/roles', [
+        'uses'      => 'authorityController@ajaxRoles',
+    ]);
+    Route::get('authority/ajax/users', [
+        'uses'      => 'authorityController@ajaxUsers',
     ]);
 #---------------------------------------------------------------
 

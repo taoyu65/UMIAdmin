@@ -68,6 +68,7 @@ UMI;
 
         $readonly = $record->is_editable ? '' : 'true " style="cursor: not-allowed ';
         $name = $record->field;
+        $title = $record->display_name == '' ? $record->field : $record->display_name;
         $property = compact('name','readonly');
 
         $value = $this->checkDefaultValue($name, $defaultValue);
@@ -82,7 +83,7 @@ UMI;
 
         $html =<<<UMI
         <div class="form-group">
-            <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="$name">$record->display_name</label>
+            <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="$name">$title</label>
             <div class="col-xs-12 col-sm-4">
                 <div class="clearfix">
                     <span >$input</span>

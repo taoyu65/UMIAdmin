@@ -10,8 +10,16 @@ use Illuminate\Support\Facades\Config;
 class User extends Model
 {
     protected $table = 'umi_users';
+    public $timestamps = true;
 
     private $modelNameSpace = 'YM\Models';
+
+    public function __construct(array $attributes = [])
+    {
+        $this->fillable = Config::get('umiEnum.fillable.' . $this->table);
+
+        parent::__construct($attributes);
+    }
 
     public function MenuJson()
     {
@@ -28,5 +36,20 @@ class User extends Model
                 ->json;
         });
         return $json;
+    }
+
+    public function userNameList()
+    {
+        return self::select('name')->pluck('name');
+    }
+
+    public function insert($inputs)
+    {
+        try {
+            self::create($inputs);
+        } catch (\Exception $exception) {
+            exit($exception->getMessage());
+            //abort(503, $exception->getMessage());
+        }
     }
 }

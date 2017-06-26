@@ -72,7 +72,8 @@ class Menu extends UmiBase
         try {
             self::create($inputs);
         } catch (\Exception $exception) {
-            abort(503, $exception->getMessage());
+            exit($exception->getMessage());
+            //abort(503, $exception->getMessage());
         }
     }
 }

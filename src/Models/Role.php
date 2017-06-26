@@ -18,4 +18,11 @@ class Role extends UmiBase
     {
         return $this->belongsToMany($this->modelNameSpace . '\User', 'umi_user_role', 'role_id','user_id');
     }
+
+    public function roleNameList()
+    {
+        return self::select('role_name')
+            ->pluck('role_name')
+            ->toJson();
+    }
 }
