@@ -51,7 +51,7 @@
                             <h3 class="header smaller lighter green">Select a User who you want to give permissions to</h3>
                             <form class="form-horizontal">
                                 <div class="form-group has-success">
-                                    <label for="inputWarning" class="col-xs-12 col-sm-3 control-label no-padding-right">user name: </label>
+                                    <label for="inputWarning" class="col-xs-12 col-sm-2 control-label no-padding-right">user name: </label>
                                     <div class="col-xs-12 col-sm-2">
                                         <span class="block input-icon input-icon-right">
                                             <div id="userStep">
@@ -82,7 +82,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group has-success">
-                                    <label for="userName" class="col-xs-12 col-sm-3 control-label no-padding-right"></label>
+                                    <label for="userName" class="col-xs-12 col-sm-2 control-label no-padding-right"></label>
 
                                     <div class="col-xs-12 col-sm-5">
                                         <span class="block input-icon input-icon-right">
@@ -97,7 +97,7 @@
                             <h3 class="header smaller lighter blue">More Action</h3>
                             <form class="form-horizontal">
                                 <div class="form-group has-success">
-                                    <label for="inputWarning" class="col-xs-12 col-sm-3 control-label no-padding-right"></label>
+                                    <label for="inputWarning" class="col-xs-12 col-sm-2 control-label no-padding-right"></label>
                                     <div class="col-xs-12 col-sm-5">
                                         <button class="btn btn-info" type="button" id="createUserBtn">Create User</button>
                                     </div>
@@ -110,7 +110,7 @@
                             <h3 class="header smaller lighter blue">Select a Role</h3>
                             <form class="form-horizontal">
                                 <div class="form-group has-info">
-                                    <label for="inputWarning" class="col-xs-12 col-sm-3 control-label no-padding-right">Role name: </label>
+                                    <label for="inputWarning" class="col-xs-12 col-sm-2 control-label no-padding-right">Role name: </label>
                                     <div class="col-xs-12 col-sm-2">
                                         <span class="block input-icon input-icon-right">
                                             <div id="roleStep">
@@ -136,7 +136,7 @@
                                     </div>
                                 </div>
                                 <div class="form-group has-info">
-                                    <label for="roleName" class="col-xs-12 col-sm-3 control-label no-padding-right"></label>
+                                    <label for="roleName" class="col-xs-12 col-sm-2 control-label no-padding-right"></label>
 
                                     <div class="col-xs-12 col-sm-5">
                                         <span class="block input-icon input-icon-right">
@@ -151,7 +151,7 @@
                             <h3 class="header smaller lighter orange2">More Action</h3>
                             <form class="form-horizontal">
                                 <div class="form-group has-success">
-                                    <label for="inputWarning" class="col-xs-12 col-sm-3 control-label no-padding-right"></label>
+                                    <label for="inputWarning" class="col-xs-12 col-sm-2 control-label no-padding-right"></label>
                                     <div class="col-xs-12 col-sm-5">
                                         <button class="btn btn-yellow" type="button" id="createRoleBtn">Create Role</button>
                                     </div>
@@ -159,16 +159,95 @@
                             </form>
                         </div>
 
+                        {{-- Permission --}}
                         <div class="step-pane" data-step="3">
-                            <div class="center">
-                                <h3 class="blue lighter">This is step 3</h3>
-                            </div>
+                            <h3 class="header smaller orange">Permissions of Role: <strong><span id="roleTitle" class="red"></span></strong></h3>
+                            <form class="form-horizontal">
+                                <div class="form-group has-warning">
+                                    <label for="inputWarning" class="col-xs-12 col-sm-2 control-label no-padding-right ">Table Name</label>
+                                    <div class="col-xs-12 col-sm-1">
+                                        <button class="btn btn-success btn-mini" type="button" id="selectAll">Select All</button>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-1">
+                                        <button class="btn btn-danger btn-mini" type="button" id="invertAll">Select Invert</button>
+                                    </div>
+                                </div>
+                            </form>
+                            <form class="form-horizontal" id="form">
+                                @foreach($tables as $table)
+                                <div class="form-group has-warning table-row" >
+                                    <label for="inputWarning" class="col-xs-12 col-sm-2 control-label no-padding-right bolder">{{$table->table_name}}</label>
+                                    <div class="col-xs-12 col-sm-1">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input name="browser{{$table->id}}" class="ace ace-checkbox-2 permissionCheckBox" type="checkbox" />
+                                                <span class="lbl">Browser</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-1">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input name="read{{$table->id}}" class="ace ace-checkbox-2 permissionCheckBox" type="checkbox" />
+                                                <span class="lbl"> Read</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-1">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input name="edit{{$table->id}}" class="ace ace-checkbox-2 permissionCheckBox" type="checkbox" />
+                                                <span class="lbl"> Edit</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-1">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input name="add{{$table->id}}" class="ace ace-checkbox-2 permissionCheckBox" type="checkbox" />
+                                                <span class="lbl"> Add</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-1">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input name="delete{{$table->id}}" class="ace ace-checkbox-2 permissionCheckBox" type="checkbox" />
+                                                <span class="lbl"> Delete</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-xs-12 col-sm-offset-1 col-sm-2">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input class="ace ace-checkbox-2" type="checkbox" onchange="checkAll(this);" />
+                                                <span class="lbl"> All / Erase</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                                @endforeach
+                            </form>
                         </div>
 
+                        {{-- Submit --}}
                         <div class="step-pane" data-step="4">
                             <div class="center">
-                                <h3 class="green">Congrats!</h3>
-                                Your product is ready to ship! Click finish to continue!
+                                <h3 class="red">Warning!</h3>
+                                <div class="alert alert-block alert-danger">
+                                    <button type="button" class="close" data-dismiss="alert">
+                                        <i class="ace-icon fa fa-times"></i>
+                                    </button>
+
+                                    <p>
+                                        <strong>
+                                            <i class="ace-icon fa fa-check"></i>
+                                            Hands Up!
+                                        </strong>
+                                        If you changed permissions, other users who has this role's permission will be changed as well. <br><br>
+                                        Click "finish" to continue.or go back to make a new role for this user.
+                                    </p>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -195,20 +274,82 @@
         $(document).ready(function () {
             $('#fuelux-wizard-container').ace_wizard({
                 }).on('finished.fu.wizard', function(e) {
-                    layer.alert('a');
-                }).on('stepclick.fu.wizard', function(e){
-                //e.preventDefault();//this will prevent clicking and selecting steps
-            }).on('actionclicked.fu.wizard' , function(e, info){
-                if(info.step == 1) {
-                    //只在第一次加载角色数据
-                    //only load once at the first time
-                    if ($('#roleStep ul li').size() === 0) {
-                        //加载步骤2的角色列表
-                        //load role list for step 2
-                        getRoleName();
+                    //提交更新
+                    //submit update
+                    
+                }).on('stepclick.fu.wizard', function(e) {
+                    //e.preventDefault();//this will prevent clicking and selecting steps
+                }).on('actionclicked.fu.wizard' , function(e, info){console.log(info);
+                    //返回并不激发事件
+                    //go back will not fire event
+                    if (info.direction !== 'previous') {
+                        if (info.step === 1) {
+                            if ($('#userName').val().trim() === '') {
+                                layer.alert('Please Select a User.', {title: 'Wrong'});
+                                return false;
+                            }
+                            //只在第一次加载角色数据
+                            //only load once at the first time
+                            if ($('#roleStep ul li').size() === 0) {
+                                //加载步骤2的角色列表
+                                //load role list for step 2
+                                getRoleName();
+                            }
+                        } else if (info.step === 2) {
+                            if ($('#roleName').val().trim() === '') {
+                                layer.alert('Please Select a Role.', {title: 'Wrong'});
+                                return false;
+                            }
+
+                            //查看是否存在指定角色, 并且返回权限列表以固定格式 例如 (B1 = 表id为1的Browser权限)
+                            //check if specific role exist, and return permission string (such as, B1 equal the permission of browser from table of id is 1)
+                            var load = layer.load(3, {
+                                shade: [0.5, '#000']
+                            });
+                            var roleName = $('#roleName').val();
+                            var url = '{{url("/api/checkRole")}}' + '/' + roleName;
+                            $.ajax({
+                                type: 'get',
+                                url: url,
+                                async: false,
+                                success: function (data) {
+                                    if (data.length > 0) {
+                                        //循环检查权限
+                                        //circulate to check all the permissions
+                                        $('#form').find('input[type="checkbox"]').each(function () {
+                                            var checkBoxName = $(this).prop('name');
+                                            if ($.inArray(checkBoxName, data) !== -1) {
+                                                $(this).prop('checked', 'checked');
+                                            } else {
+                                                $(this).removeAttr('checked');
+                                            }
+                                        });
+                                        $('#roleTitle').text($('#roleName').val());
+                                    } else {
+                                        if (data === '') {
+                                            var wizard = $('#fuelux-wizard-container').data('fu.wizard')
+                                            wizard.currentStep = 1;
+                                            wizard.setState();
+                                            layer.alert('Role does not exist, please create this role');
+                                            return false;
+                                        } else {
+                                            $('#form').find('input[type="checkbox"]').each(function () {
+                                                $(this).removeAttr('checked');
+                                            });
+                                        }
+                                    }
+                                },
+                                error: function () {
+                                    layer.alert('Something went wrong.', 'Wrong');
+                                    window.history.back();
+                                },
+                                complete: function () {
+                                    layer.close(load);
+                                }
+                            });
+                        }
                     }
-                }
-            });
+                });
 
             //点击用户列表
             //click user list
@@ -249,6 +390,26 @@
                     shadeClose: true,
                     area: ['80%', '90%'],
                     content: url
+                });
+            });
+
+            //反选所有选项
+            //invert all the checkbox
+            $('#invertAll').click(function () {
+                $('#form').find('input[type="checkbox"]').each(function () {
+                    if($(this).prop('checked')) {
+                        $(this).removeAttr('checked');
+                    } else {
+                        $(this).prop('checked', 'checked');
+                    }
+                });
+            });
+
+            //选择所有的checkbox
+            //select all the checkbox
+            $('#selectAll').click(function () {
+                $('#form').find('input[type="checkbox"]').each(function () {
+                    $(this).prop('checked', 'checked');
                 });
             });
         });
@@ -333,6 +494,16 @@
                     });
                 }
             });
+        }
+
+        //行级 - 选择所有
+        //select all in a row
+        function checkAll(e) {
+            if($(e).prop("checked")) {
+                $(e).closest('.table-row').find('input[type="checkbox"]').prop('checked', 'checked');
+            } else {
+                $(e).closest('.table-row').find('input[type="checkbox"]').removeAttr('checked');
+            }
         }
     </script>
 @endsection

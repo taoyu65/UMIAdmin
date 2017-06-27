@@ -5,6 +5,7 @@ namespace YM\Http\Controllers;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Config;
 use YM\Models\Role;
+use YM\Models\Table;
 use YM\Models\User;
 
 class authorityController extends Controller
@@ -17,7 +18,12 @@ class authorityController extends Controller
         $userTableName = Config::get('umiEnum.system_table_name.umi_users');
         $roleTableName = Config::get('umiEnum.system_table_name.umi_roles');
 
-        $list = compact('users', 'userTableName', 'roleTableName');
+        #所有table
+        #all tables
+        $tableModel = new Table();
+        $tables = $tableModel->getAllTable();
+
+        $list = compact('users', 'userTableName', 'roleTableName', 'tables');
         return view('umi::authority.wizard', $list);
     }
 

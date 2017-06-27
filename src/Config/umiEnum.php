@@ -12,6 +12,8 @@ return[
         'umi_table_relation_operation'  => 'umi_table_relation_operation',
         'umi_users'                     => 'umi_users',
         'umi_roles'                     => 'umi_roles',
+        'umi_permission_role'           => 'umi_permission_role',
+        'umi_permissions'               => 'umi_permissions',
         'umi_menus'                     => 'umi_menus',
         'umi_field_display_add'         => 'umi_field_display_add',
         'umi_field_display_browser'     => 'umi_field_display_browser',
