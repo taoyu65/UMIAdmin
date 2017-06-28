@@ -131,6 +131,9 @@ return[
         'umi_roles'                 => [
             'role_name', 'display_name'
         ],
+        'umi_user_role'             => [
+            'user_id', 'role_id'
+        ],
         'umi_menus'                 => [
             'menu_id', 'title', 'url', 'target', 'icon_class', 'order', 'extra_icon_html'
         ],

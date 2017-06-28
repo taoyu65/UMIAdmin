@@ -3,10 +3,18 @@
 namespace YM\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Config;
 
 class UserRole extends Model
 {
     protected $table = 'umi_user_role';
+    public $timestamps = false;
+
+    public function __construct(array $attributes = [])
+    {
+        $this->fillable = Config::get('umiEnum.fillable.umi_user_role');
+        parent::__construct($attributes);
+    }
 
     public function updateUserRole($userId, $roleId)
     {
@@ -14,10 +22,8 @@ class UserRole extends Model
             ->where('role_id', $roleId)
             ->first();
         if (!$record) {
-            self::create([
-                'user_id'   => $userId,
-                'role_id'   => $roleId
-            ]);
+            self::create(['user_id'   => $userId,
+                'role_id'   => $roleId]);
             return true;
         }
         return false;

@@ -5,12 +5,12 @@ namespace YM\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Config;
+use YM\Facades\Umi;
 use YM\Models\Permission;
 use YM\Models\PermissionRole;
 use YM\Models\Role;
 use YM\Models\Table;
 use YM\Models\User;
-use YM\Models\UserRole;
 
 class authorityController extends Controller
 {
@@ -47,28 +47,22 @@ class authorityController extends Controller
         return $this->getUsers()->toJson();
     }
 
+    #重新计算并更新用户所属角色,以及角色所属权限
+    #recalculate and update the users role, and role's permissions
     public function wizardUpdate(Request $request) {
         $userId = $request->input('user_id');
         $roleId = $request->input('role_id');
-        $oldPermissions = json_decode($request->input('oldPermissions'));
-        $newPermissions = json_decode($request->input('newPermissions'));
+        $oldPermissions = $request->input('oldPermissions') ? json_decode($request->input('oldPermissions')) : [];
+        $newPermissions = $request->input('newPermissions') ? json_decode($request->input('newPermissions')) : [];
 
         #检查用户指定的角色是否存在, 不存在则添加
         #check if user has that role, if not then create it
-        $userRoleModel = new UserRole();
-        if ($userRoleModel->updateUserRole($userId, $roleId)) {
-            //ok //todo -
-        } else {
-            //role had been distributed
-        }
-
-        #重新计算并更新角色所属权限
-        #recalculate and update the role's permissions
-        $permissionRoleModel = new PermissionRole();
-        $permissionModel = new Permission();
+        //由于使用事务,具体操作移动到方法updatePermissionRole() 中
+        //because of using transaction, the operation moved to updatePermissionRole().
 
         #找出修改前后权限的差集, 分别为需要增加的差集和删除的差集
         #find the difference of permission between before and after changes, both different for adding and deleting
+        $permissionModel = new Permission();
         $permission = $permissionModel->allPermissionRegulated();
 
         $permissionAdd = array_diff($newPermissions, $oldPermissions);
@@ -77,13 +71,15 @@ class authorityController extends Controller
         $permissionDelete = array_diff($oldPermissions, $newPermissions);
         $permissionDeleteIds = $this->getPermissionDeleteIds($permission, $permissionDelete);
 
-        if ($permissionRoleModel->updatePermissionRole($roleId, $permissionAddIds, $permissionDeleteIds)) {
-            //todo -
-        } else {
+        $permissionRoleModel = new PermissionRole();
+        $permissionRoleModel->updatePermissionRole($userId, $roleId, $permissionAddIds, $permissionDeleteIds);
 
-        }
+        Umi::showMessage('update success!');
+        return redirect()->route('wizard');
     }
 
+    #比较权限 获取需要增加权限的ID
+    #compare permissions, and get all the permission's id which need to be added
     private function getPermissionAddIds($permission, $permissionAdd)
     {
         $re = [];
@@ -93,6 +89,8 @@ class authorityController extends Controller
         return $re;
     }
 
+    #比较权限 获取需要删除权限的ID
+    #compare permissions, and get all the permission's id which need to be deleted
     private function getPermissionDeleteIds($permission, $permissionDelete)
     {
         $re = [];

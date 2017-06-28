@@ -161,7 +161,20 @@
 
                         {{-- Permission --}}
                         <div class="step-pane" data-step="3">
-                            <h3 class="header smaller orange">Permissions of Role: <strong><span id="roleTitle" class="red"></span></strong></h3>
+                            <h3 class="header smaller orange">Permissions of Role: <strong><span id="roleTitle" class="red roleTitle"></span></strong></h3>
+                            <div class="alert alert-block alert-danger">
+                                <button type="button" class="close" data-dismiss="alert">
+                                    <i class="ace-icon fa fa-times"></i>
+                                </button>
+                                <p>
+                                    <strong>
+                                        <i class="ace-icon fa fa-check"></i>
+                                        Important!
+                                    </strong>
+                                    This group of permissions are relate to the role: <span id="roleTitle" class="red roleTitle"></span>. <br>
+                                    It is not relate to the user. If any permission rule are changed, all the user who has this role will be affected
+                                </p>
+                            </div>
                             <form class="form-horizontal">
                                 <div class="form-group has-warning">
                                     <label for="inputWarning" class="col-xs-12 col-sm-2 control-label no-padding-right ">Table Name</label>
@@ -343,7 +356,7 @@
                                                 $(this).removeAttr('checked');
                                             }
                                         });
-                                        $('#roleTitle').text($('#roleName').val());
+                                        $('.roleTitle').text($('#roleName').val());
                                     } else {
                                         if (data === '') {
                                             var wizard = $('#fuelux-wizard-container').data('fu.wizard')
