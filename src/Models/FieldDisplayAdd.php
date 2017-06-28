@@ -8,10 +8,10 @@ use Illuminate\Support\Facades\Config;
 class FieldDisplayAdd extends UmiBase
 {
     protected $table = 'umi_field_display_add';
+    public $timestamps = true;
 
     protected $openCache = true;
     protected $cacheAllRecord = true;
-    public $timestamps = true;
 
     public function __construct(array $attributes = [], $orderBy = '', $order = 'asc')
     {

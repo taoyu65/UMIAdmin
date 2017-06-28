@@ -97,15 +97,26 @@ Route::group(['middleware' => 'umi.url.auth'], function () {
 #权限管理
 #authority management
 #---------------------------------------------------------------
+    //用户角色和权限设置向导
+    //user, role, and permission's wizard
     Route::get('authority/permission/wizard', [
         'uses'      => 'authorityController@wizard',
         'as'        => 'wizard'
     ]);
+    //异步获取角色列表
+    //ajax get role's list
     Route::get('authority/ajax/roles', [
         'uses'      => 'authorityController@ajaxRoles',
     ]);
+    //异步获取用户列表
+    //ajax get user's list
     Route::get('authority/ajax/users', [
         'uses'      => 'authorityController@ajaxUsers',
+    ]);
+    //提交更新
+    //submit update
+    Route::post('authority/wizardUpdate', [
+        'uses'      => 'authorityController@wizardUpdate'
     ]);
 #---------------------------------------------------------------
 

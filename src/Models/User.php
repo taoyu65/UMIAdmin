@@ -40,7 +40,7 @@ class User extends Model
 
     public function userNameList()
     {
-        return self::select('name')->pluck('name');
+        return self::select('id', 'name')->pluck('name', 'id');
     }
 
     public function insert($inputs)

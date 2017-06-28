@@ -64,9 +64,9 @@
                                                     <i class='ace-icon fa fa-spinner fa-spin white bigger-125'></i>
                                                 </button>
                                                 <ul class="dropdown-menu dropdown-success dropdown-menu-right">
-                                                    @foreach($users as $user)
+                                                    @foreach($users as $id=>$user)
                                                     <li>
-                                                        <a href="#">{{$user}}</a>
+                                                        <a href="#" id="{{$id}}">{{$user}}</a>
                                                     </li>
                                                     @endforeach
                                                 </ul>
@@ -86,7 +86,7 @@
 
                                     <div class="col-xs-12 col-sm-5">
                                         <span class="block input-icon input-icon-right">
-                                            <input type="text" id="userName" class="width-100" name="userName"/>
+                                            <input type="text" id="userName" class="width-100" name="userName" disabled/>
                                             <i class="ace-icon fa fa-user"></i>
                                         </span>
                                     </div>
@@ -140,7 +140,7 @@
 
                                     <div class="col-xs-12 col-sm-5">
                                         <span class="block input-icon input-icon-right">
-                                            <input type="text" id="roleName" class="width-100" name="roleName"/>
+                                            <input type="text" id="roleName" class="width-100" name="roleName" disabled/>
                                             <i class="ace-icon fa fa-users"></i>
                                         </span>
                                     </div>
@@ -180,7 +180,8 @@
                                     <div class="col-xs-12 col-sm-1">
                                         <div class="checkbox">
                                             <label>
-                                                <input name="browser{{$table->id}}" class="ace ace-checkbox-2 permissionCheckBox" type="checkbox" />
+                                                <input name="browser{{$table->id}}" class="ace ace-checkbox-2 permissionCheckBox" type="checkbox"
+                                                        {{in_array('browser' . $table->id, $permission) ? '' : 'disabled'}} />
                                                 <span class="lbl">Browser</span>
                                             </label>
                                         </div>
@@ -188,7 +189,8 @@
                                     <div class="col-xs-12 col-sm-1">
                                         <div class="checkbox">
                                             <label>
-                                                <input name="read{{$table->id}}" class="ace ace-checkbox-2 permissionCheckBox" type="checkbox" />
+                                                <input name="read{{$table->id}}" class="ace ace-checkbox-2 permissionCheckBox" type="checkbox"
+                                                        {{in_array('read' . $table->id, $permission) ? '' : 'disabled'}} />
                                                 <span class="lbl"> Read</span>
                                             </label>
                                         </div>
@@ -196,7 +198,8 @@
                                     <div class="col-xs-12 col-sm-1">
                                         <div class="checkbox">
                                             <label>
-                                                <input name="edit{{$table->id}}" class="ace ace-checkbox-2 permissionCheckBox" type="checkbox" />
+                                                <input name="edit{{$table->id}}" class="ace ace-checkbox-2 permissionCheckBox" type="checkbox"
+                                                        {{in_array('edit' . $table->id, $permission) ? '' : 'disabled'}} />
                                                 <span class="lbl"> Edit</span>
                                             </label>
                                         </div>
@@ -204,7 +207,8 @@
                                     <div class="col-xs-12 col-sm-1">
                                         <div class="checkbox">
                                             <label>
-                                                <input name="add{{$table->id}}" class="ace ace-checkbox-2 permissionCheckBox" type="checkbox" />
+                                                <input name="add{{$table->id}}" class="ace ace-checkbox-2 permissionCheckBox" type="checkbox"
+                                                        {{in_array('add' . $table->id, $permission) ? '' : 'disabled'}} />
                                                 <span class="lbl"> Add</span>
                                             </label>
                                         </div>
@@ -212,7 +216,8 @@
                                     <div class="col-xs-12 col-sm-1">
                                         <div class="checkbox">
                                             <label>
-                                                <input name="delete{{$table->id}}" class="ace ace-checkbox-2 permissionCheckBox" type="checkbox" />
+                                                <input name="delete{{$table->id}}" class="ace ace-checkbox-2 permissionCheckBox" type="checkbox"
+                                                        {{in_array('delete' . $table->id, $permission) ? '' : 'disabled'}} />
                                                 <span class="lbl"> Delete</span>
                                             </label>
                                         </div>
@@ -268,6 +273,14 @@
         </div><!-- /.widget-body -->
     </div>
 
+    <form action="{{url('authority/wizardUpdate')}}" method="post" id="updateAuthority">
+        {!! csrf_field() !!}
+        <input type="hidden" name="user_id" id="user_id" value="">
+        <input type="hidden" name="role_id" id="role_id" value="">
+        <input type="hidden" name="oldPermissions" id="oldPermissions">
+        <input type="hidden" name="newPermissions" id="newPermissions">
+    </form>
+
     <script src="{{$path}}/js/wizard.min.js"></script>
 
     <script>
@@ -276,10 +289,13 @@
                 }).on('finished.fu.wizard', function(e) {
                     //提交更新
                     //submit update
-                    
+                    //todo - set hidden field for userid, roleId, psermissionString (now and before)
+                    //todo - update data base for user-role, and role-permission
+                    //todo - when update permission, if permission table does not have permission then need to be added
+                    $('#updateAuthority').submit();
                 }).on('stepclick.fu.wizard', function(e) {
                     //e.preventDefault();//this will prevent clicking and selecting steps
-                }).on('actionclicked.fu.wizard' , function(e, info){console.log(info);
+                }).on('actionclicked.fu.wizard' , function(e, info){
                     //返回并不激发事件
                     //go back will not fire event
                     if (info.direction !== 'previous') {
@@ -301,7 +317,7 @@
                                 return false;
                             }
 
-                            //查看是否存在指定角色, 并且返回权限列表以固定格式 例如 (B1 = 表id为1的Browser权限)
+                            //查看是否存在指定角色, 并且返回权限列表以固定格式 例如 (Browser1 = 表id为1的Browser权限)
                             //check if specific role exist, and return permission string (such as, B1 equal the permission of browser from table of id is 1)
                             var load = layer.load(3, {
                                 shade: [0.5, '#000']
@@ -314,9 +330,12 @@
                                 async: false,
                                 success: function (data) {
                                     if (data.length > 0) {
+                                        //最后提交表单使用的隐藏域
+                                        //hidden field for submitting at the end
+                                        $('#oldPermissions').val(JSON.stringify(data));
                                         //循环检查权限
                                         //circulate to check all the permissions
-                                        $('#form').find('input[type="checkbox"]').each(function () {
+                                        $('#form').find('input[type="checkbox"].permissionCheckBox:not(:disabled)').each(function () {
                                             var checkBoxName = $(this).prop('name');
                                             if ($.inArray(checkBoxName, data) !== -1) {
                                                 $(this).prop('checked', 'checked');
@@ -333,7 +352,7 @@
                                             layer.alert('Role does not exist, please create this role');
                                             return false;
                                         } else {
-                                            $('#form').find('input[type="checkbox"]').each(function () {
+                                            $('#form').find('input[type="checkbox"].permissionCheckBox:not(:disabled)').each(function () {
                                                 $(this).removeAttr('checked');
                                             });
                                         }
@@ -347,6 +366,16 @@
                                     layer.close(load);
                                 }
                             });
+                        } else if (info.step === 3) {
+                            //最后提交表单使用的隐藏域
+                            //hidden field for submitting at the end
+                            var newPermission = [];
+                            $('#form').find('input[type="checkbox"].permissionCheckBox:not(:disabled)').each(function () {
+                                if ($(this).prop('checked')) {
+                                    newPermission.push($(this).prop('name'));
+                                }
+                            });
+                            $('#newPermissions').val(JSON.stringify(newPermission));
                         }
                     }
                 });
@@ -355,6 +384,9 @@
             //click user list
             $('#userStep a').click(function () {
                 $('#userName').val($(this).text());
+                //最后提交表单使用的隐藏域
+                //hidden field for submitting at the end
+                $('#user_id').val($(this).prop('id'));
             });
 
             //刷新用户列表
@@ -396,7 +428,7 @@
             //反选所有选项
             //invert all the checkbox
             $('#invertAll').click(function () {
-                $('#form').find('input[type="checkbox"]').each(function () {
+                $('#form').find('input[type="checkbox"].permissionCheckBox:not(:disabled)').each(function () {
                     if($(this).prop('checked')) {
                         $(this).removeAttr('checked');
                     } else {
@@ -408,7 +440,7 @@
             //选择所有的checkbox
             //select all the checkbox
             $('#selectAll').click(function () {
-                $('#form').find('input[type="checkbox"]').each(function () {
+                $('#form').find('input[type="checkbox"].permissionCheckBox:not(:disabled)').each(function () {
                     $(this).prop('checked', 'checked');
                 });
             });
@@ -467,7 +499,7 @@
                 success: function (data) {
                     ul.children('li').remove();
                     $.each(data, function (name, value) {
-                        ul.append("<li><a href='#'>" + value + "</a></li>");
+                        ul.append("<li><a href='#' id='" + name + "'>" + value + "</a></li>");
                     });
                     var roleDom = $('#roleBtn');
                     var loadDom = $('#loadRoleBtn');
@@ -476,8 +508,11 @@
 
                     //点击角色列表
                     //click role list
-                    $('#roleStep ul li a').click(function () {
+                    $('#roleStep a').click(function () {
                         $('#roleName').val($(this).text());
+                        //最后提交表单使用的隐藏域
+                        //hidden field for submitting at the end
+                        $('#role_id').val($(this).prop('id'));
                     });
 
                     //刷新角色列表
@@ -500,9 +535,9 @@
         //select all in a row
         function checkAll(e) {
             if($(e).prop("checked")) {
-                $(e).closest('.table-row').find('input[type="checkbox"]').prop('checked', 'checked');
+                $(e).closest('.table-row').find('input[type="checkbox"].permissionCheckBox:not(:disabled)').prop('checked', 'checked');
             } else {
-                $(e).closest('.table-row').find('input[type="checkbox"]').removeAttr('checked');
+                $(e).closest('.table-row').find('input[type="checkbox"].permissionCheckBox:not(:disabled)').removeAttr('checked');
             }
         }
     </script>

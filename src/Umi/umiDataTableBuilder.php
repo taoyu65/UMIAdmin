@@ -224,27 +224,27 @@ UMI;
         }
         $html = <<<UMI
         <div class="row">
-		    <div class="col-xs-12">
-			    <table id="dynamic-table" class="table table-striped table-bordered table-hover">
-				    <thead>
-					    <tr>
-						    <!--<th class="center">
-							    <label class="pos-rel">
-									<input type="checkbox" class="ace" />
-									<span class="lbl"></span>
-								</label>
-							</th>-->
-							$tHeadHtml
-							<th></th>
-		                </tr>
-			        </thead>
+            <div class="col-xs-12">
+                <table id="dynamic-table" class="table table-striped table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <!--<th class="center">
+                                <label class="pos-rel">
+                                    <input type="checkbox" class="ace" />
+                                    <span class="lbl"></span>
+                                </label>
+                            </th>-->
+                            $tHeadHtml
+                            <th></th>
+                        </tr>
+                    </thead>
 
-			        <tbody>
-				        $trBodyHtml
-				    </tbody>
-				</table>
-			</div>
-		</div>
+                    <tbody>
+                        $trBodyHtml
+                    </tbody>
+                </table>
+            </div>
+        </div>
 UMI;
         $html .= $links;
         return $html;
@@ -266,24 +266,24 @@ UMI;
     {
         $html = <<< UMI
         <div class="alert alert-block alert-success">
-			<button type="button" class="close" data-dismiss="alert">
-				<i class="ace-icon fa fa-times"></i>
-			</button>
+            <button type="button" class="close" data-dismiss="alert">
+                <i class="ace-icon fa fa-times"></i>
+            </button>
 
-			<p>
-				<strong>
-					<i class="ace-icon fa fa-check"></i>
-					This is Table's Foot
-				</strong>
-				You can customize this footer.<br>
-				Footer, Header, Body of Table can be different by extending a new class for the a new administrator
-			</p>
+            <p>
+                <strong>
+                    <i class="ace-icon fa fa-check"></i>
+                    This is Table's Foot
+                </strong>
+                You can customize this footer.<br>
+                Footer, Header, Body of Table can be different by extending a new class for the a new administrator
+            </p>
 
-			<p>
-				<button class="btn btn-sm btn-success">Do This</button>
-				<button class="btn btn-sm btn-info">Or This One</button>
-			</p>
-		</div>
+            <p>
+                <button class="btn btn-sm btn-success">Do This</button>
+                <button class="btn btn-sm btn-info">Or This One</button>
+            </p>
+        </div>
 UMI;
         return $html;
     }
@@ -312,11 +312,11 @@ UMI;
         $disabled = $this->delete ? '' : 'disabled';
         $html = <<<UMI
         <td class="center">
-	        <label class="pos-rel">
-	            <input type="checkbox" class="ace" $disabled/>
-	            <span class="lbl"></span>
-	        </label>
-	    </td>
+        <label class="pos-rel">
+            <input type="checkbox" class="ace" $disabled/>
+            <span class="lbl"></span>
+        </label>
+        </td>
 UMI;
         return '';
         //return $html;
@@ -377,9 +377,9 @@ UMI;
     {
         $html = <<<UMI
         <button class="$this->BtnCssNew $disable">
-	    	<i class="ace-icon fa fa-plus"></i>
+            <i class="ace-icon fa fa-plus"></i>
             New
-	    </button>
+        </button>
 UMI;
         return $html;
     }
@@ -398,9 +398,9 @@ UMI;
     {
         $html = <<<UMI
         <button class="$this->BtnCssDelete $disable">
-	    	<i class="ace-icon fa fa-trash-o"></i>
-	    	Delete
-	    </button>
+                    <i class="ace-icon fa fa-trash-o"></i>
+            Delete
+        </button>
 UMI;
         return $html;
     }
@@ -484,7 +484,7 @@ UMI;
             <li>
                 <a href="#">
                     <span class="green" style="cursor:not-allowed">
-                    	<i class="ace-icon fa fa-eye bigger-120"></i>
+                        <i class="ace-icon fa fa-eye bigger-120"></i>
                     </span>
                 </a>
             </li>
@@ -589,17 +589,17 @@ UMI;
 
         $html = <<<UMI
         <div class="alert alert-danger">
-	    	<button type="button" class="close" data-dismiss="alert">
-	    		<i class="ace-icon fa fa-times"></i>
-	    	</button>
-	    	<strong>
-	    		<i class="ace-icon fa fa-times"></i>
-	    		Oh whoops!
-	    	</strong>
-	    		$message
-	    	<br />
-	    	$showingButton
-	    </div>
+            <button type="button" class="close" data-dismiss="alert">
+                <i class="ace-icon fa fa-times"></i>
+            </button>
+            <strong>
+                <i class="ace-icon fa fa-times"></i>
+                Oh whoops!
+            </strong>
+                $message
+            <br />
+            $showingButton
+        </div>
 UMI;
         return $html;
     }

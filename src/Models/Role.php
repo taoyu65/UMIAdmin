@@ -5,6 +5,7 @@ namespace YM\Models;
 class Role extends UmiBase
 {
     protected $table = 'umi_roles';
+    public $timestamps = true;
 
     private $modelNameSpace = 'YM\Models';
 
@@ -21,8 +22,8 @@ class Role extends UmiBase
 
     public function roleNameList()
     {
-        return self::select('role_name')
-            ->pluck('role_name')
+        return self::select('id', 'role_name')
+            ->pluck('role_name', 'id')
             ->toJson();
     }
 }
