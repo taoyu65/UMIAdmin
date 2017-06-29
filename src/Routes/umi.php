@@ -118,6 +118,11 @@ Route::group(['middleware' => 'umi.url.auth'], function () {
     Route::post('authority/wizardUpdate', [
         'uses'      => 'authorityController@wizardUpdate'
     ]);
+    //角色对应的权限管理
+    //role and permission management
+    Route::get('authority/role-permission', [
+        'uses'      => 'authorityController@rolePermission'
+    ]);
 #---------------------------------------------------------------
 
 #字段显示管理

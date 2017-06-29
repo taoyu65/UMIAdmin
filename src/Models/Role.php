@@ -9,6 +9,9 @@ class Role extends UmiBase
 
     private $modelNameSpace = 'YM\Models';
 
+    protected $openCache = true;
+    protected $cacheAllRecord = true;
+
     public function permission()
     {
         $related = $this->modelNameSpace . '\Permission';
@@ -22,6 +25,11 @@ class Role extends UmiBase
 
     public function roleNameList()
     {
+        if ($this->openCache)
+            return $this->cachedTable
+                ->pluck('role_name', 'id')
+                ->toJson();
+
         return self::select('id', 'role_name')
             ->pluck('role_name', 'id')
             ->toJson();

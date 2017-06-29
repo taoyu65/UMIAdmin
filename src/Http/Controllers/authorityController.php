@@ -78,6 +78,28 @@ class authorityController extends Controller
         return redirect()->route('wizard');
     }
 
+    public function rolePermission()
+    {
+        #所有table
+        #all tables
+        $tableModel = new Table();
+        $tables = $tableModel->getAllTable();
+
+        #获取所有权限
+        #get all permission
+        $permissionModel = new Permission();
+        $permission = $permissionModel->allPermission();
+
+        #获取所有角色
+        #ge all the role
+        $roles = $this->ajaxRoles();
+        $roles = json_decode($roles);
+
+        $list = compact('tables', 'permission', 'roles');
+        return view('umi::authority.rolePermission', $list);
+    }
+
+#region Private method
     #比较权限 获取需要增加权限的ID
     #compare permissions, and get all the permission's id which need to be added
     private function getPermissionAddIds($permission, $permissionAdd)
@@ -105,4 +127,5 @@ class authorityController extends Controller
         $user = new User();
         return $user->userNameList();
     }
+#endregion
 }

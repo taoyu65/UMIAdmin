@@ -9,7 +9,7 @@ class Permission extends UmiBase
     protected $table = 'umi_permissions';
     public $timestamps = true;
 
-    protected $openCache = false;
+    protected $openCache = true;
     protected $cacheAllRecord = true;
 
     #获取所有权限字符串 比如(edit1, 权限+数据表id)
