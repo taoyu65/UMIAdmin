@@ -8,10 +8,10 @@
             </select>
         </div>
     </div>
-    <i class="fa fa-question-circle fa-lg popover-info blue" aria-hidden="true" data-rel="popover"
+    <i class="fa fa-question-circle fa-lg popover-info red" aria-hidden="true" data-rel="popover"
        data-trigger="hover" style="transform: translate(0,4px);" data-placement="auto right"
        title="Field"
-       data-content="Select a Field that does not exist"></i>
+       data-content="Field: 'Id' must to be included, and will be automatic added when you create any field"></i>
 </div>
 
 <script>

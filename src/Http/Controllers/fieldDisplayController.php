@@ -101,7 +101,7 @@ class fieldDisplayController extends Controller
         }
 
         //添加成功 //add success
-        $model->insert($request->input());
+        $model->insertWithId($request->input());
         Umi::showMessage(
             'Add field success',
             'Job Done, keep going.',

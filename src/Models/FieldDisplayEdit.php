@@ -38,6 +38,13 @@ class FieldDisplayEdit extends UmiBase
         ])
             ->count();
     }
+
+    public function insertWithId($inputs)
+    {
+        $this->checkExist($inputs);
+        $this->insert($inputs);
+    }
+
     public function insert($inputs)
     {
         try {
@@ -45,6 +52,27 @@ class FieldDisplayEdit extends UmiBase
             Cache::pull($this->table);
         } catch (\Exception $exception) {
             abort(503, $exception->getMessage());
+        }
+    }
+
+    private function checkExist($inputs)
+    {
+        $tableId = $inputs['table_id'];
+        $fields = self::where('table_id', $tableId)
+            ->pluck('field');
+
+        if (!$fields->contains('id')) {
+            $id = Config::get('umi.primary_key');
+            $idFieldInput['table_id'] = $tableId;
+            $idFieldInput['field'] = $id;
+            $idFieldInput['type'] = 'label';
+            $idFieldInput['relation_display'] = '';
+            $idFieldInput['custom_value'] = '';
+            $idFieldInput['display_name'] = '';
+            $idFieldInput['validation'] = '';
+            $idFieldInput['details'] = '';
+            $idFieldInput['is_editable'] = '0';
+            $this->insert($idFieldInput);
         }
     }
 }

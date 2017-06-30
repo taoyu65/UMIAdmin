@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 use YM\Facades\Umi;
+use YM\Http\Controllers\fieldDisplayController;
 
 class FieldDisplayBrowser extends UmiBase
 {
@@ -116,6 +117,13 @@ class FieldDisplayBrowser extends UmiBase
         ])
             ->count();
     }
+
+    public function insertWithId($inputs)
+    {
+        $this->checkExist($inputs);
+        $this->insert($inputs);
+    }
+
     public function insert($inputs)
     {
         try {
@@ -123,6 +131,24 @@ class FieldDisplayBrowser extends UmiBase
             Cache::pull($this->table);
         } catch (\Exception $exception) {
             abort(503, $exception->getMessage());
+        }
+    }
+
+    private function checkExist($inputs)
+    {
+        $tableId = $inputs['table_id'];
+        $fields = self::where('table_id', $tableId)
+            ->pluck('field');
+
+        if (!$fields->contains('id')) {
+            $id = Config::get('umi.primary_key');
+            $idFieldInput['table_id'] = $tableId;
+            $idFieldInput['field'] = $id;
+            $idFieldInput['type'] = 'label';
+            $idFieldInput['relation_display'] = '';
+            $idFieldInput['display_name'] = '';
+            $idFieldInput['is_showing'] = '1';
+            $this->insert($idFieldInput);
         }
     }
 }

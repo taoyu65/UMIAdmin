@@ -11,7 +11,7 @@
                 Important!
             </strong>
             This group of permissions are relate to the role: <span id="roleTitle" class="red roleTitle"></span>. <br>
-            It is not relate to the user. If any permission rule are changed, all the user who has this role will be affected
+            It is not relate to the user. If any permission rule are changed, all the users who have this role will be affected
         </p>
     </div>
     <form class="form-horizontal">

@@ -22,8 +22,10 @@ class PermissionRole extends Model
         DB::transaction(function () use ($userId, $roleId, $insertArr, $permissionDeleteIds) {
             #更新用户角色
             #update user role
-            $userRoleModel = new UserRole();
-            $userRoleModel->updateUserRole($userId, $roleId);
+            if ($userId) {
+                $userRoleModel = new UserRole();
+                $userRoleModel->updateUserRole($userId, $roleId);
+            }
 
             #增加新权限
             #add new permissions

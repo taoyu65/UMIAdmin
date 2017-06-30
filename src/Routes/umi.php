@@ -121,7 +121,8 @@ Route::group(['middleware' => 'umi.url.auth'], function () {
     //角色对应的权限管理
     //role and permission management
     Route::get('authority/role-permission', [
-        'uses'      => 'authorityController@rolePermission'
+        'uses'      => 'authorityController@rolePermission',
+        'as'        => 'rolePermission'
     ]);
 #---------------------------------------------------------------
 

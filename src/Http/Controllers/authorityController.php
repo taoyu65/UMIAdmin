@@ -61,21 +61,26 @@ class authorityController extends Controller
         //because of using transaction, the operation moved to updatePermissionRole().
 
         #找出修改前后权限的差集, 分别为需要增加的差集和删除的差集
-        #find the difference of permission between before and after changes, both different for adding and deleting
+        #find the difference of permissionRegulated between before and after changes, both different for adding and deleting
         $permissionModel = new Permission();
-        $permission = $permissionModel->allPermissionRegulated();
+        $permissionRegulated = $permissionModel->allPermissionRegulated();
 
         $permissionAdd = array_diff($newPermissions, $oldPermissions);
-        $permissionAddIds = $this->getPermissionAddIds($permission, $permissionAdd);
+        $permissionAddIds = $this->getPermissionAddIds($permissionRegulated, $permissionAdd);
 
         $permissionDelete = array_diff($oldPermissions, $newPermissions);
-        $permissionDeleteIds = $this->getPermissionDeleteIds($permission, $permissionDelete);
+        $permissionDeleteIds = $this->getPermissionDeleteIds($permissionRegulated, $permissionDelete);
 
         $permissionRoleModel = new PermissionRole();
         $permissionRoleModel->updatePermissionRole($userId, $roleId, $permissionAddIds, $permissionDeleteIds);
 
         Umi::showMessage('update success!');
-        return redirect()->route('wizard');
+
+        #因为重用这个控制器, 根据是否存在用户ID 返回不同的页面
+        #because reuse this controller, will be returning different blade according to if the user Id is null or not
+        return $userId ?
+            redirect()->route('wizard') :
+            redirect()->route('rolePermission');
     }
 
     public function rolePermission()

@@ -22,6 +22,7 @@ class CreatePermissionsTable extends Migration
         });
 
         Schema::create('umi_permission_role', function (Blueprint $table) {
+            $table->increments('id');
             $table->integer('permission_id')->unsigned();
             $table->integer('role_id')->unsigned();
         });
