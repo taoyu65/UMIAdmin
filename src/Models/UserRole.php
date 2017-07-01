@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Config;
 
 class UserRole extends Model
 {
+    use BreadOperation;
+
     protected $table = 'umi_user_role';
     public $timestamps = false;
 

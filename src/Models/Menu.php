@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\Config;
 
 class Menu extends UmiBase
 {
+    use BreadOperation;
+
     protected $table = 'umi_menus';
     public $timestamps = true;
 
@@ -65,15 +67,5 @@ class Menu extends UmiBase
                 'menu_id'   => $parentId,
                 'order'     => $order
             ]);
-    }
-
-    public function insert($inputs)
-    {
-        try {
-            self::create($inputs);
-        } catch (\Exception $exception) {
-            exit($exception->getMessage());
-            //abort(503, $exception->getMessage());
-        }
     }
 }

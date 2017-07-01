@@ -2,10 +2,10 @@
 
 namespace YM\Models;
 
-use Illuminate\Support\Facades\DB;
-
 class TableRelationOperation extends UmiBase
 {
+    use BreadOperation;
+
     protected $table = 'umi_table_relation_operation';
 
     protected $openCache = true;

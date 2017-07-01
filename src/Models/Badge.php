@@ -4,6 +4,8 @@ namespace YM\Models;
 
 class Badge extends UmiBase
 {
+    use BreadOperation;
+
     protected $table = 'umi_badges';
 
     protected $openCache = true;

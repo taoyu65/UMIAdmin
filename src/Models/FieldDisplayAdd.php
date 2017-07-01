@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\Config;
 
 class FieldDisplayAdd extends UmiBase
 {
+    use BreadOperation;
+
     protected $table = 'umi_field_display_add';
     public $timestamps = true;
 
@@ -43,16 +45,6 @@ class FieldDisplayAdd extends UmiBase
     {
         $this->checkExist($inputs);
         $this->insert($inputs);
-    }
-
-    public function insert($inputs)
-    {
-        try {
-            self::create($inputs);
-            Cache::pull($this->table);
-        } catch (\Exception $exception) {
-            abort(503, $exception->getMessage());
-        }
     }
 
     private function checkExist($inputs)

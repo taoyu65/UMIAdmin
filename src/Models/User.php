@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Config;
 
 class User extends Model
 {
+    use BreadOperation;
+
     protected $table = 'umi_users';
     public $timestamps = true;
 

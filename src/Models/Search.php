@@ -4,6 +4,8 @@ namespace YM\Models;
 
 class Search extends UmiBase
 {
+    use BreadOperation;
+
     protected $table = 'umi_search';
 
     protected $openCache = true;

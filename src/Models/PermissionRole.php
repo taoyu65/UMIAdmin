@@ -7,6 +7,8 @@ use Illuminate\Support\Facades\DB;
 
 class PermissionRole extends Model
 {
+    use BreadOperation;
+
     protected $table = 'umi_permission_role';
 
     public function updatePermissionRole($userId, $roleId, $permissionAddIds, $permissionDeleteIds)

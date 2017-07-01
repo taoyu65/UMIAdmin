@@ -103,9 +103,20 @@ class UmiModel
         return DB::table($this->tableName)->whereId($id)->delete();
     }
 
-    public function insert($fieldsArr)
+    public function insert($fieldsArr, $timestamps = false)
     {
-        return DB::table($this->tableName)->insert($fieldsArr);
+        $fields = $this->filterFields($fieldsArr);
+        if ($timestamps) {
+            $fields['created_at'] = date('Y-m-d h:i:s');
+            $fields['updated_at'] = date('Y-m-d h:i:s');
+        }
+
+        try {
+            $count = DB::table($this->tableName)->insert($fields);
+        } catch (\Exception $exception) {
+            $count = false;
+        }
+        return $count;
     }
 
     public function getTableFields($tableName)
@@ -113,12 +124,25 @@ class UmiModel
         $db = env('DB_DATABASE');
         $fields = DB::table('information_schema.COLUMNS')
             ->select('COLUMN_NAME as name')
-            ->where(['TABLE_SCHEMA'=>$db,'TABLE_NAME'=>$tableName])
+            ->where(['TABLE_SCHEMA' => $db, 'TABLE_NAME' => $tableName])
             ->get()
-            ->map(function ($item){
+            ->map(function ($item) {
                 return $item->name;
             });
 
         return $fields;
     }
+
+#region private method
+    private function filterFields($fields)
+    {
+        $filter = Config::get("umiEnum.fillable.$this->tableName");
+        $re = [];
+        array_filter(array_keys($fields), function ($key) use ($filter, &$re, $fields) {
+            if (in_array($key, $filter))
+                $re[$key] = $fields[$key];
+        });
+        return $re;
+    }
+#endregion
 }

@@ -6,6 +6,8 @@ use Illuminate\Support\Facades\DB;
 
 class Permission extends UmiBase
 {
+    use BreadOperation;
+
     protected $table = 'umi_permissions';
     public $timestamps = true;
 

@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\DB;
 
 class UmiBase extends Model
 {
+    use BreadOperation;
+
     #是否开启当前表缓存
     #if open cache for current table
     protected $openCache = false;

@@ -149,5 +149,8 @@ return[
         'umi_field_display_add'     => [
             'table_id', 'field', 'type', 'relation_display', 'custom_value', 'display_name', 'validation', 'details', 'order', 'is_editable'
         ],
+        'umi_permissions'           => [
+            'table_id', 'key', 'display_name'
+        ]
     ]
 ];

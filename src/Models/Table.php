@@ -4,6 +4,8 @@ namespace YM\Models;
 
 class Table extends UmiBase
 {
+    use BreadOperation;
+
     protected $table = 'umi_tables';
 
     protected $openCache = true;

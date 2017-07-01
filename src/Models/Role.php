@@ -4,6 +4,8 @@ namespace YM\Models;
 
 class Role extends UmiBase
 {
+    use BreadOperation;
+
     protected $table = 'umi_roles';
     public $timestamps = true;
 

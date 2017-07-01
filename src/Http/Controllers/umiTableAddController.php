@@ -27,16 +27,26 @@ class umiTableAddController extends Controller
 
     public function add(Request $request, $tableName)
     {
-        //$menu = new Menu();
-        //$menu->insert($request->input());
-        $factory = new FactoryModel();
-        $model = $factory->getInstance($tableName);
-        $model->insert($request->input());
+        /*$factory = new FactoryModel();
+        $model = $factory->getInstance($tableName);*/
+        $model = new UmiModel($tableName);
+        $count = $model->insert($request->input(), true);
 
-        Umi::showMessage(
-            "<strong style=\'color: orange\'>Insert success!</strong>",
-            ""
-        );
+        if ($count) {
+            Umi::showMessage(
+                "<strong style=\'color: orange\'>Insert Success!</strong>",
+                ""
+            );
+        } else {
+            Umi::showMessage(
+                "<strong style=\'color: orange\'>Insert fail!</strong>",
+                "Some fields must be fill in, please go to \"Field Display\" to add all necessary fields",
+                [
+                    'class_name' => 'gritter-error'
+                ]
+            );
+        }
+
         Cache::flush($tableName);
         echo '<script>parent.window.location.reload();</script>';
     }

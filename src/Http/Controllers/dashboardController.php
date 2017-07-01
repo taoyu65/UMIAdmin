@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\Session;
 
 class DashBoardController extends Controller
 {
@@ -19,6 +20,8 @@ class DashBoardController extends Controller
         $userName = $request->get('username');
         $password = $request->get('password');
         if (Auth::attempt(['name' => $userName, 'password' => $password])) {
+            if (Session::get('previousUrl'))
+                return redirect(Session::get('previousUrl'));
             return redirect()->route('dashboard');
         } else {
             return view('umi::login', ['error' => '<script>alert("please check username or password")</script>']);

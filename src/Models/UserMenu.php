@@ -4,6 +4,8 @@ namespace YM\Models;
 
 class UserMenu extends UmiBase
 {
+    use BreadOperation;
+
     protected $table = 'umi_user_menu';
 
     protected $openCache = true;
