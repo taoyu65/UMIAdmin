@@ -375,8 +375,9 @@ UMI;
 
     private function ButtonAddHtml($disable = '')
     {
+        $addUrl = url('adding'). "/$this->tableName";
         $html = <<<UMI
-        <button class="$this->BtnCssNew $disable">
+        <button class="$this->BtnCssNew $disable" type="button" onclick="showAdding('$addUrl');">
             <i class="ace-icon fa fa-plus"></i>
             New
         </button>
@@ -459,8 +460,12 @@ UMI;
     {
         $activeFieldValue = base64_encode($activeFieldValue);
         $tableName = $this->tableName;//Ym::umiEncrypt($this->tableName);
+
+        $parameterField = $activeFieldValue === '' ? '' : "/$activeFieldValue";
+        $deleteUrl = url('deleting') . "/$tableName/$recordId$parameterField";
+
         $html = <<<UMI
-        <button class="$this->BtnCssSmallDelete $disable" $disable onclick="umiTableDelete('$tableName', '$recordId', '$activeFieldValue');">
+        <button class="$this->BtnCssSmallDelete $disable" $disable onclick="showDeleting('$deleteUrl');">
             <i class="ace-icon fa fa-trash-o bigger-120"></i>
         </button>
 UMI;

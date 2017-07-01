@@ -132,7 +132,7 @@ UMI;
     {
         $html =<<<UMI
         <div class="alert alert-danger">
-            You have not set up which fields will be able to showed
+            You have not set up fields that will be showing here to be added
             <br /><br /><p>
                 <button class="btn btn-sm btn-success">Go Set Up</button>
                 <button class="btn btn-sm btn-info" id="clsDelete">Close</button>

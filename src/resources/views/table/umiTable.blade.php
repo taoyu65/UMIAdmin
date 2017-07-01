@@ -2,6 +2,9 @@
 
 @section('content')
 
+    <?php $assetPath = config('umi.assets_path') ?>
+    <?php $path = $assetPath . '/ace' ?>
+
     <div class="page-header">
         <h1>
             UMI Tables
@@ -18,21 +21,6 @@
 
     {!! $footer !!}
 
-    <script type="text/javascript">
-        jQuery(function($) {
-        });
+    <script src="{{$assetPath}}/js/bread/umiTableBread.js"></script>
 
-        function umiTableDelete(tableName, id, activeFields) {
-            var urlActiveFields = (activeFields === '') ? '' : '/' + activeFields;
-            var url = "{{url('deleting')}}/" + tableName + '/' + id + urlActiveFields;
-            var delConfirm = layer.open ({
-                type: 2,
-                title: 'Deleting',
-                maxmin: true,
-                shadeClose: true,
-                area : ['800px' , '520px'],
-                content: url
-            });
-        };
-    </script>
 @endsection

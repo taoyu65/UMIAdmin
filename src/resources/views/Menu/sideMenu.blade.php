@@ -85,6 +85,8 @@
 
     <script src="{{$path}}/js/jquery.nestable.min.js"></script>
     <script src="{{$assetPath}}/js/jquery.form.js"></script>
+    <script src="{{$assetPath}}/js/bread/umiTableBread.js"></script>
+
     <script type="text/javascript">
 
         $(document).ready(function () {
@@ -140,32 +142,5 @@
                 }
             });
         });
-
-        //显示删除确认页面
-        //show the confirmation page before deleting
-        function showDeleting(url){
-            layer.open({
-                type: 2,
-                title: 'Deleting',
-                maxmin: true,
-                shadeClose: true,
-                area : ['80%' , '90%'],
-                content: url
-            });
-        }
-
-        //显示添加确认页面
-        //show the confirmation page before adding
-        function showAdding(url) {
-            layer.open({
-                type: 2,
-                title: 'Adding',
-                maxmin: true,
-                shadeClose: true,
-                area : ['80%' , '90%'],
-                content: url
-            });
-        }
-
     </script>
 @endsection

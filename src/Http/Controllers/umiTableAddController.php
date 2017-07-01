@@ -7,7 +7,6 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Config;
 use YM\Facades\Umi;
-use YM\Models\Menu;
 use YM\Models\UmiModel;
 use YM\Umi\FactoryModel;
 use YM\Umi\umiAddTableBuilder;
