@@ -3,13 +3,14 @@
 namespace YM\Http\ViewComposers;
 
 use Illuminate\Contracts\View\View;
+use YM\Umi\FactoryAdmin;
 use YM\Umi\FactoryMasterPage;
 
 class MasterComposer
 {
     public function compose(View $view)
     {
-        $factory = new FactoryMasterPage();
+        $factory = new FactoryAdmin();
         $mastPage = $factory->getMasterPage();
         $header = $mastPage->header();
         $body = $mastPage->body();

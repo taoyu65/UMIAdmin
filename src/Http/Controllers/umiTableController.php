@@ -4,8 +4,8 @@ namespace YM\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
-use Illuminate\Support\Facades\Session;
 use YM\Facades\Umi;
+use YM\Umi\Admin\AdminStrategy;
 use YM\Umi\FactoryBreadBrowser;
 
 class umiTableController extends Controller
@@ -56,11 +56,10 @@ class umiTableController extends Controller
 
         Umi::setCurrentTableName($tableName);
 
-        $factoryBread = new FactoryBreadBrowser($tableName);
-        $breadBrowser = $factoryBread->getBreadBrowser();
-        $header = $breadBrowser->header();
-        $tableBody = $breadBrowser->tableBody();
-        $footer = $breadBrowser->footer();
+        $adminStrategy = new AdminStrategy($tableName);
+        $header = $adminStrategy->tableHead();
+        $tableBody = $adminStrategy->tableBody();
+        $footer = $adminStrategy->tableFoot();
 
         return view('umi::table.umiTable', [
             'header'    => $header,
