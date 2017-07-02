@@ -24,7 +24,7 @@
         <div class="">
             <div class="widget-box widget-color-{{$type==='edit'?'orange':'purple'}}">
                 <div class="widget-header">
-                    <h5 class="widget-title bigger lighter bolder">Browser</h5>
+                    <h5 class="widget-title bigger lighter bolder">{{$type==='edit'?'Edit':'Add'}}</h5>
                 </div>
                 <form class="form-horizontal" id="validation-form" method="post" action="{{url('fieldDisplay')}}/{{$table}}/addType/{{$type}}">
                     {!! csrf_field() !!}
@@ -284,7 +284,7 @@
                         layer.closeAll();
                         var load = layer.load(3, {shade: [0.5, '#000']});
                         var existFields = $('#existFields').val();
-                        var url = "{{url('fieldDisplay')}}/{{$table}}/quickAdd/" + existFields + "/" + tableId;
+                        var url = "{{url('fieldDisplay')}}/{{$table}}/quickAdd/" + existFields + "/" + tableId + "/" + '{{$type}}';
 
                         //确认执行快速添加字段
                         //confirm to quick add fields

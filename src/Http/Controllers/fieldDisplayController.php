@@ -48,12 +48,19 @@ class fieldDisplayController extends Controller
 
     #快速添加所有字段 所有值为默认值
     #quick add all the fields, all the value are default
-    public function quickAdd($table, $fields, $selectedTableId)
+    public function quickAdd($table, $fields, $selectedTableId, $type)
     {
         $fieldsArr = json_decode(base64_decode($fields));
         $browserModel = new FieldDisplayBrowser();
 
-        return $browserModel->quickAdd($table, $selectedTableId, $fieldsArr);
+        switch ($type) {
+            case 'browser':
+            case 'read':
+                return $browserModel->quickAddBrowserRead($table, $selectedTableId, $fieldsArr);
+            case 'edit':
+            case 'add':
+                return $browserModel->quickAddEditAdd($table, $selectedTableId, $fieldsArr);
+        }
     }
 
     #弹出窗口 新建显示数据关系的规则

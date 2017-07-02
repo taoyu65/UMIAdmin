@@ -68,7 +68,9 @@
                 $('#field option').remove();
                 $('#field').next().remove();
                 $.each(data, function (name, value) {
-                    $('#field').append("<option value='" + value + "'>" + value + "</option>");
+                    if (value !== '{{config('umi.primary_key')}}') {
+                        $('#field').append("<option value='" + value + "'>" + value + "</option>");
+                    }
                 });
             },
             error: function () {

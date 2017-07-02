@@ -49,9 +49,9 @@ class FieldDisplayBrowser extends UmiBase
             ->get();
     }
 
-    #一键增加所有用于显示的字段, 使用默认值 (排除已存在的字段)
+    #一键增加所有用于显示的字段, 使用默认值 (排除已存在的字段) - browser and read
     #on click to add all fields that use for display as default value (not for exist fields)
-    public function quickAdd($table, $selectedTableId, $existFieldArr)
+    public function quickAddBrowserRead($table, $selectedTableId, $existFieldArr)
     {
         $tableName = Umi::getTableNameById($selectedTableId);
         $umiModel = new UmiModel($tableName);
@@ -64,15 +64,51 @@ class FieldDisplayBrowser extends UmiBase
                     continue;
 
                 $re = DB::table($table)->insert([
-                    'table_id'  => $selectedTableId,
-                    'field'     => $field,
-                    'type'      => 'label',
+                    'table_id'          => $selectedTableId,
+                    'field'             => $field,
+                    'type'              => 'label',
                     'relation_display'  => '',
                     'display_name'      => $field,
                     'order'             => $count,
                     'is_showing'        => 1,
                 ]);
-                $count = $re ? $count+1 : $count;
+                $count = $re ? $count + 1 : $count;
+            }
+        } catch (\Exception $exception) {
+            exit($exception->getMessage());
+        }
+
+        Cache::pull($table);
+        return $count;
+    }
+
+    #一键增加所有用于显示的字段, 使用默认值 (排除已存在的字段) - edit and add
+    #on click to add all fields that use for display as default value (not for exist fields)
+    public function quickAddEditAdd($table, $selectedTableId, $existFieldArr)
+    {
+        $tableName = Umi::getTableNameById($selectedTableId);
+        $umiModel = new UmiModel($tableName);
+        $allFields = $umiModel->getTableFields($tableName);
+
+        try {
+            $count = 0;
+            foreach ($allFields as $field) {
+                if (in_array($field, $existFieldArr))
+                    continue;
+
+                $re = DB::table($table)->insert([
+                    'table_id'          => $selectedTableId,
+                    'field'             => $field,
+                    'type'              => 'textBox',
+                    'relation_display'  => '',
+                    'custom_value'      => '',
+                    'display_name'      => $field,
+                    'validation'        => '',
+                    'details'           => '',
+                    'order'             => $count,
+                    'is_editable'       => $field === Config::get('umi.primary_key') ? 0 : 1,
+                ]);
+                $count = $re ? $count + 1 : $count;
             }
         } catch (\Exception $exception) {
             exit($exception->getMessage());

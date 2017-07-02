@@ -142,7 +142,7 @@ Route::group(['middleware' => 'umi.url.auth'], function () {
     ]);
     //快速添加所有指定数据表的字段
     //quick add all the fields from designated table
-    Route::get('fieldDisplay/{table}/quickAdd/{fields}/{selectedTableId}', [
+    Route::get('fieldDisplay/{table}/quickAdd/{fields}/{selectedTableId}/{type}', [
         'middleware'=> ['umi.bread.access:add'],
         'uses'      => 'fieldDisplayController@quickAdd'
     ]);
