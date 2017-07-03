@@ -11,20 +11,33 @@ function showAdding(url) {
         title: 'Adding',
         maxmin: true,
         shadeClose: true,
-        area : ['80%' , '90%'],
+        area: ['80%', '90%'],
         content: url
     });
 }
 
 //显示删除确认页面
 //show the confirmation page before deleting
-function showDeleting(url){
+function showDeleting(url) {
     layer.open({
         type: 2,
         title: 'Deleting',
         maxmin: true,
         shadeClose: true,
-        area : ['80%' , '90%'],
+        area: ['80%', '90%'],
+        content: url
+    });
+}
+
+//显示编辑确认页面
+//show the confirmation page before editing
+function showEditing(url) {
+    layer.open({
+        type: 2,
+        title: 'Editing',
+        maxmin: true,
+        shadeClose: true,
+        area: ['80%', '90%'],
         content: url
     });
 }

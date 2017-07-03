@@ -205,4 +205,21 @@ Route::group(['middleware' => 'umi.url.auth'], function () {
         'uses'      => 'umiTableAddController@add'
     ]);
 #---------------------------------------------------------------
+
+#编辑确认页面 和 执行编辑
+#confirmation page before editing and command of editing
+#---------------------------------------------------------------
+    //添加数据记录的页面
+    //interface of adding record
+    Route::get('editing/{table}/{recordId}/{fields?}', [
+        'middleware'=> ['umi.bread.access:edit', 'umi.TRelation.confirmation'],
+        'uses'      => 'umiTableEditController@editing'
+    ]);
+    //编辑操作
+    //edit action
+    Route::post('edit/{table}', [
+        'middleware'=> ['umi.bread.access:edit', 'umi.TRelation.execute'],
+        'uses'      => 'umiTableEditController@edit'
+    ]);
+#---------------------------------------------------------------
 });

@@ -8,7 +8,6 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Config;
 use YM\Facades\Umi;
 use YM\Models\UmiModel;
-use YM\Umi\FactoryModel;
 use YM\Umi\umiAddTableBuilder;
 
 class umiTableAddController extends Controller
@@ -20,15 +19,14 @@ class umiTableAddController extends Controller
 //        $actionAvailable = isset($request['TRO_Available']) && $request['TRO_Available'] === false ? false : true;
 //        $message = $request['TRO_Message'];
         $defaultValue = Umi::unSerializeAndBase64($defaultValue);
-
         $display = $this->getTableFields($tableName, $defaultValue);
-        return view('umi::table.umiTableAdding', ['display' => $display]);
+
+        $list = compact('display', 'tableName');
+        return view('umi::table.umiTableAdding', $list);
     }
 
     public function add(Request $request, $tableName)
     {
-        /*$factory = new FactoryModel();
-        $model = $factory->getInstance($tableName);*/
         $model = new UmiModel($tableName);
         $count = $model->insert($request->input(), true);
 
@@ -41,9 +39,7 @@ class umiTableAddController extends Controller
             Umi::showMessage(
                 "<strong style=\'color: orange\'>Insert fail!</strong>",
                 "Some fields must be fill in, please go to \"Field Display\" to add all necessary fields",
-                [
-                    'class_name' => 'gritter-error'
-                ]
+                ['class_name' => 'gritter-error']
             );
         }
 
@@ -51,7 +47,7 @@ class umiTableAddController extends Controller
         echo '<script>parent.window.location.reload();</script>';
     }
 
-    public function getTableFields($tableName, $defaultValue)
+    private function getTableFields($tableName, $defaultValue)
     {
         $tableNameLoadingFieldTable = Config::get('umiEnum.system_table_name.umi_field_display_add');
         $tableId = Umi::getTableIdByTableName($tableName);
@@ -59,6 +55,6 @@ class umiTableAddController extends Controller
         $records = $umiModel->getRecordsByWhere('table_id', $tableId);
 
         $builder = new umiAddTableBuilder();
-        return $builder->display($records, $defaultValue, $tableName);
+        return $builder->display($records, $defaultValue, 'add');
     }
 }

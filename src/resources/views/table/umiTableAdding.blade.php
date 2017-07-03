@@ -5,15 +5,20 @@
     <?php $assetPath = config('umi.assets_path') ?>
     <?php $path = $assetPath . '/ace' ?>
 
-    <div class="col-sm-12">
+    <form class="col-sm-12">
         <h3 class="header smaller lighter green">
             <i class="ace-icon fa fa-bullhorn"></i>
             Add Confirmation
         </h3>
+    </form>
 
-        {!! $display !!}
-
+    <div class="col-sm-12">
+        <form class="form-horizontal" id="addForm" method="post" action="{{url('add/' . $tableName)}}">
+            {!! $display !!}
+        </form>
     </div>
+
+
 
     <script>
 
@@ -24,7 +29,7 @@
 
     //关闭所有模态窗口
     //close all model windows
-    $('#clsDelete').click(function () {
+    $('#cls').click(function () {
         parent.layer.closeAll();
     });
 

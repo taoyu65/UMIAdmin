@@ -326,12 +326,12 @@ UMI;
     {
         #表格右侧小按钮
         #small button on the right side of table
-        $buttonSmallEdit = $this->ButtonSmallEdit($recordId, $superAdmin);
-        $buttonSmallRead = $this->ButtonSmallRead($recordId, $superAdmin);
+        $buttonSmallEdit = $this->ButtonSmallEdit($recordId, $superAdmin, $activeFieldValue);
+        $buttonSmallRead = $this->ButtonSmallRead($recordId, $superAdmin, $activeFieldValue);
         $buttonSmallDelete = $this->ButtonSmallDelete($recordId, $superAdmin, $activeFieldValue);
-        $linkHideEdit = $this->LinkHideEdit($recordId, $superAdmin);
-        $linkHideDelete = $this->LinkHideDelete($recordId, $superAdmin);
-        $linkHideRead = $this->LinkHideRead($recordId, $superAdmin);
+        $linkHideEdit = $this->LinkHideEdit($recordId, $superAdmin, $activeFieldValue);
+        $linkHideDelete = $this->LinkHideDelete($recordId, $superAdmin, $activeFieldValue);
+        $linkHideRead = $this->LinkHideRead($recordId, $superAdmin, $activeFieldValue);
 
         $html = <<<UMI
         <td>
@@ -406,37 +406,43 @@ UMI;
         return $html;
     }
 
-    private function ButtonSmallEdit($recordId, $superAdmin)
+    private function ButtonSmallEdit($recordId, $superAdmin, $activeFieldValue)
     {
         if ($superAdmin || $this->edit) {
-            return $this->ButtonSmallEditHtml($recordId);
+            return $this->ButtonSmallEditHtml($recordId, $activeFieldValue);
         } else {
             return $this->buttonStyle === 'disable' ?
-                $this->ButtonSmallEditHtml($recordId, 'disabled') : '';
+                $this->ButtonSmallEditHtml($recordId, $activeFieldValue, 'disabled') : '';
         }
     }
 
-    private function ButtonSmallEditHtml($recordId, $disable = '')
+    private function ButtonSmallEditHtml($recordId, $activeFieldValue, $disable = '')
     {
+        $activeFieldValue = base64_encode($activeFieldValue);
+        $tableName = $this->tableName;//Ym::umiEncrypt($this->tableName);
+
+        $parameterField = $activeFieldValue === '' ? '' : "/$activeFieldValue";
+        $editUrl = url('editing') . "/$tableName/$recordId/$recordId$parameterField";
+
         $html = <<<UMI
-        <button class="$this->BtnCssSmallEdit $disable">
+        <button class="$this->BtnCssSmallEdit $disable" $disable onclick="showEditing('$editUrl');">
             <i class="ace-icon fa fa-pencil bigger-120"></i>
         </button>
 UMI;
         return $html;
     }
 
-    private function ButtonSmallRead($recordId, $superAdmin)
+    private function ButtonSmallRead($recordId, $superAdmin, $activeFieldValue)
     {
         if ($superAdmin || $this->read) {
-            return $this->ButtonSmallReadHtml($recordId);
+            return $this->ButtonSmallReadHtml($recordId, $activeFieldValue);
         } else {
             return $this->buttonStyle === 'disable' ?
-                $this->ButtonSmallReadHtml($recordId, 'disabled') : '';
+                $this->ButtonSmallReadHtml($recordId, $activeFieldValue, 'disabled') : '';
         }
     }
 
-    private function ButtonSmallReadHtml($recordId, $disable = '')
+    private function ButtonSmallReadHtml($recordId, $activeFieldValue, $disable = '')
     {
         $html = <<<UMI
         <button class="$this->BtnCssSmallRead $disable">
@@ -472,17 +478,17 @@ UMI;
         return $html;
     }
 
-    private function LinkHideRead($recordId, $superAdmin)
+    private function LinkHideRead($recordId, $superAdmin, $activeFieldValue)
     {
         if ($superAdmin || $this->read) {
-            return $this->LinkHideReadHtml($recordId);
+            return $this->LinkHideReadHtml($recordId, $activeFieldValue);
         } else {
             return $this->buttonStyle === 'disable' ?
-                $this->LinkHideReadHtml($recordId, 'disabled') : '';
+                $this->LinkHideReadHtml($recordId, $activeFieldValue, 'disabled') : '';
         }
     }
 
-    private function LinkHideReadHtml($recordId, $disable = '')
+    private function LinkHideReadHtml($recordId, $activeFieldValue, $disable = '')
     {
         if ($disable === 'disabled') {
             $html = <<<UMI
@@ -508,17 +514,17 @@ UMI;
         return $html;
     }
 
-    private function LinkHideEdit($recordId, $superAdmin)
+    private function LinkHideEdit($recordId, $superAdmin, $activeFieldValue)
     {
         if ($superAdmin || $this->edit) {
-            return $this->LinkHideEditHtml($recordId);
+            return $this->LinkHideEditHtml($recordId, $activeFieldValue);
         } else {
             return $this->buttonStyle === 'disable' ?
-                $this->LinkHideEditHtml($recordId, 'disabled') : '';
+                $this->LinkHideEditHtml($recordId, $activeFieldValue, 'disabled') : '';
         }
     }
 
-    private function LinkHideEditHtml($recordId, $disable = '')
+    private function LinkHideEditHtml($recordId, $activeFieldValue, $disable = '')
     {
         if ($disable === 'disabled') {
             $html = <<<UMI
@@ -545,17 +551,17 @@ UMI;
         return $html;
     }
 
-    private function LinkHideDelete($recordId, $superAdmin)
+    private function LinkHideDelete($recordId, $superAdmin, $activeFieldValue)
     {
         if ($superAdmin || $this->delete) {
-            return $this->LinkHideDeleteHtml($recordId);
+            return $this->LinkHideDeleteHtml($recordId, $activeFieldValue);
         } else {
             return $this->buttonStyle === 'disable' ?
-                $this->LinkHideDeleteHtml($recordId, 'disabled') : '';
+                $this->LinkHideDeleteHtml($recordId, $activeFieldValue, 'disabled') : '';
         }
     }
 
-    private function LinkHideDeleteHtml($recordId, $disable = '')
+    private function LinkHideDeleteHtml($recordId, $activeFieldValue, $disable = '')
     {
         if ($disable === 'disabled') {
             $html = <<<UMI

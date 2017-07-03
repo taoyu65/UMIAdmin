@@ -33,7 +33,8 @@ class umiFieldDisplayBuilder
                     break;
                 $TR .= "<td>$value</td>";
             }
-            $TR .= "<td><button type='button' class='btn btn-mini btn-success' onclick='recordEdit(\"$tableName\", \"$record->id\");'>Edit</button> ";
+            $url = url('editing') . "/$tableName/$record->id";
+            $TR .= "<td><button type='button' class='btn btn-mini btn-success' onclick='showEditing(\"$url\");'>Edit</button> ";
             $TR .= "<button type='button' class='btn btn-mini btn-danger' onclick='recordDelete(\"$tableName\", \"$record->id\");'>Delete</button></td>";
             $TR .= "</tr>";
 

@@ -103,6 +103,24 @@ class UmiModel
         return DB::table($this->tableName)->whereId($id)->delete();
     }
 
+    public function update($input)
+    {
+        $primaryKey = Config::get('umi.primary_key');
+        $recordId = $input[$primaryKey];
+        $fields = $this->filterFields($input);
+
+        try {
+            $count = DB::table($this->tableName)
+                ->where($primaryKey, $recordId)
+                ->update($fields);
+            Cache::pull($this->tableName);
+        } catch (\Exception $exception) {
+            $count = false;
+        }
+
+        return $count;
+    }
+
     public function insert($fieldsArr, $timestamps = false)
     {
         $fields = $this->filterFields($fieldsArr);
@@ -142,6 +160,13 @@ class UmiModel
             if (in_array($key, $filter))
                 $re[$key] = $fields[$key];
         });
+
+        if (in_array('created_at', array_keys($fields))) {
+            $re['created_at'] = $fields['created_at'];
+        }
+        if (in_array('updated_at', array_keys($fields))) {
+            $re['updated_at'] = $fields['updated_at'];
+        }
         return $re;
     }
 #endregion

@@ -13,21 +13,20 @@ class umiAddTableBuilder
         $this->dataTypeFactory = new FactoryDataType();
     }
 
-    public function display($records, $defaultValue, $tableName)
+    public function display($records, $defaultValue, $buttonType)
     {
         if (!$records->count()) {
             return $this->showingNoRecords();
         }
 
-        $html = '<form class="form-horizontal" id="addForm" method="post" action="' . url("add/$tableName") . '">';
+        $html = '';
         $html .= csrf_field();
 
         foreach ($records as $record) {
             $html .= $this->row($record, $defaultValue);
         }
 
-        $html .= $this->buttons();
-        $html .= "</form>";
+        $html .= $this->buttons($buttonType);
         $html .=<<<UMI
         <script>
             jQuery(function ($) {
@@ -111,7 +110,31 @@ UMI;
         return $html;
     }
 
-    private function buttons()
+    private function buttons($buttonType)
+    {
+        if ($buttonType === 'edit')
+            return $this->buttonEdit();
+        if ($buttonType === 'add')
+            return $this->buttonAdd();
+    }
+
+    private function buttonEdit()
+    {
+        $html = <<<UMI
+        <button class="btn btn-info btn-sm btn-next" type="submit" id="submitBtn">
+            Update
+            <i class="ace-icon fa fa-refresh"></i>
+        </button>
+        &nbsp;&nbsp;
+        <button class="btn btn-grey btn-sm btn-next" type="button" id="cls">
+            Close
+            <i class="ace-icon fa fa-close"></i>
+        </button>
+UMI;
+        return $html;
+    }
+
+    private function buttonAdd()
     {
         $html = <<<UMI
         <button class="btn btn-success btn-sm btn-next" type="submit" id="submitBtn">
@@ -119,23 +142,21 @@ UMI;
             <i class="ace-icon fa fa-plus"></i>
         </button>
         &nbsp;&nbsp;
-        <button class="btn btn-primary btn-sm btn-next" type="button" id="clsDelete">
+        <button class="btn btn-primary btn-sm btn-next" type="button" id="cls">
             Close
             <i class="ace-icon fa fa-close"></i>
         </button>
 UMI;
-
         return $html;
     }
-
     private function showingNoRecords()
     {
         $html =<<<UMI
         <div class="alert alert-danger">
-            You have not set up fields that will be showing here to be added
+            You have not set up fields that will be showing here
             <br /><br /><p>
-                <button class="btn btn-sm btn-success">Go Set Up</button>
-                <button class="btn btn-sm btn-info" id="clsDelete">Close</button>
+                <button class="btn btn-sm btn-success" type="button">Go Set Up</button>
+                <button class="btn btn-sm btn-info" id="cls" type="button">Close</button>
             </p>
         </div>
 UMI;

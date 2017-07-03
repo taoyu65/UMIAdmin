@@ -85,7 +85,6 @@
                                                             relation_display="{{$value['relation_display']}}"
                                                             custom_value="{{$value['custom_value']}}"
                                                     >{{$key}}</option>
-                                                    {{--todo - now has new data type array, analyz and oupput different option load different function--}}
                                                 @endforeach
                                             </select>
                                         </div>
@@ -169,6 +168,7 @@
 
     <script src="{{$path}}/js/jquery.validate.min.js"></script>
     <script src="{{$assetPath}}/labelauty/jquery-labelauty.js"></script>
+    <script src="{{$assetPath}}/js/bread/umiTableBread.js"></script>
 
     <script type="text/javascript">
         $(document).ready(function () {
@@ -200,8 +200,8 @@
                     return false;
                 }
 
-                //加载符号
-                //showing loading icon
+                //加载字段
+                //loading fields
                 $('#fieldDisplay').html("<i id='responseLoading' class='ace-icon fa fa-spinner fa-spin orange bigger-170'></i>");
                 tableId = $(this).val();
                 loadTable(url + tableId);
