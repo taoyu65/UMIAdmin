@@ -7,7 +7,7 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Config;
 use YM\Facades\Umi;
 use YM\Models\UmiModel;
-use YM\Umi\umiAddTableBuilder;
+use YM\Umi\umiTableBreadBuilder;
 
 class umiTableEditController extends Controller
 {
@@ -20,8 +20,9 @@ class umiTableEditController extends Controller
         $activeFieldValue = $request['activeFieldValue'];
 
         #为字段初始化值
-        #load value to the fields//todo - 初始化字段不能从数据库取值, js生成最新的改动的值在更新.应该用ajax更新. 2. 时间戳的更新 解决
-        $defaultValue = $this->loadFieldsValue($table, $recordId);
+        #load value to the fields
+        $umiModel = new UmiModel($table);
+        $defaultValue = $umiModel->loadFieldsValue($recordId);
         $display = $this->getTableFields($table, $defaultValue);
 
         $list = compact('table', 'recordId', 'activeFields', 'actionAvailable', 'message', 'activeFieldValue', 'display');
@@ -67,19 +68,8 @@ class umiTableEditController extends Controller
         $umiModel = new UmiModel($tableNameLoadingFieldTable, 'order', 'asc');
         $records = $umiModel->getRecordsByWhere('table_id', $tableId);
 
-        $builder = new umiAddTableBuilder();
+        $builder = new umiTableBreadBuilder();
         return $builder->display($records, $defaultValue, 'edit');
-    }
-
-    private function loadFieldsValue($table, $recordId)
-    {
-        $defaultValue = [];
-        $umiModel = new UmiModel($table);
-        $record = $umiModel->getRecordsByWhere('id', $recordId);
-        foreach ($record->first() as $field => $value) {
-            $defaultValue[$field] = $value;
-        }
-        return $defaultValue;
     }
 #endregion
 }

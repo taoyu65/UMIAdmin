@@ -15,7 +15,7 @@ class TextBoxDataType extends DataTypeAbstract
         $validationString = $this->getValidation($validation);
 
         $html =<<<UMI
-        <input class="form-control" type="text" $property value="$data" $validationString >
+        <input class="form-control" type="text" $property value='$data' $validationString >
 UMI;
         return $html;
     }

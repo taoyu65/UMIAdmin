@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Config;
 use YM\Facades\Umi;
 use YM\Models\UmiModel;
-use YM\Umi\umiAddTableBuilder;
+use YM\Umi\umiTableBreadBuilder;
 
 class umiTableAddController extends Controller
 {
@@ -54,7 +54,7 @@ class umiTableAddController extends Controller
         $umiModel = new UmiModel($tableNameLoadingFieldTable, 'order', 'asc');
         $records = $umiModel->getRecordsByWhere('table_id', $tableId);
 
-        $builder = new umiAddTableBuilder();
+        $builder = new umiTableBreadBuilder();
         return $builder->display($records, $defaultValue, 'add');
     }
 }

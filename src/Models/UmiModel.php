@@ -104,7 +104,7 @@ class UmiModel
     }
 
     public function update($input)
-    {
+    {dd($input);
         $primaryKey = Config::get('umi.primary_key');
         $recordId = $input[$primaryKey];
         $fields = $this->filterFields($input);
@@ -149,6 +149,18 @@ class UmiModel
             });
 
         return $fields;
+    }
+
+    #获取字段名称和值的键值对
+    #get key-value of fields and its value
+    public function loadFieldsValue($recordId)
+    {
+        $defaultValue = [];
+        $record = $this->getRecordsByWhere('id', $recordId);
+        foreach ($record->first() as $field => $value) {
+            $defaultValue[$field] = $value;
+        }
+        return $defaultValue;
     }
 
 #region private method

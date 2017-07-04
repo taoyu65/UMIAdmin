@@ -14,10 +14,7 @@ class CheckBoxDataType extends DataTypeAbstract
         $property = $this->getProperty($option);
 
         $html =<<<UMI
-        <label>
-            <input $property class="ace ace-switch ace-switch-7" type="checkbox" />
-            <span class="lbl"></span>
-        </label>
+       <input type="checkbox" checked class="checkbox">
 UMI;
         return $html;
     }

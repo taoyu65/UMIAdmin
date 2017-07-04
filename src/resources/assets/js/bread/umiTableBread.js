@@ -41,3 +41,16 @@ function showEditing(url) {
         content: url
     });
 }
+
+//显示查看的页面
+//show the read page
+function showReading(url) {
+    layer.open({
+        type: 2,
+        title: 'Reading',
+        maxmin: true,
+        shadeClose: true,
+        area: ['80%', '90%'],
+        content: url
+    });
+}

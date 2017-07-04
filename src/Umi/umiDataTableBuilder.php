@@ -129,14 +129,12 @@ UMI;
             $tHeadHtml .= "<th>$displayName</th>";
         }
 
-        #数据表内容按照类型重写
-        #table body will be rewrite according to the custom data type
+        #数据表原始内容
+        #table original records
         $fields = $dataTypeOp->getFields();
         $perPage = Config::get('umi.umi_table_perPage');
-        $umiModel = new UmiModel($this->tableName);
 
-        #获取数据
-        #get data table
+        $umiModel = new UmiModel($this->tableName);
         $whereList = $this->getWhere();
         $dataSet = $umiModel->getSelectedTable($fields);
 
@@ -194,14 +192,14 @@ UMI;
         #是否开启 数据映射功能
         #if available for data reformat
         if (Config::get('umi.data_field_reformat'))
-            $dataSet = $dataTypeOp->regulatedDataSet($dataSet);
+            $regulatedDataSet = $dataTypeOp->regulatedDataSet($dataSet);
 
         #数据表内容
         #table body
         $trBodyHtml = '';
-        if ($dataSet) {
+        if ($regulatedDataSet) {
             $pointer = 0;
-            foreach ($dataSet as $ds) {
+            foreach ($regulatedDataSet as $ds) {
                 $trBodyHtml .= '<tr>';
                 $trBodyHtml .= $this->checkboxHtml();
                 foreach ($ds as $item => $value) {
@@ -213,7 +211,7 @@ UMI;
                 #获取数据行的主键值
                 #get value of primary key of record
                 $primaryKey = Config::get('umi.primary_key');
-                $recordId = array_has($ds, $primaryKey) ? $ds[$primaryKey] : 0;
+                $recordId = array_has($ds, $primaryKey) ? $dataSet->all()[$pointer]->$primaryKey : 0;
 
                 $activeFieldValue = $activeFieldValueList[$pointer];
                 $trBodyHtml .= $this->breadButtonHtml($recordId, $superAdmin, $activeFieldValue);     //获取按钮 get button
@@ -420,9 +418,8 @@ UMI;
     {
         $activeFieldValue = base64_encode($activeFieldValue);
         $tableName = $this->tableName;//Ym::umiEncrypt($this->tableName);
-
         $parameterField = $activeFieldValue === '' ? '' : "/$activeFieldValue";
-        $editUrl = url('editing') . "/$tableName/$recordId/$recordId$parameterField";
+        $editUrl = url('editing') . "/$tableName/$recordId$parameterField";
 
         $html = <<<UMI
         <button class="$this->BtnCssSmallEdit $disable" $disable onclick="showEditing('$editUrl');">
@@ -444,8 +441,11 @@ UMI;
 
     private function ButtonSmallReadHtml($recordId, $activeFieldValue, $disable = '')
     {
+        $tableName = $this->tableName;//Ym::umiEncrypt($this->tableName);
+        $readUrl = url('reading') . "/$tableName/$recordId";
+
         $html = <<<UMI
-        <button class="$this->BtnCssSmallRead $disable">
+        <button class="$this->BtnCssSmallRead $disable" $disable onclick="showReading('$readUrl');">
             <i class="ace-icon fa fa-eye bigger-120"></i>
         </button>
 UMI;

@@ -33,6 +33,10 @@ return[
                 'relation_display'  => 'false',
                 'custom_value'      => 'false'
             ],
+            'label4Read'         => [
+                'relation_display'  => 'false',
+                'custom_value'      => 'false'
+            ],
             'dollar'        => [
                 'relation_display'  => 'false',
                 'custom_value'      => 'false'

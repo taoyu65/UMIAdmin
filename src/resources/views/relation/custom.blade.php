@@ -93,10 +93,9 @@
             <div class="col-xs-12 col-sm-4">
                 <div class="clearfix">
                     <select class="form-control" id="operationType" name="operationType">
-                            <option value="">Please select an operation type</option>
-                        @foreach($actions as $item)
-                            <option value="{{$item}}">{{$item}}</option>
-                        @endforeach
+                        <option value="">Please select an operation type</option>
+                        <option value="edit">Edit</option>
+                        <option value="delete">Delete</option>
                     </select>
                 </div>
             </div>
@@ -160,7 +159,7 @@
             <i class="fa fa-question-circle fa-lg popover-info blue" aria-hidden="true" data-rel="popover"
                data-trigger="hover" style="transform: translate(0,4px);" data-placement="auto right"
                title="Response Table"
-               data-content="Which table will be related by operation of active table's record"></i>
+               data-content="Which table will be related to operation of active table's record"></i>
         </div>
 
         <div class="space-2"></div>

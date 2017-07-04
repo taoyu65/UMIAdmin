@@ -4,7 +4,7 @@ namespace YM\Umi;
 
 use YM\Facades\Umi as YM;
 
-class umiAddTableBuilder
+class umiTableBreadBuilder
 {
     private $dataTypeFactory;
 
@@ -22,8 +22,14 @@ class umiAddTableBuilder
         $html = '';
         $html .= csrf_field();
 
-        foreach ($records as $record) {
-            $html .= $this->row($record, $defaultValue);
+        if ($buttonType === 'read') {
+            foreach ($records as $record) {
+                $html .= $this->rowForRead($record, $defaultValue);
+            }
+        } else {
+            foreach ($records as $record) {
+                $html .= $this->rowForEditAdd($record, $defaultValue);
+            }
         }
 
         $html .= $this->buttons($buttonType);
@@ -39,7 +45,7 @@ UMI;
         return $html;
     }
 
-#region method
+#region private method
     #检查字段是否有默认值
     #check the field if there is a default value
     private function checkDefaultValue($fieldName, $defaultValueArr)
@@ -60,7 +66,7 @@ UMI;
 #endregion
 
 #region component
-    private function row($record, $defaultValue)
+    private function rowForEditAdd($record, $defaultValue)
     {
         $popoverTitle = $record->display_name ? $record->display_name : $record->field;
         $popover = $this->popoverInfo($popoverTitle, $record->details);
@@ -96,6 +102,36 @@ UMI;
         return $html;
     }
 
+    private function rowForRead($record, $defaultValue)
+    {
+        if (!$record->is_showing)
+            return '';
+
+        $name = $record->field;
+        $title = $record->display_name == '' ? $record->field : $record->display_name;
+
+        $value = $this->checkDefaultValue($name, $defaultValue);
+        $dataTypeFactory = $this->dataTypeFactory->getInstance($record->type);
+
+        list($tableName, $field) = $this->getTableField($record->relation_display);
+
+        $input = $dataTypeFactory->regulateDataBrowser($value, $tableName, $field);
+
+        $html =<<<UMI
+        <div class="form-group">
+            <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="$name">$title</label>
+            <div class="col-xs-12 col-sm-4">
+                <div class="clearfix">
+                    <span >$input</span>
+                </div>
+            </div>
+        </div>
+        
+UMI;
+
+        return $html;
+    }
+
     private function popoverInfo($title, $content)
     {
         if ($content == '')
@@ -116,6 +152,19 @@ UMI;
             return $this->buttonEdit();
         if ($buttonType === 'add')
             return $this->buttonAdd();
+        if ($buttonType === 'read')
+            return $this->buttonCloseForRead();
+    }
+
+    private function buttonCloseForRead()
+    {
+        $html = <<<UMI
+        <button class="btn btn-grey btn-sm btn-next" type="button" id="cls">
+            Close
+            <i class="ace-icon fa fa-close"></i>
+        </button>
+UMI;
+        return $html;
     }
 
     private function buttonEdit()
@@ -149,6 +198,7 @@ UMI;
 UMI;
         return $html;
     }
+
     private function showingNoRecords()
     {
         $html =<<<UMI

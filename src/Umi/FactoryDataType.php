@@ -7,6 +7,7 @@ use YM\Umi\DataTable\DataType\CheckBoxDataType;
 use YM\Umi\DataTable\DataType\DateDataType;
 use YM\Umi\DataTable\DataType\DropDownDataType;
 use YM\Umi\DataTable\DataType\ForeignKeyDataType;
+use YM\Umi\DataTable\DataType\Label4ReadDataType;
 use YM\Umi\DataTable\DataType\LabelDataType;
 use YM\Umi\DataTable\DataType\KeyIcon;
 use YM\Umi\DataTable\DataType\StarDataType;
@@ -37,6 +38,8 @@ class FactoryDataType
         switch ($dataType) {
             case 'label':
                 return new LabelDataType();
+            case 'label4Read':
+                return new Label4ReadDataType();
             case 'textBox':
                 return new TextBoxDataType();
             case 'checkBox':

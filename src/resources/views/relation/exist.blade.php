@@ -86,9 +86,8 @@
                 <div class="clearfix">
                     <select class="form-control" id="operationType" name="operationType">
                         <option value="">Please select an operation type</option>
-                        @foreach($actions as $item)
-                            <option value="{{$item}}">{{$item}}</option>
-                        @endforeach
+                        <option value="edit">Edit</option>
+                        <option value="delete">Delete</option>
                     </select>
                 </div>
             </div>

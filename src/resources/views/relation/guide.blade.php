@@ -47,7 +47,7 @@
 
                             <li>
                                 <i class="ace-icon fa fa-check green"></i>
-                                Related other tables
+                                Related to other tables
                             </li>
 
                             <li>
@@ -101,7 +101,7 @@
 
                             <li>
                                 <i class="ace-icon fa fa-check green"></i>
-                                Related other tables
+                                Related to other tables
                             </li>
 
                             <li>
@@ -119,9 +119,6 @@
                         <div class="price">
                            <span class="label label-white middle">
                                 Delete
-                            </span>
-                            <span class="label label-white middle">
-                                Read
                             </span>
                             <span class="label label-white middle">
                                Edit
@@ -160,7 +157,7 @@
 
                             <li>
                                 <i class="ace-icon fa fa-times red"></i>
-                                Related other tables
+                                Related to other tables
                             </li>
 
                             <li>
@@ -178,9 +175,6 @@
                         <div class="price">
                             <span class="label label-white middle">
                                 Delete
-                            </span>
-                            <span class="label label-white middle">
-                                Read
                             </span>
                             <span class="label label-white middle">
                                Edit
@@ -219,7 +213,7 @@
 
                             <li>
                                 <i class="ace-icon fa fa-check green"></i>
-                                Related other tables
+                                Related to other tables
                             </li>
 
                             <li>
@@ -237,9 +231,6 @@
                         <div class="price">
                             <span class="label label-white middle">
                                 Delete
-                            </span>
-                            <span class="label label-white middle">
-                                Read
                             </span>
                             <span class="label label-white middle">
                                Edit

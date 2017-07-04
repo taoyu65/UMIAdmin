@@ -352,12 +352,6 @@
             });
         }
 
-        //更新记录
-        //update record
-        function recordEdit(tableName, tableId) {
-            //todo - edit need to be completed
-        }
-
         //加载数据当选择表名的时候
         //load data when select table name
         function loadTable(url) {

@@ -222,4 +222,15 @@ Route::group(['middleware' => 'umi.url.auth'], function () {
         'uses'      => 'umiTableEditController@edit'
     ]);
 #---------------------------------------------------------------
+
+#读取记录页面
+#Read record page
+#---------------------------------------------------------------
+    //查看具体信息页面
+    //read record information page
+    Route::get('reading/{table}/{recordId}', [
+        'middleware'=> ['umi.bread.access:read'],
+        'uses'      => 'umiTableReadController@reading'
+    ]);
+#---------------------------------------------------------------
 });
