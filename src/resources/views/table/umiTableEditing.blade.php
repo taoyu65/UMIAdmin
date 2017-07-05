@@ -2,6 +2,11 @@
 
 @section('content')
 
+    <?php $assetPath = config('umi.assets_path') ?>
+    <?php $path = $assetPath . '/ace' ?>
+
+    <link rel="stylesheet" href="{{$assetPath}}/bsSwitch/bsSwitch.css" />
+
     <div class="col-sm-12">
         <h3 class="header smaller lighter blue">
             <i class="ace-icon fa fa-bullhorn"></i>
@@ -20,9 +25,8 @@
         @else
             <div class="alert alert-warning">
                 <p>
-                    <form class="form-horizontal" method="post" action="{{url("edit")}}/{{$table}}">
+                    <form class="form-horizontal" method="post" action="{{url("edit")}}/{{$table}}" id="umiForm">
                         {!! csrf_field() !!}
-
                         {!! $display !!}
 
                         <input type="hidden" name="hidden_tn" value="{{$table}}">
@@ -32,23 +36,26 @@
                 </p>
             </div>
         @endif
-
     </div>
-<script>
 
-    //关闭所有模态窗口
-    //close all model windows
-    $('#cls').click(function () {
-        parent.layer.closeAll();
-    });
+    <script src="{{$assetPath}}/bsSwitch/highlight.js"></script>
+    <script src="{{$assetPath}}/bsSwitch/bsSwitch.js"></script>
+    <script src="{{$path}}/js/jquery.validate.min.js"></script>
 
-    //生成一个蒙版和加载图标
-    //create a shade and a loading icon
-    $('#actionEdit').click(function () {
-        layer.load(0, {
-            shade: [0.8,'#000000']
+    <script>
+        //关闭所有模态窗口
+        //close all model windows
+        $('#cls').click(function () {
+            parent.layer.closeAll();
         });
-    });
 
-</script>
+        //生成一个蒙版和加载图标
+        //create a shade and a loading icon
+        $('#actionEdit').click(function () {
+            layer.load(0, {
+                shade: [0.8,'#000000']
+            });
+        });
+
+    </script>
 @endsection

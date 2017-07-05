@@ -75,9 +75,9 @@ class UmiModel
             ->paginate($page);
     }
 
-    public function getRecordsByWhere($where, $value)
+    public function getRecordsByWhere($where, $value, $useCache = true)
     {
-        if ($this->openCache) {
+        if ($this->openCache && $useCache) {
             return $this->cachedTable
                 ->where($where, $value);
         }
@@ -104,7 +104,7 @@ class UmiModel
     }
 
     public function update($input)
-    {dd($input);
+    {
         $primaryKey = Config::get('umi.primary_key');
         $recordId = $input[$primaryKey];
         $fields = $this->filterFields($input);
@@ -156,7 +156,7 @@ class UmiModel
     public function loadFieldsValue($recordId)
     {
         $defaultValue = [];
-        $record = $this->getRecordsByWhere('id', $recordId);
+        $record = $this->getRecordsByWhere('id', $recordId, false);
         foreach ($record->first() as $field => $value) {
             $defaultValue[$field] = $value;
         }

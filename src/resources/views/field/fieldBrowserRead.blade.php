@@ -5,7 +5,6 @@
     <?php $assetPath = config('umi.assets_path') ?>
     <?php $path = $assetPath . '/ace' ?>
 
-    <script src="{{$assetPath}}/labelauty/jquery-labelauty.js"></script>
     <link rel="stylesheet" href="{{$assetPath}}/labelauty/jquery-labelauty.css" />
 
     <div class="page-header">

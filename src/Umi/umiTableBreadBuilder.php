@@ -36,7 +36,7 @@ class umiTableBreadBuilder
         $html .=<<<UMI
         <script>
             jQuery(function ($) {
-                $("#addForm").validate({errorClass: "red"});
+                $("#umiForm").validate({errorClass: "red"});
             })
         </script>
 UMI;
