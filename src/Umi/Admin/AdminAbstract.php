@@ -9,9 +9,40 @@ abstract class AdminAbstract implements AdminInterface
 {
     protected $hasSuperPermission = false;
 
+    protected $browserPermission = false;
+    protected $readPermission = false;
+    protected $editPermission = false;
+    protected $addPermission = false;
+    protected $deletePermission = false;
+
     public function hasSuperPermission()
     {
         return $this->hasSuperPermission;
+    }
+
+    public function browserPermission()
+    {
+        return $this->browserPermission;
+    }
+
+    public function readPermission()
+    {
+        return $this->readPermission;
+    }
+
+    public function editPermission()
+    {
+        return $this->editPermission;
+    }
+
+    public function addPermission()
+    {
+        return $this->addPermission;
+    }
+
+    public function deletePermission()
+    {
+        return $this->deletePermission;
     }
 
     public function generateBrowserTable($tableName)

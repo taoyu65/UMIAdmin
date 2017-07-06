@@ -34,7 +34,7 @@ class umiDataTableBuilder
     public function __construct()
     {
         $this->tableName = Ym::currentTableName();
-
+//todo - need to do reform permission function, to invoke adminAbstract.
         #获取所有BREAD 权限
         #get all bread authorization
         $permission = 'browser-' . $this->tableName;

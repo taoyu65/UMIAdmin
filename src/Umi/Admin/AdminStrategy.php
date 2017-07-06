@@ -36,4 +36,39 @@ class AdminStrategy
     {
         return $this->admin->generateBrowserTable($this->tableName)->footer();
     }
+
+    public function browserPermission()
+    {
+        return $this->hasSuperPermission() ?
+            true :
+            $this->admin->browserPermission();
+    }
+
+    public function readPermission()
+    {
+        return $this->hasSuperPermission() ?
+            true :
+            $this->readPermission();
+    }
+
+    public function editPermission()
+    {
+        return $this->hasSuperPermission() ?
+            true :
+            $this->editPermission();
+    }
+
+    public function addPermission()
+    {
+        return $this->hasSuperPermission() ?
+            true :
+            $this->addPermission();
+    }
+
+    public function deletePermission()
+    {
+        return $this->hasSuperPermission() ?
+            true :
+            $this->deletePermission();
+    }
 }
