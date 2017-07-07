@@ -42,8 +42,8 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | 超级管理员名称
-    | super admin's name
+    | 硬编码系统级别角色 优先级高于存储在数据库中的角色
+    | hard-coded role player priority higher than role system in the database
     |--------------------------------------------------------------------------
     | 应用程序只允许一个超级管理员(可以重写接口实现多个超级管理员以及应用逻辑)
     | 超级管理员拥有全部的操作权限包括Url(界面入口) 以及 BREAD (数据表的增删改)
@@ -56,7 +56,9 @@ return [
     | of deleting the record, to make the business logical of authority is clear
     */
 
-    'super_admin' => 'admin',
+    'system_role'   => [
+        'super_admin' => 'admin',
+    ],
 
     /*
     |--------------------------------------------------------------------------

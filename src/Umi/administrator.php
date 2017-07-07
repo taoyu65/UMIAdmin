@@ -27,7 +27,7 @@ class administrator
     public function isSuperAdmin()
     {
         if (Config::get('umi.url_auth')) {
-            $this->isSuperAdmin = $this->userName === Config::get('umi.super_admin') ? true : false;
+            $this->isSuperAdmin = $this->userName === Config::get('umi.system_role.super_admin') ? true : false;
         } else {
             $this->isSuperAdmin = true;
         }

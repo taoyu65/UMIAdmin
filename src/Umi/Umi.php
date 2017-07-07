@@ -2,6 +2,7 @@
 
 namespace YM\Umi;
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Session;
 
@@ -147,5 +148,14 @@ UMI;
     public function unSerializeAndBase64($string)
     {
         return unserialize(base64_decode($string));
+    }
+
+    #用户是否属于系统级别权限用户
+    #is the user belongs the system role model
+    public function isSystemRole()
+    {
+        $userName = Auth::user()->name;
+        $systemRoleList = Config::get('umi.system_role');
+        return in_array($userName, $systemRoleList);
     }
 }

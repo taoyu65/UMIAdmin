@@ -23,7 +23,7 @@ class FactoryAdmin
     public function getAdmin()
     {
         switch ($this->userName) {
-            case Config::get('umi.super_admin'):
+            case Config::get('umi.system_role.super_admin'):
                 return new SuperAdmin();
             #可以扩展你特有的用户(比如一些只有这个用户拥有的功能)
             #you can extend your own user who has some special and unique function
@@ -37,7 +37,7 @@ class FactoryAdmin
     public function getMasterPage()
     {
         switch ($this->userName) {
-            case Config::get('umi.super_admin'):
+            case Config::get('umi.system_role.super_admin'):
                 return new SuperAdminMasterPage();
             #可以扩展你特有的用户(比如一些只有这个用户拥有的功能)
             #you can extend your own user who has some special and unique function

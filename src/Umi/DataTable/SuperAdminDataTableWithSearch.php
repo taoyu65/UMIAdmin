@@ -22,23 +22,23 @@ class SuperAdminDataTableWithSearch extends umiDataTableAbstract
 
     public function headerAlert()
     {
-        return $this->umiDataTable->tableHeadAlert(true);
+        return $this->umiDataTable->tableHeadAlert();
     }
 
     public function header()
     {
         return $this->search() .
         $this->headerAlert() .
-        $this->umiDataTable->tableHead(true);
+        $this->umiDataTable->tableHead();
     }
 
     public function tableBody()
     {
-        return $this->umiDataTable->tableBody(true);
+        return $this->umiDataTable->tableBody();
     }
 
     public function footer()
     {
-        return $this->umiDataTable->tableFoot(true);
+        return $this->umiDataTable->tableFoot();
     }
 }

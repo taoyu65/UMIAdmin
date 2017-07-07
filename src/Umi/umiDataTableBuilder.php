@@ -7,6 +7,7 @@ use YM\Models\Search;
 use YM\Models\TableRelationOperation;
 use YM\Models\UmiModel;
 use YM\Facades\Umi as Ym;
+use YM\Umi\Admin\AdminStrategy;
 use YM\umiAuth\Facades\umiAuth;
 use YM\Umi\DataTable\DataType\DataTypeOperation;
 
@@ -34,30 +35,39 @@ class umiDataTableBuilder
     public function __construct()
     {
         $this->tableName = Ym::currentTableName();
-//todo - need to do reform permission function, to invoke adminAbstract.
-        #获取所有BREAD 权限
+
+        #获取所有BREAD权限
         #get all bread authorization
-        $permission = 'browser-' . $this->tableName;
-        $this->browser = umiAuth::can($permission) ? true : false;
+        if (Ym::isSystemRole()) {
+            $adminStrategy = new AdminStrategy($this->tableName);
+            $this->browser = $adminStrategy->browserPermission();
+            $this->read = $adminStrategy->readPermission();
+            $this->edit = $adminStrategy->editPermission();
+            $this->add = $adminStrategy->addPermission();
+            $this->delete = $adminStrategy->deletePermission();
+        } else {
+            $permission = 'browser-' . $this->tableName;
+            $this->browser = umiAuth::can($permission) ? true : false;
 
-        $permission = 'read-' . $this->tableName;
-        $this->read = umiAuth::can($permission) ? true : false;
+            $permission = 'read-' . $this->tableName;
+            $this->read = umiAuth::can($permission) ? true : false;
 
-        $permission = 'edit-' . $this->tableName;
-        $this->edit = umiAuth::can($permission) ? true : false;
+            $permission = 'edit-' . $this->tableName;
+            $this->edit = umiAuth::can($permission) ? true : false;
 
-        $permission = 'add-' . $this->tableName;
-        $this->add = umiAuth::can($permission) ? true : false;
+            $permission = 'add-' . $this->tableName;
+            $this->add = umiAuth::can($permission) ? true : false;
 
-        $permission = 'delete-' . $this->tableName;
-        $this->delete = umiAuth::can($permission) ? true : false;
+            $permission = 'delete-' . $this->tableName;
+            $this->delete = umiAuth::can($permission) ? true : false;
+        }
 
         #获取按钮没有被授权时候的样式,可以设置为不显示或者不可点击
         #get style of button when unauthorized, does not show or not editable
         $this->buttonStyle = Config::get('umi.unAuthorizedAccessStyle');
     }
 
-    public function tableHeadAlert($superAdmin = false)
+    public function tableHeadAlert()
     {
         $html = <<<UMI
         <div class="alert alert-info">
@@ -72,13 +82,13 @@ UMI;
         return $html;
     }
 
-    public function tableHead($superAdmin = false)
+    public function tableHead()
     {
         #删除按钮 button of delete
-        $buttonDelete = '';//$this->ButtonDelete($superAdmin);
+        $buttonDelete = '';//$this->ButtonDelete();
 
         #新建按钮 button of new
-        $buttonAdd = $this->ButtonAdd($superAdmin);
+        $buttonAdd = $this->ButtonAdd();
 
         $html = <<<UMI
         <p>
@@ -94,8 +104,8 @@ UMI;
     #function or UI
     public function tableHeadSuperAdmin()
     {
-        $buttonDelete = '';//$this->ButtonDelete(true);
-        $buttonAdd = $this->ButtonAdd(true);
+        $buttonDelete = '';//$this->ButtonDelete();
+        $buttonAdd = $this->ButtonAdd();
 
         $html = <<<UMI
         <p>
@@ -107,14 +117,13 @@ UMI;
     }
 
     /**
-     * @param bool $superAdmin
      * @return string
      */
-    public function tableBody($superAdmin = false)
+    public function tableBody()
     {
         #是否有权限浏览表格数据
         #check if have authority to browser the data table
-        if (!($superAdmin || $this->browser))
+        if (!$this->browser)
             return $this->wrongMessage('you are not authorized to browser this data table');
 
         #数据表头
@@ -214,7 +223,7 @@ UMI;
                 $recordId = array_has($ds, $primaryKey) ? $dataSet->all()[$pointer]->$primaryKey : 0;
 
                 $activeFieldValue = $activeFieldValueList[$pointer];
-                $trBodyHtml .= $this->breadButtonHtml($recordId, $superAdmin, $activeFieldValue);     //获取按钮 get button
+                $trBodyHtml .= $this->breadButtonHtml($recordId, $activeFieldValue);     //获取按钮 get button
                 $trBodyHtml .= '</tr>';
 
                 $pointer++;
@@ -260,7 +269,7 @@ UMI;
         }
     }
 
-    public function tableFoot($superAdmin = false)
+    public function tableFoot()
     {
         $html = <<< UMI
         <div class="alert alert-block alert-success">
@@ -320,16 +329,16 @@ UMI;
         //return $html;
     }
 
-    private function breadButtonHtml($recordId, $superAdmin, $activeFieldValue)
+    private function breadButtonHtml($recordId, $activeFieldValue)
     {
         #表格右侧小按钮
         #small button on the right side of table
-        $buttonSmallEdit = $this->ButtonSmallEdit($recordId, $superAdmin, $activeFieldValue);
-        $buttonSmallRead = $this->ButtonSmallRead($recordId, $superAdmin, $activeFieldValue);
-        $buttonSmallDelete = $this->ButtonSmallDelete($recordId, $superAdmin, $activeFieldValue);
-        $linkHideEdit = $this->LinkHideEdit($recordId, $superAdmin, $activeFieldValue);
-        $linkHideDelete = $this->LinkHideDelete($recordId, $superAdmin, $activeFieldValue);
-        $linkHideRead = $this->LinkHideRead($recordId, $superAdmin, $activeFieldValue);
+        $buttonSmallEdit = $this->ButtonSmallEdit($recordId, $activeFieldValue);
+        $buttonSmallRead = $this->ButtonSmallRead($recordId, $activeFieldValue);
+        $buttonSmallDelete = $this->ButtonSmallDelete($recordId, $activeFieldValue);
+        $linkHideEdit = $this->LinkHideEdit($recordId, $activeFieldValue);
+        $linkHideDelete = $this->LinkHideDelete($recordId, $activeFieldValue);
+        $linkHideRead = $this->LinkHideRead($recordId, $activeFieldValue);
 
         $html = <<<UMI
         <td>
@@ -361,9 +370,9 @@ UMI;
         return $html;
     }
 
-    private function ButtonAdd($superAdmin)
+    private function ButtonAdd()
     {
-        if ($superAdmin || $this->add) {
+        if ($this->add) {
             return $this->ButtonAddHtml();
         } else {
             return $this->buttonStyle === 'disable' ?
@@ -375,7 +384,7 @@ UMI;
     {
         $addUrl = url('adding'). "/$this->tableName";
         $html = <<<UMI
-        <button class="$this->BtnCssNew $disable" type="button" onclick="showAdding('$addUrl');">
+        <button class="$this->BtnCssNew $disable" $disable type="button" onclick="showAdding('$addUrl');">
             <i class="ace-icon fa fa-plus"></i>
             New
         </button>
@@ -383,9 +392,9 @@ UMI;
         return $html;
     }
 
-    private function ButtonDelete($superAdmin)
+    private function ButtonDelete()
     {
-        if ($superAdmin || $this->delete) {
+        if ($this->delete) {
             return $this->ButtonDeleteHtml();
         } else {
             return $this->buttonStyle === 'disable' ?
@@ -396,7 +405,7 @@ UMI;
     private function ButtonDeleteHtml($disable = '')
     {
         $html = <<<UMI
-        <button class="$this->BtnCssDelete $disable">
+        <button class="$this->BtnCssDelete $disable" $disable>
                     <i class="ace-icon fa fa-trash-o"></i>
             Delete
         </button>
@@ -404,9 +413,9 @@ UMI;
         return $html;
     }
 
-    private function ButtonSmallEdit($recordId, $superAdmin, $activeFieldValue)
+    private function ButtonSmallEdit($recordId, $activeFieldValue)
     {
-        if ($superAdmin || $this->edit) {
+        if ($this->edit) {
             return $this->ButtonSmallEditHtml($recordId, $activeFieldValue);
         } else {
             return $this->buttonStyle === 'disable' ?
@@ -429,9 +438,9 @@ UMI;
         return $html;
     }
 
-    private function ButtonSmallRead($recordId, $superAdmin, $activeFieldValue)
+    private function ButtonSmallRead($recordId, $activeFieldValue)
     {
-        if ($superAdmin || $this->read) {
+        if ($this->read) {
             return $this->ButtonSmallReadHtml($recordId, $activeFieldValue);
         } else {
             return $this->buttonStyle === 'disable' ?
@@ -452,9 +461,9 @@ UMI;
         return $html;
     }
 
-    private function ButtonSmallDelete($recordId, $superAdmin, $activeFieldValue)
+    private function ButtonSmallDelete($recordId, $activeFieldValue)
     {
-        if ($superAdmin || $this->delete) {
+        if ($this->delete) {
             return $this->ButtonSmallDeleteHtml($recordId, $activeFieldValue);
         } else {
             return $this->buttonStyle === 'disable' ?
@@ -478,9 +487,9 @@ UMI;
         return $html;
     }
 
-    private function LinkHideRead($recordId, $superAdmin, $activeFieldValue)
+    private function LinkHideRead($recordId, $activeFieldValue)
     {
-        if ($superAdmin || $this->read) {
+        if ($this->read) {
             return $this->LinkHideReadHtml($recordId, $activeFieldValue);
         } else {
             return $this->buttonStyle === 'disable' ?
@@ -514,9 +523,9 @@ UMI;
         return $html;
     }
 
-    private function LinkHideEdit($recordId, $superAdmin, $activeFieldValue)
+    private function LinkHideEdit($recordId, $activeFieldValue)
     {
-        if ($superAdmin || $this->edit) {
+        if ($this->edit) {
             return $this->LinkHideEditHtml($recordId, $activeFieldValue);
         } else {
             return $this->buttonStyle === 'disable' ?
@@ -551,9 +560,9 @@ UMI;
         return $html;
     }
 
-    private function LinkHideDelete($recordId, $superAdmin, $activeFieldValue)
+    private function LinkHideDelete($recordId, $activeFieldValue)
     {
-        if ($superAdmin || $this->delete) {
+        if ($this->delete) {
             return $this->LinkHideDeleteHtml($recordId, $activeFieldValue);
         } else {
             return $this->buttonStyle === 'disable' ?

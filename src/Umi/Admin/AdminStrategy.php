@@ -17,6 +17,26 @@ class AdminStrategy
         $this->admin = $factory->getAdmin();
     }
 
+    #根据不同动态BREAD来判断权限
+    #based on the action BREAD to return the permission
+    public function actionPermission($action)
+    {
+        switch ($action) {
+            case 'browser':
+                return $this->browserPermission();
+            case 'read':
+                return $this->readPermission();
+            case 'edit':
+                return $this->readPermission();
+            case 'add':
+                return $this->addPermission();
+            case 'delete':
+                return $this->deletePermission();
+            default:
+                return false;
+        }
+    }
+
     public function hasSuperPermission()
     {
         return $this->admin->hasSuperPermission();
@@ -48,27 +68,27 @@ class AdminStrategy
     {
         return $this->hasSuperPermission() ?
             true :
-            $this->readPermission();
+            $this->admin->readPermission();
     }
 
     public function editPermission()
     {
         return $this->hasSuperPermission() ?
             true :
-            $this->editPermission();
+            $this->admin->editPermission();
     }
 
     public function addPermission()
     {
         return $this->hasSuperPermission() ?
             true :
-            $this->addPermission();
+            $this->admin->addPermission();
     }
 
     public function deletePermission()
     {
         return $this->hasSuperPermission() ?
             true :
-            $this->deletePermission();
+            $this->admin->deletePermission();
     }
 }

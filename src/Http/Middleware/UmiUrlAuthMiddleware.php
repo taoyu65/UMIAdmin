@@ -4,7 +4,6 @@ namespace YM\Http\Middleware;
 
 use Closure;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Session;
 
 class UmiUrlAuthMiddleware
 {
@@ -15,7 +14,7 @@ class UmiUrlAuthMiddleware
             if ($request->ajax() || $request->wantsJson()) {
                 return response('Unauthorized.', 401);
             } else {
-                Session::flash('previousUrl', $request->fullUrl());
+                $request->session()->put('previousUrl', $request->fullUrl());
                 return redirect()->guest(route('admin'));
             }
         }
