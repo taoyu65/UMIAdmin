@@ -51,9 +51,9 @@ class umiTableEditController extends Controller
         } else {
             Umi::showMessage(
                 "Update fail! - <strong style=\'color: orange\'>active update</strong>",
-                "Please make sure data type is correct",
+                "Nothing has been changed",
                 [
-                    'class_name' => 'gritter-error'
+                    'class_name' => 'gritter-warning'
                 ]
             );
         }

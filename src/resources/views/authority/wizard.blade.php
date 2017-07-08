@@ -66,7 +66,11 @@
                                                 <ul class="dropdown-menu dropdown-success dropdown-menu-right">
                                                     @foreach($users as $id=>$user)
                                                     <li>
-                                                        <a href="#" id="{{$id}}">{{$user}}</a>
+                                                        @if(in_array($user, $systemRole))
+                                                            <a href="#" id="{{$id}}" onclick="systemRole(true)">{{$user}}</a>
+                                                        @else
+                                                            <a href="#" id="{{$id}}" onclick="systemRole(false)">{{$user}}</a>
+                                                        @endif
                                                     </li>
                                                     @endforeach
                                                 </ul>
@@ -91,6 +95,11 @@
                                         </span>
                                     </div>
                                     <div class="help-block col-xs-12 col-sm-reset inline"> Select a User </div>
+                                    <div class="col-xs-offset-2 col-xs-12 red" id="systemRole" hidden="hidden">
+                                        <strong>Important!!!</strong>
+                                        This user is system role which is controlled by hard-coding!
+                                        You still can set up but it's not going to work unless remove system role from config file
+                                    </div>
                                 </div>
                             </form>
 
@@ -433,6 +442,17 @@
                     });
                 }
             });
+        }
+
+        //
+        //
+        function systemRole(is_system_role) {
+            var label = $('#systemRole');
+            if (is_system_role) {
+                label.show();
+            } else {
+                label.hide();
+            }
         }
     </script>
 @endsection

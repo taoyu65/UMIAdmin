@@ -32,7 +32,9 @@ class authorityController extends Controller
         $permissionModel = new Permission();
         $permission = $permissionModel->allPermission();
 
-        $list = compact('users', 'userTableName', 'roleTableName', 'tables', 'permission');
+        $systemRole = array_values(Config::get('umi.system_role'));
+
+        $list = compact('users', 'userTableName', 'roleTableName', 'tables', 'permission', 'systemRole');
         return view('umi::authority.wizard', $list);
     }
 

@@ -499,6 +499,9 @@ UMI;
 
     private function LinkHideReadHtml($recordId, $activeFieldValue, $disable = '')
     {
+        $tableName = $this->tableName;//Ym::umiEncrypt($this->tableName);
+        $readUrl = url('reading') . "/$tableName/$recordId";
+
         if ($disable === 'disabled') {
             $html = <<<UMI
             <li>
@@ -512,7 +515,7 @@ UMI;
         } else {
             $html = <<<UMI
             <li>
-                <a href="#" class="tooltip-info disabled" data-rel="tooltip" title="View">
+                <a href="#" class="tooltip-info disabled" data-rel="tooltip" title="View" onclick="showReading('$readUrl');">
                     <span class="green">
                         <i class="ace-icon fa fa-eye bigger-120"></i>
                     </span>
@@ -535,6 +538,11 @@ UMI;
 
     private function LinkHideEditHtml($recordId, $activeFieldValue, $disable = '')
     {
+        $activeFieldValue = base64_encode($activeFieldValue);
+        $tableName = $this->tableName;//Ym::umiEncrypt($this->tableName);
+        $parameterField = $activeFieldValue === '' ? '' : "/$activeFieldValue";
+        $editUrl = url('editing') . "/$tableName/$recordId$parameterField";
+
         if ($disable === 'disabled') {
             $html = <<<UMI
             <li>
@@ -548,7 +556,7 @@ UMI;
         } else {
             $html = <<<UMI
             <li>
-                <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit">
+                <a href="#" class="tooltip-success" data-rel="tooltip" title="Edit" onclick="showEditing('$editUrl');">
                     <span class="blue">
                         <i class="ace-icon fa fa-pencil-square-o bigger-120"></i>
                     </span>
@@ -572,6 +580,12 @@ UMI;
 
     private function LinkHideDeleteHtml($recordId, $activeFieldValue, $disable = '')
     {
+        $activeFieldValue = base64_encode($activeFieldValue);
+        $tableName = $this->tableName;//Ym::umiEncrypt($this->tableName);
+
+        $parameterField = $activeFieldValue === '' ? '' : "/$activeFieldValue";
+        $deleteUrl = url('deleting') . "/$tableName/$recordId$parameterField";
+
         if ($disable === 'disabled') {
             $html = <<<UMI
             <li>
@@ -585,7 +599,7 @@ UMI;
         } else {
             $html = <<<UMI
             <li>
-                <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete">
+                <a href="#" class="tooltip-error" data-rel="tooltip" title="Delete" onclick="showDeleting('$deleteUrl');">
                     <span class="red">
                         <i class="ace-icon fa fa-trash-o bigger-120"></i>
                     </span>
