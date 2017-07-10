@@ -2,6 +2,7 @@
 
 namespace YM\Http\Controllers;
 
+use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use YM\Models\UmiModel;
 use YM\Umi\Common\Selector;
@@ -24,14 +25,30 @@ class commonController extends Controller
     #       returnField: which field's value will be returned to the parent's window
     #       functionName: the method name that when the record got clicked
     #       fields: which fields will be displayed on the selector
-    public function selector($table, $property)
+    public function selector(Request $request, $table, $property)
     {
         $selectorClass = new Selector();
         $selector = $selectorClass->unSerialize($property);
 
         $umiModel = new UmiModel($table);
         $records = $umiModel->getRecordsByFields($selector->fields);
+        $links = $records->links();
+        $url = $request->url();
 
-        return view('umi::common.selector', compact('table', 'selector', 'records'));
+        return view('umi::common.selector', compact('table', 'selector', 'records', 'links', 'url'));
+    }
+
+    public function search(Request $request)
+    {
+        $table = $request->input('table');
+        $field = $request->input('field');
+        $value = $request->input('value');
+        $url = $request->input('url');
+        $selector = unserialize($request->input('selector'));
+
+        $umiModel = new UmiModel($table);
+        $records = $umiModel->singleFieldSearch($field, $value);
+
+        return view('umi::common.selector', compact('table', 'selector', 'records', 'url'));
     }
 }

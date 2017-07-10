@@ -30,59 +30,49 @@ return[
     'data_type'             => [
         'browserRead'   => [
             'label'         => [
-                'relation_display'  => 'false',
-                'custom_value'      => 'false'
+                'showInputInterface'=> false,
             ],
-            'label4Read'         => [
-                'relation_display'  => 'false',
-                'custom_value'      => 'false'
+            'label4Read'    => [
+                'showInputInterface'=> false,
             ],
             'dollar'        => [
-                'relation_display'  => 'false',
-                'custom_value'      => 'false'
+                'showInputInterface'=> false,
             ],
             'star'          => [
-                'relation_display'  => 'false',
-                'custom_value'      => 'false'
+                'showInputInterface'=> false,
             ],
             'foreignKey'    => [
-                'relation_display'  => 'true',
-                'custom_value'      => 'false'
+                'showInputInterface'=> true,
             ],
             'badge'         => [
-                'relation_display'  => 'false',
-                'custom_value'      => 'false'
+                'showInputInterface'=> false,
             ],
             'keyIcon'       => [
-                'relation_display'  => 'false',
-                'custom_value'      => 'false'
+                'showInputInterface'=> false,
             ],
         ],
         'editAdd'       => [
             'textBox'       => [
-                'relation_display'  => 'false',
-                'custom_value'      => 'false'
+                'showInputInterface'=> false,
             ],
             'checkBox'      => [
-                'relation_display'  => 'false',
-                'custom_value'      => 'false'
+                'showInputInterface'=> false,
             ],
             'textArea'      => [
-                'relation_display'  => 'false',
-                'custom_value'      => 'false'
+                'showInputInterface'=> false,
             ],
             'tags'          => [
-                'relation_display'  => 'false',
-                'custom_value'      => 'false'
+                'showInputInterface'=> false,
             ],
             'date'          => [
-                'relation_display'  => 'false',
-                'custom_value'      => 'false'
+                'showInputInterface'=> false,
             ],
             'dropDownBox'   => [
-                'relation_display'  => 'false',
-                'custom_value'      => 'true'
+                'showInputInterface'=> true,
             ],
+            'popupWindow'   => [
+                'showInputInterface'=> true,
+            ]
         ]
     ],
 
@@ -122,7 +112,6 @@ return[
     'operation_type'        => [
         'delete',
         'edit',
-        //'add',
         'read'
     ],
 

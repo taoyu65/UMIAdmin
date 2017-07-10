@@ -6,6 +6,7 @@
     <?php $path = $assetPath . '/ace' ?>
 
     <link rel="stylesheet" href="{{$assetPath}}/bsSwitch/bsSwitch.css" />
+    <link rel="stylesheet" href="{{$assetPath}}/dateTimePicker/jquery.datetimepicker.css" />
 
     <div class="col-sm-12">
         <h3 class="header smaller lighter blue">
@@ -40,6 +41,7 @@
 
     <script src="{{$assetPath}}/bsSwitch/highlight.js"></script>
     <script src="{{$assetPath}}/bsSwitch/bsSwitch.js"></script>
+    <script src="{{$assetPath}}/dateTimePicker/jquery.datetimepicker.full.min.js"></script>
     <script src="{{$path}}/js/jquery.validate.min.js"></script>
 
     <script>

@@ -7,13 +7,14 @@ use YM\Models\Table;
 
 class DropDownDataType extends DataTypeAbstract
 {
-    public function regulateDataEditAdd($dataList, $relatedTable = '', $relatedField = '', $validation = '', $option = [])
+    public function regulateDataEditAdd($data, $relatedTable = '', $relatedField = '', $validation = '', $option = [])
     {
         $property = $this->getProperty($option);
         $validationString = $this->getValidation($validation);
 
         $optionHtml = '';
-        if ($option['customValue'] == '') {
+        $placeholder = '';
+        if ($option['customValue'] == '' && $relatedTable != '') {
             #如果下拉列表有自定义的值, 优先执行自定义
             #if down down box has custom value, then load this priority
             $placeholder = 'please select...';
@@ -22,9 +23,10 @@ class DropDownDataType extends DataTypeAbstract
                 ->pluck('id', $relatedField);
 
             foreach ($options as $text => $value) {
-                $optionHtml .= "<option value='$value'>$text</option>";
+                $selected = $text === $data ? 'selected' : '';
+                $optionHtml .= "<option value='$value' $selected>$text</option>";
             }
-        } else {
+        } else if ($option['customValue'] != '') {
             #加载设定的下拉列表关联数据表
             #load drop down box with related data table
             $custom = $option['customValue']->dropDownBox;
@@ -32,7 +34,8 @@ class DropDownDataType extends DataTypeAbstract
             $options = $custom->option;
 
             foreach ($options as $option) {
-                $optionHtml .= "<option value='$option->value'>$option->text</option>";
+                $selected = $option->text === $data ? 'selected' : '';
+                $optionHtml .= "<option value='$option->value' $selected>$option->text</option>";
             }
         }
 

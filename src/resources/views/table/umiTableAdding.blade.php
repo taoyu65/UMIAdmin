@@ -50,5 +50,7 @@
 
     </script>
 
+    <script src="{{$assetPath}}/bsSwitch/highlight.js"></script>
+    <script src="{{$assetPath}}/bsSwitch/bsSwitch.js"></script>
     <script src="{{$path}}/js/jquery.validate.min.js"></script>
 @endsection

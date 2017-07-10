@@ -24,8 +24,8 @@ class ForeignKeyDataType extends DataTypeAbstract
     {
         $tableModel = new Table();
         $tableList = $tableModel->getAllTable();
-        $isCustomValue = 'true';
-        $list = compact('tableList', 'relationDisplayDomId', 'customValueDomId', 'isCustomValue');
+        $onlyShowRelationDisplay = 'true';
+        $list = compact('tableList', 'relationDisplayDomId', 'customValueDomId', 'onlyShowRelationDisplay');
 
         return view('umi::common.fieldDisplay.relationRule', $list);
     }

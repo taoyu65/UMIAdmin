@@ -4,6 +4,7 @@ namespace YM\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Cache;
 use YM\Facades\Umi;
 use YM\Models\UmiModel;
 
@@ -25,9 +26,9 @@ class umiTableDeleteController extends Controller
 
         $umiModel = new UmiModel($table);
         $id = $request['hidden_ti'];
-        $count = 1;//$umiModel->delete($id);
-        ////todo - waiting for final test
+        $count = $umiModel->delete($id);
         if ($count){
+            Cache::pull($table);
             $request['action_success'] = true;
 
             Umi::showMessage(

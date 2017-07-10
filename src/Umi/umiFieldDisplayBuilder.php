@@ -9,7 +9,7 @@ class umiFieldDisplayBuilder
 {
     public function showExistRecords($tableName, $tableId)
     {
-        $umiModel = new UmiModel($tableName);
+        $umiModel = new UmiModel($tableName, 'order', 'asc');
         $records = $umiModel->getRecordsByWhere('table_id', $tableId);
 
         $TH = '';

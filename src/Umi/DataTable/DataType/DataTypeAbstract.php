@@ -57,10 +57,22 @@ class DataTypeAbstract implements DataTypeInterface
     }
 
     #当选择数据类型时, 加载自定义录入界面
+        #
+        #
     #when select a data type, autoload custom interface
+    /**当选择数据类型时, 加载自定义录入界面
+     * when select a data type, autoload custom interface
+     * @param $relationDisplayDomId
+     *      - 用于接受返回值的DOM ID
+     *      - DOM ID for accepting the value from returning
+     * @param $customValueDomId
+     *      - 用于接受返回值的DOM ID
+     *      - DOM ID for accepting the value from returning
+     * @return string
+     */
     public function dataTypeInterface($relationDisplayDomId, $customValueDomId)
     {
-        return '';
+        return 'Please Design and Set up Input Interface';
     }
 
     #input属性数组转换为字符串

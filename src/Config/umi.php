@@ -110,12 +110,13 @@ return [
 
     /*
     |--------------------------------------------------------------------------
-    | 数据表(umi table)的每页显示数据数
-    | how many pages will be showing on umi table
+    | 数据表(umi table)和选择器(selector) 的每页显示数据数
+    | how many pages will be showing on umi table and selector
     |--------------------------------------------------------------------------
     */
 
-    'umi_table_perPage' => 3,
+    'umi_table_perPage' => 8,
+    'umi_selector_perPage' => 8,
 
     /*
     |--------------------------------------------------------------------------

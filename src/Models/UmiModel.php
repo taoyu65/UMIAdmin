@@ -69,7 +69,8 @@ class UmiModel
 
     public function getRecordsByFields($fields)
     {
-        $page = 1;//todo - per page need to go through config file, this is for test //Config::get('umi.umi_table_perPage');
+        $page = Config::get('umi.umi_table_perPage');
+
         return DB::table($this->tableName)
             ->select($fields)
             ->paginate($page);
@@ -135,6 +136,19 @@ class UmiModel
             $count = false;
         }
         return $count;
+    }
+
+    public function singleFieldSearch($field, $value, $isFuzzy = false)
+    {
+        if ($isFuzzy) {
+            return DB::table($this->tableName)
+                ->where($field, 'like', "%$value%")
+                ->get();
+        } else {
+            return DB::table($this->tableName)
+                ->where($field, $value)
+                ->get();
+        }
     }
 
     public function getTableFields($tableName)

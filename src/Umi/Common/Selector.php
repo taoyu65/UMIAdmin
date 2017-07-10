@@ -25,6 +25,10 @@ class Selector
     #which fields will be showing on the window (['filed1', 'field2'])
     public $fields = [];
 
+    #用于搜索的字段
+    #field of searching
+    public $searchField;
+
     public function __construct()
     {
         $this->title = 'Selector';
@@ -35,11 +39,13 @@ class Selector
     #turn into json and encrypt as part of url for requesting a related function
     public function serialize()
     {
-        return Umi::umiEncrypt(json_encode($this));
+        return base64_encode(serialize($this));
+        //return Umi::umiEncrypt(json_encode($this));
     }
 
     public function unSerialize($string)
     {
-        return json_decode(Umi::umiDecrypt($string));
+        return unserialize(base64_decode($string));
+        //return json_decode(Umi::umiDecrypt($string));
     }
 }

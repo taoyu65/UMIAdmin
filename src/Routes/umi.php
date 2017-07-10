@@ -19,6 +19,9 @@
         'uses'      => 'commonController@selector',
         'as'        => 'selector'
     ]);
+    Route::post('selector/search', [
+        'uses'      => 'commonController@search'
+    ]);
 #------------------------------------------------------------------
 
 #main--------------------------------------------------------------

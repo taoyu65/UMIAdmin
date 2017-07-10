@@ -10,6 +10,7 @@ use YM\Umi\DataTable\DataType\ForeignKeyDataType;
 use YM\Umi\DataTable\DataType\Label4ReadDataType;
 use YM\Umi\DataTable\DataType\LabelDataType;
 use YM\Umi\DataTable\DataType\KeyIcon;
+use YM\Umi\DataTable\DataType\PopupWindowDataType;
 use YM\Umi\DataTable\DataType\StarDataType;
 use YM\Umi\DataTable\DataType\TagsDataType;
 use YM\Umi\DataTable\DataType\TextAreaDataType;
@@ -60,6 +61,8 @@ class FactoryDataType
                 return new BadgesDataType();
             case 'keyIcon':
                 return new KeyIcon();
+            case 'popupWindow':
+                return new PopupWindowDataType();
             default:
                 throw new \Exception("You have not set up this data type: $dataType");
         }

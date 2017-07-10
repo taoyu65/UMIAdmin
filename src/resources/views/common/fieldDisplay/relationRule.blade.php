@@ -8,7 +8,7 @@
     <div class="col-sm-12">
         <h3 class="header blue lighter smaller">
             <i class="ace-icon fa fa-gear smaller-90"></i>
-            Generate Rules - {{isset($isCustomValue)&&$isCustomValue=='true'?'Foreign Key':'Drop Down Box'}}
+            Generate Rules - {{isset($onlyShowRelationDisplay)&&$onlyShowRelationDisplay=='true'?'Foreign Key':'Drop Down Box'}}
         </h3>
 
         <div id="tabs">
@@ -17,7 +17,7 @@
                     <a href="#tabs-1">Relation Display</a>
                 </li>
 
-                <li {{isset($isCustomValue)&&$isCustomValue=='true'?'hidden':''}}>
+                <li {{isset($onlyShowRelationDisplay)&&$onlyShowRelationDisplay=='true'?'hidden':''}}>
                     <a href="#tabs-2">Custom Value</a>
                 </li>
             </ul>

@@ -26,12 +26,12 @@ class fieldDisplayController extends Controller
             case 'browser':
             case 'read':
                 $dataTypes = Config::get('umiEnum.data_type.browserRead');
-                $list['dataTypes'] = $dataTypes;
+                $list['showInputInterface'] = $dataTypes;
                 return view('umi::field.fieldBrowserRead', $list);
             case 'edit':
             case 'add':
                 $dataTypes = Config::get('umiEnum.data_type.editAdd');
-                $list['dataTypes'] = $dataTypes;
+                $list['showInputInterface'] = $dataTypes;
                 return view('umi::field.fieldEditAdd', $list);
             default:
                 abort(404, 'Error page');
