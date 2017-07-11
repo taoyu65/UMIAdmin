@@ -16,8 +16,8 @@ class CreatePermissionsTable extends Migration
         Schema::create('umi_permissions', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('table_id')->unsigned();
-            $table->string('key');
-            $table->string('display_name');
+            $table->string('key', 10);
+            $table->string('display_name', 30);
             $table->timestamps();
         });
 

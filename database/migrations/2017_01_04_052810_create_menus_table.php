@@ -16,12 +16,12 @@ class CreateMenusTable extends Migration
         Schema::create('umi_menus', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('menu_id')->unsigned();
-            $table->string('title');
+            $table->string('title', 50);
             $table->string('url');
-            $table->string('target')->default('_self');
+            $table->string('target', 20)->default('_self');
             $table->string('icon_class');
             $table->string('extra_icon_html');
-            $table->integer('order')->unsigned();
+            $table->tinyInteger('order')->unsigned();
             $table->timestamps();
         });
     }

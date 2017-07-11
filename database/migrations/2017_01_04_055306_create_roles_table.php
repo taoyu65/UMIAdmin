@@ -15,8 +15,8 @@ class CreateRolesTable extends Migration
     {
         Schema::create('umi_roles', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('role_name')->unique();
-            $table->string('display_name');
+            $table->string('role_name', 30)->unique();
+            $table->string('display_name', 30);
             $table->timestamps();
         });
     }

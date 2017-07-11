@@ -16,8 +16,8 @@ class CreateBadgesTable extends Migration
         Schema::create('umi_badges', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('table_id')->unsigned();
-            $table->string('field');
-            $table->string('badge_name');
+            $table->string('field', 30);
+            $table->string('badge_name', 30);
             $table->string('class');
             $table->timestamps();
         });

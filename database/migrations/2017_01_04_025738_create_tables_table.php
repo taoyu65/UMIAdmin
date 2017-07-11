@@ -15,8 +15,8 @@ class CreateTablesTable extends Migration
     {
         Schema::create('umi_tables', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('table_name')->unique();
-            $table->string('type');
+            $table->string('table_name', 50)->unique();
+            $table->string('type', 30);
             $table->timestamps();
         });
     }

@@ -17,11 +17,11 @@ class CreateFieldDisplayBreadTable extends Migration
         Schema::create('umi_field_display_browser', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('table_id')->unsigned();
-            $table->string('field');
-            $table->string('type');
-            $table->string('relation_display');
-            $table->string('display_name');
-            $table->integer('order')->default(0);
+            $table->string('field', 50);
+            $table->string('type', 20);
+            $table->string('relation_display', 80);
+            $table->string('display_name', 30);
+            $table->tinyInteger('order')->default(0);
             $table->tinyInteger('is_showing')->default(0);
             $table->timestamps();
         });
@@ -30,11 +30,11 @@ class CreateFieldDisplayBreadTable extends Migration
         Schema::create('umi_field_display_read', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('table_id')->unsigned();
-            $table->string('field');
-            $table->string('type');
-            $table->string('relation_display');
-            $table->string('display_name');
-            $table->integer('order')->default(0);
+            $table->string('field', 50);
+            $table->string('type', 20);
+            $table->string('relation_display', 80);
+            $table->string('display_name', 30);
+            $table->tinyInteger('order')->default(0);
             $table->tinyInteger('is_showing')->default(0);
             $table->timestamps();
         });
@@ -43,14 +43,14 @@ class CreateFieldDisplayBreadTable extends Migration
         Schema::create('umi_field_display_edit', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('table_id')->unsigned();
-            $table->string('field');
-            $table->string('type');
-            $table->string('relation_display');
+            $table->string('field', 50);
+            $table->string('type', 20);
+            $table->string('relation_display', 80);
             $table->text('custom_value');
-            $table->string('display_name');
-            $table->string('validation');
+            $table->string('display_name', 30);
+            $table->text('validation');
             $table->string('details');
-            $table->integer('order')->default(0);
+            $table->tinyInteger('order')->default(0);
             $table->tinyInteger('is_editable')->default(0);
             $table->timestamps();
         });
@@ -59,14 +59,14 @@ class CreateFieldDisplayBreadTable extends Migration
         Schema::create('umi_field_display_add', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('table_id')->unsigned();
-            $table->string('field');
-            $table->string('type');
-            $table->string('relation_display');
+            $table->string('field', 50);
+            $table->string('type', 20);
+            $table->string('relation_display', 80);
             $table->text('custom_value');
-            $table->string('display_name');
-            $table->string('validation');
+            $table->string('display_name', 30);
+            $table->text('validation');
             $table->string('details');
-            $table->integer('order')->default(0);
+            $table->tinyInteger('order')->default(0);
             $table->tinyInteger('is_editable')->default(0);
             $table->timestamps();
         });
