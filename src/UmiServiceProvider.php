@@ -6,7 +6,6 @@ use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
 use YM\Http\Middleware\TableRelationConfirmationMiddleware;
 use YM\Http\Middleware\TableRelationExecuteMiddleware;
-use YM\Http\Middleware\UmiApiMiddleware;
 use YM\Http\Middleware\UmiUrlAuthMiddleware;
 use YM\Http\Middleware\BreadAccessMiddleware;
 use YM\Umi\Umi;
@@ -62,7 +61,6 @@ class UmiServiceProvider extends ServiceProvider
 
         $router->middleware('umi.TRelation.execute', TableRelationExecuteMiddleware::class);
 
-        $router->middleware('umi.api.auth', UmiApiMiddleware::class);
     }
 
 }

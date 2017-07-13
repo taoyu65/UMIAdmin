@@ -1,5 +1,5 @@
 # Laravel PHP Framework
-中文介绍(https://github.com/taoyu65/UMIAdmin/blob/master/readme_ch.md)
+中文介绍(https://github.com/taoyu65/UMIAdmin/blob/master/readme.md)
 #
 [![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
 [![Total Downloads](https://poser.pugx.org/laravel/framework/d/total.svg)](https://packagist.org/packages/laravel/framework)
