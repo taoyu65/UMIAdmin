@@ -1,5 +1,9 @@
 @extends('umi::layouts.master')
 @section('content')
+
+    <?php $assetPath = config('umi.assets_path') ?>
+    <?php $path = $assetPath . '/ace' ?>
+
     <div class="alert alert-block alert-success">
         <button type="button" class="close" data-dismiss="alert">
             <i class="ace-icon fa fa-times"></i>
@@ -77,8 +81,50 @@
             </div>
         </div>
         <div class="col-sm-6">
+            <div class="widget-box transparent">
+                <div class="widget-header widget-header-flat">
+                    <h4 class="widget-title lighter">
+                        <i class="ace-icon fa fa- orange"></i>
+                        Visit Amount Monthly Chart
+                    </h4>
 
+                    <div class="widget-toolbar">
+                        <a href="#" data-action="collapse">
+                            <i class="ace-icon fa fa-chevron-up"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="widget-body">
+                    <canvas id="myChart" width="95%" height="38"></canvas>
+                </div>
+            </div>
         </div>
     </div>
 
+    <script src="{{$assetPath}}/chart/chartjs.js"></script>
+    <script>
+        var ctx = document.getElementById('myChart').getContext('2d');
+        var chart = new Chart(ctx, {
+            // The type of chart we want to create
+            type: 'line',
+
+            // The data for our dataset
+            data: {
+                labels: JSON.parse('{!! $label !!}'),
+                datasets: [{
+                    label: "Visit Amount",
+                    backgroundColor: 'rgb(255, 99, 132)',
+                    borderColor: 'rgb(255, 99, 132)',
+                    data: [{{$data}}],
+                    fill: false
+                }]
+            },
+
+            // Configuration options go here
+            options: {
+
+            }
+        });
+    </script>
 @endsection

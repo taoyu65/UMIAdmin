@@ -12,10 +12,22 @@ class DashBoardController extends Controller
 {
     public function index()
     {
-        #get IP Information
-        $ips = DB::table('ip_info')->paginate(10);
+        ######################get IP Information##############################
+        $ips = DB::table('ip_info')->orderBy('created_at', 'desc')->paginate(10);
         $link = $ips->links();
-        return view('umi::dashboard', ['ips' => $ips, 'link' => $link]);
+
+        $label = [];
+        $data = '';
+        DB::table('ip_info_rate')->orderBy('order', 'asc')->get()->each(function ($item) use (&$label, &$data) {
+            array_push($label, $item->period);
+            $data .= $item->rate . ',';
+        });
+//dd(json_encode($label));
+        $label = json_encode($label);
+        $data = rtrim($data, ',');
+        $list = compact('ips', 'link', 'label', 'data');
+        return view('umi::dashboard', $list);
+        ######################################################################
 
 //        return view('umi::dashboard');
     }
@@ -26,21 +38,27 @@ class DashBoardController extends Controller
         $password = $request->get('password');
         if (Auth::attempt(['name' => $userName, 'password' => $password])) {
 
-            #save ip information
-            $ip = $_SERVER['REMOTE_ADDR'];
+            #######################save ip information#######################
+            $ip = '98.176.248.193';//$_SERVER['REMOTE_ADDR'];
             $query = @unserialize(file_get_contents('http://ip-api.com/php/'.$ip));
             if($query && $query['status'] == 'success') {
                 $country = $query['country'];
                 $region = $query['region'];
                 $city = $query['city'];
-                DB::table('ip_info')->insert([
+                $add = DB::table('ip_info')->insert([
                     'user_name' => $userName,
                     'ip'        => $ip,
                     'country'   => $country,
                     'region'    => $region,
                     'city'      => $city
                 ]);
+
+                if ($add) {
+                    $period = date('M-Y');
+                    DB::table('ip_info_rate')->where('period', $period)->increment('rate', 1);
+                }
             }
+            ######################################################################
 
             if (session('previousUrl'))
                 return redirect($request->session()->pull('previousUrl'));
