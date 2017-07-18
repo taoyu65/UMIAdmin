@@ -46,11 +46,14 @@
                                 <th class="hidden-480">
                                     <i class="ace-icon fa fa-caret-right blue"></i>country
                                 </th>
-                                <th class="hidden-480">
+                                {{--<th class="hidden-480">
                                     <i class="ace-icon fa fa-caret-right blue"></i>region
-                                </th>
+                                </th>--}}
                                 <th class="hidden-480">
                                     <i class="ace-icon fa fa-caret-right blue"></i>city
+                                </th>
+                                <th class="hidden-480">
+                                    <i class="ace-icon fa fa-caret-right blue"></i>Date
                                 </th>
                             </tr>
                             </thead>
@@ -65,11 +68,14 @@
                                 <td class="hidden-480">
                                     <span class="label-light ">{{$ip->country}}</span>
                                 </td>
-                                <td class="hidden-480">
+                                {{--<td class="hidden-480">
                                     <span class="label">{{$ip->region}}</span>
+                                </td>--}}
+                                <td class="hidden-480">
+                                    <span class="label label">{{$ip->city}}</span>
                                 </td>
                                 <td class="hidden-480">
-                                    <span class="label label-grey">{{$ip->city}}</span>
+                                    <span class="label label-grey">{{time_tran($ip->created_at)}}</span>
                                 </td>
                             </tr>
                             @endforeach

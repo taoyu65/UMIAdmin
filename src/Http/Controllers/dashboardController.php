@@ -22,7 +22,7 @@ class DashBoardController extends Controller
             array_push($label, $item->period);
             $data .= $item->rate . ',';
         });
-//dd(json_encode($label));
+
         $label = json_encode($label);
         $data = rtrim($data, ',');
         $list = compact('ips', 'link', 'label', 'data');
@@ -54,7 +54,7 @@ class DashBoardController extends Controller
                 ]);
 
                 if ($add) {
-                    $period = date('M-Y');
+                    $period = date('Y-M');
                     DB::table('ip_info_rate')->where('period', $period)->increment('rate', 1);
                 }
             }
