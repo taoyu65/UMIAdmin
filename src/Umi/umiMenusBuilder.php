@@ -45,7 +45,12 @@ class umiMenusBuilder
         $menus = $this->menus->getMenus($menu_id);
         $html = '';
         foreach ($menus as $menu) {
-            $rootMenu = $menu_id == 0 ? '<span class="menu-text">' . $menu->title . '</span>' : $menu->title;
+            #输出自定义图标 (标题后面的小图标)
+            #getting the custom icon which is behind the title
+            $extraIconHtml = $menu->extra_icon_html;
+
+            $titleWithIcon = $menu->title . $extraIconHtml;
+            $rootMenu = $menu_id == 0 ? '<span class="menu-text">' . $titleWithIcon . '</span>' : $titleWithIcon;
             //menus class(active or open) -------------------------------------------
             $url = $menu->url === '#' ? '#' : url($menu->url) . '?id=' . $menu->id;
             $class = '';
