@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\DB;
 
 class CreateUmiTableRelationOperationTable extends Migration
 {
@@ -26,7 +27,8 @@ class CreateUmiTableRelationOperationTable extends Migration
             $table->string('check_operation', 20);
             $table->boolean('is_extra_operation')->default(0);
             $table->string('details');
-            $table->timestamps();
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_at')->nullable();
         });
     }
 

@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\DB;
 
 class CreatePermissionsTable extends Migration
 {
@@ -18,7 +19,8 @@ class CreatePermissionsTable extends Migration
             $table->integer('table_id')->unsigned();
             $table->string('key', 10);
             $table->string('display_name', 30);
-            $table->timestamps();
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_at')->nullable();
         });
 
         Schema::create('umi_permission_role', function (Blueprint $table) {

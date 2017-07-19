@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\DB;
 
 class CreateFieldDisplayBreadTable extends Migration
 {
@@ -23,7 +24,8 @@ class CreateFieldDisplayBreadTable extends Migration
             $table->string('display_name', 30);
             $table->tinyInteger('order')->default(0);
             $table->tinyInteger('is_showing')->default(0);
-            $table->timestamps();
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_at')->nullable();
         });
 
         #field_display_read
@@ -36,7 +38,8 @@ class CreateFieldDisplayBreadTable extends Migration
             $table->string('display_name', 30);
             $table->tinyInteger('order')->default(0);
             $table->tinyInteger('is_showing')->default(0);
-            $table->timestamps();
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_at')->nullable();
         });
 
         #field_display_edit
@@ -52,7 +55,8 @@ class CreateFieldDisplayBreadTable extends Migration
             $table->string('details');
             $table->tinyInteger('order')->default(0);
             $table->tinyInteger('is_editable')->default(0);
-            $table->timestamps();
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_at')->nullable();
         });
 
         #field_display_add
@@ -68,7 +72,8 @@ class CreateFieldDisplayBreadTable extends Migration
             $table->string('details');
             $table->tinyInteger('order')->default(0);
             $table->tinyInteger('is_editable')->default(0);
-            $table->timestamps();
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_at')->nullable();
         });
     }
 

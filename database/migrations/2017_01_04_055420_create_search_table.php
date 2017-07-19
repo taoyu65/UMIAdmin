@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
+use Illuminate\Support\Facades\DB;
 
 class CreateSearchTable extends Migration
 {
@@ -18,7 +19,8 @@ class CreateSearchTable extends Migration
             $table->integer('table_id')->unsigned();
             $table->string('tab_title', 20);
             $table->tinyInteger('order')->unsigned();
-            $table->timestamps();
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_at')->nullable();
         });
 
         Schema::create('umi_search', function (Blueprint $table) {
@@ -28,7 +30,8 @@ class CreateSearchTable extends Migration
             $table->string('display_name', 30);
             $table->string('type', 30);
             $table->boolean('is_fuzzy')->default(1);
-            $table->timestamps();
+            $table->timestamp('created_at')->default(DB::raw('CURRENT_TIMESTAMP'));
+            $table->timestamp('updated_at')->nullable();
         });
     }
 
