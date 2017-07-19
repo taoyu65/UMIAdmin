@@ -12,6 +12,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call(umi_menus_seeder::class);
-        //$this->call(umi_table_seeder::class);
+        $this->call(umi_table_seeder::class);
+        $this->call(umi_permissions_seeder::class);
     }
 }
