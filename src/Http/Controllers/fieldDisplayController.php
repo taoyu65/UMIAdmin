@@ -55,8 +55,9 @@ class fieldDisplayController extends Controller
 
         switch ($type) {
             case 'browser':
+                return $browserModel->quickAddBrowserRead($table, $selectedTableId, $fieldsArr, 'label');
             case 'read':
-                return $browserModel->quickAddBrowserRead($table, $selectedTableId, $fieldsArr);
+                return $browserModel->quickAddBrowserRead($table, $selectedTableId, $fieldsArr, 'label4Read');
             case 'edit':
             case 'add':
                 return $browserModel->quickAddEditAdd($table, $selectedTableId, $fieldsArr);

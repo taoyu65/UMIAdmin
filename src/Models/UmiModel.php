@@ -89,8 +89,13 @@ class UmiModel
         if ($this->orderBy === '' && $this->order === '')
             return $ds->get();
 
-        return $ds->order($this->orderBy, $this->order)
-            ->get();
+        if ($this->order === 'asc')
+            return $ds
+                ->get()
+                ->sortBy($this->orderBy);
+        return $ds
+            ->get()
+            ->sortByDesc($this->orderBy);
     }
 
     public function getSelectedTable($fields)

@@ -6,6 +6,6 @@ class Label4ReadDataType extends DataTypeAbstract
 {
     public function regulateDataBrowser($data, $relatedTable = '', $relatedField = '', $option = [])
     {
-        return "<div class='form-control'>$data</div>";
+        return "<input class='form-control' readonly value='$data' style='cursor: not-allowed;'>";
     }
 }

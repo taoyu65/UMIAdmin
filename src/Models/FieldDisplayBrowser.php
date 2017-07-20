@@ -51,7 +51,7 @@ class FieldDisplayBrowser extends UmiBase
 
     #一键增加所有用于显示的字段, 使用默认值 (排除已存在的字段) - browser and read
     #on click to add all fields that use for display as default value (not for exist fields)
-    public function quickAddBrowserRead($table, $selectedTableId, $existFieldArr)
+    public function quickAddBrowserRead($table, $selectedTableId, $existFieldArr, $type)
     {
         $tableName = Umi::getTableNameById($selectedTableId);
         $umiModel = new UmiModel($tableName);
@@ -66,7 +66,7 @@ class FieldDisplayBrowser extends UmiBase
                 $re = DB::table($table)->insert([
                     'table_id'          => $selectedTableId,
                     'field'             => $field,
-                    'type'              => 'label',
+                    'type'              => $type,
                     'relation_display'  => '',
                     'display_name'      => $field,
                     'order'             => $count,

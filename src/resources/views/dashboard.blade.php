@@ -16,6 +16,16 @@
             Made by Laravel 5.3, php 5.6+
         </strong>
     </div>
+    <div class="well">
+        <h4 class="blue smaller lighter bolder">Super Administrator</h4>
+        This user is system user which has all permissions and not controlled by database. Please add a new user
+        and set up permissions as needed. <br>
+        Wizard:
+        <span class="label label-lg label-success arrowed-right"><a href="#" target="_blank" class="white">Create user</a></span>
+        <span class="label label-lg label-info arrowed-right"><a href="#" target="_blank" class="white">create/apply role</a></span>
+        <span class="label label-lg label-warning arrowed-right"><a href="#" target="_blank" class="white">set permissions</a></span>
+        <span class="label label-lg label-purple"><a href="#" target="_blank" class="white">set side menus</a></span>
+    </div>
     <div class="row">
         <div class="col-sm-6">
             <div class="widget-box transparent">

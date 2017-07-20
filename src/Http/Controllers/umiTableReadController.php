@@ -26,8 +26,8 @@ class umiTableReadController extends Controller
     {
         $tableNameLoadingFieldTable = Config::get('umiEnum.system_table_name.umi_field_display_read');
         $tableId = Umi::getTableIdByTableName($tableName);
-        $umiModel = new UmiModel($tableNameLoadingFieldTable, 'order', 'asc');
-        $records = $umiModel->getRecordsByWhere('table_id', $tableId);
+        $umiModel2 = new UmiModel($tableNameLoadingFieldTable, 'order', 'asc');
+        $records = $umiModel2->getRecordsByWhere('table_id', $tableId);
 
         $builder = new umiTableBreadBuilder();
         return $builder->display($records, $defaultValue, 'read');
