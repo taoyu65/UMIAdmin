@@ -5,6 +5,8 @@
     <?php $assetPath = config('umi.assets_path') ?>
     <?php $path = $assetPath . '/ace' ?>
 
+    <link rel="stylesheet" href="{{$assetPath}}/bsSwitch/bsSwitch.css" />
+
     <form class="col-sm-12">
         <h3 class="header smaller lighter green">
             <i class="ace-icon fa fa-bullhorn"></i>

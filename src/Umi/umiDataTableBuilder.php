@@ -143,7 +143,7 @@ UMI;
         $fields = $dataTypeOp->getFields();
         $perPage = Config::get('umi.umi_table_perPage');
 
-        $umiModel = new UmiModel($this->tableName);
+        $umiModel = new UmiModel($this->tableName, 'id', 'desc');
         $whereList = $this->getWhere();
         $dataSet = $umiModel->getSelectedTable($fields);
 

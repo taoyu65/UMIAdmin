@@ -17,7 +17,7 @@ class umiMenusBuilder
 
     public function __construct()
     {
-        $this->menus = new Menu();
+        $this->menus = new Menu([], 'order');
     }
 #region Menus for super admin-------------------------------------------------------------------------
 

@@ -100,8 +100,11 @@ class UmiModel
 
     public function getSelectedTable($fields)
     {
+        if ($this->orderBy === '' && $this->order === '')
+            return DB::table($this->tableName)
+                ->select($fields);
         return DB::table($this->tableName)
-            ->select($fields);
+            ->orderBy($this->orderBy, $this->order);
     }
 
     public function delete($id)
@@ -127,13 +130,13 @@ class UmiModel
         return $count;
     }
 
-    public function insert($fieldsArr, $timestamps = false)
+    public function insert($fieldsArr, $autoTimestamps = true)
     {
         $fields = $this->filterFields($fieldsArr);
-        if ($timestamps) {
+        /*if ($autoTimestamps) {
             $fields['created_at'] = date('Y-m-d h:i:s');
             $fields['updated_at'] = date('Y-m-d h:i:s');
-        }
+        }*/
 
         try {
             $count = DB::table($this->tableName)->insert($fields);
@@ -186,6 +189,9 @@ class UmiModel
     private function filterFields($fields)
     {
         $filter = Config::get("umiEnum.fillable.$this->tableName");
+        if (!$filter)
+            exit('Please check config file to set up a fillable fields');
+
         $re = [];
         array_filter(array_keys($fields), function ($key) use ($filter, &$re, $fields) {
             if (in_array($key, $filter))

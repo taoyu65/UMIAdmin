@@ -10,10 +10,10 @@ class DateDataType extends DataTypeAbstract
         $validationString = $this->getValidation($validation);
 
         $html =<<<UMI
-        <input class="form-control" type="text" $property value='$data' $validationString id="datetimepicker">
+        <input class="form-control datetimepicker" type="text" $property value='$data' $validationString >
         <script>
             jQuery(function($) {
-                $('#datetimepicker').datetimepicker({
+                $('.datetimepicker').datetimepicker({
                     lang: 'en',
                     format:"Y-m-d H:i:s",
                     step:5,

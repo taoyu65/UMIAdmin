@@ -28,7 +28,7 @@ class umiTableAddController extends Controller
     public function add(Request $request, $tableName)
     {
         $model = new UmiModel($tableName);
-        $count = $model->insert($request->input(), true);
+        $count = $model->insert($request->input());
 
         if ($count) {
             Umi::showMessage(

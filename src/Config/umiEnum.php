@@ -118,8 +118,14 @@ return[
     #可填充数据字段
     #fields that can be filled
     'fillable'              => [
+        'umi_badges'                => [
+            'table_id', 'field', 'badge_name', 'class'
+        ],
         'umi_users'                 => [
             'name', 'email', 'password', 'remember_token'
+        ],
+        'umi_user_menu'             => [
+            'user_id', 'json'
         ],
         'umi_roles'                 => [
             'role_name', 'display_name'
@@ -144,6 +150,21 @@ return[
         ],
         'umi_permissions'           => [
             'table_id', 'key', 'display_name'
+        ],
+        'umi_permission_role'       => [
+            'permission_id', 'role_id'
+        ],
+        'search'                    => [
+            'search_tab_id', 'field', 'display_name', 'type', 'is_fuzzy'
+        ],
+        'search_tab'                => [
+            'table_id', 'tab_title', 'order'
+        ],
+        'umi_table_relation_operation'=> [
+            'rule_name', 'customer_rule_name', 'operation_type', 'active_table_id', 'active_table_field', 'response_table_id', 'response_table_field', 'check_value', 'check_operation', 'is_extra_operation', 'details'
+        ],
+        'umi_tables'                => [
+            'table_name', 'type'
         ]
     ]
 ];
