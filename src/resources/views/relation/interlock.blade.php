@@ -164,7 +164,7 @@
             <i class="fa fa-question-circle fa-lg popover-error red2" aria-hidden="true" data-rel="popover"
                data-trigger="hover" style="transform: translate(0,4px);" data-placement="auto right"
                title="Custom Rule"
-               data-content="Set the rule to match active field for deleting of records"></i>
+               data-content="Set the rule to match response field for deleting of records"></i>
         </div>
 
         <div id="advantage" hidden="hidden">

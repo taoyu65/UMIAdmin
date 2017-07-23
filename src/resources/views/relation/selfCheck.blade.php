@@ -58,7 +58,7 @@
                             Warning: The rule is only: active field compare with custom value
                         </span><br>
                         Operating current table (active table) only according the rule you make. The rule is checking current table itself <br>
-                        Before do a action (delete, edit, read, or add a record) the rule will be applied.<br>
+                        Before do a action (delete, edit a record) the rule will be applied.<br>
                         For example: there are items with the property of 1-5 stars in the table. You want to protect all the items which has 5 stars from deleting. So set the rule: active table - items, active field - stars, operation - "=", target value - "5"<br>
                     </p>
                 </div>

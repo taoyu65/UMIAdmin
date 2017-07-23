@@ -58,7 +58,7 @@
                             Warning: The rule is only: active field compare with response field or response field compare with custom value
                         </span><br>
                         Operating current table (active table) only according the rule you make. The rule is checking other tables <br>
-                        Before do a action (delete, edit, read, or add a record) the rule will be applied.<br>
+                        Before do a action (delete, edit a record) the rule will be applied.<br>
                         For example: there are user table and user's article table. If you want to delete a user then check article table to make sure no article belongs user.
                         you can set the rule, active table - user, active field - id, response table - article, response field - user_id.<br>
                         <span class="blue">

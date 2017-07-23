@@ -1,5 +1,5 @@
 {
-    "name": "taoyu/umi",
+    "name": "laravel/admin-UMI",
     "description": "umi is powerful laravel admin BREAD and RBAC system, just few minutes to click button and you will see the magic world",
     "keywords": ["laravel", "admin", "bread", "rbac" , "backend"],
     "license": "MIT",
