@@ -773,7 +773,7 @@ class umi_field_display_browser_seeder extends Seeder
                 'table_id'          => 14,
                 'field'             => 'user_id',
                 'type'              => 'foreignKey',
-                'relation_display'  => 'umi_users:name',
+                'relation_display'  => 'users:name',
                 'display_name'      => 'User Name',
                 'order'             => 1,
                 'is_showing'        => 1
@@ -803,7 +803,7 @@ class umi_field_display_browser_seeder extends Seeder
                 'table_id'          => 15,
                 'field'             => 'user_id',
                 'type'              => 'foreignKey',
-                'relation_display'  => 'umi_users:name',
+                'relation_display'  => 'users:name',
                 'display_name'      => 'User Name',
                 'order'             => 1,
                 'is_showing'        => 1

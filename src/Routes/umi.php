@@ -8,6 +8,7 @@
         return view('umi::login');
     }]);
     Route::post('submit', 'dashboardController@dashboard');
+    Route::post('signUp', 'dashboardController@register');
     Route::get('logout', 'dashboardController@getLogout');
 #------------------------------------------------------------------
 

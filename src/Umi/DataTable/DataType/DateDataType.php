@@ -18,7 +18,6 @@ class DateDataType extends DataTypeAbstract
                     format:"Y-m-d H:i:s",
                     step:5,
                     timepicker:true,
-                    mask:'9999-19-39 29:59',
                     todayButton:true
                 });
             });

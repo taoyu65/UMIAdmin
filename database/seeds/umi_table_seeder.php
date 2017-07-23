@@ -85,7 +85,7 @@ class umi_table_seeder extends Seeder
             ),
             array(
                 'id'    => 16,
-                'table_name'    => 'umi_users',
+                'table_name'    => 'users',
                 'type'          => 'umi'
             )
         ]);

@@ -117,6 +117,7 @@ class UmiModel
         $primaryKey = Config::get('umi.primary_key');
         $recordId = $input[$primaryKey];
         $fields = $this->filterFields($input);
+        $fields = $this->updateTimeStamp($fields);
 
         try {
             $count = DB::table($this->tableName)
@@ -130,13 +131,10 @@ class UmiModel
         return $count;
     }
 
-    public function insert($fieldsArr, $autoTimestamps = true)
+    public function insert($fieldsArr)
     {
         $fields = $this->filterFields($fieldsArr);
-        /*if ($autoTimestamps) {
-            $fields['created_at'] = date('Y-m-d h:i:s');
-            $fields['updated_at'] = date('Y-m-d h:i:s');
-        }*/
+        $fields = $this->createTimeStamp($fields);
 
         try {
             $count = DB::table($this->tableName)->insert($fields);
@@ -197,14 +195,35 @@ class UmiModel
             if (in_array($key, $filter))
                 $re[$key] = $fields[$key];
         });
-
-        if (in_array('created_at', array_keys($fields))) {
-            $re['created_at'] = $fields['created_at'];
-        }
-        if (in_array('updated_at', array_keys($fields))) {
-            $re['updated_at'] = $fields['updated_at'];
-        }
         return $re;
+    }
+
+    public function updateTimeStamp($fields)
+    {
+        if (isset($fields['updated_at'])) {
+            if ($fields['updated_at'] == '')
+                $fields['updated_at'] = date('Y-m-d H:i:s');
+        } else {
+            $filter = Config::get("umiEnum.fillable.$this->tableName");
+            if (in_array('updated_at', $filter))
+                $fields['updated_at'] = date('Y-m-d H:i:s');
+        }
+        return $fields;
+    }
+
+    public function createTimeStamp($fields)
+    {
+        if (isset($fields['created_at'])) {
+            if ($fields['created_at'] == '')
+                $fields['created_at'] = date('Y-m-d H:i:s');
+        } else {
+            $filter = Config::get("umiEnum.fillable.$this->tableName");
+            if (in_array('created_at', $filter)) {
+                $fields['created_at'] = date('Y-m-d H:i:s');
+                $fields['updated_at'] = date('Y-m-d H:i:s');
+            }
+        }
+        return $fields;
     }
 #endregion
 }

@@ -10,7 +10,7 @@ return[
     #originalTableName => changeableTableName
     'system_table_name'     => [
         'umi_table_relation_operation'  => 'umi_table_relation_operation',
-        'umi_users'                     => 'umi_users',
+        'umi_users'                     => 'users',
         'umi_roles'                     => 'umi_roles',
         'umi_permission_role'           => 'umi_permission_role',
         'umi_permissions'               => 'umi_permissions',
@@ -119,52 +119,52 @@ return[
     #fields that can be filled
     'fillable'              => [
         'umi_badges'                => [
-            'table_id', 'field', 'badge_name', 'class'
+            'table_id', 'field', 'badge_name', 'class', 'created_at', 'updated_at'
         ],
-        'umi_users'                 => [
-            'name', 'email', 'password', 'remember_token'
+        'users'                 => [
+            'name', 'email', 'password', 'remember_token', 'created_at', 'updated_at'
         ],
         'umi_user_menu'             => [
             'user_id', 'json'
         ],
         'umi_roles'                 => [
-            'role_name', 'display_name'
+            'role_name', 'display_name', 'created_at', 'updated_at'
         ],
         'umi_user_role'             => [
             'user_id', 'role_id'
         ],
         'umi_menus'                 => [
-            'menu_id', 'title', 'url', 'target', 'icon_class', 'order', 'extra_icon_html'
+            'menu_id', 'title', 'url', 'target', 'icon_class', 'order', 'extra_icon_html', 'created_at', 'updated_at'
         ],
         'umi_field_display_browser' => [
-            'table_id', 'field', 'type', 'relation_display', 'display_name', 'order', 'is_showing'
+            'table_id', 'field', 'type', 'relation_display', 'display_name', 'order', 'is_showing', 'created_at', 'updated_at'
         ],
         'umi_field_display_read'    => [
-            'table_id', 'field', 'type', 'relation_display', 'display_name', 'order', 'is_showing'
+            'table_id', 'field', 'type', 'relation_display', 'display_name', 'order', 'is_showing', 'created_at', 'updated_at'
         ],
         'umi_field_display_edit'    => [
-            'table_id', 'field', 'type', 'relation_display', 'custom_value', 'display_name', 'validation', 'details', 'order', 'is_editable'
+            'table_id', 'field', 'type', 'relation_display', 'custom_value', 'display_name', 'validation', 'details', 'order', 'is_editable', 'created_at', 'updated_at'
         ],
         'umi_field_display_add'     => [
-            'table_id', 'field', 'type', 'relation_display', 'custom_value', 'display_name', 'validation', 'details', 'order', 'is_editable'
+            'table_id', 'field', 'type', 'relation_display', 'custom_value', 'display_name', 'validation', 'details', 'order', 'is_editable', 'created_at', 'updated_at'
         ],
         'umi_permissions'           => [
-            'table_id', 'key', 'display_name'
+            'table_id', 'key', 'display_name', 'created_at', 'updated_at'
         ],
         'umi_permission_role'       => [
             'permission_id', 'role_id'
         ],
         'search'                    => [
-            'search_tab_id', 'field', 'display_name', 'type', 'is_fuzzy'
+            'search_tab_id', 'field', 'display_name', 'type', 'is_fuzzy', 'created_at', 'updated_at'
         ],
         'search_tab'                => [
-            'table_id', 'tab_title', 'order'
+            'table_id', 'tab_title', 'order', 'created_at', 'updated_at'
         ],
         'umi_table_relation_operation'=> [
-            'rule_name', 'customer_rule_name', 'operation_type', 'active_table_id', 'active_table_field', 'response_table_id', 'response_table_field', 'check_value', 'check_operation', 'is_extra_operation', 'details'
+            'rule_name', 'customer_rule_name', 'operation_type', 'active_table_id', 'active_table_field', 'response_table_id', 'response_table_field', 'check_value', 'check_operation', 'is_extra_operation', 'details', 'created_at', 'updated_at'
         ],
         'umi_tables'                => [
-            'table_name', 'type'
+            'table_name', 'type', 'created_at', 'updated_at'
         ]
     ]
 ];

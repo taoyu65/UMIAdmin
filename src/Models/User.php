@@ -11,7 +11,7 @@ class User extends Model
 {
     use BreadOperation;
 
-    protected $table = 'umi_users';
+    protected $table = 'users';
     public $timestamps = true;
 
     private $modelNameSpace = 'YM\Models';

@@ -30,7 +30,7 @@ class PopupWindowDataType extends DataTypeAbstract
         $url = url("selector/$relatedTable/$selectorProperty");
 
         $html = <<<UMI
-        <input $property $validationString type="text" class="form-control" readonly placeholder="Not editable, please select one" id="popupWindowInput">
+        <input $property $validationString value="$data" type="text" class="form-control" readonly placeholder="Not editable, please select one" id="popupWindowInput">
         <a href="#" id="popup">Click to Select</a>
         <script>
             var popupWindow = $('#popup').click(function () {

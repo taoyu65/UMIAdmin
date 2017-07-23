@@ -101,6 +101,16 @@
 @if(isset($error))
     {!! $error !!}
 @endif
+@if ($errors->has('password'))
+    <script>
+        alert('{{$errors->first('password')}}');
+    </script>
+@endif
+@if ($errors->has('email'))
+    <script>
+        alert('{{$errors->first('email')}}');
+    </script>
+@endif
 <div class="main-container">
     <div class="main-content">
         <div class="row">
@@ -135,17 +145,17 @@
                                         {!! csrf_field() !!}
                                         <fieldset>
                                             <label class="block clearfix">
-														<span class="block input-icon input-icon-right">
-															<input type="text" class="form-control" placeholder="Username" name="username" value="admin"/>
-															<i class="ace-icon fa fa-user"></i>
-														</span>
+                                                <span class="block input-icon input-icon-right">
+                                                    <input type="text" class="form-control" placeholder="Username" name="username" value="admin"/>
+                                                    <i class="ace-icon fa fa-user"></i>
+                                                </span>
                                             </label>
 
                                             <label class="block clearfix">
-											    <span class="block input-icon input-icon-right">
-												    <input type="password" class="form-control" placeholder="Password" id="password" name="password" value="123123"/>
-												    <i class="ace-icon fa fa-lock"></i>
-											    </span>
+                                                <span class="block input-icon input-icon-right">
+                                                    <input type="password" class="form-control" placeholder="Password" id="password" name="password" value="123123"/>
+                                                    <i class="ace-icon fa fa-lock"></i>
+                                                </span>
                                             </label>
 
                                             <div class="space"></div>
@@ -221,10 +231,10 @@
                                     <form>
                                         <fieldset>
                                             <label class="block clearfix">
-											    <span class="block input-icon input-icon-right">
-												    <input type="email" class="form-control" placeholder="Email" />
-												    <i class="ace-icon fa fa-envelope"></i>
-											    </span>
+                                                <span class="block input-icon input-icon-right">
+                                                    <input type="email" class="form-control" placeholder="Email" />
+                                                    <i class="ace-icon fa fa-envelope"></i>
+                                                </span>
                                             </label>
 
                                             <div class="clearfix">
@@ -257,42 +267,43 @@
                                     <div class="space-6"></div>
                                     <p> Enter your details to begin: </p>
 
-                                    <form>
+                                    <form method="post" action="{{url('signUp')}}" id="validation-form">
+                                        {{ csrf_field() }}
                                         <fieldset>
                                             <label class="block clearfix">
-											    <span class="block input-icon input-icon-right">
-												    <input type="email" class="form-control" placeholder="Email" />
-												    <i class="ace-icon fa fa-envelope"></i>
-											    </span>
+                                                <span class="block input-icon input-icon-right">
+                                                    <input name="email" type="email" class="form-control" placeholder="Email" required/>
+                                                    <i class="ace-icon fa fa-envelope"></i>
+                                                </span>
                                             </label>
 
                                             <label class="block clearfix">
                                                 <span class="block input-icon input-icon-right">
-                                                    <input type="text" class="form-control" placeholder="Username" />
-												    <i class="ace-icon fa fa-user"></i>
-											    </span>
+                                                    <input name="name" type="text" class="form-control" placeholder="Username" required/>
+                                                    <i class="ace-icon fa fa-user"></i>
+                                                </span>
                                             </label>
 
                                             <label class="block clearfix">
                                                 <span class="block input-icon input-icon-right">
-                                                    <input type="password" class="form-control" placeholder="Password" />
-													<i class="ace-icon fa fa-lock"></i>
-												</span>
+                                                    <input name="password" type="password" class="form-control" placeholder="Password" required/>
+                                                	<i class="ace-icon fa fa-lock"></i>
+                                                </span>
                                             </label>
 
                                             <label class="block clearfix">
-												<span class="block input-icon input-icon-right">
-												    <input type="password" class="form-control" placeholder="Repeat password" />
-													<i class="ace-icon fa fa-retweet"></i>
-												</span>
+                                                <span class="block input-icon input-icon-right">
+                                                    <input name="password_confirmation" type="password" class="form-control" placeholder="Repeat password" />
+                                                    <i class="ace-icon fa fa-retweet"></i>
+                                                </span>
                                             </label>
 
                                             <label class="block">
-                                                <input type="checkbox" class="ace" />
-												<span class="lbl">
-													I accept the
-													<a href="#">User Agreement</a>
-												</span>
+                                                <input type="checkbox" class="ace" required/>
+                                                <span class="lbl">
+                                                    I accept the
+                                                    <a href="#">User Agreement</a>
+                                                </span>
                                             </label>
 
                                             <div class="space-24"></div>
@@ -303,7 +314,7 @@
                                                     <span class="bigger-110">Reset</span>
                                                 </button>
 
-                                                <button type="button" class="width-65 pull-right btn btn-sm btn-success">
+                                                <button type="submit" class="width-65 pull-right btn btn-sm btn-success">
                                                     <span class="bigger-110">Register</span>
 
                                                     <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
@@ -344,10 +355,10 @@
 </div><!-- /.main-container -->
 <div style="text-align:center;">
     <p>Template From:
-            <span class="bigger-120">
-                <span class="blue bolder">Ace</span>
-				Application &copy; 2013-2014
-				</span>
+        <span class="bigger-120">
+            <span class="blue bolder">Ace</span>
+            Application &copy; 2013-2014
+        </span>
     </p>
 </div>
 <!-- basic scripts -->
@@ -388,6 +399,7 @@
 
 <!--[if IE]>
 <script src="{{$path}}/js/jquery-1.11.3.min.js"></script>
+<script src="{{$path}}/js/jquery.validate.min.js"></script>
 <![endif]-->
 <script type="text/javascript">
     if('ontouchstart' in document.documentElement) document.write("<script src='{{$path}}/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
@@ -431,6 +443,10 @@
         });
 
     });
+
+    jQuery(function ($) {
+        $("#validation-form").validate({errorClass: "red"});
+    })
 </script>
 </body>
 </html>

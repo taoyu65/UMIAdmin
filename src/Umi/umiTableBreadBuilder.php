@@ -88,7 +88,7 @@ UMI;
 
         $html =<<<UMI
         <div class="form-group">
-            <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="$name">$title</label>
+            <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="$name">$title</label>
             <div class="col-xs-12 col-sm-4">
                 <div class="clearfix">
                     <span >$input</span>
@@ -119,7 +119,7 @@ UMI;
 
         $html =<<<UMI
         <div class="form-group">
-            <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="$name">$title</label>
+            <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="$name">$title</label>
             <div class="col-xs-12 col-sm-4">
                 <div class="clearfix">
                     <span >$input</span>

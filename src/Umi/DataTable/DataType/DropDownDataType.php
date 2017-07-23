@@ -19,11 +19,12 @@ class DropDownDataType extends DataTypeAbstract
             #if down down box has custom value, then load this priority
             $placeholder = 'please select...';
             $options = DB::table($relatedTable)
+                ->orderBy('id', 'asc')
                 ->get()
                 ->pluck('id', $relatedField);
 
             foreach ($options as $text => $value) {
-                $selected = $text === $data ? 'selected' : '';
+                $selected = $value === $data ? 'selected' : '';
                 $optionHtml .= "<option value='$value' $selected>$text</option>";
             }
         } else if ($option['customValue'] != '') {
@@ -34,16 +35,16 @@ class DropDownDataType extends DataTypeAbstract
             $options = $custom->option;
 
             foreach ($options as $option) {
-                $selected = $option->text === $data ? 'selected' : '';
+                $selected = $option->value === $data ? 'selected' : '';
                 $optionHtml .= "<option value='$option->value' $selected>$option->text</option>";
             }
         }
 
         $html =<<<UMI
         <select class="input-medium form-control" $property $validationString>
-			<option value="">$placeholder</option>
-			$optionHtml
-	    </select>
+            <option value="">$placeholder</option>
+            $optionHtml
+        </select>
 UMI;
         return $html;
     }
