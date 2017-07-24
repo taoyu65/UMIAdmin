@@ -61,6 +61,22 @@ class UmiServiceProvider extends ServiceProvider
 
         $router->middleware('umi.TRelation.execute', TableRelationExecuteMiddleware::class);
 
+        #全局帮助文件
+        #helper
+        $this->registerHelpers();
+
+        #注册命令
+        #command
+        if ($this->app->runningInConsole()) {
+//todo-
+        }
     }
 
+    public function registerHelpers()
+    {
+        if (file_exists($file = __DIR__ . '/Helper/umiHelper.php'))
+        {
+            require_once($file);
+        }
+    }
 }

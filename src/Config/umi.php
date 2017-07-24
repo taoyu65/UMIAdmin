@@ -10,7 +10,7 @@ return [
     |
     */
 
-    'assets_path' => '/umi/UMIAdmin/src/resources/assets',
+    'assets_path' => '/umi/UMIAdmin_en/src/resources/assets',
 
     /*
     |--------------------------------------------------------------------------

@@ -35,23 +35,27 @@ class UmiRouteProvider extends ServiceProvider
     {
         parent::boot();
 
-        ###config
+        ##config
         $this->publishes([
             __DIR__ . '/Config/umi.php' => app()->basePath() . '/config/umi.php',
         ]);
+        $this->publishes([
+            __DIR__ . '/Config/umiEnum.php' => app()->basePath() . '/config/umiEnum.php',
+        ]);
 
-        ###views
+        ##views
         $this->loadViewsFrom(__DIR__ . '/resources/views', 'umi');
         $this->publishes([
             __DIR__ . '/resources/views' => resource_path('views')
         ]);
 
-        ###assets
+        ##assets
         $this->publishes([
-            __DIR__ . '/path/to/assets' => public_path('vendor/courier'),
-        ], 'public');
+            __DIR__ . '/resources/assets' => resource_path('assets'),
+        ]);
 
-        //$router->middleware('admin.user', AdminMiddleware::class);
+        ##migrate
+        $this->loadMigrationsFrom(__DIR__.'/path/to/migrations');
     }
 
     /**
@@ -80,7 +84,9 @@ class UmiRouteProvider extends ServiceProvider
             'middleware' => 'web',
             'namespace' => $this->namespace,
         ], function ($router) {
-            require base_path($this->umi_path . 'Routes/umi.php');
+            //if (! $this->app->routesAreCached()) {
+                require base_path($this->umi_path . 'Routes/umi.php');
+            //}
         });
     }
 

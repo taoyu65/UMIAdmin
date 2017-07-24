@@ -34,12 +34,14 @@ Route::get('/fields/noExist/{fieldTable}/{table}/{tableId}', function ($fieldTab
     return $re;
 });
 
-function getFields($table)
-{
-    return DB::table('information_schema.COLUMNS')
-        ->select('COLUMN_NAME')
-        ->where('TABLE_NAME', $table)
-        ->pluck('COLUMN_NAME');
+if (!function_exists('getFields')) {
+    function getFields($table)
+    {
+        return DB::table('information_schema.COLUMNS')
+            ->select('COLUMN_NAME')
+            ->where('TABLE_NAME', $table)
+            ->pluck('COLUMN_NAME');
+    }
 }
 
 #查看是否存在指定角色, 并且返回权限列表以固定格式 例如 (B1 = 表id为1的Browser权限)

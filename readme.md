@@ -46,7 +46,12 @@ Umi 是由laravel 5.3开发的全面的后台管理系统, 包括以下特性
 - 菜单定制: 左边栏菜单可以根据不同的用户显示不同的菜单, 属于权限的一部分, 但是仅仅是url链接级别的显示和隐藏. 配合RBAC发挥最大作用.菜单功能在数据库层面上分为, 菜单树 和 json菜单
     - 菜单树: 以树状形态显示所有的菜单, 只有超级管理用会从这个菜单树加载菜单(因为超级管理员拥有全部权限,不受RBAC控制, 需要看到所有菜单)
     - json菜单: 每一个用户分配一个json菜单, 以json形式存储, json数据是根据彩单树的数据整合而成.(不要和RBAC的用户角色权限混淆)
-    
+
+## 安装
+1. 安装composer 和 laravel 5.3 框架. 请自行安装,可以通过不同方式安装. 推荐composer方式 
+> 命令是 composer create-project --prefer-dist laravel/laravel blog 5.3.*
+2. >仍as扥
+
 ## 图片 
 ![](http://umiadmin.ccbuy.co/public/img/a.jpg)
 ![](http://umiadmin.ccbuy.co/public/img/b.jpg)
@@ -56,9 +61,7 @@ Umi 是由laravel 5.3开发的全面的后台管理系统, 包括以下特性
 ![](http://umiadmin.ccbuy.co/public/img/f.jpg)
 ![](http://umiadmin.ccbuy.co/public/img/g.jpg)
 ![](http://umiadmin.ccbuy.co/public/img/h.jpg)
-## 安装
 
-车轮还在建造中...
 
 
 ## License
