@@ -2,8 +2,8 @@
 
 @section('content')
 
-    <?php $assetPath = config('umi.assets_path') ?>
-    <?php $path = $assetPath . '/ace' ?>
+    <?php $assetPath = url(config('umi.assets_path')) ?>
+    <?php $path = url($assetPath . '/ace') ?>
 
     <div class="widget-box">
         <div class="widget-header widget-header-blue widget-header-flat">

@@ -5,8 +5,8 @@
     <meta charset="utf-8" />
     <title>Dashboard - UMI Admin</title>
 
-    <?php $assetPath = config('umi.assets_path') ?>
-    <?php $path = $assetPath . '/ace' ?>
+    <?php $assetPath = url(config('umi.assets_path')) ?>
+    <?php $path = url($assetPath . '/ace') ?>
 
     <meta name="description" content="overview &amp; stats" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
@@ -148,7 +148,7 @@
 
 <!-- basic scripts -->
 <script type="text/javascript">
-    if('ontou chstart' in document.documentElement) document.write("<script src='assets/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
+    if('ontou chstart' in document.documentElement) document.write("<script src='{{$path}}/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
 </script>
 <script src="{{$path}}/js/bootstrap.min.js"></script>
 

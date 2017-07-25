@@ -3,8 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <title></title>
-    <?php $assetPath = config('umi.assets_path') ?>
-    <?php $path = $assetPath . '/ace' ?>
+
+    <?php $assetPath = url(config('umi.assets_path')) ?>
+    <?php $path = url($assetPath . '/ace') ?>
+
     <link rel="stylesheet" href="{{$path}}/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style" />
     <link rel="stylesheet" href="{{$path}}/css/bootstrap.min.css" />
     <link rel="stylesheet" href="{{$path}}/font-awesome/4.5.0/css/font-awesome.min.css" />

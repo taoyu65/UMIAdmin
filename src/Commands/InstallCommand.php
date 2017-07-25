@@ -3,7 +3,6 @@
 namespace YM\Commands;
 
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Config;
 use Symfony\Component\Process\Process;
 use YM\Commands\Traits\executeSeed;
 use YM\umiAuth\umiAuthServiceProvider;

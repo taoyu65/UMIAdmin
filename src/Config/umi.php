@@ -5,12 +5,12 @@ return [
     |--------------------------------------------------------------------------
     | 资源路径 Assets Path
     |--------------------------------------------------------------------------
-    | 包括js css, images 等
-    | All the js, css, images files
+    | 所有资源将被发布到public下, 设置发布到public的子目录
+    | All the assets will publish to public folder, set up the sub-folder
     |
     */
 
-    'assets_path' => '/umi/UMIAdmin_en/src/resources/assets',
+    'assets_path' => 'umi',
 
     /*
     |--------------------------------------------------------------------------

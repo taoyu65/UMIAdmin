@@ -2,8 +2,8 @@
 
 @section('content')
 
-    <?php $assetPath = config('umi.assets_path') ?>
-    <?php $path = $assetPath . '/ace' ?>
+    <?php $assetPath = url(config('umi.assets_path')) ?>
+    <?php $path = url($assetPath . '/ace') ?>
 
     <h3 class="header smaller orange">Select a Role: <strong><span id="roleTitle" class="red roleTitle"></span></strong></h3>
     <form class="form-horizontal" id="updateSubmit" action="{{url('authority/wizardUpdate')}}" method="post">

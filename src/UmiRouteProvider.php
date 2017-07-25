@@ -3,7 +3,6 @@
 namespace YM;
 
 use Illuminate\Contracts\Foundation\Application;
-use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Support\Providers\RouteServiceProvider as ServiceProvider;
 

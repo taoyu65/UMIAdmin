@@ -2,8 +2,8 @@
 
 @section('content')
 
-    <?php $assetPath = config('umi.assets_path') ?>
-    <?php $path = $assetPath . '/ace' ?>
+    <?php $assetPath = url(config('umi.assets_path')) ?>
+    <?php $path = url($assetPath . '/ace') ?>
 
     <script src="{{$path}}/js/jquery-ui.min.js"></script>
 

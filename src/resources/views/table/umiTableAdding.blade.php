@@ -2,8 +2,8 @@
 
 @section('content')
 
-    <?php $assetPath = config('umi.assets_path') ?>
-    <?php $path = $assetPath . '/ace' ?>
+    <?php $assetPath = url(config('umi.assets_path')) ?>
+    <?php $path = url($assetPath . '/ace') ?>
 
     <link rel="stylesheet" href="{{$assetPath}}/bsSwitch/bsSwitch.css" />
 
@@ -22,15 +22,6 @@
     </div>
 
     <script>
-        $(document).ready(function () {
-            //单选框
-            //switch
-            $(".to-labelauty-icon").labelauty({
-                minimum_width: "120px",
-                same_width: true
-            });
-        });
-
         jQuery(function ($) {
             $('[data-rel=tooltip]').tooltip();
             $('[data-rel=popover]').popover({html:true});

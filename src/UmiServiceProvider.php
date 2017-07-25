@@ -89,7 +89,7 @@ class UmiServiceProvider extends ServiceProvider
         ]);
 
         $this->publishes([
-            __DIR__ . '/resources/assets' => resource_path('assets'),
+            __DIR__ . '/resources/assets' => public_path('umi'),
         ]);
 
         #注册命令
