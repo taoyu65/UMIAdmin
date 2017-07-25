@@ -62,7 +62,7 @@ class DashBoardController extends Controller
         if (Auth::attempt(['name' => $userName, 'password' => $password])) {
 
             #######################save ip information#######################
-            $ip = '98.176.248.193';//$_SERVER['REMOTE_ADDR'];
+            $ip = $_SERVER['REMOTE_ADDR'];
             $query = @unserialize(file_get_contents('http://ip-api.com/php/'.$ip));
             if($query && $query['status'] == 'success') {
                 $country = $query['country'];

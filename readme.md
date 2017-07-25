@@ -51,7 +51,7 @@ Umi 是由laravel 5.3开发的全面的后台管理系统, 包括以下特性
 1. 安装composer 和 laravel 5.3 框架. 请自行安装,可以通过不同方式安装. 推荐composer方式 
 > 执行命令 composer create-project --prefer-dist laravel/laravel blog 5.3.*
 2. 安装UMI Admin. 
->执行命令  composer require ym/umi v0.1.1
+>执行命令  composer require ym/umi "v0.1.2"
 3. 配置数据库连接文件(.env)
 >DB_HOST=localhost<br>
 >DB_DATABASE=新建一个空的数据库<br>
