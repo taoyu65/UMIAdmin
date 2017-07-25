@@ -23,29 +23,12 @@
     },
     "autoload": {
         "psr-4": {
-            "App\\": "app/",
             "YM\\": "src/"
         }
     },
     "autoload-dev": {
         "classmap": [
             "tests/TestCase.php"
-        ]
-    },
-    "scripts": {
-        "post-root-package-install": [
-            "php -r \"file_exists('.env') || copy('.env.example', '.env');\""
-        ],
-        "post-create-project-cmd": [
-            "php artisan key:generate"
-        ],
-        "post-install-cmd": [
-            "Illuminate\\Foundation\\ComposerScripts::postInstall",
-            "php artisan optimize"
-        ],
-        "post-update-cmd": [
-            "Illuminate\\Foundation\\ComposerScripts::postUpdate",
-            "php artisan optimize"
         ]
     },
     "config": {
