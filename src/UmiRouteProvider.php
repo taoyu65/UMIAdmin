@@ -18,12 +18,9 @@ class UmiRouteProvider extends ServiceProvider
      */
     protected $namespace = 'YM\Http\Controllers';
 
-    private $umi_path;
-
     public function __construct(Application $app)
     {
         parent::__construct($app);
-        $this->umi_path = Config::get('umi.umi_path');
     }
 
     /**
@@ -63,7 +60,7 @@ class UmiRouteProvider extends ServiceProvider
             'namespace' => $this->namespace,
         ], function ($router) {
             //if (! $this->app->routesAreCached()) {
-                require base_path($this->umi_path . 'Routes/umi.php');
+                require __DIR__ . '/Routes/umi.php';
             //}
         });
     }
@@ -82,7 +79,7 @@ class UmiRouteProvider extends ServiceProvider
             'namespace' => $this->namespace,
             'prefix' => 'api',
         ], function ($router) {
-            require base_path($this->umi_path . 'Routes/api.php');
+            require __DIR__ . '/Routes/api.php';
         });
     }
 }

@@ -21,7 +21,7 @@ class InstallCommand extends Command
     {
         parent::__construct();
 
-        $this->seederPath = Config::get('umi.umi_path') . '/Database/seeds/';
+        $this->seederPath = __DIR__ . '/../Database/seeds/';
     }
 
     public function fire()
