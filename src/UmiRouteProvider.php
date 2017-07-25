@@ -34,28 +34,6 @@ class UmiRouteProvider extends ServiceProvider
     public function boot()
     {
         parent::boot();
-
-        ##config
-        $this->publishes([
-            __DIR__ . '/Config/umi.php' => app()->basePath() . '/config/umi.php',
-        ]);
-        $this->publishes([
-            __DIR__ . '/Config/umiEnum.php' => app()->basePath() . '/config/umiEnum.php',
-        ]);
-
-        ##views
-        $this->loadViewsFrom(__DIR__ . '/resources/views', 'umi');
-        $this->publishes([
-            __DIR__ . '/resources/views' => resource_path('views')
-        ]);
-
-        ##assets
-        $this->publishes([
-            __DIR__ . '/resources/assets' => resource_path('assets'),
-        ]);
-
-        ##migrate
-        $this->loadMigrationsFrom(__DIR__.'/path/to/migrations');
     }
 
     /**

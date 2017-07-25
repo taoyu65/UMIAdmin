@@ -4,6 +4,7 @@ namespace YM;
 
 use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
+use YM\Commands\InstallCommand;
 use YM\Http\Middleware\TableRelationConfirmationMiddleware;
 use YM\Http\Middleware\TableRelationExecuteMiddleware;
 use YM\Http\Middleware\UmiUrlAuthMiddleware;
@@ -65,14 +66,42 @@ class UmiServiceProvider extends ServiceProvider
         #helper
         $this->registerHelpers();
 
+        #加载迁移文件
+        #load migrate
+        $this->loadMigrationsFrom(__DIR__ . '/Database/migrations');
+
+        #加载视图文件
+        #load view
+        $this->loadViewsFrom(__DIR__ . '/resources/views', 'umi');
+
+        #发布文件
+        #publish
+        $this->publishes([
+            __DIR__ . '/Config/umi.php' => app()->basePath() . '/config/umi.php',
+        ]);
+
+        $this->publishes([
+            __DIR__ . '/Config/umiEnum.php' => app()->basePath() . '/config/umiEnum.php',
+        ]);
+
+        $this->publishes([
+            __DIR__ . '/resources/views' => resource_path('views')
+        ]);
+
+        $this->publishes([
+            __DIR__ . '/resources/assets' => resource_path('assets'),
+        ]);
+
         #注册命令
         #command
         if ($this->app->runningInConsole()) {
-//todo-
+            $this->commands([
+                InstallCommand::class
+            ]);
         }
     }
 
-    public function registerHelpers()
+    private function registerHelpers()
     {
         if (file_exists($file = __DIR__ . '/Helper/umiHelper.php'))
         {
