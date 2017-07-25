@@ -3,7 +3,7 @@
 use Illuminate\Database\Seeder;
 use YM\Commands\Traits\executeSeed;
 
-class DatabaseSeeder extends Seeder
+class umiDatabaseSeeder extends Seeder
 {
     use executeSeed;
 

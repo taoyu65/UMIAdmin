@@ -45,7 +45,7 @@ class InstallCommand extends Command
 
             //seed
             $this->info('Seeding data into database');
-            $this->executeSeed('DatabaseSeeder');
+            $this->executeSeed('umiDatabaseSeeder');
         } catch (\Exception $exception) {
             $hasError = $exception->getMessage();
             $this->info('Something wrong when executing the database operation');
