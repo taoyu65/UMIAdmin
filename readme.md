@@ -51,12 +51,12 @@ Umi 是由laravel 5.3开发的全面的后台管理系统, 包括以下特性
 1. 安装composer 和 laravel 5.3 框架. 请自行安装,可以通过不同方式安装. 推荐composer方式 
 > 执行命令 composer create-project --prefer-dist laravel/laravel blog 5.3.*
 2. 安装UMI Admin. 
->执行命令  composer require ym/umi "v0.1.2.*"
->如果可以正常使用composer 执行上面命令的可以忽略这个段落， 如果不能正常使用composer的小伙伴可以按照以下流程操作
-> I. 下载最新的master版本或者最初可安装v0.1.2.2版本（点击branch然后点击tags选择v0.1.2.2，然后下载）
-> II. 解压并且将得到的src文件夹放到laravel框架的根目录
-> III. 修改根目录下的composer.json文件，添加 "YM\\": "src/" 到 psr-4 自动加载下。 
-> IV. 在执行完第4步的时候（也就是修改完了env文件 并且 添加完了服务提供者之后） 执行命令 composer dump-autoload， 然后再执行第5步 php artisan umi:install 之后就大工告成了
+>执行命令  composer require ym/umi "v0.1.2.*" <br>
+>如果可以正常使用composer 执行上面命令的可以忽略这个段落， 如果不能正常使用composer的小伙伴可以按照以下流程操作<br>
+> I. 下载最新的master版本或者最初可安装v0.1.2.2版本（点击branch然后点击tags选择v0.1.2.2，然后下载）<br>
+> II. 解压并且将得到的src文件夹放到laravel框架的根目录<br>
+> III. 修改根目录下的composer.json文件，添加 "YM\\": "src/" 到 psr-4 自动加载下。<br> 
+> IV. 在执行完第4步的时候（也就是修改完了env文件 并且 添加完了服务提供者之后） 执行命令 composer dump-autoload， 然后再执行第5步 php artisan umi:install 之后就大工告成了<br>
 
 3. 配置数据库连接文件(.env)
 >DB_HOST=localhost<br>
@@ -68,7 +68,7 @@ Umi 是由laravel 5.3开发的全面的后台管理系统, 包括以下特性
 >YM\umiAuth\umiAuthServiceProvider::class,
 5. 执行下面的命令, 用于安装应用程序
 >php artisan umi:install
-6. 好了. 可以开始了.
+6. 好了. 可以开始了.<br>
 注意：为了保证数据库迁移，数据库结构和一些必要的数据。 请在执行php artisan umi：install之前 保持数据库为空。如果要重新安装请手动清空数据库包括结构。
 
 
