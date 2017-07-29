@@ -2,24 +2,24 @@
 
 @section('content')
 
-    <?php $assetPath = url(config('umi.assets_path')) ?>
-    <?php $path = url($assetPath . '/ace') ?>
+    <?php $assetPath = config('umi.assets_path') ?>
+    <?php $path = $assetPath . '/ace' ?>
 
-    <h3 class="header smaller orange">Select a Role: <strong><span id="roleTitle" class="red roleTitle"></span></strong></h3>
+    <h3 class="header smaller orange">{{trans('umiTrans::rolePermission.selectRole')}}: <strong><span id="roleTitle" class="red roleTitle"></span></strong></h3>
     <form class="form-horizontal" id="updateSubmit" action="{{url('authority/wizardUpdate')}}" method="post">
         {!! csrf_field() !!}
         <div class="form-group has-success">
-            <label for="role_id" class="col-xs-12 col-sm-2 control-label no-padding-right">Role: </label>
+            <label for="role_id" class="col-xs-12 col-sm-2 control-label no-padding-right">{{trans('umiTrans::rolePermission.role')}} </label>
             <div class="col-xs-12 col-sm-5">
-                <select id="role_id" name="role_id" class="chosen-select form-control" data-placeholder="Select a Role" required>
-                    <option value="">Select a Role...</option>
+                <select id="role_id" name="role_id" class="chosen-select form-control" data-placeholder="{{trans('umiTrans::rolePermission.selectRole')}}" required>
+                    <option value="">{{trans('umiTrans::rolePermission.selectRole')}}...</option>
                     @foreach($roles as $id => $role)
                         <option value="{{$id}}">{{$role}}</option>
                     @endforeach
                 </select>
             </div>
             <div class="col-xs-12 col-xs-2">
-                <button class="btn btn-success btn-sm" type="button" id="addNewRole">Add New Role</button>
+                <button class="btn btn-success btn-sm" type="button" id="addNewRole">{{trans('umiTrans::rolePermission.addNewRole')}}</button>
             </div>
         </div>
         <input type="hidden" name="oldPermissions" id="oldPermissions">
@@ -34,7 +34,7 @@
         <div class="form-group has-success">
             <label for="role_id" class="col-xs-12 col-sm-2 control-label no-padding-right"></label>
             <div class="col-xs-12 col-sm-5">
-                <button class="btn btn-warning bolder" type="button" id="updateSubmitBtn">Update</button>
+                <button class="btn btn-warning bolder" type="button" id="updateSubmitBtn">{{trans('umiTrans::rolePermission.update')}}</button>
             </div>
         </div>
     </form>

@@ -7,10 +7,10 @@
 
     <div class="page-header">
         <h1>
-            Side Menu
+            {{trans('umiTrans::menu.sideMenu')}}
             <small>
                 <i class="ace-icon fa fa-angle-double-right"></i>
-                Distribution
+                {{trans('umiTrans::menu.distribution')}}
             </small>
         </h1>
     </div>
@@ -21,10 +21,9 @@
             </button>
             <strong>
                 <i class="ace-icon fa fa-check"></i>
-                Select a user first.
+                {{trans('umiTrans::menu.userFirst')}}.
             </strong>
-            Drag and Drop from right size menu tree to user tree rebuild a new user's menu!
-            If you want make a new Menu, Go to Side Menu->Management
+            {{trans('umiTrans::menu.tip1')}}
             </p>
         </div>
     </div>
@@ -33,26 +32,26 @@
         <div class="col-sm-6">
             <div class="col-sm-12">
                 <h3 class="header smaller lighter purple">
-                    User Tree
+                    {{trans('umiTrans::menu.userTree')}}
                 </h3>
             </div>
 
             <div class="col-sm-12">
                 <menu id="nestable-menu-user" class="nestable-menu-user">
                     <button type="button" data-action="select-user" class="btn btn-purple btn-sm btn-next" id="select-user">
-                        Select a user
+                        {{trans('umiTrans::menu.selectUser')}}
                         <i class="ace-icon fa fa-user-plus"></i>
                     </button>
                     <button type="button" data-action="expand-all" class="btn btn-primary btn-sm btn-next">
-                        Expand All
+                        {{trans('umiTrans::menu.expandAll')}}
                         <i class="ace-icon fa fa-expand"></i>
                     </button>
                     <button type="button" data-action="collapse-all" class="btn btn-primary btn-sm btn-next">
-                        Collapse All
+                        {{trans('umiTrans::menu.collapseAll')}}
                         <i class="ace-icon fa fa-compress"></i>
                     </button>
                     <button type="button" data-action="save" class="btn btn-success btn-sm btn-next" id="save-user">
-                        Update
+                        {{trans('umiTrans::menu.update')}}
                         <i class="ace-icon fa fa-arrow-up"></i>
                     </button>
                 </menu>
@@ -65,22 +64,22 @@
         <div class="col-sm-6">
             <div class="col-sm-12">
                 <h3 class="header smaller lighter red">
-                    Menu Tree
+                    {{trans('umiTrans::menu.menuTree')}}
                 </h3>
             </div>
 
             <div class="col-sm-12">
                 <menu id="nestable-menu" class="nestable-menu">
                     <button type="button" data-action="expand-all" class="btn btn-primary btn-sm btn-next">
-                        Expand All
+                        {{trans('umiTrans::menu.expandAll')}}
                         <i class="ace-icon fa fa-expand"></i>
                     </button>
                     <button type="button" data-action="collapse-all" class="btn btn-primary btn-sm btn-next">
-                        Collapse All
+                        {{trans('umiTrans::menu.collapseAll')}}
                         <i class="ace-icon fa fa-compress"></i>
                     </button>
                     <button type="button" data-action="refresh" class="btn btn-pink btn-sm btn-next">
-                        Reload
+                        {{trans('umiTrans::menu.reload')}}
                         <i class="ace-icon fa fa-refresh"></i>
                     </button>
                 </menu>

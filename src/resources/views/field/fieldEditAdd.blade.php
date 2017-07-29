@@ -9,10 +9,10 @@
 
     <div class="page-header">
         <h1>
-            Field
+            {{trans('umiTrans::field.field')}}
             <small>
                 <i class="ace-icon fa fa-angle-double-right"></i>
-                Field Display Management
+                {{trans('umiTrans::field.fieldDisplayManagement')}}
             </small>
         </h1>
     </div>
@@ -23,7 +23,7 @@
         <div class="">
             <div class="widget-box widget-color-{{$type==='edit'?'orange':'purple'}}">
                 <div class="widget-header">
-                    <h5 class="widget-title bigger lighter bolder">{{$type==='edit'?'Edit':'Add'}}</h5>
+                    <h5 class="widget-title bigger lighter bolder">{{$type==='edit'?trans('umiTrans::field.edit'):trans('umiTrans::field.add')}}</h5>
                 </div>
                 <form class="form-horizontal" id="validation-form" method="post" action="{{url('fieldDisplay')}}/{{$table}}/addType/{{$type}}">
                     {!! csrf_field() !!}
@@ -32,7 +32,7 @@
                             <div class="col-xs-12">
                                 <div class="space-2"></div>
                                 <div class="form-group">
-                                    <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="table_id">Select Table</label>
+                                    <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="table_id">{{trans('umiTrans::field.selectTable')}}</label>
                                     <div class="col-xs-12 col-sm-4">
                                         <div class="clearfix">
                                             <select class="form-control" id="tableName" name="table_id" required title="Please select a table">
@@ -46,15 +46,15 @@
                                     <div class="col-xs-12 col-sm-6">
                                         <button type="button" class="btn btn-sm btn-round btn-pink" id="quickAdd"
                                                 data-rel="tooltip" data-placement="bottom" title="Fill up all missing fields">
-                                            Quick Add
+                                            {{trans('umiTrans::field.quickAdd')}}
                                             <i class="fa fa-bolt"></i>
                                         </button>
                                         <button type="button" class="btn btn-sm btn-round btn-default btn-inverse" id="hideQuickAdd">
-                                            Hide Fields
+                                            {{trans('umiTrans::field.hideField')}}
                                             <i class="fa fa-eye-slash"></i>
                                         </button>
                                         <button type="button" class="btn btn-sm btn-round btn-light" id="showQuickAdd">
-                                            Show Fields
+                                            {{trans('umiTrans::field.showField')}}
                                             <i class="fa fa-eye"></i>
                                         </button>
                                     </div>
@@ -74,11 +74,11 @@
                                 @include('umi::common.fieldDisplay.fieldsDropDownBox')
 
                                 <div class="form-group">
-                                    <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="type">Data Type</label>
+                                    <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="type">{{trans('umiTrans::field.dataType')}}</label>
                                     <div class="col-xs-12 col-sm-4">
                                         <div class="clearfix">
                                             <select class="form-control" name="type" id="type" required>
-                                                <option value=''>Please select a Type</option>
+                                                <option value=''>{{trans('umiTrans::field.selectType')}}</option>
                                                 @foreach($showInputInterface as $key => $value)
                                                     <option value="{{$key}}"
                                                             showInputInterface="{{$value['showInputInterface']}}"
@@ -90,7 +90,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="relation_display">Relation Rule</label>
+                                    <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="relation_display">{{trans('umiTrans::field.relationRule')}}</label>
                                     <div class="col-xs-12 col-sm-4">
                                         <div class="clearfix">
                                             <input class="form-control" name="relation_display" id="relation_display" placeholder="tableName:fieldName">
@@ -99,7 +99,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="custom_value">Custom Value</label>
+                                    <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="custom_value">{{trans('umiTrans::field.customValue')}}</label>
                                     <div class="col-xs-12 col-sm-4">
                                         <div class="clearfix">
                                             <input class="form-control" name="custom_value" id="custom_value">
@@ -108,7 +108,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="display_name">Display Name</label>
+                                    <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="display_name">{{trans('umiTrans::field.displayName')}}</label>
                                     <div class="col-xs-12 col-sm-4">
                                         <div class="clearfix">
                                             <input class="form-control" name="display_name" id="display_name">
@@ -117,7 +117,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="details">Detail</label>
+                                    <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="details">{{trans('umiTrans::field.detail')}}</label>
                                     <div class="col-xs-12 col-sm-4">
                                         <div class="clearfix">
                                             <input class="form-control" name="details" id="details">
@@ -126,7 +126,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="validation">Validation</label>
+                                    <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="validation">{{trans('umiTrans::field.validation')}}</label>
                                     <div class="col-xs-12 col-sm-4">
                                         <div class="clearfix">
                                             <input class="form-control" name="validation" id="validation">
@@ -135,7 +135,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="order">Order</label>
+                                    <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="order">{{trans('umiTrans::field.order')}}</label>
                                     <div class="col-xs-12 col-sm-4">
                                         <div class="clearfix">
                                             <input class="form-control" name="order" id="order" number="true" value=0>
@@ -144,19 +144,19 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="is_editable">Is Editable</label>
+                                    <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="is_editable">{{trans('umiTrans::field.isEditable')}}</label>
                                     <div class="col-xs-12 col-sm-1">
-                                        <input class="to-labelauty-icon" type="radio" name="is_editable" data-labelauty="Edtiable" checked value="1"/>
+                                        <input class="to-labelauty-icon" type="radio" name="is_editable" data-labelauty="{{trans('umiTrans::field.show')}}" checked value="1"/>
                                     </div>
                                     <div class="col-xs-12 col-sm-1">
-                                        <input class="to-labelauty-icon" type="radio" name="is_editable" data-labelauty="Not Editable" value="0"/>
+                                        <input class="to-labelauty-icon" type="radio" name="is_editable" data-labelauty="{{trans('umiTrans::field.hide')}}" value="0"/>
                                     </div>
                                 </div>
 
                             </div>
                         </div>
                         <div>
-                            <button class="btn btn-block btn-sm btn-{{$type==='edit'?'warning':'purple'}} bolder" type="submit"><span class="bolder">Add Field</span></button>
+                            <button class="btn btn-block btn-sm btn-{{$type==='edit'?'warning':'purple'}} bolder" type="submit"><span class="bolder">{{trans('umiTrans::field.addField')}}</span></button>
                         </div>
                     </div>
                 </form>

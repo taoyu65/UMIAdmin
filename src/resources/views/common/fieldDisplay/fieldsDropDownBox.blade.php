@@ -1,9 +1,9 @@
 
 <div class="form-group">
-    <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="field">Table Field</label>
+    <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="field">{{trans('umiTrans::fieldDisplay.tableField')}}</label>
     <div class="col-xs-12 col-sm-4">
         <div class="clearfix">
-            <select class="form-control" id="field" name="field" required title="No more fields you can add, please select one to edit">
+            <select class="form-control" id="field" name="field" required title="{{trans('umiTrans::fieldDisplay.tip1')}}">
                 <option value=""></option>
             </select>
         </div>
@@ -11,7 +11,7 @@
     <i class="fa fa-question-circle fa-lg popover-info red" aria-hidden="true" data-rel="popover"
        data-trigger="hover" style="transform: translate(0,4px);" data-placement="auto right"
        title="Field"
-       data-content="Field: 'Id' must to be included, and will be automatic added when you create any field"></i>
+       data-content="{{trans('umiTrans::fieldDisplay.tip2')}}"></i>
 </div>
 
 <script>

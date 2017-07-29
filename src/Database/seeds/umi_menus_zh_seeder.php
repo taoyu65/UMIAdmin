@@ -3,7 +3,7 @@
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class umi_menus_seeder extends Seeder
+class umi_menus_zh_seeder extends Seeder
 {
     public function run()
     {
@@ -14,7 +14,7 @@ class umi_menus_seeder extends Seeder
             array(
                 'id'        => 1,
                 'menu_id'   => 0,
-                'title'     => 'Dashboard',
+                'title'     => '系统面板',
                 'url'       => 'dashboard',
                 'target'    => '_self',
                 'icon_class'=> 'fa-tachometer pink',
@@ -24,7 +24,7 @@ class umi_menus_seeder extends Seeder
             array(
                 'id'        => 2,
                 'menu_id'   => 0,
-                'title'     => 'Field Display',
+                'title'     => '字段设置(BREAD)',
                 'url'       => '#',
                 'target'    => '_self',
                 'icon_class'=> 'fa-desktop pink',
@@ -34,7 +34,7 @@ class umi_menus_seeder extends Seeder
             array(
                 'id'        => 3,
                 'menu_id'   => 0,
-                'title'     => 'Authority(BREAD)',
+                'title'     => '权限设置',
                 'url'       => '#',
                 'target'    => '_self',
                 'icon_class'=> 'fa-list-alt red',
@@ -44,7 +44,7 @@ class umi_menus_seeder extends Seeder
             array(
                 'id'        => 4,
                 'menu_id'   => 0,
-                'title'     => 'Side Menu',
+                'title'     => '菜单设置',
                 'url'       => '#',
                 'target'    => '_self',
                 'icon_class'=> 'fa-tree green',
@@ -54,7 +54,7 @@ class umi_menus_seeder extends Seeder
             array(
                 'id'        => 5,
                 'menu_id'   => 0,
-                'title'     => 'Table Relation',
+                'title'     => '数据关联',
                 'url'       => '#',
                 'target'    => '_self',
                 'icon_class'=> 'fa-list blue',
@@ -64,7 +64,7 @@ class umi_menus_seeder extends Seeder
             array(
                 'id'        => 6,
                 'menu_id'   => 0,
-                'title'     => 'Table',
+                'title'     => '数据操作',
                 'url'       => '#',
                 'target'    => '_self',
                 'icon_class'=> 'fa-pencil-square-o orange',
@@ -74,7 +74,7 @@ class umi_menus_seeder extends Seeder
             array(
                 'id'        => 7,
                 'menu_id'   => 0,
-                'title'     => 'Search',
+                'title'     => '搜索设置',
                 'url'       => '#',
                 'target'    => '_self',
                 'icon_class'=> 'fa-search green',
@@ -84,7 +84,7 @@ class umi_menus_seeder extends Seeder
             array(
                 'id'        => 8,
                 'menu_id'   => 0,
-                'title'     => 'Other',
+                'title'     => '其他设置',
                 'url'       => '#',
                 'target'    => '_self',
                 'icon_class'=> 'fa-coffee grey',
@@ -94,7 +94,7 @@ class umi_menus_seeder extends Seeder
             array(
                 'id'        => 9,
                 'menu_id'   => 2,
-                'title'     => 'When Browser',
+                'title'     => '当浏览时(Browser)',
                 'url'       => 'fieldDisplay/umi_field_display_browser/type/browser',
                 'target'    => '_self',
                 'icon_class'=> '',
@@ -104,7 +104,7 @@ class umi_menus_seeder extends Seeder
             array(
                 'id'        => 10,
                 'menu_id'   => 2,
-                'title'     => 'When Read',
+                'title'     => '当查阅时(Read)',
                 'url'       => 'fieldDisplay/umi_field_display_read/type/read',
                 'target'    => '_self',
                 'icon_class'=> '',
@@ -114,7 +114,7 @@ class umi_menus_seeder extends Seeder
             array(
                 'id'        => 11,
                 'menu_id'   => 2,
-                'title'     => 'When Edit',
+                'title'     => '当编辑时(Edit)',
                 'url'       => 'fieldDisplay/umi_field_display_edit/type/edit',
                 'target'    => '_self',
                 'icon_class'=> '',
@@ -124,7 +124,7 @@ class umi_menus_seeder extends Seeder
             array(
                 'id'        => 12,
                 'menu_id'   => 2,
-                'title'     => 'When Add',
+                'title'     => '当增加时(Add)',
                 'url'       => 'fieldDisplay/umi_field_display_add/type/add',
                 'target'    => '_self',
                 'icon_class'=> '',
@@ -134,7 +134,7 @@ class umi_menus_seeder extends Seeder
             array(
                 'id'        => 13,
                 'menu_id'   => 3,
-                'title'     => 'Role Management',
+                'title'     => '角色管理',
                 'url'       => 'umiTable/umi_roles',
                 'target'    => '_self',
                 'icon_class'=> '',
@@ -144,7 +144,7 @@ class umi_menus_seeder extends Seeder
             array(
                 'id'        => 14,
                 'menu_id'   => 3,
-                'title'     => 'Permission Management',
+                'title'     => '权限管理',
                 'url'       => 'umiTable/umi_permissions',
                 'target'    => '_self',
                 'icon_class'=> '',
@@ -154,7 +154,7 @@ class umi_menus_seeder extends Seeder
             array(
                 'id'        => 15,
                 'menu_id'   => 3,
-                'title'     => 'User-Role',
+                'title'     => '用户-角色',
                 'url'       => 'umiTable/umi_user_role',
                 'target'    => '_self',
                 'icon_class'=> '',
@@ -164,7 +164,7 @@ class umi_menus_seeder extends Seeder
             array(
                 'id'        => 16,
                 'menu_id'   => 3,
-                'title'     => 'Role-Permission',
+                'title'     => '角色-权限',
                 'url'       => 'authority/role-permission',
                 'target'    => '_self',
                 'icon_class'=> '',
@@ -174,7 +174,7 @@ class umi_menus_seeder extends Seeder
             array(
                 'id'        => 17,
                 'menu_id'   => 3,
-                'title'     => 'Distribute Wizard',
+                'title'     => '分配向导',
                 'url'       => 'authority/permission/wizard',
                 'target'    => '_self',
                 'icon_class'=> '',
@@ -184,7 +184,7 @@ class umi_menus_seeder extends Seeder
             array(
                 'id'        => 18,
                 'menu_id'   => 4,
-                'title'     => 'Management',
+                'title'     => '菜单管理',
                 'url'       => 'menuManagement/umi_menus',
                 'target'    => '_self',
                 'icon_class'=> '',
@@ -194,7 +194,7 @@ class umi_menus_seeder extends Seeder
             array(
                 'id'        => 19,
                 'menu_id'   => 4,
-                'title'     => 'Distribution',
+                'title'     => '分配菜单',
                 'url'       => 'menuManagement/umi_menus/distribution',
                 'target'    => '_self',
                 'icon_class'=> '',
@@ -204,7 +204,7 @@ class umi_menus_seeder extends Seeder
             array(
                 'id'        => 20,
                 'menu_id'   => 5,
-                'title'     => 'Show Relation',
+                'title'     => '显示关联',
                 'url'       => 'umiTable/umi_table_relation_operation',
                 'target'    => '_self',
                 'icon_class'=> '',
@@ -214,7 +214,7 @@ class umi_menus_seeder extends Seeder
             array(
                 'id'        => 21,
                 'menu_id'   => 5,
-                'title'     => 'Add Relation',
+                'title'     => '添加关联',
                 'url'       => 'relationOpe/adding',
                 'target'    => '_self',
                 'icon_class'=> '',
@@ -224,7 +224,7 @@ class umi_menus_seeder extends Seeder
             array(
                 'id'        => 22,
                 'menu_id'   => 6,
-                'title'     => 'All Tables',
+                'title'     => '所有表格',
                 'url'       => 'umiTable',
                 'target'    => '_self',
                 'icon_class'=> '',
@@ -234,7 +234,7 @@ class umi_menus_seeder extends Seeder
             array(
                 'id'        => 23,
                 'menu_id'   => 6,
-                'title'     => 'UMI Table',
+                'title'     => '系统表格(UMI)',
                 'url'       => '#',
                 'target'    => '_self',
                 'icon_class'=> '',
@@ -244,7 +244,7 @@ class umi_menus_seeder extends Seeder
             array(
                 'id'        => 24,
                 'menu_id'   => 6,
-                'title'     => 'Custom Table',
+                'title'     => '用户表格',
                 'url'       => '#',
                 'target'    => '_self',
                 'icon_class'=> '',
@@ -414,7 +414,7 @@ class umi_menus_seeder extends Seeder
             array(
                 'id'        => 41,
                 'menu_id'   => 7,
-                'title'     => 'Tab Management',
+                'title'     => '选项卡管理',
                 'url'       => 'umiTable/umi_search_tab',
                 'target'    => '_self',
                 'icon_class'=> '',
@@ -424,7 +424,7 @@ class umi_menus_seeder extends Seeder
             array(
                 'id'        => 42,
                 'menu_id'   => 7,
-                'title'     => 'Search Content',
+                'title'     => '搜索内容',
                 'url'       => 'umiTable/umi_search',
                 'target'    => '_self',
                 'icon_class'=> '',
@@ -434,7 +434,7 @@ class umi_menus_seeder extends Seeder
             array(
                 'id'        => 43,
                 'menu_id'   => 8,
-                'title'     => 'Table Management',
+                'title'     => '表格管理',
                 'url'       => 'umiTable/umi_tables',
                 'target'    => '_self',
                 'icon_class'=> '',
@@ -444,7 +444,7 @@ class umi_menus_seeder extends Seeder
             array(
                 'id'        => 44,
                 'menu_id'   => 8,
-                'title'     => 'Badge Management',
+                'title'     => '标记管理',
                 'url'       => 'umiTable/umi_badges',
                 'target'    => '_self',
                 'icon_class'=> '',
@@ -454,7 +454,7 @@ class umi_menus_seeder extends Seeder
             array(
                 'id'        => 45,
                 'menu_id'   => 8,
-                'title'     => 'User Management',
+                'title'     => '用户管理',
                 'url'       => 'umiTable/users',
                 'target'    => '_self',
                 'icon_class'=> '',

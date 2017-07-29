@@ -15,7 +15,7 @@
                 <button type="button" class="close" data-dismiss="alert">
                     <i class="ace-icon fa fa-times"></i>
                 </button>
-                {{$selector->tip or 'Please Click Row To Select'}}
+                {{$selector->tip or trans('umiTrans::selector.clickToSelect')}}
                 <br />
             </div>
 
@@ -28,7 +28,7 @@
                     <div id="tabs">
                         <ul>
                             <li>
-                                <a href="#tabs-1"><i class="fa fa-search"></i> Search</a>
+                                <a href="#tabs-1"><i class="fa fa-search"></i> {{trans('umiTrans.selector.search')}}</a>
                             </li>
                         </ul>
                         <div id="tabs-1">
@@ -38,9 +38,9 @@
                                 <input type="hidden" name="table" value="{{$table}}">
                                 <input type="hidden" name="field" value="{{$selector->searchField}}">
                                 <input type="hidden" name="selector" value="{{serialize($selector)}}">
-                                field: <input type="text" name="value">
-                                <button class="btn btn-info" type="submit">Search</button>
-                                <button class="btn btn-info" type="button" id="showAll">Show All</button>
+                                {{trans('umiTrans.selector.field')}}: <input type="text" name="value">
+                                <button class="btn btn-info" type="submit">{{trans('umiTrans.selector.search')}}</button>
+                                <button class="btn btn-info" type="button" id="showAll">{{trans('umiTrans.selector.showAll')}}</button>
                             </form>
                         </div>
                     </div>

@@ -18,7 +18,7 @@
             <ul class="dropdown-menu-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close">
                 <li class="dropdown-header">
                     <i class="ace-icon fa fa-check"></i>
-                    4 Tasks to complete
+                    {{trans('umiTrans::master.task')}}
                 </li>
 
                 <li class="dropdown-content">
@@ -26,7 +26,7 @@
                         <li>
                             <a href="#">
                                 <div class="clearfix">
-                                    <span class="pull-left">Software Update</span>
+                                    <span class="pull-left">{{trans('umiTrans::master.softwareUpdate')}}</span>
                                     <span class="pull-right">65%</span>
                                 </div>
 
@@ -39,7 +39,7 @@
                         <li>
                             <a href="#">
                                 <div class="clearfix">
-                                    <span class="pull-left">Hardware Upgrade</span>
+                                    <span class="pull-left">{{trans('umiTrans::master.hardwareUpdate')}}</span>
                                     <span class="pull-right">35%</span>
                                 </div>
 
@@ -52,7 +52,7 @@
                         <li>
                             <a href="#">
                                 <div class="clearfix">
-                                    <span class="pull-left">Unit Testing</span>
+                                    <span class="pull-left">{{trans('umiTrans::master.unitTesting')}}</span>
                                     <span class="pull-right">15%</span>
                                 </div>
 
@@ -65,7 +65,7 @@
                         <li>
                             <a href="#">
                                 <div class="clearfix">
-                                    <span class="pull-left">Bug Fixes</span>
+                                    <span class="pull-left">{{trans('umiTrans::master.bugFix')}}</span>
                                     <span class="pull-right">90%</span>
                                 </div>
 
@@ -79,7 +79,7 @@
 
                 <li class="dropdown-footer">
                     <a href="#">
-                        See tasks with details
+                        {{trans('umiTrans::master.taskDetail')}}
                         <i class="ace-icon fa fa-arrow-right"></i>
                     </a>
                 </li>
@@ -95,7 +95,7 @@
             <ul class="dropdown-menu-right dropdown-navbar navbar-pink dropdown-menu dropdown-caret dropdown-close">
                 <li class="dropdown-header">
                     <i class="ace-icon fa fa-exclamation-triangle"></i>
-                    8 Notifications
+                    {{trans('umiTrans::master.notification')}}
                 </li>
 
                 <li class="dropdown-content">
@@ -105,7 +105,7 @@
                                 <div class="clearfix">
                                     <span class="pull-left">
                                         <i class="btn btn-xs no-hover btn-pink fa fa-comment"></i>
-                                        New Comments
+                                        {{trans('umiTrans::master.newComment')}}
                                     </span>
                                     <span class="pull-right badge badge-info">+12</span>
                                 </div>
@@ -124,7 +124,7 @@
                                 <div class="clearfix">
                                     <span class="pull-left">
                                         <i class="btn btn-xs no-hover btn-success fa fa-shopping-cart"></i>
-                                        New Orders
+                                        {{trans('umiTrans::master.newOrder')}}
                                     </span>
                                     <span class="pull-right badge badge-success">+8</span>
                                 </div>
@@ -147,7 +147,7 @@
 
                 <li class="dropdown-footer">
                     <a href="#">
-                        See all notifications
+                        {{trans('umiTrans::master.allNotification')}}
                         <i class="ace-icon fa fa-arrow-right"></i>
                     </a>
                 </li>
@@ -163,7 +163,7 @@
             <ul class="dropdown-menu-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close">
                 <li class="dropdown-header">
                     <i class="ace-icon fa fa-envelope-o"></i>
-                    5 Messages
+                    {{trans('umiTrans::master.message')}}
                 </li>
 
                 <li class="dropdown-content">
@@ -252,7 +252,7 @@
 
                 <li class="dropdown-footer">
                     <a href="#">
-                        See all messages
+                        {{trans('umiTrans::master.allMessage')}}
                         <i class="ace-icon fa fa-arrow-right"></i>
                     </a>
                 </li>
@@ -263,7 +263,7 @@
             <a data-toggle="dropdown" href="#" class="dropdown-toggle">
                 <img class="nav-user-photo" src="{{$path}}/images/avatars/user.jpg" alt="{{$userName}}'s Photo" />
                 <span class="user-info">
-                    <small>Welcome,</small>
+                    <small>{{trans('umiTrans::master.welcome')}}</small>
                     {{$userName}}
                 </span>
 
@@ -274,14 +274,14 @@
                 <li>
                     <a href="#">
                         <i class="ace-icon fa fa-cog"></i>
-                        Settings
+                        {{trans('umiTrans::master.setting')}}
                     </a>
                 </li>
 
                 <li>
                     <a href="#">
                         <i class="ace-icon fa fa-user"></i>
-                        Profile
+                        {{trans('umiTrans::master.profile')}}
                     </a>
                 </li>
 
@@ -289,14 +289,14 @@
                 <li>
                     <a href="{{$refresh}}">
                         <i class="ace-icon fa fa-refresh"></i>
-                        refresh (Clean Cache)
+                        {{trans('umiTrans::master.refresh')}}
                     </a>
                 </li>
                 <li class="divider"></li>
                 <li>
                     <a href="{{$logout}}">
                         <i class="ace-icon fa fa-power-off"></i>
-                        Logout
+                        {{trans('umiTrans::master.logout')}}
                     </a>
                 </li>
             </ul>

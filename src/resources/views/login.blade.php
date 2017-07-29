@@ -163,12 +163,12 @@
                                             <div class="clearfix">
                                                 <label class="inline">
                                                     <input type="checkbox" class="ace" />
-                                                    <span class="lbl"> Remember Me</span>
+                                                    <span class="lbl"> {{trans('umiTrans::login.rememberPassword')}}</span>
                                                 </label>
 
                                                 <button type="submit" class="width-35 pull-right btn btn-sm btn-primary">
                                                     <i class="ace-icon fa fa-key"></i>
-                                                    <span class="bigger-110">Login</span>
+                                                    <span class="bigger-110">{{trans('umiTrans::login.login')}}</span>
                                                 </button>
                                             </div>
 
@@ -177,7 +177,7 @@
                                     </form>
 
                                     <div class="social-or-login center">
-                                        <span class="bigger-110">Or Login Using</span>
+                                        <span class="bigger-110">{{trans('umiTrans::login.otherWayLogin')}}</span>
                                     </div>
 
                                     <div class="space-6"></div>
@@ -201,13 +201,13 @@
                                     <div>
                                         <a href="#" data-target="#forgot-box" class="forgot-password-link">
                                             <i class="ace-icon fa fa-arrow-left"></i>
-                                            I forgot my password
+                                            {{trans('umiTrans::login.forget')}}
                                         </a>
                                     </div>
 
                                     <div>
                                         <a href="#" data-target="#signup-box" class="user-signup-link">
-                                            I want to register
+                                            {{trans('umiTrans::login.iWantRegister')}}
                                             <i class="ace-icon fa fa-arrow-right"></i>
                                         </a>
                                     </div>
@@ -220,19 +220,19 @@
                                 <div class="widget-main">
                                     <h4 class="header red lighter bigger">
                                         <i class="ace-icon fa fa-key"></i>
-                                        Retrieve Password
+                                        {{trans('umiTrans::login.retrievePassword')}}
                                     </h4>
 
                                     <div class="space-6"></div>
                                     <p>
-                                        Enter your email and to receive instructions
+                                        {{trans('umiTrans::login.tip')}}
                                     </p>
 
                                     <form>
                                         <fieldset>
                                             <label class="block clearfix">
                                                 <span class="block input-icon input-icon-right">
-                                                    <input type="email" class="form-control" placeholder="Email" />
+                                                    <input type="email" class="form-control" placeholder="{{trans('umiTrans::login.email')}}" />
                                                     <i class="ace-icon fa fa-envelope"></i>
                                                 </span>
                                             </label>
@@ -240,7 +240,7 @@
                                             <div class="clearfix">
                                                 <button type="button" class="width-35 pull-right btn btn-sm btn-danger">
                                                     <i class="ace-icon fa fa-lightbulb-o"></i>
-                                                    <span class="bigger-110">Send Me!</span>
+                                                    <span class="bigger-110">{{trans('umiTrans::login.send')}}</span>
                                                 </button>
                                             </div>
                                         </fieldset>
@@ -249,7 +249,7 @@
 
                                 <div class="toolbar center">
                                     <a href="#" data-target="#login-box" class="back-to-login-link">
-                                        Back to login
+                                        {{trans('umiTrans::login.back')}}
                                         <i class="ace-icon fa fa-arrow-right"></i>
                                     </a>
                                 </div>
@@ -261,39 +261,39 @@
                                 <div class="widget-main">
                                     <h4 class="header green lighter bigger">
                                         <i class="ace-icon fa fa-users blue"></i>
-                                        New User Registration
+                                        {{trans('umiTrans::login.newRegister')}}
                                     </h4>
 
                                     <div class="space-6"></div>
-                                    <p> Enter your details to begin: </p>
+                                    <p> {{trans('umiTrans::login.info')}} </p>
 
                                     <form method="post" action="{{url('signUp')}}" id="validation-form">
                                         {{ csrf_field() }}
                                         <fieldset>
                                             <label class="block clearfix">
                                                 <span class="block input-icon input-icon-right">
-                                                    <input name="email" type="email" class="form-control" placeholder="Email" required/>
+                                                    <input name="email" type="email" class="form-control" placeholder="{{trans('umiTrans::login.email')}}" required/>
                                                     <i class="ace-icon fa fa-envelope"></i>
                                                 </span>
                                             </label>
 
                                             <label class="block clearfix">
                                                 <span class="block input-icon input-icon-right">
-                                                    <input name="name" type="text" class="form-control" placeholder="Username" required/>
+                                                    <input name="name" type="text" class="form-control" placeholder="{{trans('umiTrans::login.user')}}" required/>
                                                     <i class="ace-icon fa fa-user"></i>
                                                 </span>
                                             </label>
 
                                             <label class="block clearfix">
                                                 <span class="block input-icon input-icon-right">
-                                                    <input name="password" type="password" class="form-control" placeholder="Password" required/>
+                                                    <input name="password" type="password" class="form-control" placeholder="{{trans('umiTrans::login.password')}}" required/>
                                                 	<i class="ace-icon fa fa-lock"></i>
                                                 </span>
                                             </label>
 
                                             <label class="block clearfix">
                                                 <span class="block input-icon input-icon-right">
-                                                    <input name="password_confirmation" type="password" class="form-control" placeholder="Repeat password" />
+                                                    <input name="password_confirmation" type="password" class="form-control" placeholder="{{trans('umiTrans::login.password2')}}" />
                                                     <i class="ace-icon fa fa-retweet"></i>
                                                 </span>
                                             </label>
@@ -301,8 +301,8 @@
                                             <label class="block">
                                                 <input type="checkbox" class="ace" required/>
                                                 <span class="lbl">
-                                                    I accept the
-                                                    <a href="#">User Agreement</a>
+                                                    {{trans('umiTrans::login.iAgree')}}
+                                                    <a href="#">{{trans('umiTrans::login.agreement')}}</a>
                                                 </span>
                                             </label>
 
@@ -311,11 +311,11 @@
                                             <div class="clearfix">
                                                 <button type="reset" class="width-30 pull-left btn btn-sm">
                                                     <i class="ace-icon fa fa-refresh"></i>
-                                                    <span class="bigger-110">Reset</span>
+                                                    <span class="bigger-110">{{trans('umiTrans::login.reset')}}</span>
                                                 </button>
 
                                                 <button type="submit" class="width-65 pull-right btn btn-sm btn-success">
-                                                    <span class="bigger-110">Register</span>
+                                                    <span class="bigger-110">{{trans('umiTrans::login.register')}}</span>
 
                                                     <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
                                                 </button>
@@ -327,7 +327,7 @@
                                 <div class="toolbar center">
                                     <a href="#" data-target="#login-box" class="back-to-login-link">
                                         <i class="ace-icon fa fa-arrow-left"></i>
-                                        Back to login
+                                        {{trans('umiTrans::login.backToLogin')}}
                                     </a>
                                 </div>
                             </div><!-- /.widget-body -->
@@ -337,15 +337,15 @@
                     <div class="navbar-fixed-top align-right">
                         <br />
                         &nbsp;
-                        <a id="btn-login-dark" href="#">Dark</a>
+                        <a id="btn-login-dark" href="#">{{trans('umiTrans::login.black')}}</a>
                         &nbsp;
                         <span class="blue">/</span>
                         &nbsp;
-                        <a id="btn-login-blur" href="#">Blur</a>
+                        <a id="btn-login-blur" href="#">{{trans('umiTrans::login.blue')}}</a>
                         &nbsp;
                         <span class="blue">/</span>
                         &nbsp;
-                        <a id="btn-login-light" href="#">Light</a>
+                        <a id="btn-login-light" href="#">{{trans('umiTrans::login.light')}}</a>
                         &nbsp; &nbsp; &nbsp;
                     </div>
                 </div>

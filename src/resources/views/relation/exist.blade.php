@@ -7,12 +7,12 @@
 
     <div class="page-header">
         <h1>
-            Relation Operation
+            {{trans('umiTrans::relation.relationOperation')}}
             <small>
                 <i class="ace-icon fa fa-angle-double-right"></i>
-                Select &amp; Add
+                {{trans('umiTrans::relation.selectAdd')}}
                 <i class="ace-icon fa fa-angle-double-right"></i>
-                Exist
+                {{trans('umiTrans::relation.exist')}}
             </small>
         </h1>
     </div>
@@ -25,10 +25,10 @@
         <p>
             <strong>
                 <i class="ace-icon fa fa-check"></i>
-                Hands Up!
+                {{trans('umiTrans::relation.handsUp')}}
             </strong>
-            You can turn off this function (relation operation) in config file.<br>
-            <span class="red2"><strong>Function Description: When the rule is matched, the action will be held</strong></span>
+            {{trans('umiTrans::relation.turnOff')}}<br>
+            <span class="red2"><strong>{{trans('umiTrans::relation.functionDescription2')}}</strong></span>
         </p>
     </div>
 
@@ -36,8 +36,8 @@
         <div class="widget-box">
             <div class="widget-header">
                 <h4 class="widget-title">
-                    Tooltips
-                    <small>Example of Exist Operation</small>
+                    {{trans('umiTrans::relation.tooltip')}}
+                    <small>{{trans('umiTrans::relation.exitOperation')}}</small>
                 </h4>
                 <div class="widget-toolbar">
                     <a href="#" data-action="collapse">
@@ -53,18 +53,7 @@
             <div class="widget-body">
                 <div class="widget-main">
                     <p class="muted">
-                        <span class="red">
-                            Warning: This function is not operating other tables only current active table will be operated come with the customized rule<br>
-                            Warning: The rule is only: active field compare with response field or response field compare with custom value
-                        </span><br>
-                        Operating current table (active table) only according the rule you make. The rule is checking other tables <br>
-                        Before do a action (delete, edit a record) the rule will be applied.<br>
-                        For example: there are user table and user's article table. If you want to delete a user then check article table to make sure no article belongs user.
-                        you can set the rule, active table - user, active field - id, response table - article, response field - user_id.<br>
-                        <span class="blue">
-                            Advantage: delete action will follow the rule you make (no long active field match response field). The rule such as
-                            when delete record from active table then all the records will be deleted base on response field match custom rule
-                        </span>
+                        {!! trans('umiTrans::relation.existExplain') !!}
                     </p>
                 </div>
             </div>
@@ -81,11 +70,11 @@
 
         {{--custom rule name--}}
         <div class="form-group">
-            <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="operationType">Action</label>
+            <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="operationType">{{trans('umiTrans::relation.action')}}</label>
             <div class="col-xs-12 col-sm-4">
                 <div class="clearfix">
                     <select class="form-control" id="operationType" name="operationType">
-                        <option value="">Please select an operation type</option>
+                        <option value="">{{trans('umiTrans::relation.operationType')}}</option>
                         <option value="edit">Edit</option>
                         <option value="delete">Delete</option>
                     </select>
@@ -94,7 +83,7 @@
             <i class="fa fa-question-circle fa-lg popover-info blue" aria-hidden="true" data-rel="popover"
                data-trigger="hover" style="transform: translate(0,4px);" data-placement="auto right"
                title="Operation Type"
-               data-content="What action will trigger the relation operation"></i>
+               data-content="{{trans('umiTrans::relation.actionInfo')}}"></i>
         </div>
 
         <div class="hr hr-dotted"></div>
@@ -102,9 +91,9 @@
 
         {{--active table--}}
         <div class="form-group">
-            <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="activeTable">Active Table</label>
+            <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="activeTable">{{trans('umiTrans::relation.activeTable')}}</label>
             <div class="col-xs-12 col-sm-4">
-                <select id="activeTable" name="activeTable" class="chosen-select form-control" data-placeholder="Click to Choose...">
+                <select id="activeTable" name="activeTable" class="chosen-select form-control" data-placeholder="{{trans('umiTrans::relation.choose')}}">
                     <option value="">&nbsp;</option>
                     @foreach($tableNames as $tableName => $tableId)
                         <option value="{{$tableId}}">{{$tableName}}</option>
@@ -114,24 +103,24 @@
             <i class="fa fa-question-circle fa-lg popover-info blue" aria-hidden="true" data-rel="popover"
                data-trigger="hover" style="transform: translate(0,4px);" data-placement="auto right"
                title="Active Table"
-               data-content="The record that you are going to operate from which table"></i>
+               data-content="{{trans('umiTrans::relation.activeTableInfo')}}"></i>
         </div>
 
         <div class="space-2"></div>
 
         <div class="form-group">
-            <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="responseTable">Active Field </label>
+            <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="responseTable">{{trans('umiTrans::relation.activeField')}} </label>
             <div class="col-xs-12 col-sm-4">
                 <div class="clearfix">
                     <select class="form-control" id="activeField" name="activeField">
-                        <option value="">select active table</option>
+                        <option value="">{{trans('umiTrans::relation.selectActiveTable')}}</option>
                     </select>
                 </div>
             </div>
             <i class="fa fa-question-circle fa-lg popover-info blue" aria-hidden="true" data-rel="popover"
                data-trigger="hover" style="transform: translate(0,4px);" data-placement="auto right"
                title="Active Field"
-               data-content="The record that you are going to operate from which table"></i>
+               data-content="{{trans('umiTrans::relation.activeFieldInfo')}}"></i>
         </div>
 
         <div class="hr hr-dotted"></div>
@@ -139,9 +128,9 @@
 
         {{--response table--}}
         <div class="form-group">
-            <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="responseTable">Response Table</label>
+            <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="responseTable">{{trans('umiTrans::relation.responseTable')}}</label>
             <div class="col-xs-12 col-sm-4">
-                <select id="responseTable" name="responseTable" class="chosen-select form-control" data-placeholder="Click to Choose...">
+                <select id="responseTable" name="responseTable" class="chosen-select form-control" data-placeholder="{{trans('umiTrans::relation.choose')}}">
                     <option value="">&nbsp;</option>
                     @foreach($tableNames as $tableName => $tableId)
                         <option value="{{$tableId}}">{{$tableName}}</option>
@@ -151,24 +140,24 @@
             <i class="fa fa-question-circle fa-lg popover-info blue" aria-hidden="true" data-rel="popover"
                data-trigger="hover" style="transform: translate(0,4px);" data-placement="auto right"
                title="Response Table"
-               data-content="Which table will be related by operating of active table's record"></i>
+               data-content="{{trans('umiTrans::relation.responseTableInfo')}}"></i>
         </div>
 
         <div class="space-2"></div>
 
         <div class="form-group">
-            <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="responseField">Response Field</label>
+            <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="responseField">{{trans('umiTrans::relation.responseField')}}</label>
             <div class="col-xs-12 col-sm-4">
                 <div class="clearfix">
                     <select class="form-control" id="responseField" name="responseField">
-                        <option value="">select response table</option>
+                        <option value="">{{trans('umiTrans::relation.selectResponseTable')}}</option>
                     </select>
                 </div>
             </div>
             <i class="fa fa-question-circle fa-lg popover-info blue" aria-hidden="true" data-rel="popover"
                data-trigger="hover" style="transform: translate(0,4px);" data-placement="auto right"
                title="Response Field"
-               data-content="This field will match active filed to achieve operation of relation"></i>
+               data-content="{{trans('umiTrans::relation.responseFieldInfo')}}"></i>
         </div>
 
         <div class="hr hr-dotted"></div>
@@ -176,7 +165,7 @@
 
         {{--advantage--}}
         <div class="form-group">
-            <label class="control-label col-xs-12 col-sm-1 no-padding-right blue" for="detail">Advantage</label>
+            <label class="control-label col-xs-12 col-sm-1 no-padding-right blue" for="detail">{{trans('umiTrans::relation.advantage')}}</label>
             <div class="col-xs-4">
                 <label>
                     <input name="advantageSwitch" id="advantageSwitch" class="ace ace-switch ace-switch-7" type="checkbox" />
@@ -186,7 +175,7 @@
             <i class="fa fa-question-circle fa-lg popover-error red2" aria-hidden="true" data-rel="popover"
                data-trigger="hover" style="transform: translate(0,4px);" data-placement="auto right"
                title="Custom Rule"
-               data-content="Set the rule to match active field for operation of records"></i>
+               data-content="{{trans('umiTrans::relation.advantageInfo')}}"></i>
         </div>
 
         <div id="advantage" hidden="hidden">
@@ -203,17 +192,17 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="targetValue">Target Value</label>
+                <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="targetValue">{{trans('umiTrans::relation.targetValue')}}</label>
                 <div class="col-xs-12 col-sm-4">
                     <div class="clearfix">
                         <input class="form-control" type="text" name="targetValue" id="targetValue" disabled="disabled"
-                               placeholder="This value will be matched to response field">
+                               placeholder="{{trans('umiTrans::relation.targetValuePh')}}">
                     </div>
                 </div>
                 <i class="fa fa-question-circle fa-lg popover-error red2" aria-hidden="true" data-rel="popover"
                    data-trigger="hover" style="transform: translate(0,4px);" data-placement="auto right"
                    title="Warning"
-                   data-content="Please set correct type of value to match response field. TRUE:1 FALSE:0"></i>
+                   data-content="{{trans('umiTrans::relation.targetValueInfo')}}"></i>
             </div>
         </div>
 
@@ -230,12 +219,12 @@
         <div class="space-8"></div>
 
         <button class="btn btn-success btn-sm btn-next" type="submit" id="submitBtn">
-            Add
+            {{trans('umiTrans::relation.add')}}
             <i class="ace-icon fa fa-plus"></i>
         </button>
         &nbsp;&nbsp;
         <button class="btn btn-primary btn-sm btn-next" type="button" id="back">
-            Back
+            {{trans('umiTrans::relation.back')}}
             <i class="ace-icon fa fa-arrow-left"></i>
         </button>
     </form>

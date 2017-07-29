@@ -10,16 +10,16 @@
     <div class="col-sm-12">
         <h3 class="header blue lighter smaller">
             <i class="ace-icon fa fa-gear smaller-90"></i>
-            Generate Popup Window Rules
+            {{trans('umiTrans::popupWindow.generateRule')}}
         </h3>
     </div>
 
     <form class="form-horizontal" method="post" action="">
         <div class="form-group">
-            <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="tableName">Table Name</label>
+            <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="tableName">{{trans('umiTrans::popupWindow.tableName')}}</label>
             <div class="col-xs-12 col-sm-4">
                 <select class="form-control" id="tableName" required>
-                    <option value="">Select a Table...</option>
+                    <option value="">{{trans('umiTrans::popupWindow.selectTable')}}</option>
                     @foreach($table as $item => $value)
                         <option value="{{$item}}">{{$item}}</option>
                     @endforeach
@@ -27,31 +27,31 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="returnField">Return Field</label>
+            <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="returnField">{{trans('umiTrans::popupWindow.returnField')}}</label>
             <div class="col-xs-12 col-sm-4">
                 <select class="form-control" id="returnField" name="returnField" required>
                 </select>
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="searchField">Search Field</label>
+            <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="searchField">{{trans('umiTrans::popupWindow.searchField')}}</label>
             <div class="col-xs-12 col-sm-4">
                 <select class="form-control" id="searchField" name="searchField" required>
                 </select>
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="showField">Show Field</label>
+            <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="showField">{{trans('umiTrans::popupWindow.showField')}}</label>
             <div class="col-xs-12 col-sm-4" id="showFieldParent">
-                <select multiple="" class="chosen-select form-control tag-input-style" id="showField" data-placeholder="Choose Fields...">
+                <select multiple="" class="chosen-select form-control tag-input-style" id="showField" data-placeholder="{{trans('umiTrans::popupWindow.chooseField')}}">
                 </select>
             </div>
         </div>
         <div class="form-group">
             <label class="control-label col-xs-12 col-sm-2 no-padding-right"></label>
             <div class="col-xs-12 col-sm-4">
-                <button type="button" class="btn btn-info" id="generate">Generate Role</button>
-                <button type="button" class="btn btn-grey" id="close">Close</button>
+                <button type="button" class="btn btn-info" id="generate">{{trans('umiTrans::popupWindow.generateRole')}}</button>
+                <button type="button" class="btn btn-grey" id="close">{{trans('umiTrans::popupWindow.close')}}</button>
             </div>
         </div>
     </form>

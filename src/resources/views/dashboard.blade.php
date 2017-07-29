@@ -9,7 +9,7 @@
             <i class="ace-icon fa fa-times"></i>
         </button>
         <i class="ace-icon fa fa-check green"></i>
-        Welcome to
+        {{trans('umiTrans::dashboard.welcome')}}
         <strong class="green">
             UMI Admin
             <small>(v0.1)</small>
@@ -17,14 +17,13 @@
         </strong>
     </div>
     <div class="well">
-        <h4 class="blue smaller lighter bolder">Super Administrator</h4>
-        This user is system user which has all permissions and not controlled by database. Please add a new user
-        and set up permissions as needed. <br>
-        Wizard:
-        <span class="label label-lg label-success arrowed-right"><a href="#" target="_blank" class="white">Create user</a></span>
-        <span class="label label-lg label-info arrowed-right"><a href="#" target="_blank" class="white">create/apply role</a></span>
-        <span class="label label-lg label-warning arrowed-right"><a href="#" target="_blank" class="white">set permissions</a></span>
-        <span class="label label-lg label-purple"><a href="#" target="_blank" class="white">set side menus</a></span>
+        <h4 class="blue smaller lighter bolder">{{trans('umiTrans::dashboard.admin')}}</h4>
+        {{trans('umiTrans::dashboard.info')}}<br><br>
+        {{trans('umiTrans::dashboard.wizard')}}
+        <span class="label label-lg label-success arrowed-right"><a href="#" target="_blank" class="white">{{trans('umiTrans::dashboard.createUser')}}</a></span>
+        <span class="label label-lg label-info arrowed-right"><a href="#" target="_blank" class="white">{{trans('umiTrans::dashboard.role')}}</a></span>
+        <span class="label label-lg label-warning arrowed-right"><a href="#" target="_blank" class="white">{{trans('umiTrans::dashboard.permission')}}</a></span>
+        <span class="label label-lg label-purple"><a href="#" target="_blank" class="white">{{trans('umiTrans::dashboard.sideMenu')}}</a></span>
     </div>
     <div class="row">
         <div class="col-sm-6">
@@ -32,7 +31,7 @@
                 <div class="widget-header widget-header-flat">
                     <h4 class="widget-title lighter">
                         <i class="ace-icon fa fa- orange"></i>
-                        People from whole world
+                        {{trans('umiTrans::dashboard.peopleFrom')}}
                     </h4>
 
                     <div class="widget-toolbar">
@@ -101,7 +100,7 @@
                 <div class="widget-header widget-header-flat">
                     <h4 class="widget-title lighter">
                         <i class="ace-icon fa fa- orange"></i>
-                        Visit Amount Monthly Chart
+                        {{trans('umiTrans::dashboard.chart')}}
                     </h4>
 
                     <div class="widget-toolbar">

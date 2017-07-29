@@ -1,6 +1,6 @@
 
 <div class="step-pane" data-step="3">
-    <h3 class="header smaller orange">Permissions of Role: <strong><span id="roleTitle" class="red roleTitle"></span></strong></h3>
+    <h3 class="header smaller orange">{{trans('umiTrans::permissionCheckBox.permissionOfRole')}} <strong><span id="roleTitle" class="red roleTitle"></span></strong></h3>
     <div class="alert alert-block alert-danger">
         <button type="button" class="close" data-dismiss="alert">
             <i class="ace-icon fa fa-times"></i>
@@ -8,20 +8,19 @@
         <p>
             <strong>
                 <i class="ace-icon fa fa-check"></i>
-                Important!
+                {{trans('umiTrans::permissionCheckBox.important')}}
             </strong>
-            This group of permissions are relate to the role: <span id="roleTitle" class="red roleTitle"></span>. <br>
-            It is not relate to the user. If any permission rule are changed, all the users who have this role will be affected
+            {!! trans('umiTrans::permissionCheckBox.tip') !!}
         </p>
     </div>
     <form class="form-horizontal">
         <div class="form-group has-warning">
-            <label for="inputWarning" class="col-xs-12 col-sm-2 control-label no-padding-right ">Table Name</label>
+            <label for="inputWarning" class="col-xs-12 col-sm-2 control-label no-padding-right ">{{trans('umiTrans::permissionCheckBox.tableName')}}</label>
             <div class="col-xs-12 col-sm-1">
-                <button class="btn btn-success btn-mini" type="button" id="selectAll">Select All</button>
+                <button class="btn btn-success btn-mini" type="button" id="selectAll">{{trans('umiTrans::permissionCheckBox.selectAll')}}</button>
             </div>
             <div class="col-xs-12 col-sm-1">
-                <button class="btn btn-danger btn-mini" type="button" id="invertAll">Select Invert</button>
+                <button class="btn btn-danger btn-mini" type="button" id="invertAll">{{trans('umiTrans::permissionCheckBox.invertSelection')}}</button>
             </div>
         </div>
     </form>
@@ -34,7 +33,7 @@
                         <label>
                             <input name="browser{{$table->id}}" class="ace ace-checkbox-2 permissionCheckBox" type="checkbox"
                                     {{in_array('browser' . $table->id, $permission) ? '' : 'disabled'}} />
-                            <span class="lbl">Browser</span>
+                            <span class="lbl"> {{trans('umiTrans::permissionCheckBox.browser')}}</span>
                         </label>
                     </div>
                 </div>
@@ -43,7 +42,7 @@
                         <label>
                             <input name="read{{$table->id}}" class="ace ace-checkbox-2 permissionCheckBox" type="checkbox"
                                     {{in_array('read' . $table->id, $permission) ? '' : 'disabled'}} />
-                            <span class="lbl"> Read</span>
+                            <span class="lbl"> {{trans('umiTrans::permissionCheckBox.read')}}</span>
                         </label>
                     </div>
                 </div>
@@ -52,7 +51,7 @@
                         <label>
                             <input name="edit{{$table->id}}" class="ace ace-checkbox-2 permissionCheckBox" type="checkbox"
                                     {{in_array('edit' . $table->id, $permission) ? '' : 'disabled'}} />
-                            <span class="lbl"> Edit</span>
+                            <span class="lbl"> {{trans('umiTrans::permissionCheckBox.edit')}}</span>
                         </label>
                     </div>
                 </div>
@@ -61,7 +60,7 @@
                         <label>
                             <input name="add{{$table->id}}" class="ace ace-checkbox-2 permissionCheckBox" type="checkbox"
                                     {{in_array('add' . $table->id, $permission) ? '' : 'disabled'}} />
-                            <span class="lbl"> Add</span>
+                            <span class="lbl"> {{trans('umiTrans::permissionCheckBox.add')}}</span>
                         </label>
                     </div>
                 </div>
@@ -70,7 +69,7 @@
                         <label>
                             <input name="delete{{$table->id}}" class="ace ace-checkbox-2 permissionCheckBox" type="checkbox"
                                     {{in_array('delete' . $table->id, $permission) ? '' : 'disabled'}} />
-                            <span class="lbl"> Delete</span>
+                            <span class="lbl"> {{trans('umiTrans::permissionCheckBox.delete')}}</span>
                         </label>
                     </div>
                 </div>
@@ -78,7 +77,7 @@
                     <div class="checkbox">
                         <label>
                             <input class="ace ace-checkbox-2" type="checkbox" onchange="checkAll(this);" />
-                            <span class="lbl"> All / Erase</span>
+                            <span class="lbl"> {{trans('umiTrans::permissionCheckBox.allErase')}}</span>
                         </label>
                     </div>
                 </div>

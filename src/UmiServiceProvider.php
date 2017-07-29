@@ -74,6 +74,10 @@ class UmiServiceProvider extends ServiceProvider
         #load view
         $this->loadViewsFrom(__DIR__ . '/resources/views', 'umi');
 
+        #加载语言文件
+        #load lang
+        $this->loadTranslationsFrom(__DIR__ . '/resources/lang', 'umiTrans');
+
         #发布文件
         #publish
         $this->publishes([
@@ -86,6 +90,10 @@ class UmiServiceProvider extends ServiceProvider
 
         $this->publishes([
             __DIR__ . '/resources/views' => resource_path('views')
+        ]);
+
+        $this->publishes([
+            __DIR__ . '/resources/lang' => resource_path('lang')
         ]);
 
         $this->publishes([

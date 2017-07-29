@@ -8,17 +8,17 @@
     <div class="col-sm-12">
         <h3 class="header blue lighter smaller">
             <i class="ace-icon fa fa-gear smaller-90"></i>
-            Generate Rules - {{isset($onlyShowRelationDisplay)&&$onlyShowRelationDisplay=='true'?'Foreign Key':'Drop Down Box'}}
+            {{trans('umiTrans::fieldDisplay.generateRule')}} - {{isset($onlyShowRelationDisplay)&&$onlyShowRelationDisplay=='true'?trans('umiTrans::fieldDisplay.foreignKey'):trans('umiTrans::fieldDisplay.dropDownBox')}}
         </h3>
 
         <div id="tabs">
             <ul>
                 <li>
-                    <a href="#tabs-1">Relation Display</a>
+                    <a href="#tabs-1">{{trans('umiTrans::fieldDisplay.relationDisplay')}}</a>
                 </li>
 
                 <li {{isset($onlyShowRelationDisplay)&&$onlyShowRelationDisplay=='true'?'hidden':''}}>
-                    <a href="#tabs-2">Custom Value</a>
+                    <a href="#tabs-2">{{trans('umiTrans::fieldDisplay.customValue')}}</a>
                 </li>
             </ul>
 
@@ -30,9 +30,9 @@
                     <p>
                         <strong>
                             <i class="ace-icon fa fa-check"></i>
-                            Hands Up!
+                            {{trans('umiTrans::fieldDisplay.handsUp')}}
                         </strong>
-                        Displaying a value that related another table's field to instead of original data. Rule<strong> must be: "TableName:FieldName"</strong>
+                        {!! trans('umiTrans::fieldDisplay.tip3') !!}
                     </p>
                 </div>
                 {{-- relation display --}}
@@ -40,15 +40,15 @@
                     <div class="">
                         <div class="widget-box widget-color-green">
                             <div class="widget-header">
-                                <h5 class="widget-title bigger lighter bolder">Rule maker</h5>
+                                <h5 class="widget-title bigger lighter bolder">{{trans('umiTrans::fieldDisplay.ruleMaker')}}</h5>
                             </div>
                             <form class="form-horizontal" id="validation-form" method="post" action="#">
                                 <div class="space-2"></div>
                                 <div class="form-group">
-                                    <label class="control-label col-sm-2 no-padding-right" for="table_id">Select Table</label>
+                                    <label class="control-label col-sm-2 no-padding-right" for="table_id">{{trans('umiTrans::fieldDisplay.selectTable')}}</label>
                                     <div class="col-sm-4">
                                         <div class="clearfix">
-                                            <select class="form-control" id="tableName" name="table_id" required title="Please select a table">
+                                            <select class="form-control" id="tableName" name="table_id" required title="{{trans('umiTrans::fieldDisplay.pleaseSelectTable')}}">
                                                 <option value=""></option>
                                                 @foreach($tableList as $item)
                                                     <option value="{{$item->id}}">{{$item->table_name}}</option>
@@ -60,7 +60,7 @@
 
                                 <div class="space-2"></div>
                                 <div class="form-group">
-                                    <label class="control-label col-sm-2 no-padding-right" for="field">Table Field</label>
+                                    <label class="control-label col-sm-2 no-padding-right" for="field">{{trans('umiTrans::fieldDisplay.tableField')}}</label>
                                     <div class="col-sm-4">
                                         <div class="clearfix">
                                             <select class="form-control" id="field" name="field" required>
@@ -76,12 +76,12 @@
                                     <div class="col-xs-12">
                                         <button class="btn btn-success" type="button" id="generate_relation">
                                             <i class="ace-icon fa fa-check bigger-110"></i>
-                                            Generate Rule
+                                            {{trans('umiTrans::fieldDisplay.generateRule')}}
                                         </button>
 
                                         <button class="btn" type="button" id="close_relation">
                                             <i class="ace-icon fa fa-times bigger-110"></i>
-                                            Close
+                                            {{trans('umiTrans::fieldDisplay.close')}}
                                         </button>
                                     </div>
                                 </div>
@@ -99,9 +99,9 @@
                     <p>
                         <strong>
                             <i class="ace-icon fa fa-check"></i>
-                            Hands Up!
+                            {{trans('umiTrans::fieldDisplay.handsUp')}}
                         </strong>
-                        Customize a json (normally) that contains values to generate a input interface for a data type<strong></strong>
+                        {{trans('umiTrans::fieldDisplay.tip4')}}
                     </p>
                 </div>
                 {{-- custom value --}}
@@ -109,28 +109,28 @@
                     <div class="">
                         <div class="widget-box widget-color-orange">
                             <div class="widget-header">
-                                <h5 class="widget-title bigger lighter bolder">Json maker</h5>
+                                <h5 class="widget-title bigger lighter bolder">{{trans('umiTrans::fieldDisplay.jsonMaker')}}</h5>
                             </div>
                             {{-- options table --}}
                             <form class="form-horizontal" id="validation-form" method="post" action="#">
                                 <div class="space-2"></div>
                                 <div class="form-group">
-                                    <label class="control-label col-sm-2 no-padding-right" for="ph">Place Holder</label>
+                                    <label class="control-label col-sm-2 no-padding-right" for="ph">{{trans('umiTrans::fieldDisplay.placeHolder')}}</label>
                                     <div class="col-sm-4">
                                         <div class="clearfix">
-                                            <input type="text" class="form-control" name="ph" id="ph" value="Please Select one...">
+                                            <input type="text" class="form-control" name="ph" id="ph" value="{{trans('umiTrans::fieldDisplay.pleaseSelectOne')}}">
                                         </div>
                                     </div>
                                 </div>
 
                                 <div class="form-group">
-                                    <label class="control-label col-sm-2 no-padding-right" for="ph">Option</label>
+                                    <label class="control-label col-sm-2 no-padding-right" for="ph">{{trans('umiTrans::fieldDisplay.option')}}</label>
                                     <div class="col-sm-4">
                                         <table class="table" id="table">
                                             <thead>
                                             <tr>
-                                                <th>value</th>
-                                                <th>text</th>
+                                                <th>{{trans('umiTrans::fieldDisplay.value')}}</th>
+                                                <th>{{trans('umiTrans::fieldDisplay.text')}}</th>
                                                 <th></th>
                                             </tr>
                                             </thead>
@@ -150,7 +150,7 @@
                                     <div class="col-xs-offset-2 col-xs-12">
                                         <button class="btn btn-success" type="button" id="add">
                                             <i class="fa fa-plus"></i>
-                                            Add Option
+                                            {{trans('umiTrans::fieldDisplay.addOption')}}
                                         </button>
                                     </div>
                                 </div>
@@ -159,12 +159,12 @@
                                     <div class="col-xs-12">
                                         <button class="btn btn-yellow" type="button" id="generate_customValue">
                                             <i class="ace-icon fa fa-check bigger-110"></i>
-                                            Generate Rule
+                                            {{trans('umiTrans::fieldDisplay.generateRule')}}
                                         </button>
 
                                         <button class="btn" type="button" id="close_generation">
                                             <i class="ace-icon fa fa-times bigger-110"></i>
-                                            Close
+                                            {{trans('umiTrans::fieldDisplay.close')}}
                                         </button>
                                     </div>
                                 </div>

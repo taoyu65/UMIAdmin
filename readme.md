@@ -46,12 +46,13 @@ Umi 是由laravel 5.3开发的全面的后台管理系统, 包括以下特性
 - 菜单定制: 左边栏菜单可以根据不同的用户显示不同的菜单, 属于权限的一部分, 但是仅仅是url链接级别的显示和隐藏. 配合RBAC发挥最大作用.菜单功能在数据库层面上分为, 菜单树 和 json菜单
     - 菜单树: 以树状形态显示所有的菜单, 只有超级管理用会从这个菜单树加载菜单(因为超级管理员拥有全部权限,不受RBAC控制, 需要看到所有菜单)
     - json菜单: 每一个用户分配一个json菜单, 以json形式存储, json数据是根据彩单树的数据整合而成.(不要和RBAC的用户角色权限混淆)
-
+    
 ## 安装
 1. 安装composer 和 laravel 5.3 框架. 请自行安装,可以通过不同方式安装. 推荐composer方式 
 > 执行命令 composer create-project --prefer-dist laravel/laravel blog 5.3.*
 2. 安装UMI Admin. 
->执行命令  composer require ym/umi "v0.1.2.*"
+>执行命令  composer require ym/umi "v0.1.2.*" <br>
+>如果可以正常使用composer 执行上面命令的可以忽略这个段落， 如果不能正常使用composer的小伙伴可以查看 https://github.com/taoyu65/UMIAdmin/wiki/install
 3. 配置数据库连接文件(.env)
 >DB_HOST=localhost<br>
 >DB_DATABASE=新建一个空的数据库<br>
@@ -61,9 +62,12 @@ Umi 是由laravel 5.3开发的全面的后台管理系统, 包括以下特性
 >YM\UmiServiceProvider::class,<br>
 >YM\umiAuth\umiAuthServiceProvider::class,
 5. 执行下面的命令, 用于安装应用程序
->php artisan umi:install
-6. 好了. 可以开始了.
+>php artisan umi:install (会提示选择安装数据库中数据的语言 1=汉语 2=英语) 输入1然后回车.
+>附:如果数据库已经安装完毕, 在想更改语言英语或汉语 仅需执行 php artisan umi:install --lang-zh-only(或 --lang-en-only) 
+6. 好了. 可以开始了.<br>
+注意：为了保证数据库迁移，数据库结构和一些必要的数据。 请在执行php artisan umi：install之前 保持数据库为空。如果要重新安装请手动清空数据库包括结构。
 
+    
 ## 图片 
 ![](http://umiadmin.ccbuy.co/public/img/a.jpg)
 ![](http://umiadmin.ccbuy.co/public/img/b.jpg)
@@ -73,8 +77,6 @@ Umi 是由laravel 5.3开发的全面的后台管理系统, 包括以下特性
 ![](http://umiadmin.ccbuy.co/public/img/f.jpg)
 ![](http://umiadmin.ccbuy.co/public/img/g.jpg)
 ![](http://umiadmin.ccbuy.co/public/img/h.jpg)
-
-
 
 ## License
 

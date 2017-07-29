@@ -7,7 +7,7 @@
 
     <div class="widget-box">
         <div class="widget-header widget-header-blue widget-header-flat">
-            <h4 class="widget-title lighter">Distribute Authority Wizard</h4>
+            <h4 class="widget-title lighter">{{trans('umiTrans::wizard.wizardTitle')}}</h4>
 
             <div class="widget-toolbar">
                 <label>
@@ -23,22 +23,22 @@
                         <ul class="steps">
                             <li data-step="1" class="active">
                                 <span class="step">1</span>
-                                <span class="title">Select User</span>
+                                <span class="title">{{trans('umiTrans::wizard.selectUser')}}</span>
                             </li>
 
                             <li data-step="2">
                                 <span class="step">2</span>
-                                <span class="title">Select Role</span>
+                                <span class="title">{{trans('umiTrans::wizard.selectRole')}}</span>
                             </li>
 
                             <li data-step="3">
                                 <span class="step">3</span>
-                                <span class="title">Distribute Permission</span>
+                                <span class="title">{{trans('umiTrans::wizard.distributePermission')}}</span>
                             </li>
 
                             <li data-step="4">
                                 <span class="step">4</span>
-                                <span class="title">Finish</span>
+                                <span class="title">{{trans('umiTrans::wizard.finish')}}</span>
                             </li>
                         </ul>
                     </div>
@@ -48,19 +48,19 @@
                     <div class="step-content pos-rel">
                         {{-- User --}}
                         <div class="step-pane active" data-step="1">
-                            <h3 class="header smaller lighter green">Select a User who you want to give permissions to</h3>
+                            <h3 class="header smaller lighter green">{{trans('umiTrans::wizard.givePermission')}}</h3>
                             <form class="form-horizontal">
                                 <div class="form-group has-success">
-                                    <label for="inputWarning" class="col-xs-12 col-sm-2 control-label no-padding-right">user name: </label>
+                                    <label for="inputWarning" class="col-xs-12 col-sm-2 control-label no-padding-right">{{trans('umiTrans::wizard.userName')}} </label>
                                     <div class="col-xs-12 col-sm-2">
                                         <span class="block input-icon input-icon-right">
                                             <div id="userStep">
                                                 <button data-toggle="dropdown" class="btn btn-success btn-sm dropdown-toggle" id="userBtn">
-                                                    Select a User
+                                                    {{trans('umiTrans::wizard.selectUser')}}
                                                     <span class="ace-icon fa fa-caret-down icon-on-right"></span>
                                                 </button>
                                                 <button data-toggle="dropdown" class="btn btn-success btn-sm dropdown-toggle" id="loadUserBtn" disabled="disabled" style="display: none">
-                                                    Loading...
+                                                    {{trans('umiTrans::wizard.loading')}}
                                                     <i class='ace-icon fa fa-spinner fa-spin white bigger-125'></i>
                                                 </button>
                                                 <ul class="dropdown-menu dropdown-success dropdown-menu-right">
@@ -80,7 +80,7 @@
                                     </div>
                                     <div class="col-xs-12 col-sm-2">
                                         <button class="btn btn-success btn-sm" id="userRefresh" type="button">
-                                            Refresh
+                                            {{trans('umiTrans::wizard.refresh')}}
                                             <i class="fa fa-refresh"></i>
                                         </button>
                                     </div>
@@ -94,21 +94,20 @@
                                             <i class="ace-icon fa fa-user"></i>
                                         </span>
                                     </div>
-                                    <div class="help-block col-xs-12 col-sm-reset inline"> Select a User </div>
+                                    <div class="help-block col-xs-12 col-sm-reset inline"> {{trans('umiTrans::wizard.selectUser')}} </div>
                                     <div class="col-xs-offset-2 col-xs-12 red" id="systemRole" hidden="hidden">
-                                        <strong>Important!!!</strong>
-                                        This user is system role which is controlled by hard-coding!
-                                        You still can set up but it's not going to work unless remove system role from config file
+                                        <strong>{{trans('umiTrans::wizard.important')}}</strong>
+                                        {{trans('umiTrans::wizard.tip1')}}
                                     </div>
                                 </div>
                             </form>
 
-                            <h3 class="header smaller lighter blue">More Action</h3>
+                            <h3 class="header smaller lighter blue">{{trans('umiTrans::wizard.moreAction')}}More Action</h3>
                             <form class="form-horizontal">
                                 <div class="form-group has-success">
                                     <label for="inputWarning" class="col-xs-12 col-sm-2 control-label no-padding-right"></label>
                                     <div class="col-xs-12 col-sm-5">
-                                        <button class="btn btn-info" type="button" id="createUserBtn">Create User</button>
+                                        <button class="btn btn-info" type="button" id="createUserBtn">{{trans('umiTrans::wizard.createUser')}}</button>
                                     </div>
                                 </div>
                             </form>
@@ -116,19 +115,19 @@
 
                         {{-- Role --}}
                         <div class="step-pane" data-step="2">
-                            <h3 class="header smaller lighter blue">Select a Role</h3>
+                            <h3 class="header smaller lighter blue">{{trans('umiTrans::wizard.selectRole')}}</h3>
                             <form class="form-horizontal">
                                 <div class="form-group has-info">
-                                    <label for="inputWarning" class="col-xs-12 col-sm-2 control-label no-padding-right">Role name: </label>
+                                    <label for="inputWarning" class="col-xs-12 col-sm-2 control-label no-padding-right">{{trans('umiTrans::wizard.roleName')}} </label>
                                     <div class="col-xs-12 col-sm-2">
                                         <span class="block input-icon input-icon-right">
                                             <div id="roleStep">
                                                 <button data-toggle="dropdown" class="btn btn-info btn-sm dropdown-toggle" disabled="disabled" id="loadRoleBtn">
-                                                    Loading...
+                                                    {{trans('umiTrans::wizard.loading')}}
                                                     <i class='ace-icon fa fa-spinner fa-spin white bigger-125'></i>
                                                 </button>
                                                 <button data-toggle="dropdown" class="btn btn-info btn-sm dropdown-toggle" id="roleBtn" style="display: none">
-                                                    Select Role
+                                                    {{trans('umiTrans::wizard.selectRole')}}
                                                     <span id='responseLoading' class='ace-icon fa fa-caret-down icon-on-right'></span>
                                                 </button>
 
@@ -139,7 +138,7 @@
                                     </div>
                                     <div class="col-xs-12 col-sm-2">
                                         <button class="btn btn-info btn-sm" id="roleRefresh" type="button">
-                                            Refresh
+                                            {{trans('umiTrans::wizard.refresh')}}
                                             <i class="fa fa-refresh"></i>
                                         </button>
                                     </div>
@@ -153,16 +152,16 @@
                                             <i class="ace-icon fa fa-users"></i>
                                         </span>
                                     </div>
-                                    <div class="help-block col-xs-12 col-sm-reset inline"> Select a Role </div>
+                                    <div class="help-block col-xs-12 col-sm-reset inline"> {{trans('umiTrans::wizard.selectRole')}} </div>
                                 </div>
                             </form>
 
-                            <h3 class="header smaller lighter orange2">More Action</h3>
+                            <h3 class="header smaller lighter orange2">{{trans('umiTrans::wizard.moreAction')}}</h3>
                             <form class="form-horizontal">
                                 <div class="form-group has-success">
                                     <label for="inputWarning" class="col-xs-12 col-sm-2 control-label no-padding-right"></label>
                                     <div class="col-xs-12 col-sm-5">
-                                        <button class="btn btn-yellow" type="button" id="createRoleBtn">Create Role</button>
+                                        <button class="btn btn-yellow" type="button" id="createRoleBtn">{{trans('umiTrans::wizard.createRole')}}</button>
                                     </div>
                                 </div>
                             </form>
@@ -174,7 +173,7 @@
                         {{-- Submit --}}
                         <div class="step-pane" data-step="4">
                             <div class="center">
-                                <h3 class="red">Warning!</h3>
+                                <h3 class="red">{{trans('umiTrans::wizard.warning')}}</h3>
                                 <div class="alert alert-block alert-danger">
                                     <button type="button" class="close" data-dismiss="alert">
                                         <i class="ace-icon fa fa-times"></i>
@@ -183,10 +182,9 @@
                                     <p>
                                         <strong>
                                             <i class="ace-icon fa fa-check"></i>
-                                            Hands Up!
+                                            {{trans('umiTrans::wizard.handsUp')}}
                                         </strong>
-                                        If you changed permissions, other users who has this role's permission will be changed as well. <br><br>
-                                        Click "finish" to continue.or go back to make a new role for this user.
+                                        {{trans('umiTrans::wizard.tip2')}}
                                     </p>
                                 </div>
                             </div>
@@ -197,11 +195,11 @@
                 <div class="wizard-actions">
                     <button class="btn btn-prev">
                         <i class="ace-icon fa fa-arrow-left"></i>
-                        Prev
+                        {{trans('umiTrans::wizard.prev')}}
                     </button>
 
                     <button class="btn btn-success btn-next" data-last="Finish">
-                        Next
+                        {{trans('umiTrans::wizard.next')}}
                         <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
                     </button>
                 </div>

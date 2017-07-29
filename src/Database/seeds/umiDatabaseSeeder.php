@@ -16,7 +16,7 @@ class umiDatabaseSeeder extends Seeder
 
     public function run()
     {
-        $this->executeSeed('umi_menus_seeder');
+        //$this->executeSeed('umi_menus_seeder');
         $this->executeSeed('umi_table_seeder');
         $this->executeSeed('umi_permissions_seeder');
         $this->executeSeed('umi_field_display_browser_seeder');

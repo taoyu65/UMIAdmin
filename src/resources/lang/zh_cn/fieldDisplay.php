@@ -1,0 +1,30 @@
+<?php
+
+return [
+    'tableField'        => 'tableFIeld',
+    'tip1'              => '没有字段可以被添加了, 可以选择一个编辑或者删除',
+    'tip2'              => '字段:id 必须被包含, 当你添加其他任何字段的时候id字段会被自动添加',
+    'browser'           => '浏览',
+    'read'              => '查阅',
+    'edit'              => '编辑',
+    'add'               => '添加',
+    'generateRule'      => '生成规则',
+    'foreignKey'        => '外键显示',
+    'dropDownBox'       => '下拉列表',
+    'relationDisplay'   => '关系显示',
+    'customValue'       => '自定义规则',
+    'handsUp'           => '提示',
+    'tip3'              => '根据设置规则,所显示的数据是对应的其他数据表的某个字段. 规则<strong> 必须是: "数据表名:要显示的字段名称"</strong>',
+    'ruleMaker'         => '规则制作器',
+    'selectTable'       => '选择数据表',
+    'pleaseSelectTable' => '请选择一个数据表...',
+    'close'             => '关闭',
+    'tip4'              => '自定义一个json(通常情况下), json包含一系列的键值对用于显示自定义的下拉列表.',
+    'jsonMaker'         => 'Json 制作器',
+    'placeHolder'       => 'Place Holder',
+    'pleaseSelectOne'   => '请选择一项...',
+    'option'            => '选项',
+    'value'             => '值',
+    'text'              => '文本',
+    'addOption'         => '增加选项'
+];

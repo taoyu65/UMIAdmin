@@ -1,0 +1,30 @@
+<?php
+
+return [
+    'tableField'        => 'Table Field',
+    'tip1'              => 'No more fields you can add, please select one to edit',
+    'tip2'              => 'Field: \'Id\' must to be included, and will be automatic added when you create any field',
+    'browser'           => 'Browser',
+    'read'              => 'Read',
+    'edit'              => 'Edit',
+    'add'               => 'Add',
+    'generateRule'      => 'Generate Rules',
+    'foreignKey'        => 'Foreign Key',
+    'dropDownBox'       => 'Drop Down Box',
+    'relationDisplay'   => 'Relation Display',
+    'customValue'       => 'Custom Value',
+    'handsUp'           => 'Hands Up',
+    'tip3'              => 'Displaying a value that related another table\'s field to instead of original data. Rule<strong> must be: "TableName:FieldName"</strong>',
+    'ruleMaker'         => 'Rule maker',
+    'selectTable'       => 'Select Table',
+    'pleaseSelectTable' => 'Please select a table',
+    'close'             => 'Close',
+    'tip4'              => 'Customize a json (normally) that contains values to generate a input interface for a data type',
+    'jsonMaker'         => 'Json maker',
+    'placeHolder'       => 'Place Holder',
+    'pleaseSelectOne'   => 'Please Select one...',
+    'option'            => 'Option',
+    'value'             => 'value',
+    'text'              => 'text',
+    'addOption'         => 'Add Option'
+];

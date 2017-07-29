@@ -10,12 +10,12 @@
             <div class="col-md-12">
                 <button class="btn btn-sm btn-info" type="submit" >
                     <i class="ace-icon fa fa-search bigger-110"></i>
-                    Search
+                    {{trans('umiTrans.search.search')}}
                 </button>
 
                 <button class="btn btn-sm" type="reset">
                     <i class="ace-icon fa fa-undo bigger-110"></i>
-                    Reset
+                    {{trans('umiTrans.search.resets')}}
                 </button>
             </div>
         </div>
