@@ -19,4 +19,5 @@ return [
     'profile'           => '个人档案',
     'refresh'           => '刷新 (清除缓存)',
     'logout'            => '登出',
+    'chooseLanguage'    => '选择语言'
 ];

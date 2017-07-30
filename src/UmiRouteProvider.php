@@ -55,7 +55,7 @@ class UmiRouteProvider extends ServiceProvider
     protected function mapWebRoutes()
     {
         Route::group([
-            'middleware' => 'web',
+            'middleware' => ['web', 'umi.language'],
             'namespace' => $this->namespace,
         ], function ($router) {
             //if (! $this->app->routesAreCached()) {

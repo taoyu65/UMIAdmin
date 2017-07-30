@@ -24,13 +24,14 @@ class umiMasterPageBuilder
 
     private function headHtml()
     {
-        $path = config('umi.assets_path') . '/ace';
+        $assetPath = config('umi.assets_path');
+        $path = $assetPath . '/ace';
         $userName = Auth::user()->name;
         $logout = url('logout');
         $refresh =  url('refresh') . '?u=' . base64_encode(URL::full());
 
         #region head of master page
-        $list = compact('path', 'userName', 'logout', 'refresh');
+        $list = compact('path', 'assetPath', 'userName', 'logout', 'refresh');
         return view('umi::common.master.masterPageHead', $list);
         #endregion
     }

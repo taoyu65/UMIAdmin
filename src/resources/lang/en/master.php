@@ -19,4 +19,5 @@ return [
     'profile'           => 'Profile',
     'refresh'           => 'refresh (Clean Cache)',
     'logout'            => 'Logout',
+    'chooseLanguage'    => 'Choose Language'
 ];

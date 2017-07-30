@@ -9,6 +9,43 @@
 
 <div class="navbar-buttons navbar-header pull-right" role="navigation">
     <ul class="nav ace-nav">
+        <li class="light-green dropdown-modal">
+            <a data-toggle="dropdown" class="dropdown-toggle" href="#">
+                <i class="ace-icon fa fa-globe"></i>
+                <span class="badge badge-danger">Lang</span>
+            </a>
+
+            <ul class="dropdown-menu-right dropdown-navbar dropdown-menu dropdown-caret dropdown-close">
+                <li class="dropdown-header">
+                    <i class="ace-icon fa fa-globe"></i>
+                    {{trans('umiTrans::master.chooseLanguage')}}
+                </li>
+
+                <li class="dropdown-content">
+                    <ul class="dropdown-menu dropdown-navbar">
+                        <li>
+                            <a href="{{url('setLanguage/zh_cn')}}">
+                                <div class="clearfix">
+                                    <span class="pull-left"><img src="{{$assetPath}}/images/zh_cn.png"></span>
+                                    <span class="pull-right">汉语</span>
+                                </div>
+                            </a>
+                        </li>
+
+                        <li>
+                            <a href="{{url('setLanguage/en')}}">
+                                <div class="clearfix">
+                                    <span class="pull-left"><img src="{{$assetPath}}/images/en.png"></span>
+                                    <span class="pull-right">English</span>
+                                </div>
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+
+            </ul>
+        </li>
+
         <li class="grey dropdown-modal">
             <a data-toggle="dropdown" class="dropdown-toggle" href="#">
                 <i class="ace-icon fa fa-tasks"></i>

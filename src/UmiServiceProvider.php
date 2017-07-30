@@ -5,6 +5,7 @@ namespace YM;
 use Illuminate\Routing\Router;
 use Illuminate\Support\ServiceProvider;
 use YM\Commands\InstallCommand;
+use YM\Http\Middleware\LanguageMiddleware;
 use YM\Http\Middleware\TableRelationConfirmationMiddleware;
 use YM\Http\Middleware\TableRelationExecuteMiddleware;
 use YM\Http\Middleware\UmiUrlAuthMiddleware;
@@ -61,6 +62,8 @@ class UmiServiceProvider extends ServiceProvider
         $router->middleware('umi.TRelation.confirmation', TableRelationConfirmationMiddleware::class);
 
         $router->middleware('umi.TRelation.execute', TableRelationExecuteMiddleware::class);
+
+        $router->middleware('umi.language', LanguageMiddleware::class);
 
         #全局帮助文件
         #helper

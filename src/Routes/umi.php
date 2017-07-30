@@ -23,6 +23,13 @@
     Route::post('selector/search', [
         'uses'      => 'commonController@search'
     ]);
+
+    //设置语言
+    //set language
+    Route::get('setLanguage/{lang}', function($lang){
+        session(['lang' => $lang]);
+        return redirect()->back();
+    });
 #------------------------------------------------------------------
 
 #main--------------------------------------------------------------
