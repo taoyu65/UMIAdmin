@@ -24,7 +24,7 @@ class umiMasterPageBuilder
 
     private function headHtml()
     {
-        $assetPath = config('umi.assets_path');
+        $assetPath = url(config('umi.assets_path'));
         $path = $assetPath . '/ace';
         $userName = Auth::user()->name;
         $logout = url('logout');
