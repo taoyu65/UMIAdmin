@@ -11,7 +11,7 @@ class umiAuthServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->publishes([
-            __DIR__ . '/Config/umiAuthConfig.php' => app()->basePath() . '/config/umiAuth.php',
+            __DIR__ . '/config/umiAuthConfig.php' => app()->basePath() . '/config/umiAuth.php',
         ]);
 
         $this->bladeTranslate();
@@ -20,7 +20,7 @@ class umiAuthServiceProvider extends ServiceProvider
     public function register()
     {
         $this->mergeConfigFrom(
-            __DIR__ . '/Config/umiAuthConfig.php', 'umiAuth'
+            __DIR__ . '/config/umiAuthConfig.php', 'umiAuth'
         );
 
         $this->app->singleton('umiAuth', function () {

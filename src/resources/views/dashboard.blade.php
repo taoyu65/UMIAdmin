@@ -71,8 +71,8 @@
                             @foreach($ips as $ip)
                             <tr>
                                 <td>{{$ip->user_name}}</td>
-                                <td>
-                                    <b class="green">{{$ip->ip}}</b>
+                                <td title="{{$ip->ip}}">
+                                    <b class="green">{{substr($ip->ip, 0, 19)}}</b>
                                 </td>
                                 <td class="hidden-480">
                                     <span class="label-light ">{{$ip->country}}</span>

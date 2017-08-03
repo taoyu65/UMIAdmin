@@ -17,7 +17,7 @@ class CreateIpTable extends Migration
         Schema::create('ip_info', function (Blueprint $table) {
             $table->increments('id');
             $table->string('user_name', 50);
-            $table->string('ip', 20);
+            $table->string('ip', 50);
             $table->string('country', 50);
             $table->string('region', 50);
             $table->string('city', 50);
