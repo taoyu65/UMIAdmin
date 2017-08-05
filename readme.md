@@ -69,14 +69,14 @@ Umi 是由laravel 5.3开发的全面的后台管理系统, 包括以下特性
 
     
 ## 图片 
-![](http://umiadmin.ccbuy.co/public/img/a.jpg)
-![](http://umiadmin.ccbuy.co/public/img/b.jpg)
-![](http://umiadmin.ccbuy.co/public/img/c.jpg)
-![](http://umiadmin.ccbuy.co/public/img/d.jpg)
-![](http://umiadmin.ccbuy.co/public/img/e.jpg)
-![](http://umiadmin.ccbuy.co/public/img/f.jpg)
-![](http://umiadmin.ccbuy.co/public/img/g.jpg)
-![](http://umiadmin.ccbuy.co/public/img/h.jpg)
+![](http://umi.laravelumi.com/public/img/a.jpg)
+![](http://umi.laravelumi.com/public/img/b.jpg)
+![](http://umi.laravelumi.com/public/img/c.jpg)
+![](http://umi.laravelumi.com/public/img/d.jpg)
+![](http://umi.laravelumi.com/public/img/e.jpg)
+![](http://umi.laravelumi.com/public/img/f.jpg)
+![](http://umi.laravelumi.com/public/img/g.jpg)
+![](http://umi.laravelumi.com/public/img/h.jpg)
 
 ## License
 

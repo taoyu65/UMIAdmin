@@ -20,7 +20,7 @@
         <h4 class="blue smaller lighter bolder">{{trans('umiTrans::dashboard.admin')}}</h4>
         {{trans('umiTrans::dashboard.info')}}<br><br>
         {{trans('umiTrans::dashboard.wizard')}}
-        <span class="label label-lg label-success arrowed-right"><a href="#" target="_blank" class="white">{{trans('umiTrans::dashboard.createUser')}}</a></span>
+        <span class="label label-lg label-success arrowed-right"><a href="#" class="white" id="wizardUser">{{trans('umiTrans::dashboard.createUser')}}</a></span>
         <span class="label label-lg label-info arrowed-right"><a href="#" target="_blank" class="white">{{trans('umiTrans::dashboard.role')}}</a></span>
         <span class="label label-lg label-warning arrowed-right"><a href="#" target="_blank" class="white">{{trans('umiTrans::dashboard.permission')}}</a></span>
         <span class="label label-lg label-purple"><a href="#" target="_blank" class="white">{{trans('umiTrans::dashboard.sideMenu')}}</a></span>
@@ -140,6 +140,20 @@
             options: {
 
             }
+        });
+
+        jQuery(function ($) {
+            $('#wizardUser').click(function () {
+                var url = "{{url('adding') . '/' . config('umiEnum.system_table_name.umi_users')}}";
+                layer.open({
+                    type: 2,
+                    title: 'Add User',
+                    maxmin: true,
+                    shadeClose: true,
+                    area: ['80%', '90%'],
+                    content: url
+                });
+            });
         });
     </script>
 @endsection

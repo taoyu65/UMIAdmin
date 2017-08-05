@@ -72,6 +72,9 @@ return[
             ],
             'popupWindow'   => [
                 'showInputInterface'=> true,
+            ],
+            'bcryptPassword'=> [
+                'showInputInterface'=> false,
             ]
         ]
     ],

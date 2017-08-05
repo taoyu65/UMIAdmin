@@ -73,3 +73,7 @@ Route::get('/checkRole/{roleName}', function ($roleName) {
         return '';
     }
 });
+
+Route::get('/generatePassword/{password}', function ($password) {
+    return bcrypt($password);
+});

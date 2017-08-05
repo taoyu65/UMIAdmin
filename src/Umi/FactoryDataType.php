@@ -3,6 +3,7 @@
 namespace YM\Umi;
 
 use YM\Umi\DataTable\DataType\BadgesDataType;
+use YM\Umi\DataTable\DataType\BcryptPasswordDataType;
 use YM\Umi\DataTable\DataType\CheckBoxDataType;
 use YM\Umi\DataTable\DataType\DateDataType;
 use YM\Umi\DataTable\DataType\DropDownDataType;
@@ -63,6 +64,8 @@ class FactoryDataType
                 return new KeyIcon();
             case 'popupWindow':
                 return new PopupWindowDataType();
+            case 'bcryptPassword':
+                return new BcryptPasswordDataType();
             default:
                 throw new \Exception("You have not set up this data type: $dataType");
         }
