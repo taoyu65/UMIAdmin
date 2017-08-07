@@ -9,8 +9,14 @@ return[
     #system table name (if modify following table name in the database, then following table name has to be changed same time)
     #originalTableName => changeableTableName
     'system_table_name'     => [
+        'umi_badges'                    => 'umi_badges',
+        'umi_search'                    => 'umi_search',
+        'umi_search_tab'                => 'umi_search_tab',
+        'umi_tables'                    => 'umi_tables',
+        'umi_user_menu'                 => 'umi_user_menu',
         'umi_table_relation_operation'  => 'umi_table_relation_operation',
         'umi_users'                     => 'users',
+        'umi_user_role'                 => 'umi_user_role',
         'umi_roles'                     => 'umi_roles',
         'umi_permission_role'           => 'umi_permission_role',
         'umi_permissions'               => 'umi_permissions',

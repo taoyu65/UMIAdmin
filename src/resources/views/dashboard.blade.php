@@ -21,9 +21,10 @@
         {{trans('umiTrans::dashboard.info')}}<br><br>
         {{trans('umiTrans::dashboard.wizard')}}
         <span class="label label-lg label-success arrowed-right"><a href="#" class="white" id="wizardUser">{{trans('umiTrans::dashboard.createUser')}}</a></span>
-        <span class="label label-lg label-info arrowed-right"><a href="#" target="_blank" class="white">{{trans('umiTrans::dashboard.role')}}</a></span>
-        <span class="label label-lg label-warning arrowed-right"><a href="#" target="_blank" class="white">{{trans('umiTrans::dashboard.permission')}}</a></span>
-        <span class="label label-lg label-purple"><a href="#" target="_blank" class="white">{{trans('umiTrans::dashboard.sideMenu')}}</a></span>
+        <span class="label label-lg label-info arrowed-right"><a href="#" class="white" id="wizardRole">{{trans('umiTrans::dashboard.role')}}</a></span>
+        <span class="label label-lg label-danger arrowed-right"><a href="#" class="white" id="wizardSetRole">{{trans('umiTrans::dashboard.setRole')}}</a></span>
+        <span class="label label-lg label-warning arrowed-right"><a href="{{route('rolePermission')}}" target="_blank" class="white">{{trans('umiTrans::dashboard.permission')}}</a></span>
+        <span class="label label-lg label-purple"><a href="{{url('menuManagement' . '/' . config('umiEnum.system_table_name.umi_menus') . '/distribution')}}" target="_blank" class="white">{{trans('umiTrans::dashboard.sideMenu')}}</a></span>
     </div>
     <div class="row">
         <div class="col-sm-6">
@@ -148,6 +149,30 @@
                 layer.open({
                     type: 2,
                     title: 'Add User',
+                    maxmin: true,
+                    shadeClose: true,
+                    area: ['80%', '90%'],
+                    content: url
+                });
+            });
+
+            $('#wizardRole').click(function () {
+                var url = "{{url('adding') . '/' . config('umiEnum.system_table_name.umi_roles')}}";
+                layer.open({
+                    type: 2,
+                    title: 'Add Role',
+                    maxmin: true,
+                    shadeClose: true,
+                    area: ['80%', '90%'],
+                    content: url
+                });
+            });
+
+            $('#wizardSetRole').click(function () {
+                var url = "{{url('adding') . '/' . config('umiEnum.system_table_name.umi_user_role')}}";
+                layer.open({
+                    type: 2,
+                    title: 'Set User\'s Role',
                     maxmin: true,
                     shadeClose: true,
                     area: ['80%', '90%'],
