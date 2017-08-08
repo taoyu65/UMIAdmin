@@ -61,10 +61,10 @@ class umiMenusBuilder
                 $html .= <<<UMI
                 <li class="$class">
                     <a href="$url" target="$menu->target" class="dropdown-toggle">
-			            <i class="menu-icon fa $menu->icon_class"></i>
-			            $rootMenu
-			            <b class="arrow fa fa-angle-down"></b>
-		            </a>
+                        <i class="menu-icon fa $menu->icon_class"></i>
+                        $rootMenu
+                        <b class="arrow fa fa-angle-down"></b>
+                    </a>
                     <b class="arrow"></b>
 UMI;
                 $html .= '<ul class="submenu">';
@@ -75,9 +75,9 @@ UMI;
                 $html .= <<<UMI
                 <li class="$class">
                     <a href="$url" target="$menu->target">
-			            <i class="menu-icon fa $menu->icon_class"></i>
-			        $rootMenu
-		            </a>
+                        <i class="menu-icon fa $menu->icon_class"></i>
+                        $rootMenu
+                    </a>
                     <b class="arrow"></b>
                 </li>
 UMI;
@@ -217,10 +217,10 @@ UMI;
                 $html .= <<<UMI
                 <li class='$class'>
                     <a href="$url" target="$objMenu->target" class="dropdown-toggle">
-			            <i class="menu-icon fa $objMenu->icon_class"></i>
-			            $rootMenu
-			            <b class="arrow fa fa-angle-down"></b>
-		            </a>
+                        <i class="menu-icon fa $objMenu->icon_class"></i>
+                            $rootMenu
+                        <b class="arrow fa fa-angle-down"></b>
+                    </a>
                     <b class="arrow"></b>
 UMI;
                 $html .= '<ul class="submenu">';
@@ -231,9 +231,9 @@ UMI;
                 $html .= <<<UMI
                 <li class='$class'>
                     <a href="$url" target="$objMenu->target">
-			            <i class="menu-icon fa $objMenu->icon_class"></i>
-			        $rootMenu
-		            </a>
+                        <i class="menu-icon fa $objMenu->icon_class"></i>
+                        $rootMenu
+                    </a>
                     <b class="arrow"></b>
                 </li>
 UMI;
@@ -250,12 +250,12 @@ UMI;
         $dashboard = route('dashboard');
         $html = <<<UMI
         <li class="" id="dashboard">
-		    <a href="$dashboard">
-			    <i class="menu-icon fa fa-tachometer"></i>
-				<span class="menu-text"> Dashboard </span>
-			</a>
+            <a href="$dashboard">
+                <i class="menu-icon fa fa-tachometer"></i>
+                <span class="menu-text"> Dashboard </span>
+            </a>
             <b class="arrow"></b>
-		</li>
+        </li>
 UMI;
         return $html;
     }
@@ -402,7 +402,8 @@ UMI;
         #add rule, the last parameter is: supply defaults value and its fields
         $parameterDefaultValue = YM::serializeAndBase64(array('menu_id' => $itemId));
         $addUrl = url('adding'). "/$this->tableName" . "/$parameterDefaultValue";
-        //todo  - need to finish add, browser, edit, still waiting for the main function and than make a link.
+        $readUrl = url('reading') . "/$this->tableName/$itemId";
+        $editUrl = url('editing') . "/$this->tableName/$itemId/$parameterField";
 
         $html = '<div class="pull-right action-buttons">';
 
@@ -423,7 +424,7 @@ UMI;
                         <i class="ace-icon fa fa-eye bigger-130"></i>
                       </a>';
         } else {
-            $html .= '<a class="orange" href="#">
+            $html .= '<a class="orange" href="#" onclick="showReading(\'' . $readUrl . '\')">
                         <i class="ace-icon fa fa-eye bigger-130"></i>
                       </a>';
         }
@@ -434,7 +435,7 @@ UMI;
                         <i class="ace-icon fa fa-pencil bigger-130"></i>
                       </a>';
         } else {
-            $html .= '<a class="blue" href="#">
+            $html .= '<a class="blue" href="#" onclick="showEditing(\'' . $editUrl . '\')">
                         <i class="ace-icon fa fa-pencil bigger-130"></i>
                       </a>';
         }
