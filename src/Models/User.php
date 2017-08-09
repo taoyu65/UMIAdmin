@@ -32,12 +32,13 @@ class User extends Model
     {
         $minute = Config::get('umi.cache_minutes');
         $json = Cache::remember('menuJson', $minute, function () {
-            return self::find(Auth::user()->id)
+            return $re = self::find(Auth::user()->id)
                 ->MenuJson()
-                ->firstOrFail()
-                ->json;
+                ->first();
+                //->firstOrFail()
+                //->json;
         });
-        return $json;
+        return $json ? $json->json : $json;
     }
 
     public function userNameList()

@@ -118,7 +118,8 @@ UMI;
         $json = $json === '' ? $this->menusJson() : $json;
 
         if (!is_string($json) || !is_array(json_decode($json)))
-            throw new Exception('loading Menus was failed');
+            //throw new Exception('loading Menus was failed');
+            return 'No menus or Loading menus was failed, Please set a user menus permission first!';
 
         $html = '';//$this->dashboard();
         try {
@@ -324,7 +325,8 @@ UMI;
     #show user's menu, reading from user's json, can be customized
     private function createUserTree($jsonArr)
     {
-        $html = '<ol class="dd-list">';
+        $emptyContainer = count($jsonArr) > 0 ? '' : 'dd-empty';
+        $html = "<ol class='dd-list $emptyContainer'>";
 
         foreach ($jsonArr as $item) {
             $record = $this->menus->getOneMenu($item->id);

@@ -13,10 +13,10 @@ class TRDeleteInterlock extends TROperationAbstract
 
     public function executeExtraOperation($activeTableName, $activeField, $currentFieldValue, $targetValue, $responseTableName, $responseField, $checkOperation = '=')
     {
-//        $count = DB::table($responseTableName)
-//            ->where($responseField, $checkOperation, $currentFieldValue)
-//            ->delete();
-        return 0;//$count;//todo - waiting for final test
+        $count = DB::table($responseTableName)
+            ->where($responseField, $checkOperation, $currentFieldValue)
+            ->delete();
+        return $count;
     }
 
     private function errMessage($activeTableName, $activeField, $currentFieldValue, $targetValue, $responseTableName, $responseField, $checkOperation)
