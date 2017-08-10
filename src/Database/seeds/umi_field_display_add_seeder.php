@@ -1039,7 +1039,7 @@ class umi_field_display_add_seeder extends Seeder
                 'id'                => 80,
                 'table_id'          => 16,
                 'field'             => 'password',
-                'type'              => 'textBox',
+                'type'              => 'bcryptPassword',
                 'relation_display'  => '',
                 'custom_value'      => '',
                 'display_name'      => '',

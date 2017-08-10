@@ -8,6 +8,7 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use YM\Models\User;
 
@@ -62,12 +63,12 @@ class DashBoardController extends Controller
         if (Auth::attempt(['name' => $userName, 'password' => $password])) {
 
             #######################save ip information#######################
-            $ip = $_SERVER['REMOTE_ADDR'];
-            $query = @unserialize(file_get_contents('http://ip-api.com/php/'.$ip));
-            if($query && $query['status'] == 'success') {
-                $country = $query['country'];
-                $region = $query['region'];
-                $city = $query['city'];
+            $ip = $_SERVER['REMOTE_ADDR'];//'98.176.248.193';//
+            $query = json_decode($this->curl_file_get_contents('http://ip-api.com/json/'.$ip));
+            if($query && $query->status == 'success') {
+                $country = $query->country;
+                $region = $query->region;
+                $city = $query->city;
                 $add = DB::table('ip_info')->insert([
                     'user_name' => $userName,
                     'ip'        => $ip,
@@ -104,5 +105,15 @@ class DashBoardController extends Controller
         $url = base64_decode($_REQUEST['u']);
         Cache::flush();
         return redirect($url);
+    }
+
+    public function curl_file_get_contents($url){
+        $ch = curl_init();
+        curl_setopt($ch, CURLOPT_URL, $url);
+        curl_setopt($ch, CURLOPT_TIMEOUT, 5);
+        curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+        $r = curl_exec($ch);
+        curl_close($ch);
+        return $r;
     }
 }
