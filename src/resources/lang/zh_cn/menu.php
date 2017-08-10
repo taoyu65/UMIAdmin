@@ -16,4 +16,6 @@ return [
     'tip2'              => '这是 <strong class="red">系统菜单</strong>, 如果你想管理用户菜单, 请进入 菜单设置中的 <strong>分配菜单</strong> 中设置',
     'reload'            => '重新加载',
     'save'              => '保存',
+    'warning'           => '警告:',
+    'superAdminWarning' => '是超级管理员, 超级管理员默认加载所有菜单, 但是依然可以对其进行菜单设置, 只有在取消它的超级管理员身份时才起作用'
 ];

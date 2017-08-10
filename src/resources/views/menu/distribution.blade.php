@@ -23,8 +23,9 @@
                 <i class="ace-icon fa fa-check"></i>
                 {{trans('umiTrans::menu.userFirst')}}.
             </strong>
-            {{trans('umiTrans::menu.tip1')}}
-            </p>
+            {{trans('umiTrans::menu.tip1')}} <br>
+            <span class="red"><strong>{{trans('umiTrans::menu.warning')}} </strong>"{{config('umi.system_role.super_admin')}}"
+                {{trans('umiTrans::menu.superAdminWarning')}}</span>
         </div>
     </div>
 

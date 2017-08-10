@@ -2,6 +2,9 @@
 
 namespace YM\Models;
 
+use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Facades\DB;
+
 class UserMenu extends UmiBase
 {
     use BreadOperation;
@@ -21,15 +24,22 @@ class UserMenu extends UmiBase
     public function userJsonMenu($userId)
     {
         if ($this->openCache) {
-            return $this->cachedTable
-                ->where('user_id', $userId)
-                ->first()
-                ->json;
+            $userMenu = $this->cachedTable->where('user_id', $userId)->first();
+        } else {
+            $userMenu = self::where('user_id', $userId)->first();
         }
 
-        return self::where('user_id', $userId)
-            ->first()
-            ->json;
+        if ($userMenu) {
+            return $userMenu->json;
+        } else {
+            DB::table($this->table)
+                ->insert([
+                    'user_id'   => $userId,
+                    'json'      => '[]'
+                ]);
+            Cache::pull($this->table);
+            return '[]';
+        }
     }
 
     public function updateUserMenu($userId, $json)

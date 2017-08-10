@@ -57,7 +57,7 @@
                 </thead>
                 <tbody>
                     @foreach($records as $record)
-                        <tr class="tr" onclick="parent.{{$selector->functionName}}($(this).find('#{{$selector->returnField}}').html())" >
+                        <tr class="tr" onclick="parent.{{$selector->functionName}}($(this).find('#{{$selector->returnField}}').html().trim())" >
                             @foreach($selector->fields as $item)
                                 <td>
                                     <span id="{{$item}}">
