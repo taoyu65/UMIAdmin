@@ -5,7 +5,7 @@
     <meta charset="utf-8" />
     <title>UMI admin - login page</title>
 
-    <?php $path = config('umi.assets_path') . '/ace' ?>
+    <?php $path = url(config('umi.assets_path')) . '/ace' ?>
 
     <meta name="description" content="User login page" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />

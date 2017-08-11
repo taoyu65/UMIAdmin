@@ -2,8 +2,8 @@
 
 @section('content')
 
-    <?php $assetPath = config('umi.assets_path') ?>
-    <?php $path = $assetPath . '/ace' ?>
+    <?php $assetPath = url(config('umi.assets_path')) ?>
+    <?php $path = url($assetPath . '/ace') ?>
 
     <h3 class="header smaller orange">{{trans('umiTrans::rolePermission.selectRole')}}: <strong><span id="roleTitle" class="red roleTitle"></span></strong></h3>
     <form class="form-horizontal" id="updateSubmit" action="{{url('authority/wizardUpdate')}}" method="post">
@@ -41,7 +41,7 @@
 
     <script src="{{$path}}/js/jquery.validate.min.js"></script>
 
-    <script>
+    <script type="text/javascript">
         $(document).ready(function () {
             //根据角色获取权限
             //get all permissions according to the role selected
@@ -102,14 +102,22 @@
                 });
                 $('#newPermissions').val(JSON.stringify(newPermission));
 
-                $('#updateSubmit').validate({errorClass: 'red'});
+                $("#updateSubmit").validate({errorClass: 'red'});
                 $('#updateSubmit').submit();
             });
 
             //增加一个新角色
             //add a new role
             $('#addNewRole').click(function () {
-
+                var url = "{{url('adding') . '/' . config('umiEnum.system_table_name.umi_roles')}}";
+                layer.open({
+                    type: 2,
+                    title: 'Add Role',
+                    maxmin: true,
+                    shadeClose: true,
+                    area: ['80%', '90%'],
+                    content: url
+                });
             });
         });
     </script>
