@@ -3,6 +3,7 @@
 namespace YM\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 
 class PermissionRole extends Model
@@ -37,8 +38,11 @@ class PermissionRole extends Model
             #删除权限
             #delete permissions
             DB::table($this->table)
+                ->where('role_id', $roleId)
                 ->whereIn('permission_id', $permissionDeleteIds)
                 ->delete();
         });
+
+        Cache::pull($this->table);
     }
 }

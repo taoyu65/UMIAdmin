@@ -184,7 +184,7 @@
                                             <i class="ace-icon fa fa-check"></i>
                                             {{trans('umiTrans::wizard.handsUp')}}
                                         </strong>
-                                        {{trans('umiTrans::wizard.tip2')}}
+                                        {!! trans('umiTrans::wizard.tip2') !!}
                                     </p>
                                 </div>
                             </div>

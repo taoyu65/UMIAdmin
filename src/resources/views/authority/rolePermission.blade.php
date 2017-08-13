@@ -54,8 +54,7 @@
                     shade: [0.6, '#000']
                 });
 
-                var roleName = $(this).find('option:selected').text();
-                var url = '{{url("/api/checkRole")}}' + '/' + roleName;
+                var url = '{{url("/api/checkRole")}}' + '/' + roleId;
                 $.ajax({
                     type: 'get',
                     url: url,

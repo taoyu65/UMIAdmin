@@ -28,6 +28,10 @@ class CreatePermissionsTable extends Migration
             $table->integer('permission_id')->unsigned();
             $table->integer('role_id')->unsigned();
         });
+
+        #生成view
+        #make view
+        DB::statement("create view view_role_permission as select `umi_permissions`.`id` AS `id`,`umi_permission_role`.`role_id` AS `role_id`, `umi_roles`.`role_name` AS `role_name`,concat(`umi_permissions`.`key`,`umi_permissions`.`table_id`) AS `permission` from ((`umi_permissions` join `umi_permission_role` on((`umi_permissions`.`id` = `umi_permission_role`.`permission_id`))) join `umi_roles` on((`umi_permission_role`.`role_id` = `umi_roles`.`id`)))");
     }
 
     /**
