@@ -1,4 +1,6 @@
-#UMI Admin RBAC 后台管理系统
+#UMI Admin RBAC 后台管理系统 
+
+> ```不同于其他后台管理, UMI Admin 可用于快速搭建后台 对于中小型后台甚至不用写任何代码``` 
 
 English (https://github.com/taoyu65/UMIAdmin/blob/master/readme_ch.md)
 

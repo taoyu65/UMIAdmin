@@ -8,7 +8,6 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 use YM\Models\User;
 
@@ -64,8 +63,10 @@ class DashBoardController extends Controller
 
             #######################save ip information#######################
             $ip = $_SERVER['REMOTE_ADDR'];//'98.176.248.193';//
-            $query = json_decode($this->curl_file_get_contents('http://ip-api.com/json/'.$ip));
-            if($query && $query->status == 'success') {
+            //$ip = file_get_contents('https://api.ipify.org');
+            //$query = json_decode(file_get_contents('http://ip-api.com/json/'.$ip));
+            $query = json_decode(file_get_contents("https://ipinfo.io/asdf/json"));
+            if(!isset($query->bogon) && !isset($query->error)) {
                 $country = $query->country;
                 $region = $query->region;
                 $city = $query->city;
