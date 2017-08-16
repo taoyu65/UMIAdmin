@@ -10,7 +10,17 @@ return [
     |
     */
 
-    'assets_path' => 'umi',
+    'assets_path' => 'umi/lte',
+
+    /*
+    |--------------------------------------------------------------------------
+    | 前端UI 大替换, 默认有 lte(admin-LTE) 和 ace(ACE). current_ui对应blade总文件夹名称
+    | front-end UI can be changed, now has lte(admin-LTE) and ace. UI name
+    | is same as the blade folder name
+    |--------------------------------------------------------------------------
+    */
+
+    'current_ui' => 'ace',
 
     /*
     |--------------------------------------------------------------------------

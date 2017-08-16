@@ -2,21 +2,22 @@
 
 namespace YM\Umi\DataTable;
 
-use YM\Umi\umiDataTableBuilder;
-use YM\Umi\umiSearchBuilder;
+use YM\Umi\FactoryUI;
 
 class SuperAdminDataTableWithSearch extends umiDataTableAbstract
 {
     private $umiDataTable;
+    private $factoryUI;
 
     public function __construct()
     {
-        $this->umiDataTable = new umiDataTableBuilder();
+        $this->factoryUI = new FactoryUI();
+        $this->umiDataTable = $this->factoryUI->dataTableUI();
     }
 
     public function search()
     {
-        $search = new umiSearchBuilder();
+        $search = $this->factoryUI->searchUI();
         return $search->searchHtml();
     }
 
