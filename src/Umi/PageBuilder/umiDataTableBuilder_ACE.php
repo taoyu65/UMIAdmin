@@ -8,10 +8,11 @@ use YM\Models\TableRelationOperation;
 use YM\Models\UmiModel;
 use YM\Facades\Umi as Ym;
 use YM\Umi\Admin\AdminStrategy;
+use YM\Umi\Contracts\PageBuilder\dataTableInterface;
 use YM\umiAuth\Facades\umiAuth;
 use YM\Umi\DataTable\DataType\DataTypeOperation;
 
-class umiDataTableBuilder_ACE
+class umiDataTableBuilder_ACE implements dataTableInterface
 {
     private $browser;
     private $read;
@@ -116,9 +117,6 @@ UMI;
         return $html;
     }
 
-    /**
-     * @return string
-     */
     public function tableBody()
     {
         #是否有权限浏览表格数据
@@ -257,18 +255,6 @@ UMI;
         return $html;
     }
 
-    public function getWhere()
-    {
-        if (\Request::isMethod('post')) {
-            #获取search_tab_id        #get search_tab_id
-            if (isset($_REQUEST['std'])) {
-                $search = new Search();
-                $searchList = $search->getSearchByTabId($_REQUEST['std'])->all();
-                return $searchList;
-            }
-        }
-    }
-
     public function tableFoot()
     {
         $html = <<< UMI
@@ -293,6 +279,18 @@ UMI;
         </div>
 UMI;
         return $html;
+    }
+
+    private function getWhere()
+    {
+        if (\Request::isMethod('post')) {
+            #获取search_tab_id        #get search_tab_id
+            if (isset($_REQUEST['std'])) {
+                $search = new Search();
+                $searchList = $search->getSearchByTabId($_REQUEST['std'])->all();
+                return $searchList;
+            }
+        }
     }
 
     /**

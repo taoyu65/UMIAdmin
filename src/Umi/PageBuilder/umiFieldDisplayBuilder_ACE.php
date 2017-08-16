@@ -4,8 +4,9 @@ namespace YM\Umi\PageBuilder;
 
 use YM\Models\UmiModel;
 use YM\Facades\Umi as Ym;
+use YM\Umi\Contracts\PageBuilder\fieldDisplayInterface;
 
-class umiFieldDisplayBuilder_ACE
+class umiFieldDisplayBuilder_ACE implements fieldDisplayInterface
 {
     public function showExistRecords($tableName, $tableId)
     {

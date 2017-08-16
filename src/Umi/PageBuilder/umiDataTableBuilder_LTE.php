@@ -8,10 +8,11 @@ use YM\Models\TableRelationOperation;
 use YM\Models\UmiModel;
 use YM\Facades\Umi as Ym;
 use YM\Umi\Admin\AdminStrategy;
+use YM\Umi\Contracts\PageBuilder\dataTableInterface;
 use YM\umiAuth\Facades\umiAuth;
 use YM\Umi\DataTable\DataType\DataTypeOperation;
 
-class umiDataTableBuilder_LTE
+class umiDataTableBuilder_LTE implements dataTableInterface
 {
     private $browser;
     private $read;

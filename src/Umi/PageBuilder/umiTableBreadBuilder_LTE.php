@@ -3,9 +3,10 @@
 namespace YM\Umi\PageBuilder;
 
 use YM\Facades\Umi as YM;
+use YM\Umi\Contracts\PageBuilder\tableBreadInterface;
 use YM\Umi\FactoryDataType;
 
-class umiTableBreadBuilder_LTE
+class umiTableBreadBuilder_LTE implements tableBreadInterface
 {
     private $dataTypeFactory;
 

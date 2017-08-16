@@ -7,8 +7,9 @@ use YM\Models\Menu;
 use Exception;
 use YM\Models\User;
 use YM\Facades\Umi as YM;
+use YM\Umi\Contracts\PageBuilder\menusInterface;
 
-class umiMenusBuilder_LTE
+class umiMenusBuilder_LTE implements menusInterface
 {
     private $menus;
 
@@ -280,7 +281,7 @@ UMI;
 
     #获取此用户的menu的json值
     #get this user's json of menu
-    public function menusJson()
+    private function menusJson()
     {
         $user = new User();
         return $user->menusJson();

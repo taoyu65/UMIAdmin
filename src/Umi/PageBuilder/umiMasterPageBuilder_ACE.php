@@ -4,8 +4,9 @@ namespace YM\Umi\PageBuilder;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\URL;
+use YM\Umi\Contracts\PageBuilder\masterPageInterface;
 
-class umiMasterPageBuilder_ACE
+class umiMasterPageBuilder_ACE implements masterPageInterface
 {
     public function masterPageHead()
     {

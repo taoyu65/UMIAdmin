@@ -4,8 +4,9 @@ namespace YM\Umi\PageBuilder;
 use YM\Models\Search;
 use YM\Models\SearchTab;
 use YM\Facades\Umi as Ym;
+use YM\Umi\Contracts\PageBuilder\searchInterface;
 
-class umiSearchBuilder_ACE
+class umiSearchBuilder_ACE implements searchInterface
 {
     private $contentList = [];
     private $firstIcon;

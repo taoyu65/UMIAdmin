@@ -5,8 +5,9 @@ namespace YM\Umi\PageBuilder;
 use YM\Models\Menu;
 use YM\Models\TableRelationOperation;
 use YM\Facades\Umi as YM;
+use YM\Umi\Contracts\PageBuilder\nestableInterface;
 
-class umiNestableBuilder_ACE
+class umiNestableBuilder_ACE implements nestableInterface
 {
     private $tableName;
     private $relationOperationRuleList;
