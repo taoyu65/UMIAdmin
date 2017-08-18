@@ -2,6 +2,7 @@
 
 namespace YM\Http\Controllers;
 
+use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -9,7 +10,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
-use YM\Models\User;
 
 class DashBoardController extends Controller
 {
@@ -31,6 +31,11 @@ class DashBoardController extends Controller
             'email' => $data['email'],
             'password' => bcrypt($data['password']),
         ]);
+    }
+
+    public function redirectPath()
+    {
+        return route('dashboard');
     }
 
     public function index()

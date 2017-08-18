@@ -75,7 +75,8 @@ class UmiServiceProvider extends ServiceProvider
 
         #加载视图文件
         #load view
-        $this->loadViewsFrom(__DIR__ . '/resources/views', 'umi');
+        $ui = config('umi.current_ui');
+        $this->loadViewsFrom(__DIR__ . '/resources/views/' . $ui, 'umi');
 
         #加载语言文件
         #load lang
@@ -84,11 +85,11 @@ class UmiServiceProvider extends ServiceProvider
         #发布文件
         #publish
         $this->publishes([
-            __DIR__ . '/Config/umi.php' => app()->basePath() . '/config/umi.php',
+            __DIR__ . '/Config/umi.php' => app()->basePath() . '/config/umi.php'
         ]);
 
         $this->publishes([
-            __DIR__ . '/Config/umiEnum.php' => app()->basePath() . '/config/umiEnum.php',
+            __DIR__ . '/Config/umiEnum.php' => app()->basePath() . '/config/umiEnum.php'
         ]);
 
         $this->publishes([
@@ -100,7 +101,7 @@ class UmiServiceProvider extends ServiceProvider
         ]);
 
         $this->publishes([
-            __DIR__ . '/resources/assets' => public_path('umi'),
+            __DIR__ . '/resources/assets' => public_path('umi')
         ]);
 
         #注册命令

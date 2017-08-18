@@ -7,7 +7,7 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\Config;
 use YM\Facades\Umi;
 use YM\Models\UmiModel;
-use YM\Umi\umiTableBreadBuilder;
+use YM\Umi\FactoryUI;
 
 class umiTableReadController extends Controller
 {
@@ -29,7 +29,8 @@ class umiTableReadController extends Controller
         $umiModel2 = new UmiModel($tableNameLoadingFieldTable, 'order', 'asc');
         $records = $umiModel2->getRecordsByWhere('table_id', $tableId);
 
-        $builder = new umiTableBreadBuilder();
+        $factoryUI = new FactoryUI();
+        $builder = $factoryUI->tableBreadUI();
         return $builder->display($records, $defaultValue, 'read');
     }
 #endregion

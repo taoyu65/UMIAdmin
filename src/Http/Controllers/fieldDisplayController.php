@@ -12,7 +12,7 @@ use YM\Models\FieldDisplayEdit;
 use YM\Models\FieldDisplayRead;
 use YM\Models\Table;
 use YM\Umi\FactoryDataType;
-use YM\Umi\umiFieldDisplayBuilder;
+use YM\Umi\FactoryUI;
 
 class fieldDisplayController extends Controller
 {
@@ -42,7 +42,8 @@ class fieldDisplayController extends Controller
     #get and show all fields that exist
     public function loadFields($table, $tableId)
     {
-        $builder = new umiFieldDisplayBuilder();
+        $factoryUI = new FactoryUI();
+        $builder = $factoryUI->fieldDisplayUI();
         return $builder->showExistRecords($table, $tableId);
     }
 

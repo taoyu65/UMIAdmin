@@ -3,15 +3,18 @@
 namespace YM\Umi\Auth;
 
 use YM\Umi\Contracts\PrintHtml\MasterPageInterface;
-use YM\Umi\umiMasterPageBuilder;
+use YM\Umi\FactoryUI;
 
 abstract class UmiMasterPageAbstract implements MasterPageInterface
 {
-    private $masterPageBuilder;
+    protected $masterPageBuilder;
+    protected $masterPageMenuBuilder;
 
     public function __construct()
     {
-        $this->masterPageBuilder = new umiMasterPageBuilder();
+        $factoryUI = new FactoryUI();
+        $this->masterPageBuilder = $factoryUI->masterPageUI();
+        $this->masterPageMenuBuilder = $factoryUI->masterPageMenuUI();
     }
 
     public function header()

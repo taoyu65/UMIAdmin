@@ -79,8 +79,14 @@ class UmiModel
     public function getRecordsByWhere($where, $value, $useCache = true)
     {
         if ($this->openCache && $useCache) {
+
+            if ($this->order === 'asc')
+                return $this->cachedTable
+                    ->where($where, $value)
+                    ->sortBy($this->orderBy);
             return $this->cachedTable
-                ->where($where, $value);
+                ->where($where, $value)
+                ->sortByDesc($this->orderBy);
         }
 
         $ds = DB::table($this->tableName)

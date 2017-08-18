@@ -2,7 +2,7 @@
 
 namespace YM\Umi\DataTable;
 
-use YM\Umi\umiDataTableBuilder;
+use YM\Umi\FactoryUI;
 
 class SuperAdminDataTable extends umiDataTableAbstract
 {
@@ -10,7 +10,8 @@ class SuperAdminDataTable extends umiDataTableAbstract
 
     public function __construct()
     {
-        $this->umiDataTable = new umiDataTableBuilder();
+        $factoryUI = new FactoryUI();
+        $this->umiDataTable = $factoryUI->dataTableUI();
     }
 
     public function headerAlert()

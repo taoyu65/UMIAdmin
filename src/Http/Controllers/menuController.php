@@ -9,25 +9,27 @@ use Illuminate\Support\Facades\Config;
 use YM\Models\Menu;
 use YM\Models\UserMenu;
 use YM\Umi\Common\Selector;
-use YM\Umi\umiMenusBuilder;
+use YM\Umi\FactoryUI;
 
 class menuController extends Controller
 {
     private $menu;
+    private $menuBuilder;
 
     public function __construct()
     {
         $this->menu = new Menu();
+
+        $factoryUI = new FactoryUI();
+        $this->menuBuilder = $factoryUI->nestableUI();
     }
 
     #加载所有菜单 并管理
     #load all menus and manage
     public function management(Request $request)
     {
-        $menuBuilder = new umiMenusBuilder();
-
         $tableName = $request->route()->parameter('table');
-        $menuTree = $menuBuilder->showDragDropTree($tableName, true);
+        $menuTree = $this->menuBuilder->showDragDropTree($tableName, true);
 
         return view('umi::menu.sideMenu', [
             'menuTree' => $menuTree,
@@ -70,8 +72,7 @@ class menuController extends Controller
         $property = $selector->serialize();
 #endregion
 
-        $menuBuilder = new umiMenusBuilder();
-        $menuTree = $menuBuilder->showDragDropTree($tableName);
+        $menuTree = $this->menuBuilder->showDragDropTree($tableName);
 
         return view('umi::menu.distribution', compact('menuTree', 'tableName', 'userTableName', 'property'));
     }
@@ -80,8 +81,7 @@ class menuController extends Controller
     #reload all the menus from ajax request
     public function loadMenuTree($table, $showButton = false, $buttonException = [])
     {
-        $menuBuilder = new umiMenusBuilder();
-        $menuTree = $menuBuilder->showDragDropTree($table, $showButton, $buttonException);
+        $menuTree = $this->menuBuilder->showDragDropTree($table, $showButton, $buttonException);
 
         #必须重新用js启动可拖拽功能
         #must to be restart the drag function with js command
@@ -97,8 +97,7 @@ class menuController extends Controller
         $json = $userMenu->userJsonMenu($userId);
         $jsonArr = json_decode($json);
 
-        $menuBuilder = new umiMenusBuilder();
-        return $menuBuilder->showDragDropTreeByJson($jsonArr);
+        return $this->menuBuilder->showDragDropTreeByJson($jsonArr);
     }
 
     #更新用户菜单 以json方式进行数据存储

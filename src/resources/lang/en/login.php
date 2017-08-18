@@ -2,7 +2,7 @@
 
 return [
     'rememberPassword'  => 'Remember Me',
-    'login'             => 'login',
+    'login'             => 'Sign in',
     'otherWayLogin'     => 'Or Login Using',
     'forget'            => 'I forgot my password',
     'iWantRegister'     => 'I want to register',
