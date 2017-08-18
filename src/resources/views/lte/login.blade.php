@@ -1,40 +1,35 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <meta charset="utf-8" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>UMI admin - login page</title>
 
-    <?php $path = url(config('umi.assets_path')) . '/ace' ?>
+    <?php $path = url(config('umi.assets_path')) . '/lte' ?>
 
-    <meta name="description" content="User login page" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.7 -->
+    <link rel="stylesheet" href="{{$path}}/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="{{$path}}/bower_components/font-awesome/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="{{$path}}/bower_components/Ionicons/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="{{$path}}/dist/css/AdminLTE.min.css">
+    <!-- iCheck -->
+    <link rel="stylesheet" href="{{$path}}/plugins/iCheck/square/blue.css">
 
-    <!-- bootstrap & fontawesome -->
-    <link rel="stylesheet" href="{{$path}}/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="{{$path}}/font-awesome/4.5.0/css/font-awesome.min.css" />
-
-    <!-- text fonts -->
-    <link rel="stylesheet" href="{{$path}}/css/fonts.googleapis.com.css" />
-
-    <!-- ace styles -->
-    <link rel="stylesheet" href="{{$path}}/css/ace.min.css" />
-
-    <!--[if lte IE 9]>
-    <link rel="stylesheet" href="{{$path}}/css/ace-part2.min.css" />
-    <![endif]-->
-    <link rel="stylesheet" href="{{$path}}/css/ace-rtl.min.css" />
-
-    <!--[if lte IE 9]>
-    <link rel="stylesheet" href="{{$path}}/css/ace-ie.min.css" />
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <!-- HTML5shiv and Respond.js for IE8 to support HTML5 elements and media queries -->
+    <!-- Google Font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 
-    <!--[if lte IE 8]>
-    <script src="{{$path}}/js/html5shiv.min.js"></script>
-    <script src="{{$path}}/js/respond.min.js"></script>
-    <![endif]-->
     <style>
         .tou{
             background: url("{{$path}}/images/login/tou.png") no-repeat;
@@ -94,10 +89,9 @@
         }
 
     </style>
-
 </head>
+<body class="hold-transition login-page">
 
-<body class="login-layout">
 @if(isset($error))
     {!! $error !!}
 @endif
@@ -111,260 +105,83 @@
         alert('{{$errors->first('email')}}');
     </script>
 @endif
-<div class="main-container">
-    <div class="main-content">
-        <div class="row">
-            <div class="col-sm-10 col-sm-offset-1">
-                <div class="login-container">
-                    <div class="center">
-                        <h1>
-                            <i class="ace-icon fa fa-paw green"></i>
-                            <span class="red">UMI</span>
-                            <span class="white" id="id-text2">Admin</span>
-                        </h1>
-                        <h4 class="blue" id="id-company-text"></h4>
-                    </div>
 
-                    <div style="padding-bottom: 50px;"></div>
-                    <div class="space-6"></div>
+<div class="login-box">
+    <div class="login-logo">
+        <h1>
+            <i class="ace-icon fa fa-paw fa-success"></i>
+            <span class="fa-danger">UMI</span>
+            <span class="fa-gray" id="id-text2">Admin</span>
+        </h1>
+    </div>
+    <div style="padding-bottom: 50px;"></div>
+    <div class="space-6"></div>
+    <!-- /.login-logo -->
+    <div class="login-box-body">
+        <DIV style="width: 165px; height: 96px; position: absolute;">
+            <DIV class="tou"></DIV>
+            <DIV class="initial_left_hand" id="left_hand"></DIV>
+            <DIV class="initial_right_hand" id="right_hand"></DIV>
+        </DIV>
 
-                    <div class="position-relative">
-                        <div id="login-box" class="login-box visible widget-box no-border">
-                            <div class="widget-body">
-                                <div class="widget-main">
-
-                                    <div class="space-6"></div>
-
-                                    <DIV style="width: 165px; height: 96px; position: absolute;">
-                                        <DIV class="tou"></DIV>
-                                        <DIV class="initial_left_hand" id="left_hand"></DIV>
-                                        <DIV class="initial_right_hand" id="right_hand"></DIV>
-                                    </DIV>
-
-                                    <form method="post" action="{{url('submit')}}">
-                                        {!! csrf_field() !!}
-                                        <fieldset>
-                                            <label class="block clearfix">
-                                                <span class="block input-icon input-icon-right">
-                                                    <input type="text" class="form-control" placeholder="Username" name="username" value="admin"/>
-                                                    <i class="ace-icon fa fa-user"></i>
-                                                </span>
-                                            </label>
-
-                                            <label class="block clearfix">
-                                                <span class="block input-icon input-icon-right">
-                                                    <input type="password" class="form-control" placeholder="Password" id="password" name="password" value="123123"/>
-                                                    <i class="ace-icon fa fa-lock"></i>
-                                                </span>
-                                            </label>
-
-                                            <div class="space"></div>
-
-                                            <div class="clearfix">
-                                                <label class="inline">
-                                                    <input type="checkbox" class="ace" />
-                                                    <span class="lbl"> {{trans('umiTrans::login.rememberPassword')}}</span>
-                                                </label>
-
-                                                <button type="submit" class="width-35 pull-right btn btn-sm btn-primary">
-                                                    <i class="ace-icon fa fa-key"></i>
-                                                    <span class="bigger-110">{{trans('umiTrans::login.login')}}</span>
-                                                </button>
-                                            </div>
-
-                                            <div class="space-4"></div>
-                                        </fieldset>
-                                    </form>
-
-                                    <div class="social-or-login center">
-                                        <span class="bigger-110">{{trans('umiTrans::login.otherWayLogin')}}</span>
-                                    </div>
-
-                                    <div class="space-6"></div>
-
-                                    <div class="social-login center">
-                                        <a class="btn btn-primary">
-                                            <i class="ace-icon fa fa-facebook"></i>
-                                        </a>
-
-                                        <a class="btn btn-info">
-                                            <i class="ace-icon fa fa-twitter"></i>
-                                        </a>
-
-                                        <a class="btn btn-danger">
-                                            <i class="ace-icon fa fa-google-plus"></i>
-                                        </a>
-                                    </div>
-                                </div><!-- /.widget-main -->
-
-                                <div class="toolbar clearfix">
-                                    <div>
-                                        <a href="#" data-target="#forgot-box" class="forgot-password-link">
-                                            <i class="ace-icon fa fa-arrow-left"></i>
-                                            {{trans('umiTrans::login.forget')}}
-                                        </a>
-                                    </div>
-
-                                    <div>
-                                        <a href="#" data-target="#signup-box" class="user-signup-link">
-                                            {{trans('umiTrans::login.iWantRegister')}}
-                                            <i class="ace-icon fa fa-arrow-right"></i>
-                                        </a>
-                                    </div>
-                                </div>
-                            </div><!-- /.widget-body -->
-                        </div><!-- /.login-box -->
-
-                        <div id="forgot-box" class="forgot-box widget-box no-border">
-                            <div class="widget-body">
-                                <div class="widget-main">
-                                    <h4 class="header red lighter bigger">
-                                        <i class="ace-icon fa fa-key"></i>
-                                        {{trans('umiTrans::login.retrievePassword')}}
-                                    </h4>
-
-                                    <div class="space-6"></div>
-                                    <p>
-                                        {{trans('umiTrans::login.tip')}}
-                                    </p>
-
-                                    <form>
-                                        <fieldset>
-                                            <label class="block clearfix">
-                                                <span class="block input-icon input-icon-right">
-                                                    <input type="email" class="form-control" placeholder="{{trans('umiTrans::login.email')}}" />
-                                                    <i class="ace-icon fa fa-envelope"></i>
-                                                </span>
-                                            </label>
-
-                                            <div class="clearfix">
-                                                <button type="button" class="width-35 pull-right btn btn-sm btn-danger">
-                                                    <i class="ace-icon fa fa-lightbulb-o"></i>
-                                                    <span class="bigger-110">{{trans('umiTrans::login.send')}}</span>
-                                                </button>
-                                            </div>
-                                        </fieldset>
-                                    </form>
-                                </div><!-- /.widget-main -->
-
-                                <div class="toolbar center">
-                                    <a href="#" data-target="#login-box" class="back-to-login-link">
-                                        {{trans('umiTrans::login.back')}}
-                                        <i class="ace-icon fa fa-arrow-right"></i>
-                                    </a>
-                                </div>
-                            </div><!-- /.widget-body -->
-                        </div><!-- /.forgot-box -->
-
-                        <div id="signup-box" class="signup-box widget-box no-border">
-                            <div class="widget-body">
-                                <div class="widget-main">
-                                    <h4 class="header green lighter bigger">
-                                        <i class="ace-icon fa fa-users blue"></i>
-                                        {{trans('umiTrans::login.newRegister')}}
-                                    </h4>
-
-                                    <div class="space-6"></div>
-                                    <p> {{trans('umiTrans::login.info')}} </p>
-
-                                    <form method="post" action="{{url('signUp')}}" id="validation-form">
-                                        {{ csrf_field() }}
-                                        <fieldset>
-                                            <label class="block clearfix">
-                                                <span class="block input-icon input-icon-right">
-                                                    <input name="email" type="email" class="form-control" placeholder="{{trans('umiTrans::login.email')}}" required/>
-                                                    <i class="ace-icon fa fa-envelope"></i>
-                                                </span>
-                                            </label>
-
-                                            <label class="block clearfix">
-                                                <span class="block input-icon input-icon-right">
-                                                    <input name="name" type="text" class="form-control" placeholder="{{trans('umiTrans::login.user')}}" required/>
-                                                    <i class="ace-icon fa fa-user"></i>
-                                                </span>
-                                            </label>
-
-                                            <label class="block clearfix">
-                                                <span class="block input-icon input-icon-right">
-                                                    <input name="password" type="password" class="form-control" placeholder="{{trans('umiTrans::login.password')}}" required/>
-                                                	<i class="ace-icon fa fa-lock"></i>
-                                                </span>
-                                            </label>
-
-                                            <label class="block clearfix">
-                                                <span class="block input-icon input-icon-right">
-                                                    <input name="password_confirmation" type="password" class="form-control" placeholder="{{trans('umiTrans::login.password2')}}" />
-                                                    <i class="ace-icon fa fa-retweet"></i>
-                                                </span>
-                                            </label>
-
-                                            <label class="block">
-                                                <input type="checkbox" class="ace" required/>
-                                                <span class="lbl">
-                                                    {{trans('umiTrans::login.iAgree')}}
-                                                    <a href="#">{{trans('umiTrans::login.agreement')}}</a>
-                                                </span>
-                                            </label>
-
-                                            <div class="space-24"></div>
-
-                                            <div class="clearfix">
-                                                <button type="reset" class="width-30 pull-left btn btn-sm">
-                                                    <i class="ace-icon fa fa-refresh"></i>
-                                                    <span class="bigger-110">{{trans('umiTrans::login.reset')}}</span>
-                                                </button>
-
-                                                <button type="submit" class="width-65 pull-right btn btn-sm btn-success">
-                                                    <span class="bigger-110">{{trans('umiTrans::login.register')}}</span>
-
-                                                    <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
-                                                </button>
-                                            </div>
-                                        </fieldset>
-                                    </form>
-                                </div>
-
-                                <div class="toolbar center">
-                                    <a href="#" data-target="#login-box" class="back-to-login-link">
-                                        <i class="ace-icon fa fa-arrow-left"></i>
-                                        {{trans('umiTrans::login.backToLogin')}}
-                                    </a>
-                                </div>
-                            </div><!-- /.widget-body -->
-                        </div><!-- /.signup-box -->
-                    </div><!-- /.position-relative -->
-
-                    <div class="navbar-fixed-top align-right">
-                        <br />
-                        &nbsp;
-                        <a id="btn-login-dark" href="#">{{trans('umiTrans::login.black')}}</a>
-                        &nbsp;
-                        <span class="blue">/</span>
-                        &nbsp;
-                        <a id="btn-login-blur" href="#">{{trans('umiTrans::login.blue')}}</a>
-                        &nbsp;
-                        <span class="blue">/</span>
-                        &nbsp;
-                        <a id="btn-login-light" href="#">{{trans('umiTrans::login.light')}}</a>
-                        &nbsp; &nbsp; &nbsp;
+        <form method="post" action="{{url('submit')}}">
+            {!! csrf_field() !!}
+            <div class="form-group has-feedback">
+                <input type="text" class="form-control" placeholder="Username" name="username" value="admin">
+                <span class="glyphicon glyphicon-user form-control-feedback"></span>
+            </div>
+            <div class="form-group has-feedback">
+                <input type="password" class="form-control" placeholder="Password" id="password" name="password" value="123123">
+                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
+            </div>
+            <div class="row">
+                <div class="col-xs-8">
+                    <div class="checkbox icheck">
+                        <label>
+                            <input type="checkbox" checked> {{trans('umiTrans::login.rememberPassword')}}
+                        </label>
                     </div>
                 </div>
-            </div><!-- /.col -->
-        </div><!-- /.row -->
-    </div><!-- /.main-content -->
-</div><!-- /.main-container -->
-<div style="text-align:center;">
-    <p>Template From:
-        <span class="bigger-120">
-            <span class="blue bolder">Ace</span>
-            Application &copy; 2013-2014
-        </span>
-    </p>
-</div>
-<!-- basic scripts -->
+                <!-- /.col -->
+                <div class="col-xs-4">
+                    <button type="submit" class="btn btn-primary btn-block btn-flat">{{trans('umiTrans::login.login')}}</button>
+                </div>
+                <!-- /.col -->
+            </div>
+        </form>
 
-<!--[if !IE]> -->
-<script src="{{$path}}/js/jquery-2.1.4.min.js"></script>
+        <div class="social-auth-links text-center">
+            <p>- {{trans('umiTrans::login.otherWayLogin')}} -</p>
+            <a href="#" class="btn btn-block btn-social btn-facebook btn-flat"><i class="fa fa-facebook"></i> Sign in using
+                Facebook</a>
+            <a href="#" class="btn btn-block btn-social btn-google btn-flat"><i class="fa fa-google-plus"></i> Sign in using
+                Google+</a>
+        </div>
+        <!-- /.social-auth-links -->
+
+        <a href="#">{{trans('umiTrans::login.forget')}}</a><br>
+        <a href="#" class="text-center">{{trans('umiTrans::login.iWantRegister')}}</a>
+
+    </div>
+    <!-- /.login-box-body -->
+</div>
+<!-- /.login-box -->
+
+<!-- jQuery 3 -->
+<script src="{{$path}}/bower_components/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap 3.3.7 -->
+<script src="{{$path}}/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- iCheck -->
+<script src="{{$path}}/plugins/iCheck/icheck.min.js"></script>
+<script>
+    $(function () {
+        $('input').iCheck({
+            checkboxClass: 'icheckbox_square-blue',
+            radioClass: 'iradio_square-blue',
+            increaseArea: '20%' // optional
+        });
+    });
+</script>
 <SCRIPT type="text/javascript">
     $(function(){
 
@@ -395,58 +212,5 @@
         });
     });
 </SCRIPT>
-<!-- <![endif]-->
-
-<!--[if IE]>
-<script src="{{$path}}/js/jquery-1.11.3.min.js"></script>
-<script src="{{$path}}/js/jquery.validate.min.js"></script>
-<![endif]-->
-<script type="text/javascript">
-    if('ontouchstart' in document.documentElement) document.write("<script src='{{$path}}/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
-</script>
-
-<!-- inline scripts related to this page -->
-<script type="text/javascript">
-    jQuery(function($) {
-        $(document).on('click', '.toolbar a[data-target]', function(e) {
-            e.preventDefault();
-            var target = $(this).data('target');
-            $('.widget-box.visible').removeClass('visible');//hide others
-            $(target).addClass('visible');//show target
-        });
-    });
-
-
-
-    //you don't need this, just used for changing background
-    jQuery(function($) {
-        $('#btn-login-dark').on('click', function(e) {
-            $('body').attr('class', 'login-layout');
-            $('#id-text2').attr('class', 'white');
-            $('#id-company-text').attr('class', 'blue');
-
-            e.preventDefault();
-        });
-        $('#btn-login-light').on('click', function(e) {
-            $('body').attr('class', 'login-layout light-login');
-            $('#id-text2').attr('class', 'grey');
-            $('#id-company-text').attr('class', 'blue');
-
-            e.preventDefault();
-        });
-        $('#btn-login-blur').on('click', function(e) {
-            $('body').attr('class', 'login-layout blur-login');
-            $('#id-text2').attr('class', 'white');
-            $('#id-company-text').attr('class', 'light-blue');
-
-            e.preventDefault();
-        });
-
-    });
-
-    jQuery(function ($) {
-        $("#validation-form").validate({errorClass: "red"});
-    })
-</script>
 </body>
 </html>

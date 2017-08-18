@@ -51,7 +51,7 @@ class Umi
         return $this->table->getTableId($tableName);
     }
 
-    public function showMessage($title, $content = '', $options = [])
+    public function showMessage($title, $content = '', $options = [], $multiple = true)
     {
         #设置默认的样式为深绿色的界面 gritter-success
         #set default style as a gritter-success
@@ -72,7 +72,7 @@ class Umi
             });
         </script>
 UMI;
-        if (Session::has('showMessage'))
+        if (Session::has('showMessage') && $multiple)
             $html .= Session::get('showMessage');
 
         Session::flash('showMessage', $html);

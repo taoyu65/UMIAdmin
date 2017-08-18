@@ -181,38 +181,39 @@ UMI;
         //$rules = $TRO->getRulesByNames(Ym::currentTableId(), false);
         $rules = $TRO->getTableRelationOperationByTableId(Ym::currentTableId());
         $activeFieldValueList = [];
-        if ($rules) {
-            foreach ($dataSet as $ds) {
-                $activeFieldValue = '';
-                foreach ($rules as $rule) {
-                    $activeTableField = $rule->active_table_field;
-                    $dsActField = $ds->$activeTableField;
-                    $activeFieldValue .= "\"$activeTableField\":\"$dsActField\",";
-                }
-                #转换成对象类型
-                #turn into object
-                $activeFieldValue = $activeFieldValue == '' ? '' : "{" . trim($activeFieldValue,',') . "}";
-                array_push($activeFieldValueList, $activeFieldValue);
-            }
-        }
+        if ($rules)
+            $activeFieldValueList = $this->getActiveFieldValue($dataSet, $rules);
 
         #是否开启 数据映射功能
         #if available for data reformat
+        $regulatedDataSet = '';
         if (Config::get('umi.data_field_reformat'))
             $regulatedDataSet = $dataTypeOp->regulatedDataSet($dataSet);
 
         #数据表内容
         #table body
         $trBodyHtml = '';
+        $regulatedDataSet = $regulatedDataSet ?: $dataSet;
         if ($regulatedDataSet) {
             $pointer = 0;
             foreach ($regulatedDataSet as $ds) {
                 $trBodyHtml .= '<tr>';
-                $trBodyHtml .= $this->checkboxHtml();
-                foreach ($ds as $item => $value) {
+                //$trBodyHtml .= $this->checkboxHtml();
+                /*foreach ($ds as $item => $value) {
                     $trBodyHtml .= '<td>';
                     $trBodyHtml .= $value;
                     $trBodyHtml .= '</td>';
+                }*/
+                if (is_array($ds)) {
+                    foreach ($tHeads as $tHead) {
+                        $showField = $tHead->field;
+                        $trBodyHtml .= "<td>{$ds[$showField]}</td>";
+                    }
+                } else if (is_object($ds)) {
+                    foreach ($tHeads as $tHead) {
+                        $showField = $tHead->field;
+                        $trBodyHtml .= "<td>{$ds->$showField}</td>";
+                    }
                 }
 
                 #获取数据行的主键值
@@ -220,7 +221,7 @@ UMI;
                 $primaryKey = Config::get('umi.primary_key');
                 $recordId = array_has($ds, $primaryKey) ? $dataSet->all()[$pointer]->$primaryKey : 0;
 
-                $activeFieldValue = $activeFieldValueList[$pointer];
+                $activeFieldValue = isset($activeFieldValueList[$pointer]) ? $activeFieldValueList[$pointer] : '';
                 $trBodyHtml .= $this->breadButtonHtml($recordId, $activeFieldValue);     //获取按钮 get button
                 $trBodyHtml .= '</tr>';
 
@@ -309,6 +310,31 @@ UMI;
                 $arr[$key] =  $value;
         }
         return $arr;
+    }
+
+    private function getActiveFieldValue($dataSet, $rules)
+    {
+        $activeFieldValueList = [];
+        foreach ($dataSet as $ds) {
+            $activeFieldValue = '';
+            foreach ($rules as $rule) {
+                $activeTableField = $rule->active_table_field;
+                if (!isset($ds->$activeTableField)) {
+                    Ym::showMessage('Warning', 'Detect the rule of relation operation somewhere is wrong for operating this table, Please correct or will not work', [
+                        'class_name' => 'gritter-error',
+                        'sticky'     => true
+                    ], false);
+                    return [];
+                }
+                $dsActField = $ds->$activeTableField;
+                $activeFieldValue .= "\"$activeTableField\":\"$dsActField\",";
+            }
+            #转换成对象类型
+            #turn into object
+            $activeFieldValue = $activeFieldValue == '' ? '' : "{" . trim($activeFieldValue,',') . "}";
+            array_push($activeFieldValueList, $activeFieldValue);
+        }
+        return $activeFieldValueList;
     }
 
     #region component

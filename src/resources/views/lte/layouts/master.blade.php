@@ -1,170 +1,120 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <meta charset="utf-8" />
-    <title>Dashboard - UMI Admin</title>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>UMI admin - login page</title>
 
     <?php $assetPath = url(config('umi.assets_path')) ?>
-    <?php $path = url($assetPath . '/ace') ?>
+    <?php $path = url($assetPath . '/lte') ?>
 
-    <meta name="description" content="overview &amp; stats" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.7 -->
+    <link rel="stylesheet" href="{{$path}}/bower_components/bootstrap/dist/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="{{$path}}/bower_components/font-awesome/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="{{$path}}/bower_components/Ionicons/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="{{$path}}/dist/css/AdminLTE.min.css">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+           folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="../dist/css/skins/_all-skins.min.css">
 
-    <!-- bootstrap & fontawesome -->
-    <link rel="stylesheet" href="{{$path}}/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="{{$path}}/font-awesome/4.5.0/css/font-awesome.min.css" />
-
-    <!-- plug in -->
-    <link rel="stylesheet" href="{{$path}}/css/jquery.gritter.min.css" />
-    <link rel="stylesheet" href="{{$path}}/css/chosen.min.css" />
-    <link rel="stylesheet" href="{{$path}}/css/select2.min.css" />
-
-    <!-- text fonts -->
-    <link rel="stylesheet" href="{{$path}}/css/fonts.googleapis.com.css" />
-
-    <!-- ace styles -->
-    <link rel="stylesheet" href="{{$path}}/css/ace.min.css" class="ace-main-stylesheet" id="main-ace-style" />
-
-    <!--[if lte IE 9]>
-    <link rel="stylesheet" href="{{$path}}/css/ace-part2.min.css" class="ace-main-stylesheet" />
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
-
-    <link rel="stylesheet" href="{{$path}}/css/ace-skins.min.css" />
-    <link rel="stylesheet" href="{{$path}}/css/ace-rtl.min.css" />
-
-    <!--[if lte IE 9]>
-    <link rel="stylesheet" href="{{$path}}/css/ace-ie.min.css" />
-    <![endif]-->
-
-    <!--[if !IE]> -->
-    <script src="{{$path}}/js/jquery-2.1.4.min.js"></script>
-    <!-- <![endif]-->
-
-    <!--[if IE]>
-    <script src="{{$path}}/js/jquery-1.11.3.min.js"></script>
-    <![endif]-->
-
+    <!-- Google Font -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 </head>
 
-<body class="no-skin">
-<div id="navbar" class="navbar navbar-default          ace-save-state">
-    <div class="navbar-container ace-save-state" id="navbar-container">
-        <button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler" data-target="#sidebar">
-            <span class="sr-only">Toggle sidebar</span>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+    {!! $header !!}
 
-            <span class="icon-bar"></span>
+    <aside class="main-sidebar">
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+            <!-- Sidebar user panel -->
+            {{--<div class="user-panel">
+                <div class="pull-left image">
+                    <img src="../dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                </div>
+                <div class="pull-left info">
+                    <p>Alexander Pierce</p>
+                    <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                </div>
+            </div>--}}
+            <!-- search form -->
+            {{--<form action="#" method="get" class="sidebar-form">
+                <div class="input-group">
+                    <input type="text" name="q" class="form-control" placeholder="Search...">
+                    <span class="input-group-btn">
+                <button type="submit" name="search" id="search-btn" class="btn btn-flat"><i class="fa fa-search"></i>
+                </button>
+              </span>
+                </div>
+            </form>--}}
+            <!-- /.search form -->
+            <!-- sidebar menu: : style can be found in sidebar.less -->
+            <ul class="sidebar-menu" data-widget="tree">
+                {!! $sideMenu !!}
+            </ul>
+        </section>
+        <!-- /.sidebar -->
+    </aside>
 
-            <span class="icon-bar"></span>
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+        <section class="content-header">
+            <h1>
+                Dashboard
+                <small>{{Request::segment(1)}}</small>
+            </h1>
+            <ol class="breadcrumb">
+                <li><a href="{{route('dashboard')}}"><i class="fa fa-dashboard"></i> Dashboard</a></li>
+                <li class="active">{{Request::segment(1)}}</li>
+            </ol>
+        </section>
 
-            <span class="icon-bar"></span>
-        </button>
+        <!-- Main content -->
+        <section class="content">
+            {!! $body !!}
+            @yield('content')
+        </section>
+        <!-- /.content -->
+    </div>
 
-        {!! $header !!}
-
-    </div><!-- /.navbar-container -->
+    <footer class="main-footer">
+        {!! $footer !!}
+    </footer>
 </div>
-
-<div class="main-container ace-save-state" id="main-container">
-    <script type="text/javascript">
-        try{ace.settings.loadState('main-container')}catch(e){}
-    </script>
-
-    <div id="sidebar" class="sidebar responsive ace-save-state">
-        <script type="text/javascript">
-            try{ace.settings.loadState('sidebar')}catch(e){}
-        </script>
-
-        <div class="sidebar-shortcuts" id="sidebar-shortcuts">
-            <div class="sidebar-shortcuts-large" id="sidebar-shortcuts-large">
-                <button class="btn btn-success" onclick="window.location.href='{{url('umiTable')}}'">
-                    <i class="ace-icon fa fa-bars"></i>
-                </button>
-
-                <button class="btn btn-info">
-                    <i class="ace-icon fa fa-pencil"></i>
-                </button>
-
-                <button class="btn btn-warning">
-                    <i class="ace-icon fa fa-users"></i>
-                </button>
-
-                <button class="btn btn-danger">
-                    <i class="ace-icon fa fa-cogs"></i>
-                </button>
-            </div>
-
-            <div class="sidebar-shortcuts-mini" id="sidebar-shortcuts-mini">
-                <span class="btn btn-success"></span>
-
-                <span class="btn btn-info"></span>
-
-                <span class="btn btn-warning"></span>
-
-                <span class="btn btn-danger"></span>
-            </div>
-        </div><!-- /.sidebar-shortcuts -->
-
-        <ul class="nav nav-list">
-            {!! $sideMenu !!}
-        </ul><!-- /.nav-list -->
-
-        <div class="sidebar-toggle sidebar-collapse" id="sidebar-collapse">
-            <i id="sidebar-toggle-icon" class="ace-icon fa fa-angle-double-left ace-save-state" data-icon1="ace-icon fa fa-angle-double-left" data-icon2="ace-icon fa fa-angle-double-right"></i>
-        </div>
-    </div>
-
-    <div class="main-content">
-        <div class="main-content-inner">
-            <div class="breadcrumbs ace-save-state" id="breadcrumbs">
-
-                <ul class="breadcrumb">
-                    <i class="ace-icon fa fa-home home-icon"></i>
-                    <li>
-                        <a href="">Dashboard</a>
-                    </li>
-                    <li class="active">{{Request::segment(1)}}</li>
-                </ul>
-            </div>
-            <div class="page-content">
-                {!! $body !!}
-                @yield('content')
-            </div><!-- /.page-content -->
-        </div>
-    </div><!-- /.main-content -->
-
-    <div class="footer">
-        <div class="footer-inner">
-            <div class="footer-content">
-                {!! $footer !!}
-            </div>
-        </div>
-    </div>
-
-    <a href="#" id="btn-scroll-up" class="btn-scroll-up btn btn-sm btn-inverse">
-        <i class="ace-icon fa fa-angle-double-up icon-only bigger-110"></i>
-    </a>
-</div><!-- /.main-container -->
-
-<!-- basic scripts -->
-<script type="text/javascript">
-    if('ontou chstart' in document.documentElement) document.write("<script src='{{$path}}/js/jquery.mobile.custom.min.js'>"+"<"+"/script>");
-</script>
-<script src="{{$path}}/js/bootstrap.min.js"></script>
-
-<!-- ace scripts -->
-<script src="{{$path}}/js/ace-elements.min.js"></script>
-<script src="{{$path}}/js/ace.min.js"></script>
-
-<!-- layer scripts -->
-<script src="{{$assetPath}}/layer/layer.js"></script>
-
-<!-- ace plugin -->
-<script src="{{$path}}/js/jquery.gritter.min.js"></script>
-
 <!-- 显示操作信息 使用 gritter 和 一次性的快闪session -->
 <!-- show all the operation information, use gritter and flash session -->
 {!! \Illuminate\Support\Facades\Session::get('showMessage') !!}
+{{\Illuminate\Support\Facades\Session::pull('showMessage')}}
 
 </body>
+
+<!-- jQuery 3 -->
+<script src="{{$path}}/bower_components/jquery/dist/jquery.min.js"></script>
+<!-- Bootstrap 3.3.7 -->
+<script src="{{$path}}/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- Slimscroll -->
+<script src="{{$path}}/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<!-- FastClick -->
+<script src="{{$path}}/bower_components/fastclick/lib/fastclick.js"></script>
+<!-- AdminLTE App -->
+<script src="{{$path}}/dist/js/adminlte.min.js"></script>
+<!-- AdminLTE for demo purposes -->
+<script src="{{$path}}/dist/js/demo.js"></script>
+
+<!-- layer scripts -->
+<script src="{{$assetPath}}/layer/layer.js"></script>
+<!-- ace plugin -->
+<script src="{{$assetPath}}/js/jquery.gritter.min.js"></script>
 </html>

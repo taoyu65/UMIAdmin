@@ -165,6 +165,6 @@
 <!-- 显示操作信息 使用 gritter 和 一次性的快闪session -->
 <!-- show all the operation information, use gritter and flash session -->
 {!! \Illuminate\Support\Facades\Session::get('showMessage') !!}
-
+{{\Illuminate\Support\Facades\Session::pull('showMessage')}}
 </body>
 </html>

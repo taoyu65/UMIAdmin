@@ -2,7 +2,7 @@
 @section('content')
 
     <?php $assetPath = url(config('umi.assets_path')) ?>
-    <?php $path = url($assetPath . '/ace') ?>
+    <?php $path = url($assetPath . '/lte') ?>
 
     <div class="alert alert-block alert-success">
         <button type="button" class="close" data-dismiss="alert">
@@ -13,7 +13,7 @@
         <strong class="green">
             UMI Admin
             <small>(v0.1)</small>
-            Made by Laravel 5.3, php 5.6+
+            Made by Laravel 5.3, php 5.6+huikhuk
         </strong>
     </div>
     <div class="well">
