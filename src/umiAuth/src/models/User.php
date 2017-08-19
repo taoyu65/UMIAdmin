@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 class User extends Model
 {
-    protected $table = 'umi_users';
+    protected $table = 'users';
 
     private $userPermsTable;
     private $modelNameSpace = 'YM\umiAuth\src\Models';
@@ -26,8 +26,8 @@ class User extends Model
     {
         $minutes = Config::get('umiAuth.cache_minutes');
         $callback = function () use ($user_id) {
-            return DB::table('umi_users')
-                ->join('umi_user_role', 'umi_users.id', 'umi_user_role.user_id')
+            return DB::table('users')
+                ->join('umi_user_role', 'users.id', 'umi_user_role.user_id')
                 ->join('umi_roles', 'umi_user_role.role_id', 'umi_roles.id')
                 ->join('umi_permission_role', 'umi_permission_role.role_id', 'umi_roles.id')
                 ->join('umi_permissions', 'umi_permissions.id', 'umi_permission_role.permission_id')
@@ -42,7 +42,7 @@ class User extends Model
                     'umi_permission_role.role_id',
                     'umi_tables.table_name'
                 )
-                ->where('umi_users.id', $user_id)
+                ->where('users.id', $user_id)
                 ->get();
         };
         return Cache::remember('userPerms', $minutes, $callback);
