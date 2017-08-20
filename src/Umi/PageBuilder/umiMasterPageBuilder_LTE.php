@@ -26,7 +26,7 @@ class umiMasterPageBuilder_LTE implements masterPageInterface
     private function headHtml()
     {
         $assetPath = url(config('umi.assets_path'));
-        $path = $assetPath . '/ace';
+        $path = $assetPath . '/lte';
         $userName = Auth::user()->name;
         $logout = url('logout');
         $refresh =  url('refresh') . '?u=' . base64_encode(URL::full());

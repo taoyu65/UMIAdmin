@@ -102,7 +102,7 @@
                                 </div>
                             </form>
 
-                            <h3 class="header smaller lighter blue">{{trans('umiTrans::wizard.moreAction')}}More Action</h3>
+                            <h3 class="header smaller lighter blue">{{trans('umiTrans::wizard.moreAction')}}</h3>
                             <form class="form-horizontal">
                                 <div class="form-group has-success">
                                     <label for="inputWarning" class="col-xs-12 col-sm-2 control-label no-padding-right"></label>

@@ -20,7 +20,9 @@
     <link rel="stylesheet" href="{{$path}}/dist/css/AdminLTE.min.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
            folder instead of downloading all of them to reduce the load. -->
-    <link rel="stylesheet" href="../dist/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="{{$path}}/dist/css/skins/_all-skins.min.css">
+    <!-- gritter -->
+    <link rel="stylesheet" href="{{$assetPath}}/css/jquery.gritter.min.css" />
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -30,6 +32,9 @@
     <![endif]-->
     <!-- Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+
+    <!-- jQuery 3 -->
+    <script src="{{$path}}/bower_components/jquery/dist/jquery.min.js"></script>
 </head>
 
 <body class="hold-transition skin-blue sidebar-mini">
@@ -98,10 +103,6 @@
 {!! \Illuminate\Support\Facades\Session::get('showMessage') !!}
 {{\Illuminate\Support\Facades\Session::pull('showMessage')}}
 
-</body>
-
-<!-- jQuery 3 -->
-<script src="{{$path}}/bower_components/jquery/dist/jquery.min.js"></script>
 <!-- Bootstrap 3.3.7 -->
 <script src="{{$path}}/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
 <!-- Slimscroll -->
@@ -117,4 +118,5 @@
 <script src="{{$assetPath}}/layer/layer.js"></script>
 <!-- ace plugin -->
 <script src="{{$assetPath}}/js/jquery.gritter.min.js"></script>
+</body>
 </html>

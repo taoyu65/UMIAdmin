@@ -4975,3 +4975,9 @@ table.text-center th {
     white-space: normal !important;
   }
 }
+.fa-primary {color: #3c8dbc !important;}.fa-info {color: #00c0ef !important;}.fa-success,.fa-green {color: #00a65a !important;}.fa-warning,.fa-orange {color: #f39c12 !important;}.fa-danger,.fa-red {color: #f56954 !important;}.fa-gray {color: #d2d6de !important;}.fa-navy {color: #001F3F !important;}.fa-teal {color: #39CCCC !important;}.fa-purple {color: #605ca8 !important;}.fa-orange {color: #ff851b !important;}.fa-pink,.fa-maroon {color: #D81B60 !important;}.fa-black {color: #3c8dbc !important;}.fa-white {color: #fff !important;}.alert-danger-light,
+.alert-error-light {
+	background-color: #f2dede;
+    border-color: #ebccd1;
+    color: #a94442;
+}.form-group.has-primary label{color:#3c8dbc}.form-group.has-primary .form-control,.form-group.has-primary .input-group-addon{border-color:#3c8dbc;box-shadow:none}.form-group.has-success .help-block{color:#3c8dbc}

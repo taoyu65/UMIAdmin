@@ -4,72 +4,48 @@
     <?php $assetPath = url(config('umi.assets_path')) ?>
     <?php $path = url($assetPath . '/lte') ?>
 
-    <div class="alert alert-block alert-success">
-        <button type="button" class="close" data-dismiss="alert">
-            <i class="ace-icon fa fa-times"></i>
-        </button>
-        <i class="ace-icon fa fa-check green"></i>
-        {{trans('umiTrans::dashboard.welcome')}}
-        <strong class="green">
-            UMI Admin
-            <small>(v0.1)</small>
-            Made by Laravel 5.3, php 5.6+huikhuk
-        </strong>
+    <div class="callout callout-success">
+        <h4>{{trans('umiTrans::dashboard.welcome')}} <strong>UMI Admin</strong><small>(v0.1)</small></h4>
+        <p>Made by Laravel 5.3, php 5.6+</p>
     </div>
-    <div class="well">
-        <h4 class="blue smaller lighter bolder">{{trans('umiTrans::dashboard.admin')}}</h4>
-        {{trans('umiTrans::dashboard.info')}}<br><br>
-        {{trans('umiTrans::dashboard.wizard')}}
-        <span class="label label-lg label-success arrowed-right"><a href="#" class="white" id="wizardUser">{{trans('umiTrans::dashboard.createUser')}}</a></span>
-        <span class="label label-lg label-info arrowed-right"><a href="#" class="white" id="wizardRole">{{trans('umiTrans::dashboard.role')}}</a></span>
-        <span class="label label-lg label-danger arrowed-right"><a href="#" class="white" id="wizardSetRole">{{trans('umiTrans::dashboard.setRole')}}</a></span>
-        <span class="label label-lg label-warning arrowed-right"><a href="{{route('rolePermission')}}" target="_blank" class="white">{{trans('umiTrans::dashboard.permission')}}</a></span>
-        <span class="label label-lg label-purple"><a href="{{url('menuManagement' . '/' . config('umiEnum.system_table_name.umi_menus') . '/distribution')}}" target="_blank" class="white">{{trans('umiTrans::dashboard.sideMenu')}}</a></span>
+
+    <div class="box box-primary">
+        <div class="box-header with-border">
+            <h3 class="box-title">{{trans('umiTrans::dashboard.admin')}}</h3>
+            <div class="box-tools pull-right">
+                <button type="button" class="btn btn-box-tool" data-widget="remove"><i class="fa fa-times"></i></button>
+                <button type="button" class="btn btn-box-tool" data-widget="collapse"><i class="fa fa-minus"></i></button>
+            </div>
+        </div>
+        <div class="box-body">
+            {{trans('umiTrans::dashboard.info')}}<br><br>
+            <h4>{{trans('umiTrans::dashboard.wizard')}}
+            <span class="label label-danger"><a href="#" class="fa-white" id="wizardUser">{{trans('umiTrans::dashboard.createUser')}}</a></span>
+            <span class="label label-success"><a href="#" class="fa-white" id="wizardRole">{{trans('umiTrans::dashboard.role')}}</a></span>
+            <span class="label label label-info"><a href="#" class="fa-white" id="wizardSetRole">{{trans('umiTrans::dashboard.setRole')}}</a></span>
+            <span class="label label-warning"><a href="{{route('rolePermission')}}" target="_blank" class="fa-white">{{trans('umiTrans::dashboard.permission')}}</a></span>
+            <span class="label label-primary"><a href="{{url('menuManagement' . '/' . config('umiEnum.system_table_name.umi_menus') . '/distribution')}}" target="_blank" class="fa-white">{{trans('umiTrans::dashboard.sideMenu')}}</a></span>
+            </h4>
+        </div>
     </div>
+
     <div class="row">
-        <div class="col-sm-6">
-            <div class="widget-box transparent">
-                <div class="widget-header widget-header-flat">
-                    <h4 class="widget-title lighter">
-                        <i class="ace-icon fa fa- orange"></i>
-                        {{trans('umiTrans::dashboard.peopleFrom')}}
-                    </h4>
-
-                    <div class="widget-toolbar">
-                        <a href="#" data-action="collapse">
-                            <i class="ace-icon fa fa-chevron-up"></i>
-                        </a>
-                    </div>
+        <div class="col-xs-6">
+            <div class="box box-success">
+                <div class="box-header">
+                    <h3 class="box-title">{{trans('umiTrans::dashboard.peopleFrom')}}</h3>
                 </div>
-
-                <div class="widget-body">
-                    <div class="widget-main no-padding">
-                        <table class="table table-bordered table-striped">
-                            <thead class="thin-border-bottom">
-                            <tr>
-                                <th>
-                                    <i class="ace-icon fa fa-user blue"></i>user name
-                                </th>
-                                <th>
-                                    <i class="ace-icon fa fa-globe blue"></i>ip
-                                </th>
-                                <th class="hidden-480">
-                                    <i class="ace-icon fa fa-caret-right blue"></i>country
-                                </th>
-                                {{--<th class="hidden-480">
-                                    <i class="ace-icon fa fa-caret-right blue"></i>region
-                                </th>--}}
-                                <th class="hidden-480">
-                                    <i class="ace-icon fa fa-caret-right blue"></i>city
-                                </th>
-                                <th class="hidden-480">
-                                    <i class="ace-icon fa fa-caret-right blue"></i>Date
-                                </th>
-                            </tr>
-                            </thead>
-
-                            <tbody>
-                            @foreach($ips as $ip)
+                <!-- /.box-header -->
+                <div class="box-body table-responsive no-padding">
+                    <table class="table table-hover">
+                        <tr>
+                            <th>user name</th>
+                            <th>IP</th>
+                            <th>Country</th>
+                            <th>City</th>
+                            <th>Date</th>
+                        </tr>
+                        @foreach($ips as $ip)
                             <tr>
                                 <td>{{$ip->user_name}}</td>
                                 <td title="{{$ip->ip}}">
@@ -88,29 +64,18 @@
                                     <span class="label label-grey">{{time_tran($ip->created_at)}}</span>
                                 </td>
                             </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
-                        <div>{{$link}}</div>
-                    </div><!-- /.widget-main -->
-                </div><!-- /.widget-body -->
+                        @endforeach
+                    </table>
+                    <div>{{$link}}</div>
+                </div>
+                <!-- /.box-body -->
             </div>
         </div>
-        <div class="col-sm-6">
-            <div class="widget-box transparent">
-                <div class="widget-header widget-header-flat">
-                    <h4 class="widget-title lighter">
-                        <i class="ace-icon fa fa- orange"></i>
-                        {{trans('umiTrans::dashboard.chart')}}
-                    </h4>
-
-                    <div class="widget-toolbar">
-                        <a href="#" data-action="collapse">
-                            <i class="ace-icon fa fa-chevron-up"></i>
-                        </a>
-                    </div>
+        <div class="col-xs-6">
+            <div class="box box-danger">
+                <div class="box-header">
+                    <h3 class="box-title">{{trans('umiTrans::dashboard.chart')}}</h3>
                 </div>
-
                 <div class="widget-body">
                     <canvas id="myChart" width="95%" height="38"></canvas>
                 </div>

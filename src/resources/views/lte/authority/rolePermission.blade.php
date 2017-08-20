@@ -3,32 +3,44 @@
 @section('content')
 
     <?php $assetPath = url(config('umi.assets_path')) ?>
-    <?php $path = url($assetPath . '/ace') ?>
+    <?php $path = url($assetPath . '/lte') ?>
 
-    <h3 class="header smaller orange">{{trans('umiTrans::rolePermission.selectRole')}}: <strong><span id="roleTitle" class="red roleTitle"></span></strong></h3>
-    <form class="form-horizontal" id="updateSubmit" action="{{url('authority/wizardUpdate')}}" method="post">
-        {!! csrf_field() !!}
-        <div class="form-group has-success">
-            <label for="role_id" class="col-xs-12 col-sm-2 control-label no-padding-right">{{trans('umiTrans::rolePermission.role')}} </label>
-            <div class="col-xs-12 col-sm-5">
-                <select id="role_id" name="role_id" class="chosen-select form-control" data-placeholder="{{trans('umiTrans::rolePermission.selectRole')}}" required>
-                    <option value="">{{trans('umiTrans::rolePermission.selectRole')}}...</option>
-                    @foreach($roles as $id => $role)
-                        <option value="{{$id}}">{{$role}}</option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="col-xs-12 col-xs-2">
-                <button class="btn btn-success btn-sm" type="button" id="addNewRole">{{trans('umiTrans::rolePermission.addNewRole')}}</button>
+    <link rel="stylesheet" href="{{$path}}/plugins/iCheck/all.css">
+
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="box box-primary">
+                <div class="box-header">
+                    <h3 class="box-title Bold">{{trans('umiTrans::rolePermission.selectRole')}}:</h3>
+                    <strong><span id="roleTitle" class="red roleTitle"></span></strong>
+                </div>
+                <div class="widget-body">
+                    <form class="form-horizontal" id="updateSubmit" action="{{url('authority/wizardUpdate')}}" method="post">
+                        {!! csrf_field() !!}
+                        <div class="form-group has-info">
+                            <label for="role_id" class="col-xs-12 col-sm-2 control-label no-padding-right">{{trans('umiTrans::rolePermission.role')}} </label>
+                            <div class="col-xs-12 col-sm-5">
+                                <select id="role_id" name="role_id" class="chosen-select form-control" data-placeholder="{{trans('umiTrans::rolePermission.selectRole')}}" required>
+                                    <option value="">{{trans('umiTrans::rolePermission.selectRole')}}...</option>
+                                    @foreach($roles as $id => $role)
+                                        <option value="{{$id}}">{{$role}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                            <div class="col-xs-12 col-xs-2">
+                                <button class="btn bg-olive btn-flat" type="button" id="addNewRole">{{trans('umiTrans::rolePermission.addNewRole')}}</button>
+                            </div>
+                        </div>
+                        <input type="hidden" name="oldPermissions" id="oldPermissions">
+                        <input type="hidden" name="newPermissions" id="newPermissions">
+                    </form>
+                    <br>
+                </div>
             </div>
         </div>
-        <input type="hidden" name="oldPermissions" id="oldPermissions">
-        <input type="hidden" name="newPermissions" id="newPermissions">
-    </form>
-    @include('umi::common.authority.permissionCheckBox')
+    </div>
 
-    <div class="hr hr-dotted"></div>
-    <div class="space-2"></div>
+    @include('umi::common.authority.permissionCheckBox')
 
     <form class="form-horizontal">
         <div class="form-group has-success">
@@ -39,7 +51,8 @@
         </div>
     </form>
 
-    <script src="{{$path}}/js/jquery.validate.min.js"></script>
+    <script src="{{$assetPath}}/js/jquery.validate.min.js"></script>
+    <script src="{{$path}}/plugins/iCheck/icheck.min.js"></script>
 
     <script type="text/javascript">
         $(document).ready(function () {
@@ -66,16 +79,19 @@
                             //循环检查权限
                             //circulate to check all the permissions
                             $('#form').find('input[type="checkbox"].permissionCheckBox:not(:disabled)').each(function () {
-                                var checkBoxName = $(this).prop('name');
-                                if ($.inArray(checkBoxName, data) !== -1) {
-                                    $(this).prop('checked', 'checked');
+                                var checkBoxName = $(this).prop('name');console.log($.inArray(checkBoxName, data));
+                                if ($.inArray(checkBoxName, data) === -1) {
+                                    //$(this).prop('checked', 'checked');
+                                    $(this).iCheck('uncheck');
                                 } else {
-                                    $(this).removeAttr('checked');
+                                    $(this).iCheck('check');
+                                    //$(this).removeAttr('checked');
                                 }
                             });
                         } else {
                             $('#form').find('input[type="checkbox"].permissionCheckBox:not(:disabled)').each(function () {
-                                $(this).removeAttr('checked');
+                                //$(this).removeAttr('checked');
+                                $(this).iCheck('uncheck');
                             });
                         }
                     },
@@ -95,13 +111,13 @@
                 //hidden field for submitting at the end
                 var newPermission = [];
                 $('#form').find('input[type="checkbox"].permissionCheckBox:not(:disabled)').each(function () {
-                    if ($(this).prop('checked')) {
+                    if ($(this).is(':checked')) {
                         newPermission.push($(this).prop('name'));
                     }
                 });
                 $('#newPermissions').val(JSON.stringify(newPermission));
 
-                $("#updateSubmit").validate({errorClass: 'red'});
+                $("#updateSubmit").validate({errorClass: 'text-red'});
                 $('#updateSubmit').submit();
             });
 

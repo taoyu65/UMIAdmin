@@ -38,7 +38,7 @@ class umiTableBreadBuilder_LTE implements tableBreadInterface
         $html .=<<<UMI
         <script>
             jQuery(function ($) {
-                $("#umiForm").validate({errorClass: "red"});
+                $("#umiForm").validate({errorClass: "text-red"});
             })
         </script>
 UMI;
