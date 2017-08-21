@@ -1,12 +1,10 @@
 
 <div class="form-group">
-    <label class="control-label col-xs-12 col-sm-1 no-padding-right" for="field">{{trans('umiTrans::fieldDisplay.tableField')}}</label>
+    <label class="control-labelcol-sm-1" for="field">{{trans('umiTrans::fieldDisplay.tableField')}}</label>
     <div class="col-xs-12 col-sm-4">
-        <div class="clearfix">
-            <select class="form-control" id="field" name="field" required title="{{trans('umiTrans::fieldDisplay.tip1')}}">
-                <option value=""></option>
-            </select>
-        </div>
+        <select class="form-control" id="field" name="field" required title="{{trans('umiTrans::fieldDisplay.tip1')}}">
+            <option value=""></option>
+        </select>
     </div>
     <i class="fa fa-question-circle fa-lg popover-info red" aria-hidden="true" data-rel="popover"
        data-trigger="hover" style="transform: translate(0,4px);" data-placement="auto right"
@@ -23,7 +21,7 @@
         if (table !== '') {
             //加载符号
             //showing loading icon
-            $('#field').html("<i id='responseLoading' class='ace-icon fa fa-spinner fa-spin orange bigger-170'></i>");
+            $('#field').html("<i id='responseLoading' class='fa fa-spinner fa-spin fa-orange bigger-170'></i>");
             loadTableFields($('#tableName'));
         }
     });
@@ -44,7 +42,7 @@
 
         //加载符号
         //showing loading icon
-        $('#field').after("<i id='responseLoading' class='ace-icon fa fa-spinner fa-spin orange bigger-125'></i>");
+        $('#field').after("<i id='responseLoading' class='fa fa-spinner fa-spin fa-orange bigger-125'></i>");
 
         //获取数据
         //get data

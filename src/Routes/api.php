@@ -37,10 +37,11 @@ Route::get('/fields/noExist/{fieldTable}/{table}/{tableId}', function ($fieldTab
 if (!function_exists('getFields')) {
     function getFields($table)
     {
-        return DB::table('information_schema.COLUMNS')
+        return \Illuminate\Support\Facades\Schema::getColumnListing('users');
+        /*return DB::table('information_schema.COLUMNS')
             ->select('COLUMN_NAME')
             ->where('TABLE_NAME', $table)
-            ->pluck('COLUMN_NAME');
+            ->pluck('COLUMN_NAME');*/
     }
 }
 

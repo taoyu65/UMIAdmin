@@ -3,78 +3,70 @@
 @section('content')
 
     <?php $assetPath = url(config('umi.assets_path')) ?>
-    <?php $path = url($assetPath . '/ace') ?>
+    <?php $path = url($assetPath . '/lte') ?>
 
-    <link rel="stylesheet" href="{{$path}}/css/chosen.min.css" />
+    <link rel="stylesheet" href="{{$path}}/bower_components/select2/dist/css/select2.min.css">
+    <link rel="stylesheet" href="{{$path}}/dist/css/AdminLTE.min.css">
 
     <div class="col-sm-12">
-        <h3 class="header blue lighter smaller">
-            <i class="ace-icon fa fa-gear smaller-90"></i>
-            {{trans('umiTrans::popupWindow.generateRule')}}
-        </h3>
+        <div class="box box-primary with-border">
+            <div class="box-header">
+                <h4 class="box-title text-primary"><i class="fa fa-gear fa-primary"></i> {{trans('umiTrans::popupWindow.generateRule')}}</h4>
+            </div>
+            <div class="box-body">
+                <div class="col-xs-12">
+                    <form class="form-horizontal">
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="tableName">{{trans('umiTrans::popupWindow.tableName')}}</label>
+                            <div class="col-sm-4">
+                                <select class="form-control" id="tableName" required>
+                                    <option value="">{{trans('umiTrans::popupWindow.selectTable')}}</option>
+                                    @foreach($table as $item => $value)
+                                        <option value="{{$item}}">{{$item}}</option>
+                                    @endforeach
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="returnField">{{trans('umiTrans::popupWindow.returnField')}}</label>
+                            <div class="col-sm-4">
+                                <select class="form-control" id="returnField" name="returnField" required>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="searchField">{{trans('umiTrans::popupWindow.searchField')}}</label>
+                            <div class="col-sm-4">
+                                <select class="form-control" id="searchField" name="searchField" required>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2" for="showField">{{trans('umiTrans::popupWindow.showField')}}</label>
+                            <div class="col-sm-4" id="showFieldParent">
+                                <select class="form-control select2" id="showField" multiple="multiple" data-placeholder="{{trans('umiTrans::popupWindow.chooseField')}}">
+
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label class="control-label col-sm-2"></label>
+                            <div class="col-sm-4">
+                                <button type="button" class="btn btn-primary btn-flat" id="generate">{{trans('umiTrans::popupWindow.generateRole')}}</button>
+                                <button type="button" class="btn btn-danger btn-flat" id="close">{{trans('umiTrans::popupWindow.close')}}</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <form class="form-horizontal" method="post" action="">
-        <div class="form-group">
-            <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="tableName">{{trans('umiTrans::popupWindow.tableName')}}</label>
-            <div class="col-xs-12 col-sm-4">
-                <select class="form-control" id="tableName" required>
-                    <option value="">{{trans('umiTrans::popupWindow.selectTable')}}</option>
-                    @foreach($table as $item => $value)
-                        <option value="{{$item}}">{{$item}}</option>
-                    @endforeach
-                </select>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="returnField">{{trans('umiTrans::popupWindow.returnField')}}</label>
-            <div class="col-xs-12 col-sm-4">
-                <select class="form-control" id="returnField" name="returnField" required>
-                </select>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="searchField">{{trans('umiTrans::popupWindow.searchField')}}</label>
-            <div class="col-xs-12 col-sm-4">
-                <select class="form-control" id="searchField" name="searchField" required>
-                </select>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="showField">{{trans('umiTrans::popupWindow.showField')}}</label>
-            <div class="col-xs-12 col-sm-4" id="showFieldParent">
-                <select multiple="" class="chosen-select form-control tag-input-style" id="showField" data-placeholder="{{trans('umiTrans::popupWindow.chooseField')}}">
-                </select>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label col-xs-12 col-sm-2 no-padding-right"></label>
-            <div class="col-xs-12 col-sm-4">
-                <button type="button" class="btn btn-info" id="generate">{{trans('umiTrans::popupWindow.generateRole')}}</button>
-                <button type="button" class="btn btn-grey" id="close">{{trans('umiTrans::popupWindow.close')}}</button>
-            </div>
-        </div>
-    </form>
-
-    <script src="{{$path}}/js/chosen.jquery.min.js"></script>
+    <script src="{{$path}}/bower_components/select2/dist/js/select2.full.min.js"></script>
 
     <script type="text/javascript">
 
         $(document).ready(function () {
-            if(!ace.vars['touch']) {
-                $('.chosen-select').chosen({allow_single_deselect:true});
-                //resize the chosen on window resize
-
-                $(window)
-                    .off('resize.chosen')
-                    .on('resize.chosen', function() {
-                        $('.chosen-select').each(function() {
-                            var $this = $(this);
-                            $this.next().css({'width': $this.parent().width()});
-                        })
-                    }).trigger('resize.chosen');
-            };
-
             $('#close').click(function () {
                 parent.layer.closeAll();
             });
@@ -111,12 +103,13 @@
                     success: function (data) {
                         $('#showFieldParent').empty();
                         data = JSON.parse(data);
-                        $('#showFieldParent').append('<select multiple="" class="chosen-select form-control tag-input-style" id="showField" data-placeholder="Choose Fields...">');
+                        $('#showFieldParent').append('<select multiple="multiple" class="form-control select2" id="showField" data-placeholder="Choose Fields...">');
                         $.each(data, function (value, text) {
                             $('#showField').append("<option value='" + text + "'>" + text + "</option>");
                         });
                         $('#showFieldParent').append('</select>');
-                        $('.chosen-select').chosen({allow_single_deselect:true});
+                        $('.select2').select2();
+
                         //复制获得的所有字段
                         //clone all the fields
                         var cloneFields = $('#showField option').clone();
