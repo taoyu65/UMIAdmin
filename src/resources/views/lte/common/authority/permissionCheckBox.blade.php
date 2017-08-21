@@ -5,7 +5,7 @@
                 <h3 class="box-title">{{trans('umiTrans::permissionCheckBox.permissionOfRole')}}</h3>
             </div>
             <div class="widget-body">
-                <div class="col-xs-12 col- center">
+                <div class="col-xs-12 ">
                     <div class="alert alert-danger-light alert-dismissible">
                         <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
                         <h4><i class="icon fa fa-ban"></i> {{trans('umiTrans::permissionCheckBox.important')}}</h4>
@@ -78,7 +78,7 @@
                                 <div class="checkbox">
                                     <label>
                                         {{--<input class="minimal checkRowAll {{$table->table_name}}" type="checkbox" />--}}
-                                        <input type="button" value="Select All" class="btn btn-flat btn-sm bg-purple" onclick="checkAll(this, '{{$table->table_name}}')">
+                                        <input type="button" value="Select All" class="btn btn-flat btn-sm bg-orange" onclick="checkAll(this, '{{$table->table_name}}')">
                                         {{--<span class="lbl"> </span>--}}
                                     </label>
                                 </div>
@@ -136,14 +136,14 @@
             });
             $(btn).attr('value', 'Erase All');
             $(btn).removeAttr('class');
-            $(btn).attr('class', 'btn btn-flat btn-sm bg-orange');
+            $(btn).attr('class', 'btn btn-flat btn-sm bg-purple');
         } else if ($(btn).val() === 'Erase All') {
             $('.' + e+':not(:disabled)').each(function () {
                 $(this).iCheck('uncheck');
             });
             $(btn).attr('value', 'Select All');
             $(btn).removeAttr('class');
-            $(btn).attr('class', 'btn btn-flat btn-sm bg-purple');
+            $(btn).attr('class', 'btn btn-flat btn-sm bg-orange');
         }
     }
 </script>

@@ -6,6 +6,7 @@
     <?php $path = url($assetPath . '/lte') ?>
 
     <link rel="stylesheet" href="{{$assetPath}}/css/style.css">
+    <link rel="stylesheet" href="{{$path}}/plugins/iCheck/all.css">
 
     <div class="box box-success box-solid">
         <div class="box-header with-border">
@@ -14,8 +15,8 @@
         <div class="box-body">
             <div class="col-xs-12 text-center">
                 <div class="f1">
-                    <h3>{{trans('umiTrans::wizard.wizardTitle')}}</h3>
-                    <p>Please follow the step</p>
+                    {{--<h3>{{trans('umiTrans::wizard.wizardTitle')}}</h3>
+                    <p>Please follow the step</p>--}}
                     <div class="f1-steps">
                         <div class="f1-progress">
                             <div class="f1-progress-line" data-now-value="25" data-number-of-steps="4" style="width: 25%;"></div>
@@ -38,11 +39,12 @@
                         </div>
                     </div>
 
-                    <fieldset>
+                    {{-- step 1 --}}
+                    <fieldset step="1">
                         <br/>
                         <div class="box box-primary">
                             <div class="box-header with-border">
-                                <h3 class="text-primary">{{trans('umiTrans::wizard.givePermission')}}</h3>
+                                <h4 class="text-primary">{{trans('umiTrans::wizard.givePermission')}}</h4>
                             </div>
                             <div class="form-horizontal">
                                 <div class="box-body">
@@ -53,8 +55,8 @@
                                                 <div class="input-group-btn">
                                                     <button type="button" class="btn btn-primary dropdown-toggle btn-flat" data-toggle="dropdown" id="userBtn">{{trans('umiTrans::wizard.selectUser')}}
                                                         <span class="fa fa-caret-down"></span></button>
-                                                    <button type="button" class="btn btn-primary dropdown-toggle btn-flat" data-toggle="dropdown" id="loadUserBtn" disabled="disabled" style="display: none">{{trans('umiTrans::wizard.loading')}}
-                                                        <i class='ace-icon fa fa-spinner fa-spin white bigger-125'></i></button>
+                                                    <button type="button" class="btn btn-primary dropdown-toggle btn-flat"id="loadUserBtn" disabled="disabled" style="display: none">{{trans('umiTrans::wizard.loading')}}
+                                                        <i class='fa fa-spinner fa-spin fa-fw'></i></button>
                                                     <ul class="dropdown-menu userStep">
                                                         @foreach($users as $id=>$user)
                                                             <li>
@@ -85,6 +87,12 @@
                                             </div>
                                             <label class="text-red" hidden="hidden" id="errorUser">Please select a user</label>
                                         </div>
+                                        <div class="row">
+                                            <div class="col-sm-10 col-sm-offset-2 fa-red" id="systemRole" hidden="hidden">
+                                                <strong>{{trans('umiTrans::wizard.important')}}</strong>
+                                                {!! trans('umiTrans::wizard.tip1') !!}
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -92,7 +100,7 @@
 
                         <div class="box box-success">
                             <div class="box-header with-border">
-                                <h3 class="text-success">{{trans('umiTrans::wizard.moreAction')}}</h3>
+                                <h4 class="text-success">{{trans('umiTrans::wizard.moreAction')}}</h4>
                             </div>
                             <div class="form-horizontal">
                                 <div class="box-body">
@@ -107,48 +115,140 @@
                         </div>
 
                         <div class="f1-buttons">
-                            <button type="button" class="btn btn-prev btn-navy btn-flat" disabled="disabled">
-                                <i class="ace-icon fa fa-arrow-left"></i>
+                            <button type="button" class="btn btn-previous btn-navy btn-flat" disabled="disabled">
+                                <i class="fa fa-arrow-left"></i>
                                 {{trans('umiTrans::wizard.prev')}}
                             </button>
                             <button type="button" class="btn btn-success btn-flat btn-next">
                                 {{trans('umiTrans::wizard.next')}}
-                                <i class="ace-icon fa fa-arrow-right icon-on-right"></i>
+                                <i class="fa fa-arrow-right icon-on-right"></i>
                             </button>
                         </div>
                     </fieldset>
 
-                    <fieldset>
-                        <div class="box box-success box-solid">
+                    {{-- step 2 --}}
+                    <fieldset step="2">
+                        <br/>
+                        <div class="box box-primary">
                             <div class="box-header with-border">
-                                <h3 class="box-title">{{trans('umiTrans::wizard.wizardTitle')}}</h3>
+                                <h4 class="text-primary">{{trans('umiTrans::wizard.selectRole')}}</h4>
                             </div>
-                            <div class="box-body">
+                            <div class="form-horizontal">
+                                <div class="box-body">
+                                    <div class="form-group">
+                                        <label for="" class="col-sm-2 control-label text-primary">{{trans('umiTrans::wizard.roleName')}} </label>
+                                        <div class="col-sm-2">
+                                            <div class="btn-group">
+                                            <div class="input-group-btn">
+                                                <button class="btn btn-primary dropdown-toggle btn-flat" disabled="disabled" id="loadRoleBtn">
+                                                    {{trans('umiTrans::wizard.loading')}}
+                                                    <i class='fa fa-spinner fa-spin fa-fw'></i>
+                                                </button>
+                                                <button data-toggle="dropdown" class="btn btn-primary dropdown-toggle btn-flat" id="roleBtn" style="display: none">
+                                                    {{trans('umiTrans::wizard.selectRole')}}
+                                                    <i class="fa fa-caret-down"></i>
+                                                </button>
+                                                <ul class="dropdown-menu roleStep">
+                                                </ul>
+                                            </div>
+                                        </div>
+                                        </div>
+                                        <div class="col-sm-2">
+                                        <button class="btn btn-primary btn-flat" id="roleRefresh" type="button">
+                                            {{trans('umiTrans::wizard.refresh')}}
+                                            <i class="fa fa-refresh"></i>
+                                        </button>
+                                    </div>
+                                    </div>
+                                    <div class="form-group has-primary">
+                                        <label class="col-sm-2 control-label" for=""></label>
+                                        <div class="col-sm-5">
+                                            <div class="input-group">
+                                                <input type="text" class="form-control" id="roleName" name="roleName" disabled="disabled">
+                                                <span class="input-group-addon"><i class="fa fa-users fa-primary"></i></span>
+                                            </div>
+                                            <label class="text-red" hidden="hidden" id="errorRole">Please select a role</label>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
+
+                        <div class="box box-success">
+                            <div class="box-header with-border">
+                                <h4 class="text-success">{{trans('umiTrans::wizard.moreAction')}}</h4>
+                            </div>
+                            <div class="form-horizontal">
+                                <div class="box-body">
+                                    <div class="form-group">
+                                        <label for="" class="col-sm-2 control-label text-success"></label>
+                                        <div class="col-sm-12 col-sm-5">
+                                            <button class="btn btn-success btn-flat" type="button" id="createRoleBtn">{{trans('umiTrans::wizard.createRole')}}</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="f1-buttons">
-                            <button type="button" class="btn btn-previous">Previous</button>
-                            <button type="button" class="btn btn-next">Next</button>
+                            <button type="button" class="btn btn-previous  btn-flat">
+                                <i class="fa fa-arrow-left"></i>
+                                {{trans('umiTrans::wizard.prev')}}
+                            </button>
+                            <button type="button" class="btn btn-success btn-flat btn-next">
+                                {{trans('umiTrans::wizard.next')}}
+                                <i class="fa fa-arrow-right"></i>
+                            </button>
                         </div>
                     </fieldset>
 
-                    <fieldset>
+                    {{-- step 3 --}}
+                    <fieldset step="3">
+                        @include('umi::common.authority.permissionCheckBox')
                         <div class="f1-buttons">
-                            <button type="button" class="btn btn-previous">Previous</button>
-                            <button type="button" class="btn btn-next">Next</button>
+                            <button type="button" class="btn btn-previous btn-flat">
+                                <i class="fa fa-arrow-left"></i>
+                                {{trans('umiTrans::wizard.prev')}}
+                            </button>
+                            <button type="button" class="btn btn-success btn-flat btn-next">
+                                {{trans('umiTrans::wizard.next')}}
+                                <i class="fa fa-arrow-right icon-on-right"></i>
+                            </button>
                         </div>
                     </fieldset>
 
-                    <fieldset>
+                    {{-- step 4 --}}
+                    <fieldset step="4">
+                        <div class="col-sm-12">
+                            <h3 class="text-red">{{trans('umiTrans::wizard.warning')}}</h3>
+                            <div class="alert alert-danger alert-dismissable">
+                                <button type="button" class="close" data-dismiss="alert">
+                                    <i class="fa fa-times"></i>
+                                </button>
+                                <p>
+                                    <strong>
+                                        <i class="fa fa-check"></i>
+                                        {{trans('umiTrans::wizard.handsUp')}}
+                                    </strong>
+                                    {!! trans('umiTrans::wizard.tip2') !!}
+                                </p>
+                            </div>
+                        </div>
                         <div class="f1-buttons">
-                            <button type="button" class="btn btn-previous">Previous</button>
-                            <button type="submit" class="btn btn-submit">Submit</button>
+                            <button type="button" class="btn btn-previous btn-flat">
+                                <i class="fa fa-arrow-left"></i>
+                                {{trans('umiTrans::wizard.prev')}}
+                            </button>
+                            <button type="button" class="btn btn-success btn-flat btn-submit">
+                                Finish
+                                <i class="fa fa-arrow-right"></i>
+                            </button>
                         </div>
                     </fieldset>
                 </form>
             </div>
+            </div>
         </div>
-    </div>
     </div>
     <form action="{{url('authority/wizardUpdate')}}" method="post" id="updateAuthority">
         {!! csrf_field() !!}
@@ -158,12 +258,10 @@
         <input type="hidden" name="newPermissions" id="newPermissions">
     </form>
 
-
     <script src="{{$path}}/plugins/iCheck/icheck.min.js"></script>
 
     <script>
         $(document).ready(function () {
-
             //点击用户列表
             //click user list
             $('.userStep a').click(function () {
@@ -248,7 +346,7 @@
         //load role list for step 2
         function getRoleName() {
             var url = '{{url("authority/ajax/roles")}}';
-            var ul = $('#roleStep ul');
+            var ul = $('.roleStep');
             $.ajax({
                 type: 'get',
                 url: url,
@@ -264,7 +362,7 @@
                     loadDom.attr('style', 'display:none');
                     //点击角色列表
                     //click role list
-                    $('#roleStep a').click(function () {
+                    $('.roleStep a').click(function () {
                         $('#roleName').val($(this).text());
                         //最后提交表单使用的隐藏域
                         //hidden field for submitting at the end
@@ -296,8 +394,6 @@
             }
         }
 
-
-
         function scroll_to_class(element_class, removed_height) {
             var scroll_to = $(element_class).offset().top - removed_height;
             if($(window).scrollTop() != scroll_to) {
@@ -318,16 +414,54 @@
             progress_line_object.attr('style', 'width: ' + new_value + '%;').data('now-value', new_value);
         }
 
+        function loadPermissions() {
+            var roleId = $('#role_id').val();
+            if (roleId === '')
+                return false;
+
+            var load = layer.load(3, {
+                shade: [0.6, '#000']
+            });
+
+            var url = '{{url("/api/checkRole")}}' + '/' + roleId;
+            $.ajax({
+                type: 'get',
+                url: url,
+                success: function (data) {
+                    if (data.length > 0) {
+                        //最后提交表单使用的隐藏域
+                        //hidden field for submitting at the end
+                        $('#oldPermissions').val(JSON.stringify(data));
+                        //循环检查权限
+                        //circulate to check all the permissions
+                        $('#form').find('input[type="checkbox"].permissionCheckBox:not(:disabled)').each(function () {
+                            var checkBoxName = $(this).prop('name');
+                            if ($.inArray(checkBoxName, data) === -1) {
+                                //$(this).prop('checked', 'checked');
+                                $(this).iCheck('uncheck');
+                            } else {
+                                $(this).iCheck('check');
+                                //$(this).removeAttr('checked');
+                            }
+                        });
+                    } else {
+                        $('#form').find('input[type="checkbox"].permissionCheckBox:not(:disabled)').each(function () {
+                            //$(this).removeAttr('checked');
+                            $(this).iCheck('uncheck');
+                        });
+                    }
+                },
+                error: function () {
+                    layer.alert('Something went wrong!', {title: 'Wrong'})
+                },
+                complete: function () {
+                    layer.close(load);
+                }
+            });
+        }
 
         jQuery(document).ready(function() {
-            /*
-             Form
-             */
             $('.f1 fieldset:first').fadeIn('slow');
-
-            $('.f1 input[type="text"], .f1 input[type="password"], .f1 textarea').on('focus', function() {
-                $(this).removeClass('input-error');
-            });
 
             // next step
             $('.f1 .btn-next').on('click', function() {
@@ -338,15 +472,35 @@
                 var progress_line = $(this).parents('.f1').find('.f1-progress-line');
 
                 // fields validation
-                parent_fieldset.find('#userName, input[type="password"], textarea').each(function() {
-                    if( $(this).val() == "" ) {
+                if ($(parent_fieldset).attr('step') == 1) {
+                    if (parent_fieldset.find('#userName').val() == '') {
                         $('#errorUser').show();
                         next_step = false;
-                    }
-                    else {
+                    } else {
                         $('#errorUser').hide();
+                        getRoleName();
                     }
-                });
+                }
+
+                if ($(parent_fieldset).attr('step') == 2) {
+                    if (parent_fieldset.find('#roleName').val() == '') {
+                        $('#errorRole').show();
+                        next_step = false;
+                    } else {
+                        $('#errorRole').hide();
+                        loadPermissions();
+                    }
+                }
+
+                if ($(parent_fieldset).attr('step') == 3) {
+                    var newPermission = [];
+                    $('#form').find('input[type="checkbox"].permissionCheckBox:not(:disabled)').each(function () {
+                        if ($(this).is(':checked')) {
+                            newPermission.push($(this).prop('name'));
+                        }
+                    });
+                    $('#newPermissions').val(JSON.stringify(newPermission));
+                }
                 // fields validation
 
                 if( next_step ) {
@@ -361,7 +515,10 @@
                         scroll_to_class( $('.f1'), 20 );
                     });
                 }
+            });
 
+            $('.f1 .btn-submit').on('click', function() {
+                $('#updateAuthority').submit();
             });
 
             // previous step
@@ -383,19 +540,8 @@
             });
 
             // submit
-            $('.f1').on('submit', function(e) {
+            $('.f1').on('submit', function() {alert('asdf');
 
-                // fields validation
-                $(this).find('input[type="text"], input[type="password"], textarea').each(function() {
-                    if( $(this).val() == "" ) {
-                        e.preventDefault();
-                        $(this).addClass('input-error');
-                    }
-                    else {
-                        $(this).removeClass('input-error');
-                    }
-                });
-                // fields validation
             });
         });
     </script>

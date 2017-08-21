@@ -1,3 +1,4 @@
+
 /* 
 strong { font-weight: 500; }
 
@@ -28,17 +29,17 @@ h4 {
     color: #555;
     line-height: 26px;
 }
-
+ */
 img { max-width: 100%; }
 
 ::-moz-selection { background: #f35b3f; color: #fff; text-shadow: none; }
 ::selection { background: #f35b3f; color: #fff; text-shadow: none; }
- */
+
 
 /***** Top menu *****/
 
 .navbar {
-	padding-top: 10px;
+	padding-top: 0px;
 	background: #333;
 	background: rgba(51, 51, 51, 0.3);
 	border: 0;
@@ -76,7 +77,7 @@ ul.navbar-nav {
 
 /***** Top content *****/
 
-.top-content { padding: 40px 0 170px 0; }
+/* .top-content { padding: 40px 0 170px 0; }
 
 .top-content .text { color: #fff; }
 .top-content .text h1 { color: #fff; }
@@ -87,7 +88,7 @@ ul.navbar-nav {
 .top-content .description a:focus { border-bottom: 1px dotted #fff; }
 
 .form-box { padding-top: 40px; }
-
+ */
 .f1 {
 	padding: 25px; background: #fff;
 	-moz-border-radius: 4px; -webkit-border-radius: 4px; border-radius: 4px;
@@ -99,7 +100,7 @@ ul.navbar-nav {
 .f1-progress { position: absolute; top: 24px; left: 0; width: 100%; height: 1px; background: #ddd; }
 .f1-progress-line { position: absolute; top: 0; left: 0; height: 1px; background: #f35b3f; }
 
-.f1-step { position: relative; float: left; width: 33.333333%; padding: 0 5px; }
+.f1-step { position: relative; float: left; width: 25%; padding: 0 5px; }
 
 .f1-step-icon {
 	display: inline-block; width: 40px; height: 40px; margin-top: 4px; background: #ddd;

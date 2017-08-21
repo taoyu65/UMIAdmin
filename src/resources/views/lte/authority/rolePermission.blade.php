@@ -79,7 +79,7 @@
                             //循环检查权限
                             //circulate to check all the permissions
                             $('#form').find('input[type="checkbox"].permissionCheckBox:not(:disabled)').each(function () {
-                                var checkBoxName = $(this).prop('name');console.log($.inArray(checkBoxName, data));
+                                var checkBoxName = $(this).prop('name');
                                 if ($.inArray(checkBoxName, data) === -1) {
                                     //$(this).prop('checked', 'checked');
                                     $(this).iCheck('uncheck');

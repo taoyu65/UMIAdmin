@@ -97,7 +97,7 @@
                                     <div class="help-block col-xs-12 col-sm-reset inline"> {{trans('umiTrans::wizard.selectUser')}} </div>
                                     <div class="col-xs-offset-2 col-xs-12 red" id="systemRole" hidden="hidden">
                                         <strong>{{trans('umiTrans::wizard.important')}}</strong>
-                                        {{trans('umiTrans::wizard.tip1')}}
+                                        {!! trans('umiTrans::wizard.tip1') !!}
                                     </div>
                                 </div>
                             </form>

@@ -98,10 +98,6 @@
         {!! $footer !!}
     </footer>
 </div>
-<!-- 显示操作信息 使用 gritter 和 一次性的快闪session -->
-<!-- show all the operation information, use gritter and flash session -->
-{!! \Illuminate\Support\Facades\Session::get('showMessage') !!}
-{{\Illuminate\Support\Facades\Session::pull('showMessage')}}
 
 <!-- Bootstrap 3.3.7 -->
 <script src="{{$path}}/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
@@ -118,5 +114,9 @@
 <script src="{{$assetPath}}/layer/layer.js"></script>
 <!-- ace plugin -->
 <script src="{{$assetPath}}/js/jquery.gritter.min.js"></script>
+<!-- 显示操作信息 使用 gritter 和 一次性的快闪session -->
+<!-- show all the operation information, use gritter and flash session -->
+{!! \Illuminate\Support\Facades\Session::get('showMessage') !!}
+{{\Illuminate\Support\Facades\Session::pull('showMessage')}}
 </body>
 </html>
