@@ -5,6 +5,7 @@ use YM\Models\Search;
 use YM\Models\SearchTab;
 use YM\Facades\Umi as Ym;
 use YM\Umi\Contracts\PageBuilder\searchInterface;
+use YM\Umi\FactorySearchDataType;
 
 class umiSearchBuilder_ACE implements searchInterface
 {

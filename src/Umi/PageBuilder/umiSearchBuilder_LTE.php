@@ -5,6 +5,7 @@ use YM\Models\Search;
 use YM\Models\SearchTab;
 use YM\Facades\Umi as Ym;
 use YM\Umi\Contracts\PageBuilder\searchInterface;
+use YM\Umi\FactorySearchDataType;
 
 class umiSearchBuilder_LTE implements searchInterface
 {
@@ -16,7 +17,7 @@ class umiSearchBuilder_LTE implements searchInterface
 
     public function __construct()
     {
-        $this->firstIcon = 'green ace-icon fa fa-search bigger-120';
+        $this->firstIcon = 'fa fa-search';
         $this->currentTableId = Ym::currentTableId();
         $this->search = new Search();
     }
@@ -36,12 +37,13 @@ class umiSearchBuilder_LTE implements searchInterface
         #获得并缓存所有当前标签的搜索选项
         #get and cache all the content of current tab
         $tabIdList = $searchTabList->pluck('id')->flatten()->all();     //即将被缓存的数据的索引 all the index of data will be cached
-        if ($tabIdList == null) return;
+        if ($tabIdList == null) return false;
 
         #缓存数据  cached data
         $this->searchContent = $this->search->content($tabIdList);
 
-        #循环所有标签     #for each all the tabs
+        #循环所有标签
+        #for each all the tabs
         $active = 'active';     //第一个标签默认为激活    the first tab will be active by default
         $tabs = '';
         foreach ($searchTabList as $searchTab) {
@@ -61,15 +63,15 @@ class umiSearchBuilder_LTE implements searchInterface
         }
 
         $html = <<<UMI
-        <div class="tabbable">
-            <ul class="nav nav-tabs" id="myTab1">
-                $tabs
+        
+        <div class="nav-tabs-custom">
+            <ul class="nav nav-tabs">
+              $tabs
             </ul>
-
             <div class="tab-content">
-                $content
+              $content
             </div>
-        </div>
+        </div>  
         <br>
 UMI;
         return $html;
@@ -122,18 +124,18 @@ UMI;
                     <input type="hidden" name="std" value="$tabDataId">
                 </div>
                 <div class="row">
-			    <div class="col-md-12">
-					<button class="btn btn-sm btn-info" type="submit" >
-						<i class="ace-icon fa fa-search bigger-110"></i>
-						Search
-					</button>
-					&nbsp; &nbsp; &nbsp;
-					<button class="btn btn-sm" type="reset">
-						<i class="ace-icon fa fa-undo bigger-110"></i>
-						Reset
-					</button>
-				</div>
-			    </div>
+                    <div class="col-sm-12">
+                        <button class="btn btn-primary btn-flat" type="submit" >
+                            <i class="fa fa-search"></i>
+                            Search
+                        </button>
+                        &nbsp; &nbsp; &nbsp;
+                        <button class="btn btn-primary btn-flat" type="reset">
+                            <i class="fa fa-undo"></i>
+                            Reset
+                        </button>
+                    </div>
+                </div>
             </form>
         </div>
 UMI;

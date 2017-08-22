@@ -3,17 +3,14 @@
 @section('content')
 
     <?php $assetPath = url(config('umi.assets_path')) ?>
-    <?php $path = url($assetPath . '/ace') ?>
-
-    <script src="{{$path}}/js/jquery-ui.min.js"></script>
+    <?php $path = url($assetPath . '/lte') ?>
 
     <div class="col-sm-12">
         <div class="col-sm-12">
-            <h3 class="header smaller lighter blue">{{$selector->title or 'Selector'}}</h3>
-
-            <div class="alert alert-info">
+            <h4 class="text-primary">{{$selector->title or 'Selector'}}</h4>
+            <div class="alert alert-info alert-dismissable">
                 <button type="button" class="close" data-dismiss="alert">
-                    <i class="ace-icon fa fa-times"></i>
+                    <i class="fa fa-times"></i>
                 </button>
                 {{$selector->tip or trans('umiTrans::selector.clickToSelect')}}
                 <br />
@@ -21,77 +18,65 @@
 
             @if ($selector->searchField)
                 <div class="col-sm-12">
-                    {{--<h3 class="header blue lighter smaller">
-                        <i class="ace-icon fa fa-folder-o smaller-90"></i>
-                        Search
-                    </h3>--}}
-                    <div id="tabs">
-                        <ul>
-                            <li>
-                                <a href="#tabs-1"><i class="fa fa-search"></i> {{trans('umiTrans.selector.search')}}</a>
+                    <div id="nav-tabs-custom">
+                        <ul class="nav nav-tabs">
+                            <li class="active">
+                                <a href="#tabs-1" data-toggle="tab"><i class="fa fa-search"></i> {{trans('umiTrans::selector.search')}}</a>
                             </li>
                         </ul>
-                        <div id="tabs-1">
-                            <form action="{{url('selector/search')}}" method="post">
-                                {!! csrf_field() !!}
-                                <input type="hidden" name="url" value="{{$url}}">
-                                <input type="hidden" name="table" value="{{$table}}">
-                                <input type="hidden" name="field" value="{{$selector->searchField}}">
-                                <input type="hidden" name="selector" value="{{serialize($selector)}}">
-                                {{trans('umiTrans.selector.field')}}: <input type="text" name="value">
-                                <button class="btn btn-info" type="submit">{{trans('umiTrans.selector.search')}}</button>
-                                <button class="btn btn-info" type="button" id="showAll">{{trans('umiTrans.selector.showAll')}}</button>
-                            </form>
+                        <div class="tab-content">
+                            <div id="tabs-1" class="active tab-pane">
+                                <form action="{{url('selector/search')}}" method="post">
+                                    {!! csrf_field() !!}
+                                    <input type="hidden" name="url" value="{{$url}}">
+                                    <input type="hidden" name="table" value="{{$table}}">
+                                    <input type="hidden" name="field" value="{{$selector->searchField}}">
+                                    <input type="hidden" name="selector" value="{{serialize($selector)}}">
+                                    {{trans('umiTrans::selector.field')}}: <input type="text" name="value">
+                                    <button class="btn btn-primary btn-flat" type="submit"><i class="fa fa-search"></i> {{trans('umiTrans::selector.search')}}</button>
+                                    <button class="btn btn-primary btn-flat" type="button" id="showAll">{{trans('umiTrans::selector.showAll')}}</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
             @endif
 
-            <table id="simple-table" class="table table-bordered table-hover">
-                <thead>
-                    <tr>
+            <table id="simple-table" class="table table-hover">
+                <tr>
+                    @foreach($selector->fields as $item)
+                        <th>{{$item}}</th>
+                    @endforeach
+                </tr>
+                @foreach($records as $record)
+                    <tr class="tr" onclick="parent.{{$selector->functionName}}($(this).find('#{{$selector->returnField}}').html().trim())" >
                         @foreach($selector->fields as $item)
-                            <th>{{$item}}</th>
+                            <td>
+                                <span id="{{$item}}">
+                                    {{$record->$item}}
+                                </span>
+                            </td>
                         @endforeach
                     </tr>
-                </thead>
-                <tbody>
-                    @foreach($records as $record)
-                        <tr class="tr" onclick="parent.{{$selector->functionName}}($(this).find('#{{$selector->returnField}}').html().trim())" >
-                            @foreach($selector->fields as $item)
-                                <td>
-                                    <span id="{{$item}}">
-                                        {{$record->$item}}
-                                    </span>
-                                </td>
-                            @endforeach
-                        </tr>
-                    @endforeach
-                </tbody>
+                @endforeach
             </table>
             <br>
             {!! $links or '' !!}
         </div>
-
     </div>
 
     <script type="text/javascript">
-
         $(document).ready(function () {
-            $("#tabs").tabs();
-
             $('.tr').mouseover(function () {
                 $(this).css("background-color","#d5f4fe");
             });
             $('.tr').mouseout(function () {
                 $(this).css("background-color","#FFF");
             });
-
             $('#showAll').click(function () {
                 location.href = '{{$url}}';
             });
         });
-
     </script>
 
 @endsection

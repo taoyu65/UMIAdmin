@@ -130,7 +130,7 @@ return[
         'umi_badges'                => [
             'table_id', 'field', 'badge_name', 'class', 'created_at', 'updated_at'
         ],
-        'users'                 => [
+        'users'                     => [
             'name', 'email', 'password', 'remember_token', 'created_at', 'updated_at'
         ],
         'umi_user_menu'             => [
@@ -163,10 +163,10 @@ return[
         'umi_permission_role'       => [
             'permission_id', 'role_id'
         ],
-        'search'                    => [
+        'umi_search'                => [
             'search_tab_id', 'field', 'display_name', 'type', 'is_fuzzy', 'created_at', 'updated_at'
         ],
-        'search_tab'                => [
+        'umi_search_tab'            => [
             'table_id', 'tab_title', 'order', 'created_at', 'updated_at'
         ],
         'umi_table_relation_operation'=> [

@@ -12,10 +12,11 @@ class SearchDataTypeAbstract implements SearchDataTypeInterface
         $property = $this->getProperty($search);
 
         $html = <<<UMI
-        <div class="col-sm-3">
-            <label>$displayName</label>: &nbsp;
-            <input type="text" $property/>
+        <div class="col-sm-2">
+            <label class="control-label">$displayName</label>: &nbsp;
+            <input type="text" class="form-control" $property/>
         </div>
+         
 UMI;
         return $html;
     }
