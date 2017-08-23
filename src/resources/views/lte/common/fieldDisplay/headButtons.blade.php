@@ -12,7 +12,7 @@
                 onclick="window.location.href='{{url("fieldDisplay/" . \Illuminate\Support\Facades\Config::get('umiEnum.system_table_name.umi_field_display_edit') . "/type/edit")}}'">
             {{trans('umiTrans::fieldDisplay.edit')}} <i class="fa fa-pencil-square-o"></i>
         </button>
-        <button class="btn bg-purple btn-flat {{$type==='add'?'disabled':''}}" {{$type==='add'?'disabled="disabled"':''}}
+        <button class="btn btn-danger btn-flat {{$type==='add'?'disabled':''}}" {{$type==='add'?'disabled="disabled"':''}}
                 onclick="window.location.href='{{url("fieldDisplay/" . \Illuminate\Support\Facades\Config::get('umiEnum.system_table_name.umi_field_display_add') . "/type/add")}}'">
             {{trans('umiTrans::fieldDisplay.add')}} <i class="fa fa-plus"></i>
         </button>

@@ -35,8 +35,8 @@ class umiFieldDisplayBuilder_LTE implements fieldDisplayInterface
                 $TR .= "<td>$value</td>";
             }
             $url = url('editing') . "/$tableName/$record->id";
-            $TR .= "<td><button type='button' class='btn btn-mini btn-success' onclick='showEditing(\"$url\");'>Edit</button> ";
-            $TR .= "<button type='button' class='btn btn-mini btn-danger' onclick='recordDelete(\"$tableName\", \"$record->id\");'>Delete</button></td>";
+            $TR .= "<td><button type='button' class='btn btn-success btn-flat' onclick='showEditing(\"$url\");'>Edit</button> ";
+            $TR .= "<button type='button' class='btn btn btn-danger btn-flat' onclick='recordDelete(\"$tableName\", \"$record->id\");'>Delete</button></td>";
             $TR .= "</tr>";
 
             array_push($existFields, $record->field);
@@ -44,13 +44,13 @@ class umiFieldDisplayBuilder_LTE implements fieldDisplayInterface
 
         $bgColor = '#c7ffcd';
         if (strstr($tableName, 'browser')) {
-            $bgColor = '#c7ffcd';
+            $bgColor = '#5AC594';
         } else if (strstr($tableName, 'add')) {
-            $bgColor = '#B497FB';
+            $bgColor = '#E27D71';
         } else if (strstr($tableName, 'edit')) {
-            $bgColor = '#FFF90B';
+            $bgColor = '#F7BF65';
         } else if (strstr($tableName, 'read')) {
-            $bgColor = '#5D98FB';
+            $bgColor = '#80B5D3';
         }
 
         $streamExistField = base64_encode(json_encode($existFields));

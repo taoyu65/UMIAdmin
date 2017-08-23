@@ -3,21 +3,12 @@
 @section('content')
 
     <?php $assetPath = url(config('umi.assets_path')) ?>
-    <?php $path = url($assetPath . '/ace') ?>
+    <?php $path = url($assetPath . '/lte') ?>
 
-    <div class="page-header">
-        <h1>
-            {{trans('umiTrans::menu.sideMenu')}}
-            <small>
-                <i class="ace-icon fa fa-angle-double-right"></i>
-                {{trans('umiTrans::menu.distribution')}}
-            </small>
-        </h1>
-    </div>
-    <div class="row">
-        <div class="alert alert-block alert-success">
+    <div class="col-sm-12">
+        <div class="alert bg-olive">
             <button type="button" class="close" data-dismiss="alert">
-                <i class="ace-icon fa fa-times"></i>
+                <i class="fa fa-times"></i>
             </button>
             <strong>
                 <i class="ace-icon fa fa-check"></i>
@@ -32,28 +23,28 @@
     <div class="row">
         <div class="col-sm-6">
             <div class="col-sm-12">
-                <h3 class="header smaller lighter purple">
+                <h3 class="text-primary">
                     {{trans('umiTrans::menu.userTree')}}
                 </h3>
             </div>
 
             <div class="col-sm-12">
                 <menu id="nestable-menu-user" class="nestable-menu-user">
-                    <button type="button" data-action="select-user" class="btn btn-purple btn-sm btn-next" id="select-user">
+                    <button type="button" data-action="select-user" class="btn bg-purple btn-flat" id="select-user">
                         {{trans('umiTrans::menu.selectUser')}}
-                        <i class="ace-icon fa fa-user-plus"></i>
+                        <i class="fa fa-user-plus"></i>
                     </button>
-                    <button type="button" data-action="expand-all" class="btn btn-primary btn-sm btn-next">
+                    <button type="button" data-action="expand-all" class="btn btn-primary btn-flat">
                         {{trans('umiTrans::menu.expandAll')}}
-                        <i class="ace-icon fa fa-expand"></i>
+                        <i class="fa fa-expand"></i>
                     </button>
-                    <button type="button" data-action="collapse-all" class="btn btn-primary btn-sm btn-next">
+                    <button type="button" data-action="collapse-all" class="btn btn-primary btn-flat">
                         {{trans('umiTrans::menu.collapseAll')}}
-                        <i class="ace-icon fa fa-compress"></i>
+                        <i class="fa fa-compress"></i>
                     </button>
-                    <button type="button" data-action="save" class="btn btn-success btn-sm btn-next" id="save-user">
+                    <button type="button" data-action="save" class="btn btn-success btn-flat" id="save-user">
                         {{trans('umiTrans::menu.update')}}
-                        <i class="ace-icon fa fa-arrow-up"></i>
+                        <i class="fa fa-arrow-up"></i>
                     </button>
                 </menu>
             </div>
@@ -64,24 +55,24 @@
 
         <div class="col-sm-6">
             <div class="col-sm-12">
-                <h3 class="header smaller lighter red">
+                <h3 class="text-primary">
                     {{trans('umiTrans::menu.menuTree')}}
                 </h3>
             </div>
 
             <div class="col-sm-12">
                 <menu id="nestable-menu" class="nestable-menu">
-                    <button type="button" data-action="expand-all" class="btn btn-primary btn-sm btn-next">
+                    <button type="button" data-action="expand-all" class="btn btn-primary btn-flat">
                         {{trans('umiTrans::menu.expandAll')}}
-                        <i class="ace-icon fa fa-expand"></i>
+                        <i class="fa fa-expand"></i>
                     </button>
-                    <button type="button" data-action="collapse-all" class="btn btn-primary btn-sm btn-next">
+                    <button type="button" data-action="collapse-all" class="btn btn-primary btn-flat">
                         {{trans('umiTrans::menu.collapseAll')}}
-                        <i class="ace-icon fa fa-compress"></i>
+                        <i class="fa fa-compress"></i>
                     </button>
-                    <button type="button" data-action="refresh" class="btn btn-pink btn-sm btn-next">
+                    <button type="button" data-action="refresh" class="btn bg-orange btn-flat">
                         {{trans('umiTrans::menu.reload')}}
-                        <i class="ace-icon fa fa-refresh"></i>
+                        <i class="fa fa-refresh"></i>
                     </button>
                 </menu>
             </div>
@@ -97,7 +88,7 @@
         <input id="userId" type="hidden">
     </form>
 
-    <script src="{{$path}}/js/jquery.nestable.min.js"></script>
+    <script src="{{$assetPath}}/js/jquery.nestable.min.js"></script>
     <script src="{{$assetPath}}/js/jquery.form.js"></script>
     <script type="text/javascript">
         var userId = '';
@@ -214,7 +205,7 @@
 
             //加载用户菜单
             //loading user menus
-            $('#menuTreeUser').html('<i class="ace-icon fa fa-spinner fa-spin orange bigger-300"></i>');
+            $('#menuTreeUser').html('<i class="fa fa-spinner fa-spin fa-orange"></i>');
 
             $.ajax({
                 url:"{{url('menuManagement/' . $tableName)}}/loadMenuTreeFromJson/" + value,
@@ -233,7 +224,7 @@
         //重新加载所有菜单
         //reload all the menus
         function ReloadMenuTree() {
-            $('#menuTree').html('<i class="ace-icon fa fa-spinner fa-spin orange bigger-300"></i>');
+            $('#menuTree').html('<i class="fa fa-spinner fa-spin fa-orange"></i>');
 
             $.ajax({
                 url:"{{url('menuManagement/' . $tableName)}}/loadMenuTree",

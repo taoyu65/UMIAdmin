@@ -31,7 +31,7 @@ class umiNestableBuilder_LTE implements nestableInterface
         $this->relationOperationRuleList = $TRO->getRulesForConfirmation($tableId);
 
         $html = '';
-        $html .= '<div class="dd dd-draghandle" id="nestableMenu">';
+        $html .= '<div class="dd" id="nestableMenu">';
         $html .= $this->menuManagement($showButton, $buttonException);
         $html .= '</div>';
 
@@ -43,7 +43,7 @@ class umiNestableBuilder_LTE implements nestableInterface
     public function showDragDropTreeByJson($jsonArr)
     {
         $html = '';
-        $html .= '<div class="dd dd-draghandle" id="nestableUser">';
+        $html .= '<div class="dd" id="nestableUser">';
         $html .= $this->createUserTree($jsonArr);
         $html .= '</div>';
 
@@ -67,9 +67,9 @@ class umiNestableBuilder_LTE implements nestableInterface
             $html .= $LI =<<<UMI
                 <li class="dd-item dd2-item" data-id="$record->id">
                      <div class="dd-handle dd2-handle">
-                         <i class="normal-icon ace-icon fa $record->icon_class bigger-130"></i>
+                         <i class="normal-icon fa $record->icon_class"></i>
         
-                         <i class="drag-icon ace-icon fa fa-arrows bigger-125"></i>
+                         <i class="drag-icon fa fa-arrows"></i>
                      </div>
                      <div class="dd2-content">
                          $record->title
@@ -106,9 +106,9 @@ UMI;
             $html .= $LI =<<<UMI
             <li class="dd-item dd2-item" data-id="$itemId">
                 <div class="dd-handle dd2-handle">
-                    <i class="normal-icon ace-icon fa $iconClass bigger-130"></i>
+                    <i class="normal-icon fa $iconClass"></i>
 
-                    <i class="drag-icon ace-icon fa fa-arrows bigger-125"></i>
+                    <i class="drag-icon fa fa-arrows"></i>
                 </div>
                 <div class="dd2-content">
                     $title
@@ -140,45 +140,45 @@ UMI;
 
         #add
         if (in_array('add', $buttonException)) {
-            $html .= '<a class="grey" href="#" style="cursor: not-allowed">
-                        <i class="ace-icon fa fa-plus bigger-130"></i>
+            $html .= '<a class="fa-gray" href="#" style="cursor: not-allowed">
+                        <i class="fa fa-plus"></i>
                       </a>';
         } else {
             $html .= '<a class="green" href="#" onclick="showAdding(\'' . $addUrl . '\')">';
-            $html .= '    <i class="ace-icon fa fa-plus bigger-130"></i>';
+            $html .= '    <i class="fa fa-plus"></i>';
             $html .= '</a>';
         }
 
         #browser
         if (in_array('browser', $buttonException)) {
-            $html .= '<a class="grey" href="#" style="cursor: not-allowed">
-                        <i class="ace-icon fa fa-eye bigger-130"></i>
+            $html .= '<a class="fa-gray" href="#" style="cursor: not-allowed">
+                        <i class="fa fa-eye"></i>
                       </a>';
         } else {
             $html .= '<a class="orange" href="#" onclick="showReading(\'' . $readUrl . '\')">
-                        <i class="ace-icon fa fa-eye bigger-130"></i>
+                        <i class="fa fa-eye"></i>
                       </a>';
         }
 
         #edit
         if (in_array('edit', $buttonException)) {
-            $html .= '<a class="grey" href="#" style="cursor: not-allowed">
-                        <i class="ace-icon fa fa-pencil bigger-130"></i>
+            $html .= '<a class="fa-gray" href="#" style="cursor: not-allowed">
+                        <i class="fa fa-pencil"></i>
                       </a>';
         } else {
             $html .= '<a class="blue" href="#" onclick="showEditing(\'' . $editUrl . '\')">
-                        <i class="ace-icon fa fa-pencil bigger-130"></i>
+                        <i class="fa fa-pencil"></i>
                       </a>';
         }
 
         #delete
         if (in_array('delete', $buttonException)) {
-            $html .= '<a class="grey" href="#" style="cursor: not-allowed">
-                        <i class="ace-icon fa fa-trash-o bigger-130"></i>
+            $html .= '<a class="fa-gray" href="#" style="cursor: not-allowed">
+                        <i class="fa fa-trash-o"></i>
                       </a>';
         } else {
             $html .= '<a class="red" href="#" onclick="showDeleting(\'' . $deleteUrl . '\')">';
-            $html .= '    <i class="ace-icon fa fa-trash-o bigger-130"></i>';
+            $html .= '    <i class="fa fa-trash-o"></i>';
             $html .= '</a>';
         }
         $html .= '</div>';

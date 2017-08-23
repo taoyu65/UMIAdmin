@@ -26,11 +26,11 @@ Route::get('/fields/noExist/{fieldTable}/{table}/{tableId}', function ($fieldTab
 
     $existFields = DB::table($fieldTable)->where('table_id', $tableId)->pluck('field')->toArray();
     $re = [];
-    $allFields->map(function ($key) use ($existFields, &$re) {
-        if (!in_array($key, $existFields)) {
-            array_push($re, $key);
+    foreach ($allFields as $field) {
+        if (!in_array($field, $existFields)) {
+            array_push($re, $field);
         }
-    });
+    }
     return $re;
 });
 
