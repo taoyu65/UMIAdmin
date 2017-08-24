@@ -15,7 +15,7 @@ return [
     'handsUp'           => 'Hands Up!',
     'tip2'              => 'This list is the <strong class="red">entire menus</strong>, If you want manage different user\'s menu, you can use another function called <strong>Distribution</strong>',
     'reload'            => 'Reload',
-    'save'              => 'Save',
+    'save'              => 'Update',
     'warning'           => 'Warning:',
     'superAdminWarning' => 'is Super Admin which will load all menus regardless this setting, but still can set user menus and it will work when remove that super admin identity.'
 ];

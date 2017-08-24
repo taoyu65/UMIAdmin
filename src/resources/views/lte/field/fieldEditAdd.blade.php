@@ -52,7 +52,7 @@
                         <div id="fieldDisplay">
                         </div>
                     </div>
--
+
                     {{-- drop down box for selecting field --}}
                     @include('umi::common.fieldDisplay.fieldsDropDownBox')
 

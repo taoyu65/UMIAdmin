@@ -3,87 +3,76 @@
 @section('content')
 
     <?php $assetPath = url(config('umi.assets_path')) ?>
-    <?php $path = url($assetPath . '/ace') ?>
+    <?php $path = url($assetPath . '/lte') ?>
 
-    <div class="page-header">
-        <h1>
-            {{trans('umiTrans::menu.sideMenu')}}
-            <small>
-                <i class="ace-icon fa fa-angle-double-right"></i>
-                {{trans('umiTrans::menu.menuManagement')}}
-            </small>
-        </h1>
-    </div>
-
-    <div class="alert alert-block alert-success">
+    <div class="alert bg-olive">
         <button type="button" class="close" data-dismiss="alert">
-            <i class="ace-icon fa fa-times"></i>
+            <i class="fa fa-times"></i>
         </button>
-
         <p>
             <strong>
-                <i class="ace-icon fa fa-check"></i>
+                <i class="fa fa-check"></i>
                 {{trans('umiTrans::menu.handsUp')}}
             </strong>
             {!! trans('umiTrans::menu.tip2') !!}
         </p>
     </div>
 
-    <div class="col-xs-12">
+    <div class="row">
+        <div class="col-sm-12">
         <menu id="nestable-menu" class="nestable-menu">
-            <button type="button" data-action="expand-all" class="btn btn-primary btn-sm btn-next">
+            <button type="button" data-action="expand-all" class="btn btn-primary btn-flat">
                 {{trans('umiTrans::menu.expandAll')}}
-                <i class="ace-icon fa fa-expand"></i>
+                <i class="fa fa-expand"></i>
             </button>
-            <button type="button" data-action="collapse-all" class="btn btn-primary btn-sm btn-next">
+            <button type="button" data-action="collapse-all" class="btn btn-primary btn-flat">
                 {{trans('umiTrans::menu.collapseAll')}}
-                <i class="ace-icon fa fa-compress"></i>
+                <i class="fa fa-compress"></i>
             </button>
-            <button type="button" data-action="refresh" class="btn btn-pink btn-sm btn-next">
+            <button type="button" data-action="refresh" class="btn bg-orange btn-flat">
                 {{trans('umiTrans::menu.reload')}}
-                <i class="ace-icon fa fa-refresh"></i>
+                <i class="fa fa-refresh"></i>
             </button>
-            <button type="button" data-action="save" class="btn btn-success btn-sm btn-next">
+            <button type="button" data-action="save" class="btn btn-success btn-flat">
                 {{trans('umiTrans::menu.save')}}
-                <i class="ace-icon fa fa-plus"></i>
+                <i class="fa fa-arrow-up"></i>
             </button>
         </menu>
     </div>
 
-    {{--neastable js tree--}}
-    <div class="col-xs-12">
-        {{--<div class="dd dd-draghandle" id="nestableMenu">--}}
-            {!! $menuTree !!}
-        {{--</div>--}}
+        {{--neastable js tree--}}
+        <div class="col-sm-12">
+        {!! $menuTree !!}
     </div>
 
-    <div class="col-xs-12">
+        <div class="col-sm-12">
         <menu id="nestable-menu" class="nestable-menu">
-            <button type="button" data-action="expand-all" class="btn btn-primary btn-sm btn-next">
+            <button type="button" data-action="expand-all" class="btn btn-primary btn-flat">
                 {{trans('umiTrans::menu.expandAll')}}
-                <i class="ace-icon fa fa-expand"></i>
+                <i class="fa fa-expand"></i>
             </button>
-            <button type="button" data-action="collapse-all" class="btn btn-primary btn-sm btn-next">
+            <button type="button" data-action="collapse-all" class="btn btn-primary btn-flat">
                 {{trans('umiTrans::menu.collapseAll')}}
-                <i class="ace-icon fa fa-compress"></i>
+                <i class="fa fa-compress"></i>
             </button>
-            <button type="button" data-action="refresh" class="btn btn-pink btn-sm btn-next">
+            <button type="button" data-action="refresh" class="btn bg-orange btn-flat">
                 {{trans('umiTrans::menu.reload')}}
-                <i class="ace-icon fa fa-refresh"></i>
+                <i class="fa fa-refresh"></i>
             </button>
-            <button type="button" data-action="save" class="btn btn-success btn-sm btn-next">
+            <button type="button" data-action="save" class="btn btn-success btn-flat">
                 {{trans('umiTrans::menu.save')}}
-                <i class="ace-icon fa fa-plus"></i>
+                <i class="fa fa-plus"></i>
             </button>
         </menu>
     </div>
 
-    <form method="post" id="updateOrderForm">
+        <form method="post" id="updateOrderForm">
         {!! csrf_field() !!}
         <input id="menuJson" type="hidden">
     </form>
+    </div>
 
-    <script src="{{$path}}/js/jquery.nestable.min.js"></script>
+    <script src="{{$assetPath}}/js/jquery.nestable.min.js"></script>
     <script src="{{$assetPath}}/js/jquery.form.js"></script>
     <script src="{{$assetPath}}/js/bread/umiTableBread.js"></script>
 

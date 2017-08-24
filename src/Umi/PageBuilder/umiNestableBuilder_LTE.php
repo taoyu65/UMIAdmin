@@ -144,9 +144,9 @@ UMI;
                         <i class="fa fa-plus"></i>
                       </a>';
         } else {
-            $html .= '<a class="green" href="#" onclick="showAdding(\'' . $addUrl . '\')">';
+            $html .= '<a class="fa-green" href="#" onclick="showAdding(\'' . $addUrl . '\')">';
             $html .= '    <i class="fa fa-plus"></i>';
-            $html .= '</a>';
+            $html .= '</a>&nbsp;';
         }
 
         #browser
@@ -155,9 +155,9 @@ UMI;
                         <i class="fa fa-eye"></i>
                       </a>';
         } else {
-            $html .= '<a class="orange" href="#" onclick="showReading(\'' . $readUrl . '\')">
+            $html .= '<a class="fa-orange" href="#" onclick="showReading(\'' . $readUrl . '\')">
                         <i class="fa fa-eye"></i>
-                      </a>';
+                      </a>&nbsp;';
         }
 
         #edit
@@ -166,9 +166,9 @@ UMI;
                         <i class="fa fa-pencil"></i>
                       </a>';
         } else {
-            $html .= '<a class="blue" href="#" onclick="showEditing(\'' . $editUrl . '\')">
+            $html .= '<a class="fa-primary" href="#" onclick="showEditing(\'' . $editUrl . '\')">
                         <i class="fa fa-pencil"></i>
-                      </a>';
+                      </a>&nbsp;';
         }
 
         #delete
@@ -177,27 +177,12 @@ UMI;
                         <i class="fa fa-trash-o"></i>
                       </a>';
         } else {
-            $html .= '<a class="red" href="#" onclick="showDeleting(\'' . $deleteUrl . '\')">';
+            $html .= '<a class="fa-danger" href="#" onclick="showDeleting(\'' . $deleteUrl . '\')">';
             $html .= '    <i class="fa fa-trash-o"></i>';
             $html .= '</a>';
         }
         $html .= '</div>';
-        /*$html =<<<UMI
-        <div class="pull-right action-buttons">
-            <a class="green" href="#">
-                <i class="ace-icon fa fa-plus bigger-130"></i>
-            </a>
-            <a class="orange" href="#">
-                <i class="ace-icon fa fa-eye bigger-130"></i>
-            </a>
-            <a class="blue" href="#">
-                <i class="ace-icon fa fa-pencil bigger-130"></i>
-            </a>
-            <a class="red" href="#" onclick="showDeleting('$deleteUrl')">
-                <i class="ace-icon fa fa-trash-o bigger-130"></i>
-            </a>
-       </div>
-UMI;*/
+
         return $html;
     }
 }

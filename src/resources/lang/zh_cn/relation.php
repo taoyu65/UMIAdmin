@@ -9,10 +9,10 @@ return [
     'functionDescription'   => '功能描述: 当规则匹对成功, 删除操作会被执行',
     'tooltip'               => '帮助',
     'exampleCustom'         => '自定义关系使用说明',
-    'customExplain'         => '<span class="red">
+    'customExplain'         => '<span class="fa-red">
                             警告: 完全自定义规则, 根据需要进行配置, 但是要给规则命名
                         </span><br>
-                        <span class="blue">
+                        <span class="fa-primary">
                             高级操作(advantage): 额外的删除操作将根据你设定的条件执行(默认是active field = response field). 规则: response filed 匹配自定义的值
                         </span>',
     'ruleName'              => 'Rule Name',
@@ -45,13 +45,13 @@ return [
     'back'                  => '返回',
     'functionDescription2'  => '功能描述: 当规则匹对成功, 主操作将被禁止',
     'exitOperation'         => '使用说明 举例说明存在操作用法',
-    'existExplain'          => '<span class="red">
+    'existExplain'          => '<span class="fa-red">
                             警告: 这个功能不会操作其他数据表, 仅仅和其他数据表进行查询匹配来限制主操作的进行 <br>
                             警告: 规则为 active field 和 response field对比, 或者 response field 和 custom value 对比 
                         </span><br>
                         例如: 有一个user表 和 user\'s article表. 在你执行删除user表记录之前, 检查是否此用户存在任何文章, 如果存在则不能执行删除操作
                         你可以设置如下: active table - user, active field - id, response table - article, response field - user_id.<br>
-                        <span class="blue">
+                        <span class="fa-primary">
                             高级操作(advantage): 额外的匹配操作将根据你设定的条件执行(默认是active field = response field). 规则: response filed 匹配自定义的值 
                         </span>',
     'deleteInterlock'       => '关联删除',
@@ -75,11 +75,11 @@ return [
     'interlockExplain'      => 'user 表有id, user_name 字段<br>
                         article 表有id,user_id, article_title, content 字段<br>
                         现在当你想删除user表中的记录, 所有词用户的文章也一并删除, 你可以设置如下 active table: user, active field: id, response table: article, response filed: user_id (normally is foreign key)<br>
-                        <span class="blue">
+                        <span class="fa-primary">
                             高级操作(advantage): 额外的删除操作将根据你设定的条件执行(默认是active field = response field). 规则: response filed 匹配自定义的值 
                         </span>',
     'selfCheckOperation'    => '使用说明 举例说明自检操作用法',
-    'selfCheckExplain'      => '<span class="red">
+    'selfCheckExplain'      => '<span class="fa-red">
                             警告: 这个功能不会操作其他数据表,也不会和其他数据表进行查询匹配, 仅仅和自身进行规则匹配<br>
                             警告: 规则仅仅为 active field 和 custom value 进行对比 
                         </span><br>
