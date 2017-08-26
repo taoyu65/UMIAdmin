@@ -128,11 +128,9 @@
             {!! csrf_field() !!}
             <div class="form-group has-feedback">
                 <input type="text" class="form-control" placeholder="Username" name="username" value="admin">
-                <span class="glyphicon glyphicon-user form-control-feedback"></span>
             </div>
             <div class="form-group has-feedback">
                 <input type="password" class="form-control" placeholder="Password" id="password" name="password" value="123123">
-                <span class="glyphicon glyphicon-lock form-control-feedback"></span>
             </div>
             <div class="row">
                 <div class="col-xs-8">

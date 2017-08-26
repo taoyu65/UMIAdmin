@@ -17,9 +17,9 @@ class umi_menus_seeder extends Seeder
                 'title'     => 'Dashboard',
                 'url'       => 'dashboard',
                 'target'    => '_self',
-                'icon_class'=> 'fa-tachometer pink',
+                'icon_class'=> 'fa-tachometer fa-teal',
                 'order'     => 0,
-                'extra_icon_html'   => '<span class="badge badge-transparent tooltip-error" title="2 Important Events"><i class="ace-icon fa fa-exclamation-triangle red bigger-130"></i></span>'
+                'extra_icon_html'   => ''
             ),
             array(
                 'id'        => 2,
@@ -27,9 +27,9 @@ class umi_menus_seeder extends Seeder
                 'title'     => 'Field Display',
                 'url'       => '#',
                 'target'    => '_self',
-                'icon_class'=> 'fa-desktop pink',
+                'icon_class'=> 'fa-desktop fa-pink',
                 'order'     => 1,
-                'extra_icon_html'   => ''
+                'extra_icon_html'   => '<i class="fa fa-laptop fa-green"></i>'
             ),
             array(
                 'id'        => 3,
@@ -37,9 +37,9 @@ class umi_menus_seeder extends Seeder
                 'title'     => 'Authority(BREAD)',
                 'url'       => '#',
                 'target'    => '_self',
-                'icon_class'=> 'fa-list-alt red',
+                'icon_class'=> 'fa-list-alt fa-red',
                 'order'     => 2,
-                'extra_icon_html'   => '<span  class="badge badge-transparent purple"><i class="ace-icon fa fa-users bigger-130"></i></span>'
+                'extra_icon_html'   => '<span  class="pull-right fa-purple"><i class="fa fa-users"></i></span>'
             ),
             array(
                 'id'        => 4,
@@ -47,7 +47,7 @@ class umi_menus_seeder extends Seeder
                 'title'     => 'Side Menu',
                 'url'       => '#',
                 'target'    => '_self',
-                'icon_class'=> 'fa-tree green',
+                'icon_class'=> 'fa-tree fa-green',
                 'order'     => 3,
                 'extra_icon_html'   => ''
             ),
@@ -57,9 +57,9 @@ class umi_menus_seeder extends Seeder
                 'title'     => 'Table Relation',
                 'url'       => '#',
                 'target'    => '_self',
-                'icon_class'=> 'fa-list blue',
+                'icon_class'=> 'fa-list fa-purple',
                 'order'     => 4,
-                'extra_icon_html'   => '<span class="badge badge-transparent green"><i class="ace-icon fa fa-cogs bigger-130"></i></span>'
+                'extra_icon_html'   => '<span class="pull-right fa-orange"><i class="fa fa-cogs"></i></span> <span class="label pull-right bg-blue">17</span>'
             ),
             array(
                 'id'        => 6,
@@ -67,9 +67,9 @@ class umi_menus_seeder extends Seeder
                 'title'     => 'Table',
                 'url'       => '#',
                 'target'    => '_self',
-                'icon_class'=> 'fa-pencil-square-o orange',
+                'icon_class'=> 'fa-pencil-square-o fa-orange',
                 'order'     => 5,
-                'extra_icon_html'   => '<span class="badge badge-primary">19</span>'
+                'extra_icon_html'   => '<span class="badge badge-danger">19</span>'
             ),
             array(
                 'id'        => 7,
@@ -77,9 +77,9 @@ class umi_menus_seeder extends Seeder
                 'title'     => 'Search',
                 'url'       => '#',
                 'target'    => '_self',
-                'icon_class'=> 'fa-search green',
+                'icon_class'=> 'fa-search fa-danger',
                 'order'     => 6,
-                'extra_icon_html'   => ''
+                'extra_icon_html'   => '<small class="label pull-right bg-teal">17</small>'
             ),
             array(
                 'id'        => 8,
@@ -87,7 +87,7 @@ class umi_menus_seeder extends Seeder
                 'title'     => 'Other',
                 'url'       => '#',
                 'target'    => '_self',
-                'icon_class'=> 'fa-coffee grey',
+                'icon_class'=> 'fa-coffee fa-info',
                 'order'     => 7,
                 'extra_icon_html'   => ''
             ),
@@ -229,7 +229,7 @@ class umi_menus_seeder extends Seeder
                 'target'    => '_self',
                 'icon_class'=> '',
                 'order'     => 0,
-                'extra_icon_html'   => '<span class="badge badge-transparent"><i class="normal-icon ace-icon fa fa-table pink bigger-130"></i></span>'
+                'extra_icon_html'   => '<i class="fa fa-table fa-pink"></i>'
             ),
             array(
                 'id'        => 23,
@@ -409,7 +409,7 @@ class umi_menus_seeder extends Seeder
                 'target'    => '_self',
                 'icon_class'=> '',
                 'order'     => 15,
-                'extra_icon_html'   => '<span class="badge badge-transparent"><i class="normal-icon ace-icon fa fa-user orange bigger-130"></i></span>'
+                'extra_icon_html'   => '<i class="fa fa-user fa-orange"></i>'
             ),
             array(
                 'id'        => 41,

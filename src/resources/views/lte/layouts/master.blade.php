@@ -14,8 +14,6 @@
     <link rel="stylesheet" href="{{$path}}/bower_components/bootstrap/dist/css/bootstrap.min.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="{{$path}}/bower_components/font-awesome/css/font-awesome.min.css">
-    <!-- Ionicons -->
-    <link rel="stylesheet" href="{{$path}}/bower_components/Ionicons/css/ionicons.min.css">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{$path}}/dist/css/AdminLTE.min.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -101,14 +99,8 @@
 
 <!-- Bootstrap 3.3.7 -->
 <script src="{{$path}}/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-<!-- Slimscroll -->
-<script src="{{$path}}/bower_components/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-<!-- FastClick -->
-<script src="{{$path}}/bower_components/fastclick/lib/fastclick.js"></script>
 <!-- AdminLTE App -->
 <script src="{{$path}}/dist/js/adminlte.min.js"></script>
-<!-- AdminLTE for demo purposes -->
-<script src="{{$path}}/dist/js/demo.js"></script>
 
 <!-- layer scripts -->
 <script src="{{$assetPath}}/layer/layer.js"></script>
