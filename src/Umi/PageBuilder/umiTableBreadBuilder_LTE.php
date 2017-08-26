@@ -90,11 +90,9 @@ UMI;
 
         $html =<<<UMI
         <div class="form-group">
-            <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="$name">$title</label>
-            <div class="col-xs-12 col-sm-4">
-                <div class="clearfix">
-                    <span >$input</span>
-                </div>
+            <label class="control-label col-sm-2" for="$name">$title</label>
+            <div class="col-sm-4">
+                <span >$input</span>
             </div>
             $popover
         </div>
@@ -121,11 +119,9 @@ UMI;
 
         $html =<<<UMI
         <div class="form-group">
-            <label class="control-label col-xs-12 col-sm-2 no-padding-right" for="$name">$title</label>
-            <div class="col-xs-12 col-sm-4">
-                <div class="clearfix">
-                    <span >$input</span>
-                </div>
+            <label class="control-label col-sm-2" for="$name">$title</label>
+            <div class="col-sm-4">
+                <span >$input</span>
             </div>
         </div>
         
@@ -140,7 +136,7 @@ UMI;
             return '';
 
         $html =<<<UMI
-            <i class="fa fa-question-circle fa-lg popover-info blue" aria-hidden="true" data-rel="popover"
+            <i class="fa fa-question-circle fa-lg popover-info fa-primary" aria-hidden="true" data-rel="popover"
                        data-trigger="hover" style="transform: translate(0,4px);" data-placement="auto right"
                        title="$title"
                        data-content="$content"></i>
@@ -161,9 +157,9 @@ UMI;
     private function buttonCloseForRead()
     {
         $html = <<<UMI
-        <button class="btn btn-grey btn-sm btn-next" type="button" id="cls">
+        <button class="btn btn-danger btn-flat" type="button" id="cls">
             Close
-            <i class="ace-icon fa fa-close"></i>
+            <i class="fa fa-close"></i>
         </button>
 UMI;
         return $html;
@@ -172,14 +168,14 @@ UMI;
     private function buttonEdit()
     {
         $html = <<<UMI
-        <button class="btn btn-info btn-sm btn-next" type="submit" id="submitBtn">
+        <button class="btn bg-olive btn-flat" type="submit" id="submitBtn">
             Update
-            <i class="ace-icon fa fa-refresh"></i>
+            <i class="fa fa-refresh"></i>
         </button>
         &nbsp;&nbsp;
-        <button class="btn btn-grey btn-sm btn-next" type="button" id="cls">
+        <button class="btn btn-danger btn-flat" type="button" id="cls">
             Close
-            <i class="ace-icon fa fa-close"></i>
+            <i class="fa fa-close"></i>
         </button>
 UMI;
         return $html;
@@ -188,14 +184,14 @@ UMI;
     private function buttonAdd()
     {
         $html = <<<UMI
-        <button class="btn btn-success btn-sm btn-next" type="submit" id="submitBtn">
+        <button class="btn bg-olive btn-flat" type="submit" id="submitBtn">
             Add
-            <i class="ace-icon fa fa-plus"></i>
+            <i class="fa fa-plus"></i>
         </button>
         &nbsp;&nbsp;
-        <button class="btn btn-primary btn-sm btn-next" type="button" id="cls">
+        <button class="btn btn-danger btn-flat" type="button" id="cls">
             Close
-            <i class="ace-icon fa fa-close"></i>
+            <i class="fa fa-close"></i>
         </button>
 UMI;
         return $html;
@@ -207,8 +203,8 @@ UMI;
         <div class="alert alert-danger">
             You have not set up fields that will be showing here
             <br /><br /><p>
-                <button class="btn btn-sm btn-success" type="button">Go Set Up</button>
-                <button class="btn btn-sm btn-info" id="cls" type="button">Close</button>
+                <button class="btn btn-primary btn-flat" type="button">Go Set Up</button>
+                <button class="btn btn-danger btn-flat" id="cls" type="button">Close</button>
             </p>
         </div>
 UMI;

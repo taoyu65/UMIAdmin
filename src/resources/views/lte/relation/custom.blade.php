@@ -5,6 +5,8 @@
     <?php $assetPath = url(config('umi.assets_path')) ?>
     <?php $path = url($assetPath . '/lte') ?>
 
+    <link rel="stylesheet" href="{{$assetPath}}/bsSwitch/bsSwitch.css">
+
     <div class="alert bg-olive">
         <button type="button" class="close" data-dismiss="alert">
             <i class="fa fa-times"></i>
@@ -52,9 +54,10 @@
                 <input type="text" name="ruleName" id="ruleName" class="form-control">
             </div>
             <i class="fa fa-question-circle fa-lg popover-error fa-red" aria-hidden="true" data-rel="popover"
-               data-trigger="hover" style="transform: translate(0,4px);" data-placement="auto right"
-               title="Rule Name"
-               data-content="{{trans('umiTrans::relation.functionName')}}"></i>
+                     data-trigger="hover" style="transform: translate(0,4px);" data-placement="auto right"
+                     title="Rule Name"
+                     data-content="{{trans('umiTrans::relation.functionName')}}"></i>
+            <div class="col-sm-12 col-sm-offset-1 showError"></div>
         </div>
         <div class="form-group">
             <label class="control-label col-sm-1" for="operationType">{{trans('umiTrans::relation.action')}}</label>
@@ -69,10 +72,10 @@
                data-trigger="hover" style="transform: translate(0,4px);" data-placement="auto right"
                title="Operation Type"
                data-content="{{trans('umiTrans::relation.actionInfo')}}"></i>
+            <div class="col-sm-12 col-sm-offset-1 showError"></div>
         </div>
 
         <div class="list-seperator"></div>
-        <div class="space-2"></div>
 
         {{--active table--}}
         <div class="form-group">
@@ -89,6 +92,7 @@
                data-trigger="hover" style="transform: translate(0,4px);" data-placement="auto right"
                title="Active Table"
                data-content="{{trans('umiTrans::relation.activeTableInfo')}}"></i>
+            <div class="col-sm-12 col-sm-offset-1 showError"></div>
         </div>
 
         <div class="form-group">
@@ -102,6 +106,7 @@
                data-trigger="hover" style="transform: translate(0,4px);" data-placement="auto right"
                title="Active Field"
                data-content="{{trans('umiTrans::relation.activeFieldInfo')}}"></i>
+            <div class="col-sm-12 col-sm-offset-1 showError"></div>
         </div>
 
         <div class="list-seperator"></div>
@@ -121,6 +126,7 @@
                data-trigger="hover" style="transform: translate(0,4px);" data-placement="auto right"
                title="Response Table"
                data-content="{{trans('umiTrans::relation.responseTableInfo')}}"></i>
+            <div class="col-sm-12 col-sm-offset-1 showError"></div>
         </div>
 
         <div class="form-group">
@@ -134,6 +140,7 @@
                data-trigger="hover" style="transform: translate(0,4px);" data-placement="auto right"
                title="Response Field"
                data-content="{{trans('umiTrans::relation.responseFieldInfo')}}"></i>
+            <div class="col-sm-12 col-sm-offset-1 showError"></div>
         </div>
 
         <div class="list-seperator"></div>
@@ -143,9 +150,7 @@
             <label class="control-label col-sm-1 fa-primary" for="detail">{{trans('umiTrans::relation.advantage')}}</label>
             <div class="col-sm-4">
                 <label>
-                    <input name="advantageSwitch" id="advantageSwitch" class="ace ace-switch ace-switch-7" type="checkbox" />
-                    <span class="lbl"></span>
-                    <input type="checkbox" data-on-color="success" data-off-color="danger" data-on-text="YES" data-off-text="NO" id="bsCheckBox">
+                    <input name="advantageSwitch" id="advantageSwitch" data-on-text="YES" data-off-text="NO" type="checkbox" />
                 </label>
             </div>
             <i class="fa fa-question-circle fa-lg popover-error fa-red" aria-hidden="true" data-rel="popover"
@@ -175,6 +180,7 @@
                    data-trigger="hover" style="transform: translate(0,4px);" data-placement="auto right"
                    title="Warning"
                    data-content="{{trans('umiTrans::relation.targetValueInfo')}}"></i>
+                <div class="col-sm-12 col-sm-offset-1 showError"></div>
             </div>
         </div>
 
@@ -204,87 +210,22 @@
 
     <script src="{{$assetPath}}/js/jquery.validate.min.js"></script>
     <script src="{{$assetPath}}/js/jquery.form.js"></script>
+    <script src="{{$assetPath}}/bsSwitch/bootstrap-switch.min.js"></script>
 
     <script type="text/javascript" src="{{$assetPath}}/js/relationPage/operationPage.js"></script>
     <script>
         //获取主动表的二级联动数据
         //get active table drop down list
         $('#activeTable').change(function () {
-            if ($('#activeTable').val() === ''){
-                return false;
-            }
-
-            if ($('#advantageSwitch').is(":checked")) {
-                return false;
-            }
-
-            var tableId = $(this).children('option:selected').val();
-
-            //加载符号
-            //showing loading icon
-            $('#activeField').after("<i id='responseLoading' class='ace-icon fa fa-spinner fa-spin orange bigger-125'></i>");
-
-            //获取数据
-            //get data
-            var table = $('#activeTable').find("option:selected").text();
-            var url = "{{url('api/fields')}}" + '/' +table;
-            $.ajax({
-                type: 'get',
-                url: url,
-                dataType: 'json',
-                success: function (data) {
-                    //填充数据
-                    //fill in data
-                    $('#activeField option').remove();
-                    $('#activeField').next().remove();
-                    $.each(data, function (name, value) {
-                        $('#activeField').append("<option value='" + value + "'>" + value + "</option>");
-                    });
-                },
-                error: function () {
-                    layer.alert('loading data was wrong!', function (){
-                        window.history.back();
-                    });
-                }
-            });
+            var url = '{{url('api/fields')}}';
+            activeTable(url);
         });
 
         //获取被动表的二级联动数据
         //get response table drop down list
         $('#responseTable').change(function () {
-            if ($('#responseTable').val() === ''){
-                return false;
-            }
-
-            var tableId = $(this).children('option:selected').val();
-
-            //加载符号
-            //showing loading icon
-            $('#responseField').after("<i id='responseLoading' class='ace-icon fa fa-spinner fa-spin orange bigger-125'></i>");
-
-            //获取数据
-            //get data
-            var table = $('#responseTable').find("option:selected").text();
-            var url = "{{url('api/fields')}}" + '/' +table;
-            $.ajax({
-                type: 'get',
-                url: url,
-                dataType: 'json',
-                success: function (data) {
-                    //填充数据
-                    //fill in data
-                    $('#responseField option').remove();
-                    $('#responseField').next().remove();
-                    $.each(data, function (name, value) {
-                        $('#responseField').append("<option value='" + value + "'>" + value + "</option>");
-                    });
-                },
-                error: function () {
-                    layer.alert('loading data was wrong!', function (){
-                        window.history.back();
-                    });
-                }
-            });
+            var url = '{{url('api/fields')}}';
+            responseTable(url);
         });
 
         $(document).ready(function(){

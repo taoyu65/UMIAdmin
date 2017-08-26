@@ -170,7 +170,7 @@ return[
             'table_id', 'tab_title', 'order', 'created_at', 'updated_at'
         ],
         'umi_table_relation_operation'=> [
-            'rule_name', 'customer_rule_name', 'operation_type', 'active_table_id', 'active_table_field', 'response_table_id', 'response_table_field', 'check_value', 'check_operation', 'is_extra_operation', 'details', 'created_at', 'updated_at'
+            'rule_name', 'custom_rule_name', 'operation_type', 'active_table_id', 'active_table_field', 'response_table_id', 'response_table_field', 'check_value', 'check_operation', 'is_extra_operation', 'details', 'created_at', 'updated_at'
         ],
         'umi_tables'                => [
             'table_name', 'type', 'created_at', 'updated_at'

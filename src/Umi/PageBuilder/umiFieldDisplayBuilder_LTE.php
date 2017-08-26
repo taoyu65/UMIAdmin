@@ -36,7 +36,7 @@ class umiFieldDisplayBuilder_LTE implements fieldDisplayInterface
             }
             $url = url('editing') . "/$tableName/$record->id";
             $TR .= "<td><button type='button' class='btn btn-success btn-flat' onclick='showEditing(\"$url\");'>Edit</button> ";
-            $TR .= "<button type='button' class='btn btn btn-danger btn-flat' onclick='recordDelete(\"$tableName\", \"$record->id\");'>Delete</button></td>";
+            $TR .= "<button type='button' class='btn btn-danger btn-flat' onclick='recordDelete(\"$tableName\", \"$record->id\");'>Delete</button></td>";
             $TR .= "</tr>";
 
             array_push($existFields, $record->field);
@@ -57,15 +57,11 @@ class umiFieldDisplayBuilder_LTE implements fieldDisplayInterface
 
         $html = <<<UMI
         <input type="hidden" id="existFields" value="$streamExistField">
-        <table id="simple-table" class="table table-bordered table-hover">
-            <thead>
-                <tr>
-                    $TH
-                </tr>
-            </thead>
-            <tbody>
-                $TR
-            </tbody>
+        <table id="simple-table" class="table table-hover">
+            <tr>
+                $TH
+            </tr>
+            $TR
         </table>
         <script>
         
@@ -77,7 +73,7 @@ class umiFieldDisplayBuilder_LTE implements fieldDisplayInterface
                 $(this).removeAttr('style');
             });
         //});
-</script>
+        </script>
 UMI;
         return $html;
     }

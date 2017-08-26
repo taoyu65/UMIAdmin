@@ -1,252 +1,211 @@
 @extends('umi::layouts.master')
 
 @section('content')
-    <div class="page-header">
-        <h1>
-            {{trans('umiTrans::relation.relationOperation')}}
-            <small>
-                <i class="ace-icon fa fa-angle-double-right"></i>
-                {{trans('umiTrans::relation.selectAdd')}}
-            </small>
-        </h1>
-    </div>
 
-    <div class="alert alert-block alert-success">
-        <button type="button" class="close" data-dismiss="alert">
-            <i class="ace-icon fa fa-times"></i>
-        </button>
-
+    <div class="alert bg-info">
+        {{--<button type="button" class="close" data-dismiss="alert">
+            <i class="fa fa-times"></i>
+        </button>--}}
         <p>
             <strong>
-                <i class="ace-icon fa fa-check"></i>
+                <i class="fa fa-check"></i>
                 {{trans('umiTrans::relation.handsUp')}}
             </strong>
-            {{trans('umiTrans::relation.turnOff')}}
+            {{trans('umiTrans::relation.turnOff')}}<br>
+            <span class="text-bold"><strong>{{trans('umiTrans::relation.turnOff')}}</strong></span>
         </p>
     </div>
 
+    {{-- interlock --}}
     <div class="row">
-        <div class="col-xs-6 col-sm-3 pricing-box">
-            <div class="widget-box widget-color-red3">
-                <div class="widget-header">
-                    <h5 class="widget-title bigger lighter"><strong>{{trans('umiTrans::relation.deleteInterlock')}}</strong></h5>
-                </div>
+        <div class="col-sm-3">
+            <div class="box box-success box-solid">
+                <div class="box-header text-bold">{{trans('umiTrans::relation.deleteInterlock')}}</div>
+                <div class="box-body">
+                    <ul class="list-unstyled ul-space">
+                        <li class="">
+                            <i class="fa fa-check fa-green"></i>
+                            {{trans('umiTrans::relation.actionDelete')}}
+                        </li>
 
-                <div class="widget-body">
-                    <div class="widget-main">
-                        <ul class="list-unstyled spaced2">
-                            <li>
-                                <i class="ace-icon fa fa-check green"></i>
-                                {{trans('umiTrans::relation.actionDelete')}}
-                            </li>
+                        <li>
+                            <i class="fa fa-check fa-green"></i>
+                            {{trans('umiTrans::relation.extraOperation')}}
+                        </li>
 
-                            <li>
-                                <i class="ace-icon fa fa-check green"></i>
-                                {{trans('umiTrans::relation.extraOperation')}}
-                            </li>
+                        <li>
+                            <i class="fa fa-check fa-green"></i>
+                            {{trans('umiTrans::relation.relatedOtherTable')}}
+                        </li>
 
-                            <li>
-                                <i class="ace-icon fa fa-check green"></i>
-                                {{trans('umiTrans::relation.relatedOtherTable')}}
-                            </li>
+                        <li>
+                            <i class="fa fa-commenting fa-primary"></i>
+                            {{trans('umiTrans::relation.interlockInfo')}}
 
-                            <li>
-                                <i class="ace-icon fa fa-commenting blue"></i>
-                                {{trans('umiTrans::relation.interlockInfo')}}
+                        </li>
 
-                            </li>
-
-                            <li>
-                                <i class="ace-icon fa fa-info-circle pink"></i>
-                                {{trans('umiTrans::relation.interlockExample')}}
-                            </li>
-                        </ul>
-
-                        <hr />
-                        <div class="price">
-                           <span class="label label-white middle">
+                        <li>
+                            <i class="fa fa-info-circle fa-maroon"></i>
+                            {{trans('umiTrans::relation.interlockExample')}}
+                        </li>
+                    </ul>
+                    <hr />
+                    <div class="">
+                           <span class="label bg-gray">
                                 {{trans('umiTrans::relation.delete')}}
                             </span>
-                        </div>
-                    </div>
-
-                    <div>
-                        <a href="{{url_with_para('relationOpe/adding/interlock')}}" class="btn btn-block btn-danger">
-                            <i class="ace-icon fa fa-arrow-right bigger-110"></i>
-                            <span>{{trans('umiTrans::relation.next')}}</span>
-                        </a>
                     </div>
                 </div>
+                <a href="{{url_with_para('relationOpe/adding/interlock')}}" class="btn btn-block btn-success btn-flat">
+                    <i class="fa fa-arrow-right"></i>
+                    <span>{{trans('umiTrans::relation.next')}}</span>
+                </a>
             </div>
         </div>
 
-        <div class="col-xs-6 col-sm-3 pricing-box">
-            <div class="widget-box widget-color-orange">
-                <div class="widget-header">
-                    <h5 class="widget-title bigger lighter"><strong>{{trans('umiTrans::relation.exist')}}</strong></h5>
-                </div>
+        {{-- exist --}}
+        <div class="col-sm-3">
+            <div class="box box-danger box-solid">
+                <div class="box-header text-bold">{{trans('umiTrans::relation.exist')}}</div>
+                <div class="box-body">
+                    <ul class="list-unstyled ul-space">
+                        <li>
+                            <i class="fa fa-check fa-green"></i>
+                            {{trans('umiTrans::relation.actionDeleteEdit')}}
+                        </li>
 
-                <div class="widget-body">
-                    <div class="widget-main">
-                        <ul class="list-unstyled spaced2">
-                            <li>
-                                <i class="ace-icon fa fa-check green"></i>
-                                {{trans('umiTrans::relation.actionDeleteEdit')}}
-                            </li>
+                        <li>
+                            <i class="fa fa-times red"></i>
+                            {{trans('umiTrans::relation.extraOperation')}}
+                        </li>
 
-                            <li>
-                                <i class="ace-icon fa fa-times red"></i>
-                                {{trans('umiTrans::relation.extraOperation')}}
-                            </li>
+                        <li>
+                            <i class="fa fa-check fa-green"></i>
+                            {{trans('umiTrans::relation.relatedOtherTable')}}
+                        </li>
 
-                            <li>
-                                <i class="ace-icon fa fa-check green"></i>
-                                {{trans('umiTrans::relation.relatedOtherTable')}}
-                            </li>
+                        <li>
+                            <i class="fa fa-commenting fa-primary"></i>
+                            {{trans('umiTrans::relation.existInfo')}}
+                        </li>
 
-                            <li>
-                                <i class="ace-icon fa fa-commenting blue"></i>
-                                {{trans('umiTrans::relation.existInfo')}}
-                            </li>
-
-                            <li>
-                                <i class="ace-icon fa fa-info-circle pink"></i>
-                                {{trans('umiTrans::relation.existExample')}}
-                            </li>
-                        </ul>
-
-                        <hr />
-                        <div class="price">
-                           <span class="label label-white middle">
-                                {{trans('umiTrans::relation.delete')}}
-                            </span>
-                            <span class="label label-white middle">
-                               {{trans('umiTrans::relation.edit')}}
-                            </span>
-                        </div>
-                    </div>
-
+                        <li>
+                            <i class="fa fa-info-circle fa-maroon"></i>
+                            {{trans('umiTrans::relation.existExample')}}
+                        </li>
+                    </ul>
+                    <hr />
                     <div>
-                        <a href="{{url_with_para('relationOpe/adding/exist')}}" class="btn btn-block btn-warning">
-                            <i class="ace-icon fa fa-arrow-right bigger-110"></i>
-                            <span>{{trans('umiTrans::relation.next')}}</span>
-                        </a>
+                        <span class="label bg-gray">
+                            {{trans('umiTrans::relation.delete')}}
+                        </span>&nbsp;
+                        <span class="label bg-gray">
+                            {{trans('umiTrans::relation.edit')}}
+                        </span>
                     </div>
                 </div>
+                <a href="{{url_with_para('relationOpe/adding/interlock')}}" class="btn btn-block btn-danger btn-flat">
+                    <i class="fa fa-arrow-right"></i>
+                    <span>{{trans('umiTrans::relation.next')}}</span>
+                </a>
             </div>
         </div>
 
-        <div class="col-xs-6 col-sm-3 pricing-box">
-            <div class="widget-box widget-color-blue">
-                <div class="widget-header">
-                    <h5 class="widget-title bigger lighter"><strong>{{trans('umiTrans::relation.selfCheck')}}</strong></h5>
-                </div>
+        {{-- self check --}}
+        <div class="col-sm-3">
+            <div class="box box-warning box-solid">
+                <div class="box-header text-bold">{{trans('umiTrans::relation.selfCheck')}}</div>
+                <div class="box-body">
+                    <ul class="list-unstyled ul-space">
+                        <li>
+                            <i class="fa fa-check fa-green"></i>
+                            {{trans('umiTrans::relation.actionDeleteEdit')}}
+                        </li>
 
-                <div class="widget-body">
-                    <div class="widget-main">
-                        <ul class="list-unstyled spaced2">
-                            <li>
-                                <i class="ace-icon fa fa-check green"></i>
-                                {{trans('umiTrans::relation.actionDeleteEdit')}}
-                            </li>
+                        <li>
+                            <i class="fa fa-times fa-red"></i>
+                            {{trans('umiTrans::relation.extraOperation')}}
+                        </li>
 
-                            <li>
-                                <i class="ace-icon fa fa-times red"></i>
-                                {{trans('umiTrans::relation.extraOperation')}}
-                            </li>
+                        <li>
+                            <i class="fa fa-times fa-red"></i>
+                            {{trans('umiTrans::relation.relatedOtherTable')}}
+                        </li>
 
-                            <li>
-                                <i class="ace-icon fa fa-times red"></i>
-                                {{trans('umiTrans::relation.relatedOtherTable')}}
-                            </li>
+                        <li>
+                            <i class="fa fa-commenting fa-primary"></i>
+                            {{trans('umiTrans::relation.selfCheckInfo')}}
+                        </li>
 
-                            <li>
-                                <i class="ace-icon fa fa-commenting blue"></i>
-                                {{trans('umiTrans::relation.selfCheckInfo')}}
-                            </li>
-
-                            <li>
-                                <i class="ace-icon fa fa-info-circle pink"></i>
-                                {{trans('umiTrans::relation.selfCheckExample')}}
-                            </li>
-                        </ul>
-
-                        <hr />
-                        <div class="price">
-                            <span class="label label-white middle">
-                                {{trans('umiTrans::relation.delete')}}
-                            </span>
-                            <span class="label label-white middle">
-                               {{trans('umiTrans::relation.edit')}}
-                            </span>
-                        </div>
-                    </div>
-
+                        <li>
+                            <i class="fa fa-info-circle fa-maroon"></i>
+                            {{trans('umiTrans::relation.selfCheckExample')}}
+                        </li>
+                    </ul>
+                    <hr />
                     <div>
-                        <a href="{{url_with_para('relationOpe/adding/selfCheck')}}" class="btn btn-block btn-primary">
-                            <i class="ace-icon fa fa-arrow-right bigger-110"></i>
-                            <span>{{trans('umiTrans::relation.next')}}</span>
-                        </a>
+                        <span class="label bg-gray">
+                            {{trans('umiTrans::relation.delete')}}
+                        </span>&nbsp;
+                        <span class="label bg-gray">
+                            {{trans('umiTrans::relation.edit')}}
+                        </span>
                     </div>
                 </div>
+                <a href="{{url_with_para('relationOpe/adding/interlock')}}" class="btn btn-block btn-warning btn-flat">
+                    <i class="fa fa-arrow-right"></i>
+                    <span>{{trans('umiTrans::relation.next')}}</span>
+                </a>
             </div>
         </div>
 
-        <div class="col-xs-6 col-sm-3 pricing-box">
-            <div class="widget-box widget-color-green">
-                <div class="widget-header">
-                    <h5 class="widget-title bigger lighter"><strong>{{trans('umiTrans::relation.custom')}}</strong></h5>
-                </div>
+        {{-- custom --}}
+        <div class="col-sm-3">
+            <div class="box box-primary box-solid">
+                <div class="box-header text-bold">{{trans('umiTrans::relation.custom')}}</div>
+                <div class="box-body">
+                    <ul class="list-unstyled ul-space">
+                        <li>
+                            <i class="fa fa-check fa-green"></i>
+                            {{trans('umiTrans::relation.actionDeleteEdit')}}
+                        </li>
 
-                <div class="widget-body">
-                    <div class="widget-main">
-                        <ul class="list-unstyled spaced2">
-                            <li>
-                                <i class="ace-icon fa fa-check green"></i>
-                                {{trans('umiTrans::relation.actionDeleteEdit')}}
-                            </li>
+                        <li>
+                            <i class="fa fa-check fa-green"></i>
+                            {{trans('umiTrans::relation.extraOperation')}}
+                        </li>
 
-                            <li>
-                                <i class="ace-icon fa fa-check green"></i>
-                                {{trans('umiTrans::relation.extraOperation')}}
-                            </li>
+                        <li>
+                            <i class="fa fa-check fa-green"></i>
+                            {{trans('umiTrans::relation.relatedOtherTable')}}
+                        </li>
 
-                            <li>
-                                <i class="ace-icon fa fa-check green"></i>
-                                {{trans('umiTrans::relation.relatedOtherTable')}}
-                            </li>
+                        <li>
+                            <i class="fa fa-commenting fa-primary"></i>
+                            {{trans('umiTrans::relation.customInfo')}}
+                        </li>
 
-                            <li>
-                                <i class="ace-icon fa fa-commenting blue"></i>
-                                {{trans('umiTrans::relation.customInfo')}}
-                            </li>
-
-                            <li>
-                                <i class="ace-icon fa fa-info-circle pink"></i>
-                                {{trans('umiTrans::relation.customExample')}}
-                            </li>
-                        </ul>
-
-                        <hr />
-                        <div class="price">
-                            <span class="label label-white middle">
-                                {{trans('umiTrans::relation.delete')}}
-                            </span>
-                            <span class="label label-white middle">
-                               {{trans('umiTrans::relation.edit')}}
-                            </span>
-                        </div>
-                    </div>
-
+                        <li>
+                            <i class="fa fa-info-circle fa-maroon"></i>
+                            {{trans('umiTrans::relation.customExample')}}
+                        </li>
+                    </ul>
+                    <hr />
                     <div>
-                        <a href="{{url_with_para('relationOpe/adding/custom')}}" class="btn btn-block btn-success">
-                            <i class="ace-icon fa fa-arrow-right bigger-110"></i>
-                            <span>{{trans('umiTrans::relation.next')}}</span>
-                        </a>
+                        <span class="label bg-gray">
+                            {{trans('umiTrans::relation.delete')}}
+                        </span>&nbsp;
+                        <span class="label bg-gray">
+                            {{trans('umiTrans::relation.edit')}}
+                        </span>
                     </div>
                 </div>
+                <a href="{{url_with_para('relationOpe/adding/interlock')}}" class="btn btn-block btn-primary btn-flat">
+                    <i class="fa fa-arrow-right"></i>
+                    <span>{{trans('umiTrans::relation.next')}}</span>
+                </a>
             </div>
-        </div >
+        </div>
     </div>
 
 @endsection

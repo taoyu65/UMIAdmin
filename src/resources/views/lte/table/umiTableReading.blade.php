@@ -2,17 +2,15 @@
 
 @section('content')
 
-    <div class="col-sm-12">
-        <h3 class="header smaller lighter blue">
-            <i class="ace-icon fa fa-bullhorn"></i>
-            Read Fields
-        </h3>
-        <div class="alert alert-warning">
-            <p>
+    <br>
+    <div class="box box-success">
+        <div class="box-header with-border">
+            <h3 class="box-title text-success"><i class="fa fa-eye"></i>Read Fields</h3>
+        </div>
+        <div class="box-body">
             <form class="form-horizontal">
                 {!! $display !!}
             </form>
-            </p>
         </div>
     </div>
 <script>

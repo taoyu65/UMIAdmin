@@ -23,11 +23,11 @@ class umiDataTableBuilder_LTE implements dataTableInterface
     private $tableName;
 
     #按钮样式 style of button
-    protected $BtnCssDelete = 'btn btn-sm btn-danger';
-    protected $BtnCssNew = 'btn btn-sm btn-success';
-    protected $BtnCssSmallEdit = 'btn btn-xs btn-info';
-    protected $BtnCssSmallRead = 'btn btn-xs btn-warning';
-    protected $BtnCssSmallDelete = 'btn btn-xs btn-danger';
+    protected $BtnCssDelete = 'btn btn-danger btn-flat';
+    protected $BtnCssNew = 'btn bg-olive btn-flat';
+    protected $BtnCssSmallEdit = 'btn btn-sm btn-primary btn-flat';
+    protected $BtnCssSmallRead = 'btn btn-sm btn-warning btn-flat';
+    protected $BtnCssSmallDelete = 'btn btn-sm btn-danger btn-flat';
 
     #默认数据表主键为id 可以通过继承修改
     #default data table's primary key is id, can be changed by inheriting this class
@@ -71,14 +71,14 @@ class umiDataTableBuilder_LTE implements dataTableInterface
     public function tableHeadAlert()
     {
         $html = <<<UMI
-        <div class="alert alert-info">
-			<button type="button" class="close" data-dismiss="alert">
-				<i class="ace-icon fa fa-times"></i>
-			</button>
-			<strong>This is Table's head!</strong>
-			This alert needs your attention, but it's not super important.
-			<br />
-		</div>
+        <div class="alert bg-olive">
+            <button type="button" class="close" data-dismiss="alert">
+                <i class="fa fa-times"></i>
+            </button>
+            <strong>This is Table's head!</strong>
+            This alert needs your attention, but it's not super important.
+            <br />
+        </div>
 UMI;
         return $html;
     }
@@ -229,26 +229,17 @@ UMI;
             }
         }
         $html = <<<UMI
-        <div class="row">
-            <div class="col-xs-12">
-                <table id="dynamic-table" class="table table-striped table-bordered table-hover">
-                    <thead>
+        <div class="box-body bg-gray-light ">
+            <div class="row">
+                <div class="col-sm-12">
+                    <table id="dynamic-table" class="table table-hover">
                         <tr>
-                            <!--<th class="center">
-                                <label class="pos-rel">
-                                    <input type="checkbox" class="ace" />
-                                    <span class="lbl"></span>
-                                </label>
-                            </th>-->
                             $tHeadHtml
                             <th></th>
                         </tr>
-                    </thead>
-
-                    <tbody>
                         $trBodyHtml
-                    </tbody>
-                </table>
+                    </table>
+                </div>
             </div>
         </div>
 UMI;
@@ -259,14 +250,14 @@ UMI;
     public function tableFoot()
     {
         $html = <<< UMI
-        <div class="alert alert-block alert-success">
+        <div class="alert bg-gray-light">
             <button type="button" class="close" data-dismiss="alert">
-                <i class="ace-icon fa fa-times"></i>
+                <i class="fa fa-times"></i>
             </button>
 
             <p>
-                <strong>
-                    <i class="ace-icon fa fa-check"></i>
+                <strong class="text-primary">
+                    <i class="fa fa-check"></i>
                     This is Table's Foot
                 </strong>
                 You can customize this footer.<br>
@@ -274,8 +265,8 @@ UMI;
             </p>
 
             <p>
-                <button class="btn btn-sm btn-success">Do This</button>
-                <button class="btn btn-sm btn-info">Or This One</button>
+                <button class="btn btn-primary btn-flat">Do This</button>
+                <button class="btn btn-info btn-flat">Or This One</button>
             </p>
         </div>
 UMI;
@@ -360,37 +351,37 @@ UMI;
         $buttonSmallEdit = $this->ButtonSmallEdit($recordId, $activeFieldValue);
         $buttonSmallRead = $this->ButtonSmallRead($recordId, $activeFieldValue);
         $buttonSmallDelete = $this->ButtonSmallDelete($recordId, $activeFieldValue);
-        $linkHideEdit = $this->LinkHideEdit($recordId, $activeFieldValue);
+        /*$linkHideEdit = $this->LinkHideEdit($recordId, $activeFieldValue);
         $linkHideDelete = $this->LinkHideDelete($recordId, $activeFieldValue);
-        $linkHideRead = $this->LinkHideRead($recordId, $activeFieldValue);
+        $linkHideRead = $this->LinkHideRead($recordId, $activeFieldValue);*/
 
         $html = <<<UMI
         <td>
-	    	<div class="hidden-sm hidden-xs btn-group">
-	    		$buttonSmallEdit
+            <div class="hidden-sm hidden-xs">
+                $buttonSmallEdit
 
-	    		$buttonSmallRead
+                $buttonSmallRead
 
-	    		$buttonSmallDelete
-	    	</div>
+                $buttonSmallDelete
+            </div>
+UMI;
+            /*<div class="hidden-md hidden-lg">
+                <div class="inline pos-rel">
+                    <button class="btn btn-minier btn-primary dropdown-toggle" data-toggle="dropdown" data-position="auto">
+                        <i class="ace-icon fa fa-cog icon-only bigger-110"></i>
+                    </button>
 
-	        <div class="hidden-md hidden-lg">
-	    		<div class="inline pos-rel">
-	    			<button class="btn btn-minier btn-primary dropdown-toggle" data-toggle="dropdown" data-position="auto">
-	    				<i class="ace-icon fa fa-cog icon-only bigger-110"></i>
-	    			</button>
-
-	    			<ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
-	    				$linkHideRead
+                    <ul class="dropdown-menu dropdown-only-icon dropdown-yellow dropdown-menu-right dropdown-caret dropdown-close">
+                        $linkHideRead
 
                         $linkHideEdit
 
                         $linkHideDelete
-	    			</ul>
-	    		</div>
-	    	</div>
-	    </td>
-UMI;
+                    </ul>
+                </div>
+            </div>
+        </td>*/
+
         return $html;
     }
 
@@ -409,7 +400,7 @@ UMI;
         $addUrl = url('adding'). "/$this->tableName";
         $html = <<<UMI
         <button class="$this->BtnCssNew $disable" $disable type="button" onclick="showAdding('$addUrl');">
-            <i class="ace-icon fa fa-plus"></i>
+            <i class="fa fa-plus btn-flat"></i>
             New
         </button>
 UMI;
@@ -430,9 +421,9 @@ UMI;
     {
         $html = <<<UMI
         <button class="$this->BtnCssDelete $disable" $disable>
-                    <i class="ace-icon fa fa-trash-o"></i>
+            <i class="fa fa-trash-o"></i>
             Delete
-        </button>
+        </button>&nbsp;
 UMI;
         return $html;
     }
@@ -456,8 +447,8 @@ UMI;
 
         $html = <<<UMI
         <button class="$this->BtnCssSmallEdit $disable" $disable onclick="showEditing('$editUrl');">
-            <i class="ace-icon fa fa-pencil bigger-120"></i>
-        </button>
+            <i class="fa fa-pencil"></i>
+        </button>&nbsp;
 UMI;
         return $html;
     }
@@ -479,8 +470,8 @@ UMI;
 
         $html = <<<UMI
         <button class="$this->BtnCssSmallRead $disable" $disable onclick="showReading('$readUrl');">
-            <i class="ace-icon fa fa-eye bigger-120"></i>
-        </button>
+            <i class="fa fa-eye"></i>
+        </button>&nbsp;
 UMI;
         return $html;
     }
@@ -505,8 +496,8 @@ UMI;
 
         $html = <<<UMI
         <button class="$this->BtnCssSmallDelete $disable" $disable onclick="showDeleting('$deleteUrl');">
-            <i class="ace-icon fa fa-trash-o bigger-120"></i>
-        </button>
+            <i class="fa fa-trash-o"></i>
+        </button>&nbsp;
 UMI;
         return $html;
     }
@@ -643,15 +634,15 @@ UMI;
      */
     private function wrongMessage($message, $url = '')
     {
-        $showingButton = $url === '' ? '' : '<p><button class="btn btn-sm btn-success">Go Set Up</button> <button class="btn btn-sm">Not Now</button></p>';
+        $showingButton = $url === '' ? '' : '<p><button class="btn btn-primary btn-flat">Go Set Up</button> <button class="btn btn-primary btn-flat">Not Now</button></p>';
 
         $html = <<<UMI
         <div class="alert alert-danger">
             <button type="button" class="close" data-dismiss="alert">
-                <i class="ace-icon fa fa-times"></i>
+                <i class="fa fa-times"></i>
             </button>
             <strong>
-                <i class="ace-icon fa fa-times"></i>
+                <i class="fa fa-times"></i>
                 Oh whoops!
             </strong>
                 $message

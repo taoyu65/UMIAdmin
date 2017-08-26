@@ -107,7 +107,7 @@
                                     <div class="form-group">
                                         <label for="" class="col-sm-2 control-label text-success"></label>
                                         <div class="col-sm-12 col-sm-5">
-                                            <button class="btn btn-success btn-flat" type="button" id="createUserBtn">{{trans('umiTrans::wizard.createUser')}}</button>
+                                            <button class="btn bg-olive btn-flat" type="button" id="createUserBtn">{{trans('umiTrans::wizard.createUser')}}</button>
                                         </div>
                                     </div>
                                 </div>
@@ -119,7 +119,7 @@
                                 <i class="fa fa-arrow-left"></i>
                                 {{trans('umiTrans::wizard.prev')}}
                             </button>
-                            <button type="button" class="btn btn-success btn-flat btn-next">
+                            <button type="button" class="btn bg-olive btn-flat btn-next">
                                 {{trans('umiTrans::wizard.next')}}
                                 <i class="fa fa-arrow-right icon-on-right"></i>
                             </button>
@@ -183,7 +183,7 @@
                                     <div class="form-group">
                                         <label for="" class="col-sm-2 control-label text-success"></label>
                                         <div class="col-sm-12 col-sm-5">
-                                            <button class="btn btn-success btn-flat" type="button" id="createRoleBtn">{{trans('umiTrans::wizard.createRole')}}</button>
+                                            <button class="btn bg-olive btn-flat" type="button" id="createRoleBtn">{{trans('umiTrans::wizard.createRole')}}</button>
                                         </div>
                                     </div>
                                 </div>
@@ -195,7 +195,7 @@
                                 <i class="fa fa-arrow-left"></i>
                                 {{trans('umiTrans::wizard.prev')}}
                             </button>
-                            <button type="button" class="btn btn-success btn-flat btn-next">
+                            <button type="button" class="btn bg-olive btn-flat btn-next">
                                 {{trans('umiTrans::wizard.next')}}
                                 <i class="fa fa-arrow-right"></i>
                             </button>
@@ -210,7 +210,7 @@
                                 <i class="fa fa-arrow-left"></i>
                                 {{trans('umiTrans::wizard.prev')}}
                             </button>
-                            <button type="button" class="btn btn-success btn-flat btn-next">
+                            <button type="button" class="btn bg-olive btn-flat btn-next">
                                 {{trans('umiTrans::wizard.next')}}
                                 <i class="fa fa-arrow-right icon-on-right"></i>
                             </button>
@@ -239,7 +239,7 @@
                                 <i class="fa fa-arrow-left"></i>
                                 {{trans('umiTrans::wizard.prev')}}
                             </button>
-                            <button type="button" class="btn btn-success btn-flat btn-submit">
+                            <button type="button" class="btn bg-olive btn-flat btn-submit">
                                 Finish
                                 <i class="fa fa-arrow-right"></i>
                             </button>

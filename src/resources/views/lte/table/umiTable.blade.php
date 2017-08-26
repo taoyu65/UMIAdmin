@@ -3,17 +3,7 @@
 @section('content')
 
     <?php $assetPath = url(config('umi.assets_path')) ?>
-    <?php $path = url($assetPath . '/ace') ?>
-
-    <div class="page-header">
-        <h1>
-            UMI Tables
-            <small>
-                <i class="ace-icon fa fa-angle-double-right"></i>
-                Data Table Manage &amp; Search
-            </small>
-        </h1>
-    </div>
+    <?php $path = url($assetPath . '/lte') ?>
 
     {!! $header !!}
 

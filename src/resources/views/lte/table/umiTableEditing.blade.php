@@ -3,46 +3,42 @@
 @section('content')
 
     <?php $assetPath = url(config('umi.assets_path')) ?>
-    <?php $path = url($assetPath . '/ace') ?>
+    <?php $path = url($assetPath . '/lte') ?>
 
     <link rel="stylesheet" href="{{$assetPath}}/bsSwitch/bsSwitch.css" />
     <link rel="stylesheet" href="{{$assetPath}}/dateTimePicker/jquery.datetimepicker.css" />
 
-    <div class="col-sm-12">
-        <h3 class="header smaller lighter blue">
-            <i class="ace-icon fa fa-bullhorn"></i>
-            Edit Fields
-        </h3>
+    <br>
+    <div class="box box-warning">
+        <div class="box-header with-border">
+            <h3 class="box-title text-warning"><i class="fa fa-square"></i>Edit Fields</h3>
+        </div>
+        <div class="box-body">
+            {!! $message !!}
+            @if (!$actionAvailable)
+                <div class="alert alert-danger">
+                    Currently you can not edit this record until meet the requirements !
+                    <br /><br /><p>
+                        <button class="btn btn-danger btn-flat disabled" disabled>Edit</button>
+                        <button class="btn btn-primary btn-flat" id="clsDelete">Close</button>
+                    </p>
+                </div>
+            @else
+                <form class="form-horizontal" method="post" action="{{url("edit")}}/{{$table}}" id="umiForm">
+                    {!! csrf_field() !!}
+                    {!! $display !!}
 
-        {!! $message !!}
-        @if (!$actionAvailable)
-            <div class="alert alert-danger">
-                Currently you can not edit this record until meet the requirements !
-                <br /><br /><p>
-                    <button class="btn btn-sm btn-danger disabled" disabled>Edit</button>
-                    <button class="btn btn-sm btn-info" id="clsDelete">Close</button>
-                </p>
-            </div>
-        @else
-            <div class="alert alert-warning">
-                <p>
-                    <form class="form-horizontal" method="post" action="{{url("edit")}}/{{$table}}" id="umiForm">
-                        {!! csrf_field() !!}
-                        {!! $display !!}
-
-                        <input type="hidden" name="hidden_tn" value="{{$table}}">
-                        <input type="hidden" name="hidden_ti" value="{{$recordId}}">
-                        <input type="hidden" name="hidden_afv" value="{{$activeFieldValue}}">
-                    </form>
-                </p>
-            </div>
-        @endif
+                    <input type="hidden" name="hidden_tn" value="{{$table}}">
+                    <input type="hidden" name="hidden_ti" value="{{$recordId}}">
+                    <input type="hidden" name="hidden_afv" value="{{$activeFieldValue}}">
+                </form>
+            @endif
+        </div>
     </div>
 
-    <script src="{{$assetPath}}/bsSwitch/highlight.js"></script>
-    <script src="{{$assetPath}}/bsSwitch/bsSwitch.js"></script>
+    <script src="{{$assetPath}}/bsSwitch/bootstrap-switch.min.js"></script>
     <script src="{{$assetPath}}/dateTimePicker/jquery.datetimepicker.full.min.js"></script>
-    <script src="{{$path}}/js/jquery.validate.min.js"></script>
+    <script src="{{$assetPath}}/js/jquery.validate.min.js"></script>
 
     <script>
         //关闭所有模态窗口
@@ -58,6 +54,7 @@
                 shade: [0.8,'#000000']
             });
         });
+
 
     </script>
 @endsection

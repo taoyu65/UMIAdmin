@@ -9,11 +9,11 @@ return [
     'functionDescription'   => 'Function Description: When the rule is matched, the extra action will be completed',
     'tooltip'               => 'Tooltips',
     'exampleCustom'         => 'Example of Custom operation',
-    'customExplain'         => '<span class="fa-red">
+    'customExplain'         => '<span class="text-red">
                             Warning: The custom rule name will be the function name which you will manually program with
                         </span><br>
                         You can customize any rule, set the correct table and field that can receive the right data for special operation <br>
-                        <span class="fa-primary">
+                        <span class="text-primary">
                             Advantage: delete action will follow the rule you make (no long active field match response field). The rule such as
                             when delete record from active table then all the records will be deleted base on response field match custom rule
                         </span>',
@@ -48,7 +48,7 @@ return [
     'back'                  => 'Back',
     'functionDescription2'  => 'Function Description: When the rule is matched, the action will be held',
     'exitOperation'         => 'Example of Exist Operation',
-    'existExplain'          => '<span class="fa-red">
+    'existExplain'          => '<span class="text-red">
                             Warning: This function is not operating other tables only current active table will be operated come with the customized rule<br>
                             Warning: The rule is only: active field compare with response field or response field compare with custom value
                         </span><br>
@@ -56,7 +56,7 @@ return [
                         Before do a action (delete, edit a record) the rule will be applied.<br>
                         For example: there are user table and user\'s article table. If you want to delete a user then check article table to make sure no article belongs user.
                         you can set the rule, active table - user, active field - id, response table - article, response field - user_id.<br>
-                        <span class="fa-primary">
+                        <span class="text-primary">
                             Advantage: delete action will follow the rule you make (no long active field match response field). The rule such as
                             when delete record from active table then all the records will be deleted base on response field match custom rule
                         </span>',
@@ -85,12 +85,12 @@ return [
                         active field: id,
                         response table: article,
                         response filed: user_id (normally is foreign key)<br>
-                        <span class="fa-primary">
+                        <span class="text-primary">
                             Advantage: delete action will follow the rule you make (no long active field match response field). The rule such as
                             when delete record from active table then all the records will be deleted base on response field match custom rule
                         </span>',
     'selfCheckOperation'    => 'Example of SelfCheck Operation',
-    'selfCheckExplain'      => '<span class="fa-red">
+    'selfCheckExplain'      => '<span class="text-red">
                             Warning: This function is not operating other tables only current active table will be operated come with the customized rule<br>
                             Warning: The rule is only: active field compare with custom value
                         </span><br>

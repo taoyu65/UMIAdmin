@@ -3,22 +3,23 @@
 @section('content')
 
     <?php $assetPath = url(config('umi.assets_path')) ?>
-    <?php $path = url($assetPath . '/ace') ?>
+    <?php $path = url($assetPath . '/lte') ?>
 
     <link rel="stylesheet" href="{{$assetPath}}/bsSwitch/bsSwitch.css" />
 
-    <form class="col-sm-12">
-        <h3 class="header smaller lighter green">
-            <i class="ace-icon fa fa-bullhorn"></i>
-            Add Confirmation
-        </h3>
-    </form>
-
-    <div class="col-sm-12">
-        <form class="form-horizontal" id="umiForm" method="post" action="{{url('add/' . $tableName)}}">
-            {!! csrf_field() !!}
-            {!! $display !!}
-        </form>
+    <div class="box box-primary">
+        <div class="box-header with-border">
+            <i class="fa fa-bullhorn fa-primary"></i>
+            <h3 class="box-title">Add Confirmation</h3>
+        </div>
+        <div class="box-body">
+            <div class="col-sm-12">
+                <form class="form-horizontal" id="umiForm" method="post" action="{{url('add/' . $tableName)}}">
+                    {!! csrf_field() !!}
+                    {!! $display !!}
+                </form>
+            </div>
+        </div>
     </div>
 
     <script>
@@ -43,7 +44,6 @@
 
     </script>
 
-    <script src="{{$assetPath}}/bsSwitch/highlight.js"></script>
     <script src="{{$assetPath}}/bsSwitch/bsSwitch.js"></script>
-    <script src="{{$path}}/js/jquery.validate.min.js"></script>
+    <script src="{{$assetPath}}/js/jquery.validate.min.js"></script>
 @endsection
