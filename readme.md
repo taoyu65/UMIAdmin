@@ -38,14 +38,14 @@ Umi admin is powerful backend management system, including
 warning: Please keep the new database is empty before install application, or empty database before run the installation command
 
 ## 图片 
-![](http://umi.laravelumi.com/public/img/img/a.jpg)
-![](http://umi.laravelumi.com/public/img/img/b.jpg)
-![](http://umi.laravelumi.com/public/img/img/c.jpg)
-![](http://umi.laravelumi.com/public/img/img/d.jpg)
-![](http://umi.laravelumi.com/public/img/img/e.jpg)
-![](http://umi.laravelumi.com/public/img/img/f.jpg)
-![](http://umi.laravelumi.com/public/img/img/g.jpg)
-![](http://umi.laravelumi.com/public/img/img/h.jpg)
+![](http://umi.laravelumi.com/public/img/img2/a.jpg)
+![](http://umi.laravelumi.com/public/img/img2/b.jpg)
+![](http://umi.laravelumi.com/public/img/img2/c.jpg)
+![](http://umi.laravelumi.com/public/img/img2/d.jpg)
+![](http://umi.laravelumi.com/public/img/img2/e.jpg)
+![](http://umi.laravelumi.com/public/img/img2/f.jpg)
+![](http://umi.laravelumi.com/public/img/img2/g.jpg)
+![](http://umi.laravelumi.com/public/img/img2/h.jpg)
 
 ## License
 
