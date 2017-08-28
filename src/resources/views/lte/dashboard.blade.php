@@ -49,19 +49,19 @@
                             <tr>
                                 <td>{{$ip->user_name}}</td>
                                 <td title="{{$ip->ip}}">
-                                    <b class="green">{{substr($ip->ip, 0, 19)}}</b>
+                                    <b>{{substr($ip->ip, 0, 19)}}</b>
                                 </td>
-                                <td class="hidden-480">
-                                    <span class="label-light ">{{$ip->country}}</span>
+                                <td>
+                                    <span>{{$ip->country}}</span>
                                 </td>
                                 {{--<td class="hidden-480">
                                     <span class="label">{{$ip->region}}</span>
                                 </td>--}}
-                                <td class="hidden-480">
-                                    <span class="label label">{{$ip->city}}</span>
+                                <td>
+                                    <span class="label label-primary">{{$ip->city}}</span>
                                 </td>
-                                <td class="hidden-480">
-                                    <span class="label label-grey">{{time_tran($ip->created_at)}}</span>
+                                <td>
+                                    <span>{{time_tran($ip->created_at)}}</span>
                                 </td>
                             </tr>
                         @endforeach

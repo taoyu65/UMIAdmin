@@ -6,10 +6,12 @@ use App\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use Symfony\Component\Process\Process;
 
 class DashBoardController extends Controller
 {
@@ -70,7 +72,7 @@ class DashBoardController extends Controller
             $ip = $_SERVER['REMOTE_ADDR'];//'98.176.248.193';//
             //$ip = file_get_contents('https://api.ipify.org');
             //$query = json_decode(file_get_contents('http://ip-api.com/json/'.$ip));
-            $query = json_decode(file_get_contents("https://ipinfo.io/asdf/json"));
+            $query = json_decode(file_get_contents("https://ipinfo.io/$ip/json"));
             if(!isset($query->bogon) && !isset($query->error)) {
                 $country = $query->country;
                 $region = $query->region;
