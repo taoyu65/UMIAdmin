@@ -13,7 +13,7 @@ Umi admin is powerful backend management system, including
 
 ## installation
 1. install composer and laravel 5.3 Please install correctly. recommends use the follow command 
-> composer create-project --prefer-dist laravel/laravel blog 5.3.*
+> composer create-project --prefer-dist laravel/laravel umi_admin 5.3.*
 2. install UMI Admin. 
 >composer require ym/umi v0.1.2.* <br>
 >If not prefer to use composer to install, please read https://github.com/taoyu65/UMIAdmin/wiki/install_en
