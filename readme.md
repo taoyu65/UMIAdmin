@@ -30,7 +30,8 @@ Umi admin is powerful backend management system, including
 >(warning:if need to change language for database after installation only run command php artisan umi:install --lang-zh-only / --lang-en-only) 
 6. setting language:
 >in the file config/app.php, 'locale' => 'zh_cn' or 'en'
-7. ok, let's start.<br>
+7. renew app_key, run command: $ php artisan key:generate
+8. ok, let's start.<br>
 warning: Please keep the new database is empty before install application, or empty database before run the installation command
 
 ## 图片 
