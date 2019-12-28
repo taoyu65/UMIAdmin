@@ -66,7 +66,8 @@ Umi 是由laravel 5.3开发的全面的后台管理系统, 包括以下特性
 >附:如果数据库已经安装完毕, 在想更改语言英语或汉语 仅需执行 php artisan umi:install --lang-zh-only(或 --lang-en-only) 
 6. 设置系统为中文:
 >在根目录下config/app.php中 设置 'locale' => 'zh_cn', 即可
-7. 好了. 可以开始了.<br>
+7. 设置app_key 执行命令 $ php artisan key:generate
+8. 好了. 可以开始了.<br>
 注意：为了保证数据库迁移，数据库结构和一些必要的数据。 请在执行php artisan umi：install之前 保持数据库为空。如果要重新安装请手动清空数据库包括结构。
 
     
