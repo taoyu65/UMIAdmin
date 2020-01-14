@@ -72,24 +72,24 @@ class DashBoardController extends Controller
             $ip = $_SERVER['REMOTE_ADDR'];//'98.176.248.193';//
             //$ip = file_get_contents('https://api.ipify.org');
             //$query = json_decode(file_get_contents('http://ip-api.com/json/'.$ip));
-            $query = json_decode(file_get_contents("https://ipinfo.io/$ip/json"));
-            if(!isset($query->bogon) && !isset($query->error)) {
-                $country = $query->country;
-                $region = $query->region;
-                $city = $query->city;
-                $add = DB::table('ip_info')->insert([
-                    'user_name' => $userName,
-                    'ip'        => $ip,
-                    'country'   => $country,
-                    'region'    => $region,
-                    'city'      => $city
-                ]);
-
-                if ($add) {
-                    $period = date('Y-M');
-                    DB::table('ip_info_rate')->where('period', $period)->increment('rate', 1);
-                }
-            }
+//            $query = json_decode(file_get_contents("https://ipinfo.io/$ip/json"));
+//            if(!isset($query->bogon) && !isset($query->error)) {
+//                $country = $query->country;
+//                $region = $query->region;
+//                $city = $query->city;
+//                $add = DB::table('ip_info')->insert([
+//                    'user_name' => $userName,
+//                    'ip'        => $ip,
+//                    'country'   => $country,
+//                    'region'    => $region,
+//                    'city'      => $city
+//                ]);
+//
+//                if ($add) {
+//                    $period = date('Y-M');
+//                    DB::table('ip_info_rate')->where('period', $period)->increment('rate', 1);
+//                }
+//            }
             ######################################################################
 
             if (session('previousUrl'))
