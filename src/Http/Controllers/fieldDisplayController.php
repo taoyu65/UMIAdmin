@@ -20,7 +20,7 @@ class fieldDisplayController extends Controller
     {
         $tableModel = new Table();
         $tableList = $tableModel->getAllTable();
-        $list = compact('tableList', 'table', 'type', 'browserDisabled');
+        $list = compact('tableList', 'table', 'type');
 
         switch ($type) {
             case 'browser':
