@@ -24,7 +24,8 @@ return[
         'umi_field_display_add'         => 'umi_field_display_add',
         'umi_field_display_browser'     => 'umi_field_display_browser',
         'umi_field_display_read'        => 'umi_field_display_read',
-        'umi_field_display_edit'        => 'umi_field_display_edit'
+        'umi_field_display_edit'        => 'umi_field_display_edit',
+        'class'                         => 'class',
     ],
 
     #数据类型 browser, read 和 edit, add 会加载不同的数据类型.
@@ -174,6 +175,9 @@ return[
         ],
         'umi_tables'                => [
             'table_name', 'type', 'created_at', 'updated_at'
-        ]
+        ],
+        'class'                     => [
+            'class_name', 'class_star',
+        ],
     ]
 ];

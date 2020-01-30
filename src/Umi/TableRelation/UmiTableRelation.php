@@ -22,7 +22,7 @@ class UmiTableRelation
             $RO = $factory->getInstanceOfRelationOperation(
                 $rule->rule_name,
                 $rule->operation_type,
-                $rule->customer_rule_name
+                $rule->custom_rule_name
                 );
 
             $re = '';
@@ -68,7 +68,7 @@ class UmiTableRelation
             $RO = $factory->getInstanceOfRelationOperation(
                 $rule->rule_name,
                 $rule->operation_type,
-                $rule->customer_rule_name
+                $rule->custom_rule_name
             );
 
             $activeTableName = YM::getTableNameById($rule->active_table_id);

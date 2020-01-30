@@ -921,7 +921,7 @@ class umi_field_display_read_seeder extends Seeder
             array(
                 'id'                => 92,
                 'table_id'          => 12,
-                'field'             => 'customer_rule_name',
+                'field'             => 'custom_rule_name',
                 'type'              => 'label4Read',
                 'relation_display'  => '',
                 'display_name'      => '',

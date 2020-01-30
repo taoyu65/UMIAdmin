@@ -804,7 +804,7 @@ class umi_field_display_add_seeder extends Seeder
             array(
                 'id'                => 62,
                 'table_id'          => 12,
-                'field'             => 'customer_rule_name',
+                'field'             => 'custom_rule_name',
                 'type'              => 'textBox',
                 'relation_display'  => '',
                 'custom_value'      => '',

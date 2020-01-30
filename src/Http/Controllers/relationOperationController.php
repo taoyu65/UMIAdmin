@@ -49,7 +49,7 @@ class relationOperationController extends Controller
             'targetValue'   => 'required'*/
         ])->validate();
 
-        $customer_rule_name = $request->ruleName === null ? '' : $request->ruleName;
+        $custom_rule_name = $request->ruleName === null ? '' : $request->ruleName;
         $rule_name = $request->rule_name;
         $operation_type = $request->operationType;
         $is_extra_operation = $request->input('is_extra_operation');
@@ -66,7 +66,7 @@ class relationOperationController extends Controller
         $details = $request->detail;
 
         $list = compact(
-            'customer_rule_name',
+            'custom_rule_name',
             'rule_name',
             'operation_type',
             'is_extra_operation',

@@ -960,7 +960,7 @@ class umi_field_display_edit_seeder extends Seeder
             array(
                 'id'                => 74,
                 'table_id'          => 12,
-                'field'             => 'customer_rule_name',
+                'field'             => 'custom_rule_name',
                 'type'              => 'textBox',
                 'relation_display'  => '',
                 'custom_value'      => '',
